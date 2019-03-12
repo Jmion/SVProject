@@ -2,9 +2,15 @@
 // Created by jeremy on 3/11/19.
 //
 
+/*!
+ * \brief
+ */
+
 #ifndef INFOSV_CIRCULARCOLLIDER_HPP
 #define INFOSV_CIRCULARCOLLIDER_HPP
 
+#include "../Utility/Vec2d.hpp"
+#include <iostream>
 
 class CircularCollider {
 private:
@@ -22,7 +28,8 @@ private:
      *
      * @param cord that will be modified.
      */
-    Vec2d& clamp(Vec2d const& cord);
+    Vec2d& clamp(Vec2d& cord);
+
 public:
 
     /*!
@@ -32,7 +39,7 @@ public:
      *
      * @throw Fatal exception if radius is negative.
      */
-    CircularCollider(const Vec2d &position, double radius);
+    CircularCollider(Vec2d position, double radius);
 
     /*!
      * Gets the current position of the collider
@@ -57,11 +64,74 @@ public:
      */
     CircularCollider &operator=(const CircularCollider &) = default;
 
-    Vec2d directionTo(Vec2d const& ) const;
+    /*!
+     * Calculates the smalest vector to get from <i>from<\i> to <i>to<\i>
+     * @param to the destination
+     * @return The smalest vector that will allow to go from "from" to "to"
+     */
+    Vec2d directionTo(const Vec2d & to) const;
 
-    Vec2d directionTo(CircularCollider const& ) const;
+    /*!
+     *
+     * @see directionTo
+     * @param to destination of the vector
+     * @return
+     */
+    Vec2d directionTo(const CircularCollider & to) const;
+
+    double distanceTo(const Vec2d&) const;
+
+    double distanceTo(const CircularCollider&) const;
+
+    Vec2d& move(const Vec2d&);
+
+    CircularCollider& operator+=(const Vec2d&);
+
+    /*!
+     * Will check whether other is inside this. In case where they are touching at
+     * the edge it is still constidered inidee.
+     * @param other circular collider
+     * @return true if other is inside this. Otherwise returns false
+     */
+    bool isCircularColliderInside(const CircularCollider& other) const;
+
+    /*!
+     * Determins is there is a collision between this and other
+     * @param other CircularCollider involved in the collision check
+     * @return true is collision is occuring. false otherwise
+     */
+    bool isColliding(const CircularCollider& other) const;
+
+    /*!
+     * Determins if the point p is inside the cirucularCollider
+     * @param p the point to check
+     * @return true if p is inside this
+     */
+    bool isPointInside(const Vec2d& p) const;
+
+    /*!
+     * @param other circular collider
+     * @return true if other is inside this, otherwise false.
+     */
+    bool operator>(const CircularCollider& other) const;
+
+    /*!
+     *
+     * @param other circular collider
+     * @return true if other is colliding with this
+     */
+    bool operator|(const CircularCollider& other) const;
+
+    /*!
+     *
+     * @param point
+     * @return true if point is inside this circullar body. otherwise false
+     */
+    bool operator>(const Vec2d& point);
+
 
 };
+std::ostream& operator<<(std::ostream&, CircularCollider const&);
 
 
 #endif //INFOSV_CIRCULARCOLLIDER_HPP
