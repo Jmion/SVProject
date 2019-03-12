@@ -71,10 +71,10 @@ double CircularCollider::distanceTo(const CircularCollider& collider) const{
     return distanceTo(collider.position);
 }
 
-Vec2d& CircularCollider::move(const Vec2d & dx) {
+CircularCollider& CircularCollider::move(const Vec2d & dx) {
     Vec2d temp(position + dx);
     position = clamp(temp);
-    return position;
+    return *this;
 }
 
 CircularCollider& CircularCollider::operator+=(const Vec2d & dx) {

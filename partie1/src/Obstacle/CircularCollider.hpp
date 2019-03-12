@@ -3,7 +3,7 @@
 //
 
 /*!
- * \brief
+ * @author Jeremy Mion
  */
 
 #ifndef INFOSV_CIRCULARCOLLIDER_HPP
@@ -72,20 +72,43 @@ public:
     Vec2d directionTo(const Vec2d & to) const;
 
     /*!
+     * calculates the smalest vector to get from <i>from<\i> to <i>to's position<\i>
      *
-     * @see directionTo
-     * @param to destination of the vector
-     * @return
+     * @param to the destination
+     * @return The smalest vector that will allow to go from "from" to "to position (center)"
      */
     Vec2d directionTo(const CircularCollider & to) const;
 
-    double distanceTo(const Vec2d&) const;
+    /*!
+     * Distance to a point in the toric world.
+     *
+     * @param point destinations
+     * @return the distance in a straight line in the toric world to get to point from current position of collider
+     */
+    double distanceTo(const Vec2d& point) const;
 
-    double distanceTo(const CircularCollider&) const;
+    /*!
+     * Distance between current this center (position) and collider center
+     * @param collider that we want to know how far we are from it
+     * @return the distance between this center and the center of collider.
+     */
+    double distanceTo(const CircularCollider& collider) const;
 
-    Vec2d& move(const Vec2d&);
+    /*!
+     * Moves position of center by dx
+     *
+     * @param dx the distance to move
+     * @return the new position of the center
+     */
+    CircularCollider& move(const Vec2d& dx);
 
-    CircularCollider& operator+=(const Vec2d&);
+
+    /*!
+     * Move position of center by dx
+     * @param dx the distance to move
+     * @return the new position of the center
+     */
+    CircularCollider& operator+=(const Vec2d& dx);
 
     /*!
      * Will check whether other is inside this. In case where they are touching at
