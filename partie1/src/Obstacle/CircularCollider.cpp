@@ -47,7 +47,7 @@ Vec2d CircularCollider::directionTo(const Vec2d & to) const{
     auto worldSize = getAppConfig().simulation_world_size;
 
     for(int i(-1); i<= 1; i++){
-        for(int j(-i); j<= 1; j++){
+        for(int j(-1); j<= 1; j++){
             Vec2d nTo(to.x+worldSize*i,to.y+worldSize*j);
             double tempDistance(distance(position,nTo));
             if(tempDistance<minDist){
@@ -102,7 +102,7 @@ bool CircularCollider::operator|(const CircularCollider &other) const{
     return isColliding(other);
 }
 
-bool CircularCollider::operator>(const Vec2d &point) {
+bool CircularCollider::operator>(const Vec2d &point) const{
     return isPointInside(point);
 }
 

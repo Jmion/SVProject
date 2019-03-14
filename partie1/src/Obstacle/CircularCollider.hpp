@@ -102,7 +102,6 @@ public:
      */
     CircularCollider& move(const Vec2d& dx);
 
-
     /*!
      * Move position of center by dx
      * @param dx the distance to move
@@ -150,7 +149,7 @@ public:
      * @param point
      * @return true if point is inside this circullar body. otherwise false
      */
-    bool operator>(const Vec2d& point);
+    bool operator>(const Vec2d& point) const;
 
 
 };
