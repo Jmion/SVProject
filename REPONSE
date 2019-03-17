@@ -1,5 +1,37 @@
-Q.1.1
+---
+title: C++ SV Project
+author: Jeremy Mion (261178)
+date: December 11th 2018
+---
+
+# Q.1
+
+## Q.1.1
 The only logical thing to di is to create a private methode. In my case "clamp"
-Q.1.2
+
+## Q.1.2
 The reason that the default = and copy constructor are sufficient is that they both do a surface copy of the elements. Codding them by default allows the user of our class to know that they can safely use these constrcutors.
 
+## Q.1.3
+A double loop will allow for a more concise piece of code. There is no point in describing it in gory details in this file. See the actual code for implementation details.
+
+## Q.1.4
+Taking a const reference is almost always better. The only case where we decided to not use a const ref, is in the constructor since we want a copy of the vector to operate on it.
+
+## Q.1.5
+All the methodes that do not affect the Object should be constant. This is extremely important since C++ is strict on how it manages const functions. To see which ones where declared as const see the CircularCollider.hpp file.
+
+## Q.1.6
+We are simply adding another way to call : we are not writing code that has any functionality. This is important because it allows use to ensure that all of the functions that are designed to have the same behavior behave in the same way.
+	isCircularColliderInside(other)
+	isColliding(other);
+	isPointInside(point);
+
+## Q.1.7
+I chose an internal definition for most of the functions because there equivalent in non operator function calls are also internal.
+
+## Q.1.8
+For which functions are receiving parameters by reference see .hpp. In all cases where we do not need a copy of the object to operate on it is better to use a const reference since it will improve performance.
+
+## Q.1.9
+See CircularCollider.hpp for the list on functions that we decided to declare as const.
