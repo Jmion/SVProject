@@ -6,9 +6,11 @@
 #define INFOSV_CHASINGAUTOMATON_HPP
 
 #include <Utility/Utility.hpp>
-
+#include <Obstacle/CircularCollider.hpp>
 
 class ChasingAutomaton: public CircularCollider {
+public:
+    enum Deceleration {WEAK,MEDIUM,STRONG};
 
     /*!
      * Will return values predefined in the config file applying to this.
@@ -50,13 +52,25 @@ class ChasingAutomaton: public CircularCollider {
      */
     void draw(sf::RenderTarget& targetWindow);
 
-    ChasingAutomaton(Vec2d _postion);
+    ChasingAutomaton(const Vec2d& _postion);
+
+protected:
+
+
+    Vec2d attractionForce() const ;
+
+    Vec2d updateMovementVariables(const Vec2d& acceleration, const sf::Time dt );
 
 
 private:
-    double speed, maxSpeed;
+    double speed;
+    double maxSpeed=0; //what is this for???
     double mass =0; //what are we using this for????
     Vec2d direction, targetPosition;
+    Deceleration deceleration;
+
+    double getDecelerationRate() const;
+
 };
 
 

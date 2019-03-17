@@ -50,3 +50,13 @@ This means that when the Environment is destroyed it needs to free all the Anima
 ## Q.2.4
 ### Warning to check with others.
 The definition of the use of the different keys is done in the EnvTest
+
+
+## Q.2.5
+
+## Q.2.6
+We will for now declare a default value in the constructor of ChassingAutomaton. We have added it to the consctructor with a default value.
+We will adapt how this enum is set, once we have a better grasp of the context in which it would need to be changed. The enum names are of course capitalized to respect the convention that constants are written in capital letters. 
+
+## QUESTIONS
+* Why do we define a draw of a target when the environment does it for use?
