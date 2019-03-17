@@ -52,7 +52,13 @@ public:
      */
     void draw(sf::RenderTarget& targetWindow);
 
-    ChasingAutomaton(const Vec2d& _postion);
+    /*!
+     * Creates a new ChasingAutomaton. The deceleration parameter allows for the control of how fast the automaton slows down
+     * when approaching it's target.
+     * @param _position starting position of the automaton
+     * @param _deceleration constant that defines how quickly the automatons will slow down when approaching there target.
+     */
+    ChasingAutomaton::ChasingAutomaton(const Vec2d& _position, Deceleration _deceleration=MEDIUM);
 
 protected:
 
