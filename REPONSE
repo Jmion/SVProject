@@ -35,3 +35,18 @@ For which functions are receiving parameters by reference see .hpp. In all cases
 
 ## Q.1.9
 See CircularCollider.hpp for the list on functions that we decided to declare as const.
+
+# Q.2
+
+## Q.2.1
+The draw method should be const. The other ones will make modifications to the environment, therefor they cannot be constant.
+
+## Q.2.2
+Use the delete of the operator= and the copy constructor.
+
+## Q.2.3
+This means that when the Environment is destroyed it needs to free all the Animals.
+
+## Q.2.4
+### Warning to check with others.
+The definition of the use of the different keys is done in the EnvTest
