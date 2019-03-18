@@ -24,13 +24,12 @@ Vec2d ChasingAutomaton::getSpeedVector() const {
     return direction*speed;
 }
 
-ChasingAutomaton::ChasingAutomaton(const Vec2d& _position, Deceleration _deceleration=MEDIUM): CircularCollider(_postion,CHASING_AUTOMATON_RADIUS), speed(0), targetPosition(Vec2d(0,0)), direction(Vec2d(1,0)),deceleration(_deceleration) {}
+ChasingAutomaton::ChasingAutomaton(const Vec2d& _position, Deceleration _deceleration):
+CircularCollider(_position,CHASING_AUTOMATON_RADIUS), speed(0), targetPosition(Vec2d(0,0)), direction(Vec2d(1,0)),deceleration(_deceleration) {}
 
 void ChasingAutomaton::update(sf::Time dt) {
-    Vec2d acceleration = attractionForce() / mass;
+    Vec2d acceleration = attractionForce() / getMass();
     updateMovementVariables(acceleration, dt);
-
-
 }
 
 
@@ -50,10 +49,11 @@ Vec2d ChasingAutomaton::attractionForce() const {
 }
 
 Vec2d ChasingAutomaton::updateMovementVariables(const Vec2d& acceleration, const sf::Time dt) {
-    move(getSpeedVector()*dt.asSeconds());
-    direction = getSpeedVector()+acceleration*dt.asSeconds();
-    speed = fmin(getSpeedVector().length(),getStandardMaxSpeed());
-    direction = direction.normalised();
+    Vec2d new_speed = getSpeedVector() + acceleration * dt.asSeconds();
+    Vec2d new_direction = new_speed.normalised();
+    speed = fmin(getStandardMaxSpeed(), new_speed.length());
+    setTargetPosition(targetPosition + new_speed * dt.asSeconds());
+    direction = new_direction;
 }
 
 double ChasingAutomaton::getDecelerationRate() const {
@@ -62,7 +62,8 @@ double ChasingAutomaton::getDecelerationRate() const {
             return 0.9;
         case MEDIUM:
             return 0.6;
-        case STRONG:
+        default: // STRONG
             return 0.3;
+
     }
 }

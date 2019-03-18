@@ -47,10 +47,18 @@ void Environment::draw(sf::RenderTarget& targetWindow) const{
  * Removes all animals and targets from the environment.
  */
 void Environment::clean() {
+    for(Animal* a: animals){
+        delete (a);
+    }
     animals.clear();
     targets.clear();
 };
 /*!
  * Will free all the animals attached to it.
  */
-Environment::~Environment(){}
+Environment::~Environment(){
+    for (Animal *a: animals) {
+        delete (a);
+    }
+    //TODO complete this methode
+}
