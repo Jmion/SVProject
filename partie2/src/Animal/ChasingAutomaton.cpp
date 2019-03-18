@@ -43,17 +43,18 @@ void ChasingAutomaton::draw(sf::RenderTarget &targetWindow) {
 
 Vec2d ChasingAutomaton::attractionForce() const {
     Vec2d toTarget = targetPosition - getPosition();
-    double speed = fmin(toTarget.length()/getDecelerationRate(), getStandardMaxSpeed());
+    double speed = fmin(toTarget.length() / getDecelerationRate(), getStandardMaxSpeed());
     Vec2d v_target = toTarget/(toTarget.length()*speed);
     return v_target-getSpeedVector();
 }
 
-Vec2d ChasingAutomaton::updateMovementVariables(const Vec2d& acceleration, const sf::Time dt) {
+void ChasingAutomaton::updateMovementVariables(const Vec2d& acceleration, const sf::Time dt) {
     Vec2d new_speed = getSpeedVector() + acceleration * dt.asSeconds();
     Vec2d new_direction = new_speed.normalised();
     speed = fmin(getStandardMaxSpeed(), new_speed.length());
     setTargetPosition(targetPosition + new_speed * dt.asSeconds());
     direction = new_direction;
+    move(getSpeedVector() * dt.asSeconds()*1000); // TODO ask about time ussage. To slow
 }
 
 double ChasingAutomaton::getDecelerationRate() const {

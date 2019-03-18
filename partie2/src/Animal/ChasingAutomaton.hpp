@@ -58,7 +58,7 @@ public:
      * @param _position starting position of the automaton
      * @param _deceleration constant that defines how quickly the automatons will slow down when approaching there target.
      */
-    ChasingAutomaton(const Vec2d& _position, Deceleration _deceleration=MEDIUM);
+    ChasingAutomaton(const Vec2d& _position, Deceleration _deceleration=STRONG);
 
 
 protected:
@@ -66,7 +66,7 @@ protected:
 
     Vec2d attractionForce() const ;
 
-    Vec2d updateMovementVariables(const Vec2d& acceleration, const sf::Time dt );
+    void updateMovementVariables(const Vec2d& acceleration, const sf::Time dt );
 
 
 private:
