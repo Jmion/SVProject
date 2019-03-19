@@ -24,8 +24,9 @@ Vec2d ChasingAutomaton::getSpeedVector() const {
     return direction*speed;
 }
 
-ChasingAutomaton::ChasingAutomaton(const Vec2d& _position, Deceleration _deceleration):
-CircularCollider(_position,CHASING_AUTOMATON_RADIUS), speed(0), targetPosition(Vec2d(0,0)), direction(Vec2d(1,0)),deceleration(_deceleration) {}
+ChasingAutomaton::ChasingAutomaton(const Vec2d &_position, Deceleration _deceleration) :
+        CircularCollider(_position, CHASING_AUTOMATON_RADIUS), speed(0), direction(Vec2d(1, 0)),
+        targetPosition(Vec2d(0, 0)), deceleration(_deceleration) {}
 
 void ChasingAutomaton::update(sf::Time dt) {
     updateMovementVariables(attractionForce(), dt);

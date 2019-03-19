@@ -68,8 +68,6 @@ public:
      */
     Animal(const Vec2d& _position, Deceleration _deceleration=WEAK);
 
-    //ANIMAL
-    //TODO Is this a case again where we dont have a viewAngle, maxViewDistance as class attributes
     /*!
      * @return Viewing animal range in radians
      */
@@ -130,10 +128,6 @@ private:
     double speed;
     Vec2d direction, targetPosition;
     Deceleration deceleration;
-
-    //ADDING TO ANIMAL
-    //double viewAngle, maxViewDistance;
-
 
     /*!
      * This methode will resolve the Deceleration enum to a double value which is the rate of deceleration. It will return the rate of deceleration bassed on the attribute deceleration of the class

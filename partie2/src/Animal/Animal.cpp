@@ -24,11 +24,18 @@ Vec2d Animal::getSpeedVector() const {
     return direction*speed;
 }
 
-Animal::Animal(const Vec2d& _position, Deceleration _deceleration):
-        CircularCollider(_position,ANIMAL_RADIUS), speed(0), targetPosition(Vec2d(0,0)), direction(Vec2d(1,0)),deceleration(_deceleration) {}
+Animal::Animal(const Vec2d &_position, Deceleration _deceleration) :
+        CircularCollider(_position, ANIMAL_RADIUS), speed(0), direction(Vec2d(1, 0)), targetPosition(Vec2d(0, 0)),
+        deceleration(_deceleration) {}
 
 void Animal::update(sf::Time dt) {
-    updateMovementVariables(attractionForce(), dt);
+    auto targetList = getAppEnv().getTargetsInSightForAnimal(this);
+    if (targetList.size() > 0) {
+        setTargetPosition(*targetList.begin());
+        updateMovementVariables(attractionForce(), dt);
+    }
+
+    //TODO do we need to take the closest target?
 }
 
 
@@ -72,7 +79,6 @@ double Animal::getDecelerationRate() const {
             return 0.6;
         default: // STRONG
             return 0.3;
-
     }
 }
 
@@ -101,12 +107,15 @@ void Animal::setDeleleration(Deceleration decel){
     deceleration = decel;
 }
 
+//called very frequently
 bool Animal::isTargetInSight(const Vec2d &target) {
     Vec2d d = target - getPosition();
     if(d.lengthSquared() <= getViewDistance()*getViewDistance()){
         Vec2d this_to_target = target-getPosition();
-        //if(this_to_target.lengthSquared())
-        //TODO finish this shit
+        double length = this_to_target.lengthSquared();
+        if (isEqual(length, 0)) {
+            return true;
+        }
         this_to_target = this_to_target.normalised();
         return direction.dot(this_to_target) >= cos((getViewRange() + 0.001) / 2);
     }

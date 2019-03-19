@@ -3,6 +3,8 @@
 //
 
 #include "Environment.hpp"
+#include <Animal/Animal.hpp>
+
 /*!
  * Add animal to environment fauna.
  * @param animal
@@ -63,4 +65,14 @@ Environment::~Environment(){
         delete (a);
     }
     //TODO complete this methode
+}
+
+std::list<Vec2d> Environment::getTargetsInSightForAnimal(Animal* animal){
+    std::list<Vec2d> targetsInSight;
+    for(const Vec2d& t: targets){
+        if (animal->isTargetInSight(t)) {
+            targetsInSight.push_back(t);
+        }
+    }
+    return targetsInSight;
 }
