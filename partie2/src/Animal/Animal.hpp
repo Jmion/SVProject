@@ -120,7 +120,7 @@ protected:
 
 private:
     double speed;
-    Vec2d direction, targetPosition;
+    Vec2d direction, current_target, targetPosition;
     Deceleration deceleration;
 
 
@@ -144,7 +144,39 @@ private:
     */
     void drawVision(sf::RenderTarget& target) const;
 
+    /*!
+     * Generates a virtual taget for the animal. It will calculate the attraction force between the target and the animal.
+     *
+     * The calculation of the force is done as follows: virtTargetPosition-position
+     * @return force vector due to the virtual target
+     */
+    Vec2d randomWalk();
 
+    /*!
+     * Radius of the random walk circle
+     * @return the radius of the circle
+     */
+    double getRandomWalkRadius() const;
+
+    /*!
+     * Th distance between the center of the circle and the position of the animal
+     * @return The distance to the animal from the circle center
+     */
+    double getRandomWalkDistance() const;
+
+    /*!
+     * The amplificaition factor for the amount of jitter of the virtual target
+     * @return the amout of jitter amplification
+     */
+    double getRandomWalkJitter() const;
+
+    //Try to const v and ref it
+    /*!
+     * Converts from animal coordinates to global coordinates.
+     * @param v in animal coordinates
+     * @return v in the global coordinates
+     */
+    Vec2d convertToGlobalCoord(const Vec2d& v);
 
 
 };
