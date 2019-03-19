@@ -30,9 +30,12 @@ Animal::Animal(const Vec2d &_position, Deceleration _deceleration) :
 
 void Animal::update(sf::Time dt) {
     auto targetList = getAppEnv().getTargetsInSightForAnimal(this);
+    Vec2d attraction_force = attractionForce();
     if (targetList.size() > 0) {
         setTargetPosition(*targetList.begin());
-        updateMovementVariables(attractionForce(), dt);
+        updateMovementVariables(attraction_force, dt);
+    }else{
+
     }
 
     //TODO do we need to take the closest target?
@@ -48,7 +51,7 @@ void Animal::draw(sf::RenderTarget &targetWindow) {
     drawVision(targetWindow);
 }
 
-void Animal::drawVision(sf::RenderTarget& target){
+void Animal::drawVision(sf::RenderTarget& target) const {
     sf::Color black = sf::Color::Black;
     black.a = 16; //setting alpha value to 16, light gray transparent
     Arc arc(buildArc(-getViewRange()/(DEG_TO_RAD*2), getViewRange()/(DEG_TO_RAD*2), getViewDistance(), getPosition(), black, direction.angle()/DEG_TO_RAD));
@@ -108,7 +111,7 @@ void Animal::setDeleleration(Deceleration decel){
 }
 
 //called very frequently
-bool Animal::isTargetInSight(const Vec2d &target) {
+bool Animal::isTargetInSight(const Vec2d &target) const{
     Vec2d d = target - getPosition();
     if(d.lengthSquared() <= getViewDistance()*getViewDistance()){
         Vec2d this_to_target = target-getPosition();

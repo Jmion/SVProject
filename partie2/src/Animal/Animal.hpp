@@ -83,7 +83,7 @@ public:
      * @param target that needs to be tested if it can be seen
      * @return true if target can be seen by the animal, false otherwise
      */
-    bool isTargetInSight(const Vec2d& target);
+    bool isTargetInSight(const Vec2d& target) const;
 
 
     /*!
@@ -103,12 +103,6 @@ protected:
      */
     Vec2d attractionForce() const ;
 
-    /*!
-     * Makes the automaton moved based of of the force that it is experiencing.
-     * @param force that the robot is experiencing
-     * @param dt time that has passed since previous update
-     */
-    void updateMovementVariables(const Vec2d& force, const sf::Time dt );
 
     /*!
     * Changes the direction of the direction vector. The director vector will be worth [cos(angle),sin(angle)]
@@ -129,6 +123,14 @@ private:
     Vec2d direction, targetPosition;
     Deceleration deceleration;
 
+
+    /*!
+    * Makes the automaton moved based of of the force that it is experiencing.
+    * @param force that the robot is experiencing
+    * @param dt time that has passed since previous update
+    */
+    void updateMovementVariables(const Vec2d& force, const sf::Time dt );
+
     /*!
      * This methode will resolve the Deceleration enum to a double value which is the rate of deceleration. It will return the rate of deceleration bassed on the attribute deceleration of the class
      * @return the rate of deceleration
@@ -140,10 +142,14 @@ private:
     * Draws the semi circular arc centered on the animal. This is the animals viewing angle
     * @param target that is used to draw on
     */
-    void drawVision(sf::RenderTarget& target);
+    void drawVision(sf::RenderTarget& target) const;
+
+
 
 
 };
+
+
 
 
 #endif //PARTIE1_ANIMAL_HPP
