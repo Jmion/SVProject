@@ -80,6 +80,14 @@ public:
      */
     double getViewDistance() const;
 
+    /*!
+     * Will determine if the target can be seen by the Animal
+     * @param target that needs to be tested if it can be seen
+     * @return 
+     */
+    bool isTargetInSight(const Vec2d& target){
+
+    }
 
 
 
