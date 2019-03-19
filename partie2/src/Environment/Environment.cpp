@@ -24,7 +24,9 @@ void Environment::addTarget(const Vec2d& target){
  * @param dt time between updates
  */
 void Environment::update(sf::Time dt){
-    //TODO
+    for(auto a : animals){
+        a->update(dt);
+    }
 }
 
 /*!
@@ -32,9 +34,9 @@ void Environment::update(sf::Time dt){
  * @param targetWindow to display on
  */
 void Environment::draw(sf::RenderTarget& targetWindow) const{
-    /*for(const auto& Animal : animals){
-        draw
-    }*/
+    for(Animal* a: animals){
+        a->draw(targetWindow);
+    }
 
     sf::Color red(255,0,0);
     for(const auto& t : targets){

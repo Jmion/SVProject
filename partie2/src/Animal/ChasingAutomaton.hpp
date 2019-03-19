@@ -66,7 +66,7 @@ public:
      * @param _position starting position of the automaton
      * @param _deceleration constant that defines how quickly the automatons will slow down when approaching there target.
      */
-    ChasingAutomaton(const Vec2d& _position, Deceleration _deceleration=WEAK);
+    ChasingAutomaton(const Vec2d& _position, Deceleration _deceleration=STRONG);
 
 
 protected:
@@ -90,7 +90,6 @@ private:
     double speed;
     Vec2d direction, targetPosition;
     Deceleration deceleration;
-
     double getDecelerationRate() const;
 
 };

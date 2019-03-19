@@ -38,7 +38,14 @@ void Animal::draw(sf::RenderTarget &targetWindow) {
     targetWindow.draw(image_to_draw);
     sf::Color red(255,0,0);
     targetWindow.draw(buildCircle(targetPosition,5,red));
-    //drawVision(targetWindow);
+    drawVision(targetWindow);
+}
+
+void Animal::drawVision(sf::RenderTarget& target){
+    sf::Color black = sf::Color::Black;
+    black.a = 16; //setting alpha value to 16, light gray transparent
+    Arc arc(buildArc(-getViewRange()/(DEG_TO_RAD*2), getViewRange()/(DEG_TO_RAD*2), getViewDistance(), getPosition(), black, direction.angle()/DEG_TO_RAD));
+    target.draw(arc);
 }
 
 Vec2d Animal::attractionForce() const {
@@ -54,7 +61,7 @@ void Animal::updateMovementVariables(const Vec2d& acceleration, const sf::Time d
     speed = fmin(getStandardMaxSpeed(), new_speed.length());
     //setTargetPosition(targetPosition + new_speed * dt.asSeconds());
     direction = new_direction;
-    move(getSpeedVector() * dt.asSeconds()); // TODO ask about time ussage. To slow
+    move(getSpeedVector() * dt.asSeconds());
 }
 
 double Animal::getDecelerationRate() const {
@@ -79,12 +86,6 @@ double Animal::getViewDistance() const{
     return ANIMAL_VIEW_DISTANCE;
 }
 
-void Animal::drawVision(sf::RenderTarget& target){
-    sf::Color black = sf::Color::Black;
-    black.a = 16; //setting alpha value to 16, light gray transparent
-    Arc arc(buildArc(45, 135, getViewRange(), getPosition(), black, direction.angle()));
-    target.draw(arc);
-}
 
 Animal& Animal::setRotation(double angle){
     direction = Vec2d(cos(angle), sin(angle));

@@ -71,7 +71,7 @@ public:
     //ANIMAL
     //TODO Is this a case again where we dont have a viewAngle, maxViewDistance as class attributes
     /*!
-     * @return Viewing animal range
+     * @return Viewing animal range in radians
      */
     double getViewRange() const;
 
