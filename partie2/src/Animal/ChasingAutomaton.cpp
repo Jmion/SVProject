@@ -67,3 +67,7 @@ double ChasingAutomaton::getDecelerationRate() const {
 
     }
 }
+
+void ChasingAutomaton::setDeleleration(Deceleration decel){
+    deceleration = decel;
+}

@@ -96,3 +96,19 @@ Animal& Animal::setRotation(double angle){
 double Animal::getRotation() const{
     return direction.angle();
 }
+
+void Animal::setDeleleration(Deceleration decel){
+    deceleration = decel;
+}
+
+bool Animal::isTargetInSight(const Vec2d &target) {
+    Vec2d d = target - getPosition();
+    if(d.lengthSquared() <= getViewDistance()*getViewDistance()){
+        Vec2d this_to_target = target-getPosition();
+        //if(this_to_target.lengthSquared())
+        //TODO finish this shit
+        this_to_target = this_to_target.normalised();
+        return direction.dot(this_to_target) >= cos((getViewRange() + 0.001) / 2);
+    }
+    return false;
+}

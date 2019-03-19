@@ -68,6 +68,12 @@ public:
      */
     ChasingAutomaton(const Vec2d& _position, Deceleration _deceleration=STRONG);
 
+    /*!
+     * Allows modification of the deceleration rate
+     * @param decel the new deceleration rate
+     */
+    void setDeleleration(Deceleration decel);
+
 
 protected:
 

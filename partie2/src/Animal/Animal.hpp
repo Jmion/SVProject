@@ -83,12 +83,16 @@ public:
     /*!
      * Will determine if the target can be seen by the Animal
      * @param target that needs to be tested if it can be seen
-     * @return 
+     * @return true if target can be seen by the animal, false otherwise
      */
-    bool isTargetInSight(const Vec2d& target){
+    bool isTargetInSight(const Vec2d& target);
 
-    }
 
+    /*!
+     * Allows modification of the deceleration rate
+    * @param decel the new deceleration rate
+    */
+    void setDeleleration(Deceleration decel);
 
 
 
@@ -121,11 +125,6 @@ protected:
     double getRotation() const;
 
 
-    /*!
-     * Draws the semi circular arc centered on the animal. This is the animals viewing angle
-     * @param target that is used to draw on
-     */
-    void drawVision(sf::RenderTarget& target);
 
 private:
     double speed;
@@ -136,9 +135,18 @@ private:
     //double viewAngle, maxViewDistance;
 
 
+    /*!
+     * This methode will resolve the Deceleration enum to a double value which is the rate of deceleration. It will return the rate of deceleration bassed on the attribute deceleration of the class
+     * @return the rate of deceleration
+     */
     double getDecelerationRate() const;
 
 
+    /*!
+    * Draws the semi circular arc centered on the animal. This is the animals viewing angle
+    * @param target that is used to draw on
+    */
+    void drawVision(sf::RenderTarget& target);
 
 
 };
