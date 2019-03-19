@@ -28,8 +28,7 @@ ChasingAutomaton::ChasingAutomaton(const Vec2d& _position, Deceleration _deceler
 CircularCollider(_position,CHASING_AUTOMATON_RADIUS), speed(0), targetPosition(Vec2d(0,0)), direction(Vec2d(1,0)),deceleration(_deceleration) {}
 
 void ChasingAutomaton::update(sf::Time dt) {
-    Vec2d acceleration = attractionForce() / getMass();
-    updateMovementVariables(acceleration, dt);
+    updateMovementVariables(attractionForce(), dt);
 }
 
 
@@ -44,7 +43,7 @@ void ChasingAutomaton::draw(sf::RenderTarget &targetWindow) {
 Vec2d ChasingAutomaton::attractionForce() const {
     Vec2d toTarget = targetPosition - getPosition();
     double speed = fmin(toTarget.length() / getDecelerationRate(), getStandardMaxSpeed());
-    Vec2d v_target = toTarget/(toTarget.length()*speed);
+    Vec2d v_target = toTarget/toTarget.length()*speed;
     return v_target-getSpeedVector();
 }
 
@@ -52,9 +51,9 @@ void ChasingAutomaton::updateMovementVariables(const Vec2d& acceleration, const 
     Vec2d new_speed = getSpeedVector() + acceleration * dt.asSeconds();
     Vec2d new_direction = new_speed.normalised();
     speed = fmin(getStandardMaxSpeed(), new_speed.length());
-    setTargetPosition(targetPosition + new_speed * dt.asSeconds());
+    //setTargetPosition(targetPosition + new_speed * dt.asSeconds());
     direction = new_direction;
-    move(getSpeedVector() * dt.asSeconds()*1000); // TODO ask about time ussage. To slow
+    move(getSpeedVector() * dt.asSeconds()); // TODO ask about time ussage. To slow
 }
 
 double ChasingAutomaton::getDecelerationRate() const {

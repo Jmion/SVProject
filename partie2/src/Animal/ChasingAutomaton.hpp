@@ -10,6 +10,14 @@
 
 class ChasingAutomaton: public CircularCollider {
 public:
+
+    /*!
+     * Amount of deceleration that the automaton has when approaching the target.
+     */
+     /*
+      * If adding new states to this enum do not forget to configure the values that are wanted
+      * in the getDecelerationRate method present in this class.
+      */
     enum Deceleration {WEAK,MEDIUM,STRONG};
 
     /*!
@@ -58,15 +66,24 @@ public:
      * @param _position starting position of the automaton
      * @param _deceleration constant that defines how quickly the automatons will slow down when approaching there target.
      */
-    ChasingAutomaton(const Vec2d& _position, Deceleration _deceleration=STRONG);
+    ChasingAutomaton(const Vec2d& _position, Deceleration _deceleration=WEAK);
 
 
 protected:
 
 
+    /*!
+     * Calculates the attraction force that the automaton is experiencing
+     * @return force that are being applied to the robot.
+     */
     Vec2d attractionForce() const ;
 
-    void updateMovementVariables(const Vec2d& acceleration, const sf::Time dt );
+    /*!
+     * Makes the automaton moved based of of the force that it is experiencing.
+     * @param force that the robot is experiencing
+     * @param dt time that has passed since previous update
+     */
+    void updateMovementVariables(const Vec2d& force, const sf::Time dt );
 
 
 private:
