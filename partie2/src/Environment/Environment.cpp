@@ -10,7 +10,10 @@
  * @param animal
  */
 void Environment::addAnimal(Animal* animal){
-    animals.push_back(animal);
+    //TODO could imagine copying the animal passed in to gurantee that there will be not issues with animals in a list that no not exist.
+    if(animal != nullptr){
+        animals.push_back(animal);
+    }
 }
 
 /*!
@@ -53,6 +56,7 @@ void Environment::draw(sf::RenderTarget& targetWindow) const{
 void Environment::clean() {
     for(Animal* a: animals){
         delete (a);
+        a = nullptr;
     }
     animals.clear();
     targets.clear();
@@ -62,9 +66,11 @@ void Environment::clean() {
  */
 Environment::~Environment(){
     for (Animal *a: animals) {
-        delete (a);
+        if(a!= nullptr){
+            delete (a);
+            a = nullptr;
+        }
     }
-    //TODO complete this methode
 }
 
 std::list<Vec2d> Environment::getTargetsInSightForAnimal(Animal* animal){

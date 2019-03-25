@@ -37,8 +37,8 @@ void ChasingAutomaton::draw(sf::RenderTarget &targetWindow) {
     sf::Texture& texture = getAppTexture(GHOST_TEXTURE);
     auto image_to_draw(buildSprite(getPosition(),getRadius()*2,texture));
     targetWindow.draw(image_to_draw);
-    sf::Color red(255,0,0);
-    targetWindow.draw(buildCircle(targetPosition,5,red));
+    //sf::Color red(255,0,0);
+    //targetWindow.draw(buildCircle(targetPosition,5,red));
 }
 
 Vec2d ChasingAutomaton::attractionForce() const {
@@ -54,7 +54,7 @@ void ChasingAutomaton::updateMovementVariables(const Vec2d& acceleration, const 
     speed = fmin(getStandardMaxSpeed(), new_speed.length());
     //setTargetPosition(targetPosition + new_speed * dt.asSeconds());
     direction = new_direction;
-    move(getSpeedVector() * dt.asSeconds()); // TODO ask about time ussage. To slow
+    move(getSpeedVector() * dt.asSeconds());
 }
 
 double ChasingAutomaton::getDecelerationRate() const {

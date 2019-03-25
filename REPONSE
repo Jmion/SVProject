@@ -59,6 +59,8 @@ This means that when the Environment is destroyed it needs to destroy all the An
 ### Warning to check with others.
 The definition of the use of the different keys is done in the EnvTest
 
+HELP HELP HELP
+
 
 ## Q.2.5
 Well we clearly want one method that will calculate the force that is being applied to the automaton. This method called attractionForce will return the force that the automaton is experiencing. This will allow classes inheriting of ChassingAutomaton to simply redefine the attractionForce and have the wanted behavior. The methode prototypes are as follows:
@@ -84,6 +86,16 @@ We will adapt how this enum is set, once we have a better grasp of the context i
 
 ## Q.2.7
 The animal is a seperate entity. Therefor we can imagine that classes that extend the Animal class will want to influence the rotation of the animal. There is no reason why an external class such as the environment should be able to influence the rotation of the automaton. For the method setPosition does not exist since I have not had any use for it so far.
+.
+
+## Q.2.8
+In the method draw of the Environment we need to call the draw of Animals.
+
+## Q.2.9
+This is done to break encapsulation to be able to test the animal class by setting the rotation. We need this for the test
+
+## Q.2.10
+A list of Vect2. This wo
 
 ## QUESTIONS
 * Why do we define a draw of a target when the environment does it for use?
