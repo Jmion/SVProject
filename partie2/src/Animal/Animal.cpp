@@ -39,8 +39,10 @@ void Animal::update(sf::Time dt) {
     Vec2d attraction_force = attractionForce();
     if (targetList.size() > 0) {
         setTargetPosition(*targetList.begin());
+        hasTarget = true;
     }else{
         attraction_force = randomWalk();
+        hasTarget = false;
     }
     updateMovementVariables(attraction_force, dt);
 
@@ -49,8 +51,8 @@ void Animal::update(sf::Time dt) {
 
 
 void Animal::draw(sf::RenderTarget &targetWindow) {
-    sf::Texture& texture = getAppTexture(GHOST_TEXTURE);
-    auto image_to_draw(buildSprite(getPosition(),getRadius()*2,texture));
+    sf::Texture& texture = getAppTexture(ANIMAL_TEXTURE);
+    auto image_to_draw(buildSprite(getPosition(),getRadius()*2,texture, getRotation()/DEG_TO_RAD));
     targetWindow.draw(image_to_draw);
     sf::Color red(255,0,0);
     targetWindow.draw(buildCircle(targetPosition,5,sf::Color::Red));
@@ -58,11 +60,14 @@ void Animal::draw(sf::RenderTarget &targetWindow) {
 
 
     //Visuallization virtual target
-    sf::Color yellow(255, 150, 0);
-    targetWindow.draw(
-            buildAnnulus(convertToGlobalCoord(Vec2d(getRandomWalkDistance(), 0)), getRandomWalkRadius(),
-                         yellow, 2));
-    targetWindow.draw(buildCircle(convertToGlobalCoord(current_target + Vec2d(getRandomWalkDistance(), 0)),5,sf::Color::Blue));
+    if(!hasTarget) {
+        sf::Color yellow(255, 150, 0);
+        targetWindow.draw(
+                buildAnnulus(convertToGlobalCoord(Vec2d(getRandomWalkDistance(), 0)), getRandomWalkRadius(),
+                             yellow, 2));
+        targetWindow.draw(buildCircle(convertToGlobalCoord(current_target + Vec2d(getRandomWalkDistance(), 0)), 5,
+                                      sf::Color::Blue));
+    }
 }
 
 void Animal::drawVision(sf::RenderTarget& target) const {

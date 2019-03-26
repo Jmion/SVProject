@@ -58,7 +58,7 @@ public:
     /*!
      * Will free all the animals attached to it.
      */
-    ~Environment();
+    virtual ~Environment();
 
     /*!
      * Determins which targets are in sight of the animal.

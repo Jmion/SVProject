@@ -119,8 +119,22 @@ protected:
 
 
 private:
+
+    /*!
+     * speed at which the animal moves
+     */
     double speed;
+
+    /*!
+     * Indicates if the Animal has a real target. If the animal is following a virtual target this variable needs to be set to false.
+     */
+    bool hasTarget;
+
     Vec2d direction, current_target, targetPosition;
+
+    /*!
+     * Deceleration rate when animal approaches target.
+     */
     Deceleration deceleration;
 
 
@@ -145,9 +159,9 @@ private:
     void drawVision(sf::RenderTarget& target) const;
 
     /*!
-     * Generates a virtual taget for the animal. It will calculate the attraction force between the target and the animal.
+     * Generates a virtual target for the animal. It will calculate the attraction force between the target and the animal.
      *
-     * The calculation of the force is done as follows: virtTargetPosition-position
+     * The calculation of the force is done as follows: virtualTargetPosition-position
      * @return force vector due to the virtual target
      */
     Vec2d randomWalk();
