@@ -95,7 +95,29 @@ In the method draw of the Environment we need to call the draw of Animals.
 This is done to break encapsulation to be able to test the animal class by setting the rotation. We need this for the test
 
 ## Q.2.10
-A list of Vect2. This wo
+A list of Vect2. This wo...
+
+# Q.3
+
+## Q.3.1
+All of these methods are declared as abstract : *etStandardMaxSpeed, getMass, getRandomWalkRadius, getRandomWalkDistance, getRandomWalkJitter, getViewRange et getViewDistance* . We need to use the override keyword every time that we want to redefine one of the abstract methods. Here since we clearly do not know the implementation of these methods in the Animal class we will force the children of the class to define the behavior that they will provide.
+
+## Q.3.2
+
+We need to chnage the line where energy is indicated. For example:
+
+```JSON
+"energy":{
+               "initial":80,
+               "min mating male":450,
+               "min mating female":800,
+               "loss mating male":200,
+               "loss female per child":100,
+               "loss factor":0.001
+            },
+```
+
+##
 
 ## QUESTIONS
 * Why do we define a draw of a target when the environment does it for use?
