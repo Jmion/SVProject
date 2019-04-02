@@ -48,7 +48,7 @@ void PPSTest::onEventPPS(sf::Event event, sf::RenderWindow&)
 
         case sf::Keyboard::F:
             // IMPORTANT: UNCOMMENT WHEN CLASS FOOD IS CODED:
-            //getAppEnv().addEntity(new Food(getCursorPositionInView()));
+            getAppEnv().addEntity(new Food(getCursorPositionInView()));
             break;
 
         default:

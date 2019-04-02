@@ -45,7 +45,8 @@ Gerbil::Gerbil(const Vec2d &position, double energyLevel, bool isFemale) : Anima
 
 Gerbil::Gerbil(const Vec2d &position) : Gerbil(position, getInitialEnergy(), uniform(0, 1) == 0) {}
 
-Gerbil::~Gerbil() = default;
+Gerbil::~Gerbil(){
+}
 
 const std::string Gerbil::getTexturePath() const {
     if (getIsFemale())

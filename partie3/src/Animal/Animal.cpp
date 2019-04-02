@@ -65,17 +65,15 @@ void Animal::draw(sf::RenderTarget &targetWindow) const{
     targetWindow.draw(buildCircle(targetPosition,5,sf::Color::Red));
     if(isDebugOn()){
         drawVision(targetWindow);
-    }
-
-
-    //Visuallization virtual target
-    if(!hasTarget) {
-        sf::Color yellow(255, 150, 0);
-        targetWindow.draw(
-                buildAnnulus(convertToGlobalCoord(Vec2d(getRandomWalkDistance(), 0)), getRandomWalkRadius(),
-                             yellow, 2));
-        targetWindow.draw(buildCircle(convertToGlobalCoord(current_target + Vec2d(getRandomWalkDistance(), 0)), 5,
-                                      sf::Color::Blue));
+        //Visuallization virtual target
+        if(!hasTarget) {
+            sf::Color yellow(255, 150, 0);
+            targetWindow.draw(
+                    buildAnnulus(convertToGlobalCoord(Vec2d(getRandomWalkDistance(), 0)), getRandomWalkRadius(),
+                                 yellow, 2));
+            targetWindow.draw(buildCircle(convertToGlobalCoord(current_target + Vec2d(getRandomWalkDistance(), 0)), 5,
+                                          sf::Color::Blue));
+        }
     }
 }
 
@@ -113,16 +111,6 @@ double Animal::getDecelerationRate() const {
     }
 }
 
-/*
-double Animal::getViewRange() const{
-    return ANIMAL_VIEW_RANGE;
-}
-
-
-double Animal::getViewDistance() const{
-    return ANIMAL_VIEW_DISTANCE;
-}
-*/
 
 Animal& Animal::setRotation(double angle){
     direction = Vec2d(cos(angle), sin(angle));
@@ -153,20 +141,6 @@ bool Animal::isTargetInSight(const Vec2d &target) const{
     return false;
 }
 
-/*double Animal::getRandomWalkRadius() const{
-    return ANIMAL_RANDOM_WALK_RADIUS;
-}
-
-
-double Animal::getRandomWalkDistance() const{
-    return ANIMAL_RANDOM_WALK_DISTANCE;
-}
-
-double Animal::getRandomWalkJitter() const {
-    return ANIMAL_RANDOM_WALK_JITTER;
-}
-
- */
 Vec2d Animal::randomWalk() {
     Vec2d random_vec(uniform(-1.0, 1.0), uniform(-1.0, 1.0));
     current_target += random_vec * getRandomWalkJitter();

@@ -13,6 +13,7 @@
 #include <Environment/OrganicEntity.hpp>
 #include <Interface/Drawable.hpp>
 #include <Interface/Updatable.hpp>
+#include <Environment/FoodGenerator.hpp>
 class Animal;
 
 class Environment : public Drawable, public Updatable{
@@ -70,9 +71,16 @@ public:
      */
     std::list<OrganicEntity*> getEntitiesInSightForAnimal(Animal* animal);
 
+    /*!
+     * Adds a FoodGenerator to the list of generators.
+     * @param foodGenerator being added to the environment
+     */
+    void addGenerator(const FoodGenerator& foodGenerator);
+
 private:
 std::list<OrganicEntity*> organicEntities;
 std::list<Vec2d> targets;
+std::list<FoodGenerator> generators;
 
 };
 

@@ -97,11 +97,6 @@ public:
     void setDeleleration(Deceleration decel);
 
 
-    /*!
-     * Destructor of animal forcing subclasses to define a proper delete.
-     */
-    virtual ~Animal() = 0;
-
 protected:
 
 

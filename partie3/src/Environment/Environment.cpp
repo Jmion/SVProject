@@ -33,6 +33,10 @@ void Environment::update(sf::Time dt){
     for(OrganicEntity* o : organicEntities){
         o->update(dt);
     }
+
+    for(FoodGenerator& generator: generators){
+        generator.update(dt);
+    }
 }
 
 /*!
@@ -83,4 +87,8 @@ std::list<OrganicEntity*> Environment::getEntitiesInSightForAnimal(Animal* anima
         }
     }
     return targetsInSight;
+}
+
+void Environment::addGenerator(const FoodGenerator &foodGenerator) {
+    generators.push_back(foodGenerator);
 }
