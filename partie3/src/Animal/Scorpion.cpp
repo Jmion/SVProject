@@ -56,3 +56,19 @@ const std::string Scorpion::getTexturePath() const {
     return getAppConfig().scorpion_texture;
 }
 
+bool Scorpion::eatable(OrganicEntity const *entity) const {
+    return entity->eatableBy(this);
+}
+
+bool Scorpion::eatableBy(Scorpion const *scorpion) const {
+    return false;
+}
+
+bool Scorpion::eatableBy(Gerbil const *gerbil) const {
+    return false;
+}
+
+bool Scorpion::eatableBy(Food const *food) const {
+    return false;
+}
+

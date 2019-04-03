@@ -120,5 +120,5 @@ We need to chnage the line where energy is indicated. For example:
 ##
 
 ## QUESTIONS
-* Why do we define a draw of a target when the environment does it for use?
-* What is the methode setPosition of CircularCollder ref. Q2.7?
+Why are we declaring the eatable method in all the subclasses? It is the same everywhere. And why not use a visitor.
+* See for access rights to eatable methods

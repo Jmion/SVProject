@@ -38,6 +38,14 @@ public:
 
     ~Gerbil() override;
 
+    bool eatable(OrganicEntity const *entity) const override;
+
+    bool eatableBy(Scorpion const *scorpion) const override;
+
+    bool eatableBy(Gerbil const *gerbil) const override;
+
+    bool eatableBy(Food const *food) const override;
+
 protected:
     double getRandomWalkRadius() const override;
 

@@ -35,9 +35,13 @@ public:
      */
     virtual bool eatable(OrganicEntity const* entity) const = 0;
 
+
+
+
+
     /*!
-     * Determins if this can be eaten by a scorpion.
-     */
+    * Determins if this can be eaten by a scorpion.
+    */
     virtual bool eatableBy(Scorpion  const* scorpion) const = 0;
     /*!
      * Determins if this can be eaten by a gerbil.
@@ -47,9 +51,6 @@ public:
      * Determins if this can be eaten by a food.
      */
     virtual bool eatableBy(Food const* food) const = 0;
-protected:
-
-private:
 
     /*!
      * Energy level of the animal
