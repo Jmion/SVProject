@@ -13,8 +13,8 @@ FoodGenerator::FoodGenerator() :timeSinceLastFoodSpawn(sf::Time::Zero){
 
 void FoodGenerator::update(sf::Time dt) {
     timeSinceLastFoodSpawn += dt;
-    if(dt > sf::seconds(getAppConfig().food_generator_delta)){
-        dt = sf::Time::Zero;
+    if(timeSinceLastFoodSpawn > sf::seconds(getAppConfig().food_generator_delta)){
+        timeSinceLastFoodSpawn = sf::Time::Zero;
         double worldSize = getAppConfig().simulation_world_size;
         double center = worldSize/2;
         double var = (worldSize/4)*(worldSize/4);

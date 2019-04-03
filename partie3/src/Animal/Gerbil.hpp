@@ -27,7 +27,6 @@ public:
      * @param position where the Gerbil will appear.
      */
     explicit Gerbil(const Vec2d& position);
-    //TODO ask about making parrent method explcit
 
     double getStandardMaxSpeed() const override;
 
