@@ -8,6 +8,7 @@
 #include <cmath>
 #include <Random/Uniform.hpp>
 #include <Environment/OrganicEntity.hpp>
+#include <Utility/Macros.hpp>
 
 Animal& Animal::setTargetPosition(const Vec2d &target) {
     targetPosition = target;
@@ -48,7 +49,8 @@ void Animal::draw(sf::RenderTarget &targetWindow) const{
         }
 
         //textual details about the animal
-        auto text = buildText("State: " + getStateString() + " \nenergy level: " + to_nice_string(getEngeryLevel())+"",
+        std::string stateString = ToString(state);
+        auto text = buildText("State: " + stateString  + " \nenergy level: " + to_nice_string(getEngeryLevel())+"",
                               convertToGlobalCoord(Vec2d(-100, 0)), getAppFont(), getAppConfig().default_debug_text_size,
                               sf::Color::Black, getRotation() / DEG_TO_RAD + 90);
         targetWindow.draw(text);

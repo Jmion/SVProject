@@ -36,8 +36,8 @@ void Environment::update(sf::Time dt){
         o->update(dt);
     }
 
-    for(FoodGenerator& generator: generators){
-        generator.update(dt);
+    for(FoodGenerator* generator: generators){
+        generator->update(dt);
     }
 }
 
@@ -78,6 +78,13 @@ Environment::~Environment(){
             o = nullptr;
         }
     }
+
+    for (auto gen : generators) {
+        if(gen != nullptr) {
+            delete (gen);
+            gen = nullptr;
+        }
+    }
 }
 
 //TODO check complexity of this call
@@ -91,6 +98,6 @@ std::list<OrganicEntity*> Environment::getEntitiesInSightForAnimal(Animal* anima
     return targetsInSight;
 }
 
-void Environment::addGenerator(const FoodGenerator &foodGenerator) {
+void Environment::addGenerator(FoodGenerator *foodGenerator) {
     generators.push_back(foodGenerator);
 }

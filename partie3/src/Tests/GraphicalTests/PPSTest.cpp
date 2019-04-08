@@ -31,7 +31,7 @@ void PPSTest::onSimulationStart()
 {
     setSimulationMode(SimulationMode::PPS);
     // IMPORTANT: UNCOMMENT WHEN CLASS FOODGENERATOR IS CODED:
-    //getAppEnv().addGenerator(new FoodGenerator());
+    getAppEnv().addGenerator(new FoodGenerator());
 }
 
 void PPSTest::onEventPPS(sf::Event event, sf::RenderWindow&)

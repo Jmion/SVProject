@@ -9,13 +9,13 @@
 #include <Interface/Updatable.hpp>
 
 class FoodGenerator : public Updatable {
-
+public:
+    void update(sf::Time dt) override;
     explicit FoodGenerator();
 
 private:
     sf::Time timeSinceLastFoodSpawn;
-public:
-    void update(sf::Time dt) override;
+
 
 };
 
