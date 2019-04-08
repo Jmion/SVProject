@@ -41,7 +41,12 @@ void Environment::update(sf::Time dt){
         generator->update(dt);
     }
 
-    std::list<OrganicEntity*> toDelete;
+    cleanUpDeadOrganic();
+
+}
+
+void Environment::cleanUpDeadOrganic(){
+    std::__cxx11::list<OrganicEntity*> toDelete;
     for(OrganicEntity* o : organicEntities){
         if(o != nullptr && o->isDead()){
             toDelete.push_back(o);

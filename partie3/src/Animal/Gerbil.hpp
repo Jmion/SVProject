@@ -63,6 +63,9 @@ protected:
 private:
     sf::Time getLongevity() const override;
 
+    double getStarvingEnergyLevel() const override;
+
+    double getEnergyLossFactor() const override;
 };
 
 

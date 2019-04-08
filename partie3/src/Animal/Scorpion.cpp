@@ -78,3 +78,11 @@ sf::Time Scorpion::getLongevity() const {
     return getAppConfig().scorpion_longevity;
 }
 
+double Scorpion::getEnergyLossFactor() const {
+    return getAppConfig().scorpion_energy_loss_factor;
+}
+
+double Scorpion::getStarvingEnergyLevel() const {
+    return getAppConfig().scorpion_energy_starving;
+}
+

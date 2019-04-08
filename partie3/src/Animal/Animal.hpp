@@ -14,6 +14,7 @@
 class Animal: public OrganicEntity {
 public:
 
+
     /*!
      * Amount of deceleration that the automaton has when approaching the target.
      */
@@ -28,7 +29,8 @@ public:
      * The action decide how the animal is currently behaving. These are the different states that the animal
      * can be in.
      */
-    DEFINE_ENUM_WITH_STRING_CONVERSIONS(State,(FOOD_IN_SIGHT)(FEEDING)(RUNNING_AWAY)(MATE_IN_SIGHT)(MATING)(GIVING_BIRTH)(WANDERING))
+    DEFINE_ENUM_WITH_STRING_CONVERSIONS(State,(FOOD_IN_SIGHT)(FEEDING)(RUNNING_AWAY)
+    (MATE_IN_SIGHT)(MATING)(GIVING_BIRTH)(WANDERING))
 
 
     /*!
@@ -249,7 +251,25 @@ private:
      */
     Vec2d convertToGlobalCoord(const Vec2d& v) const;
 
+    /*!
+     * Updates the energy level of the animal given that it has lived for a instant dt.
+     * @param dt amount of time since last call to this methode
+     */
+    void spendEnergy(sf::Time dt);
 
+
+    /*!
+     * Factor that influences how much energy the animal uses when moving.
+     * Greater values indicate more energy is being used
+     * @return energy loss factor
+     */
+    virtual double getEnergyLossFactor() const = 0;
+
+    /*!
+     * Returns the level of energy at which the animal is considered to be starving
+     * @return energy level for starvation
+     */
+    virtual double getStarvingEnergyLevel() const = 0;
 
 };
 

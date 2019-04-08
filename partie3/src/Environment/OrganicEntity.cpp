@@ -9,7 +9,7 @@
 OrganicEntity::OrganicEntity(const Vec2d& position, double size, double energyLevel):
         CircularCollider(position,size/2.0),energyLevel(energyLevel), age(sf::Time::Zero)  {}
 
-double OrganicEntity::getEngeryLevel() const{
+double OrganicEntity::getEnergyLevel() const{
     return energyLevel;
 }
 
@@ -32,6 +32,10 @@ const sf::Time &OrganicEntity::getAge() const {
 
 void OrganicEntity::aging(sf::Time dt) {
     age += dt;
+}
+
+void OrganicEntity::spendEnergy(double energySpend) {
+    energyLevel -= energySpend;
 }
 
 

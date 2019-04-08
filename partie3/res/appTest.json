@@ -19,6 +19,7 @@
          "feed time":0.4,
 	  "base consumption" : 0.1,
 	  "min energy" : 20,
+        "starving speed factor": 0.5,
          "reproduction":{
                "delivery time":10,
                "mating time":5
@@ -49,7 +50,8 @@
                "min mating female":800,
                "loss mating male":200,
                "loss female per child":100,
-               "loss factor":0.001
+               "loss factor":0.001,
+               "starving":40
             },
 	    "wave" : {
 		"frequency" : 0.3,
@@ -63,7 +65,7 @@
          "scorpion":{
             "mass":0.7,
             "size":100,
-             "longevity":4,
+             "longevity":8000,
 	     "min age mating" : 5,
             "max speed":100,
             "rotation":{
@@ -92,7 +94,8 @@
                "min mating female":2600,
                "loss mating male":250,
                "loss female per child":130,
-               "loss factor":0.001
+               "loss factor":0.001,
+               "starving":40
             },
             "idle":{
                "min":5,

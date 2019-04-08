@@ -35,6 +35,7 @@ Config::Config(std::string path) : mConfig(j::readFromFile(path))
     , animal_mating_time(mConfig["simulation"]["animal"]["reproduction"]["mating time"].toDouble())
     , animal_min_energy(mConfig["simulation"]["animal"]["min energy"].toDouble())
     , animal_base_energy_consumption(mConfig["simulation"]["animal"]["base consumption"].toDouble())
+    , animal_starving_speed_factor(mConfig["simulation"]["animal"]["starving speed factor"].toDouble())
 // gerbil
     , gerbil_max_speed(mConfig["simulation"]["animal"]["gerbil"]["max speed"].toDouble())
     , gerbil_mass(mConfig["simulation"]["animal"]["gerbil"]["mass"].toDouble())
@@ -59,6 +60,7 @@ Config::Config(std::string path) : mConfig(j::readFromFile(path))
     , gerbil_min_age_mating(mConfig["simulation"]["animal"]["gerbil"]["min age mating"].toDouble())
     , wave_gerbil_frequency(mConfig["simulation"]["animal"]["gerbil"]["wave"]["frequency"].toDouble())
     , wave_gerbil_energy_loss_factor(mConfig["simulation"]["animal"]["gerbil"]["wave"]["loss factor"].toDouble())
+    , gerbil_energy_starving(mConfig["simulation"]["animal"]["gerbil"]["energy"]["starving"].toDouble()) //Added by Jeremy
 // scorpion
     , scorpion_max_speed(mConfig["simulation"]["animal"]["scorpion"]["max speed"].toDouble())
     , scorpion_mass(mConfig["simulation"]["animal"]["scorpion"]["mass"].toDouble())
@@ -79,11 +81,13 @@ Config::Config(std::string path) : mConfig(j::readFromFile(path))
     , scorpion_energy_loss_mating_male(mConfig["simulation"]["animal"]["scorpion"]["energy"]["loss mating male"].toDouble())
     , scorpion_texture((mConfig["simulation"]["animal"]["scorpion"]["texture"].toString()))
     , scorpion_size(mConfig["simulation"]["animal"]["scorpion"]["size"].toDouble())
-    ,scorpion_min_age_mating(mConfig["simulation"]["animal"]["scorpion"]["min age mating"].toDouble())
+    , scorpion_min_age_mating(mConfig["simulation"]["animal"]["scorpion"]["min age mating"].toDouble())
     , scorpion_sensor_radius(mConfig["simulation"]["animal"]["scorpion"]["sensor radius"].toDouble())
     , scorpion_minimal_score_for_action(mConfig["simulation"]["animal"]["scorpion"]["score for action"].toDouble())
     , scorpion_rotation_angle_precision(mConfig["simulation"]["animal"]["scorpion"]["rotation"]["angle precision"].toDouble())
     , neuronal_scorpion_texture(mConfig["simulation"]["animal"]["scorpion"]["neuronal texture"].toString())
+    , scorpion_energy_starving(mConfig["simulation"]["animal"]["scorpion"]["energy"]["starving"].toDouble()) //Added by Jeremy
+
 // sensor
     ,sensor_intensity_threshold(mConfig["simulation"]["sensor"]["intensity threshold"].toDouble())
     ,sensor_inhibition_factor(mConfig["simulation"]["sensor"]["inhibition"]["factor"].toDouble())

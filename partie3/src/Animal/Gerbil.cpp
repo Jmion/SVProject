@@ -75,3 +75,12 @@ bool Gerbil::eatableBy(A_Unused Food const *food) const {
 sf::Time Gerbil::getLongevity() const {
     return getAppConfig().gerbil_longevity;
 }
+
+
+double Gerbil::getEnergyLossFactor() const {
+    return getAppConfig().gerbil_energy_loss_factor;
+}
+
+double Gerbil::getStarvingEnergyLevel() const {
+    return getAppConfig().gerbil_energy_starving;
+}

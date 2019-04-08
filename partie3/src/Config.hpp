@@ -93,6 +93,7 @@ public:
     const float animal_mating_time;
     const double animal_min_energy;
     const float animal_base_energy_consumption;
+    const float animal_starving_speed_factor;
 
     // gerbils
     const double gerbil_max_speed;
@@ -118,6 +119,8 @@ public:
     const double gerbil_min_age_mating;
     const double wave_gerbil_frequency;
     const double wave_gerbil_energy_loss_factor;
+    const double gerbil_energy_starving;
+
 
 
     // scorpion
@@ -145,6 +148,8 @@ public:
     const double scorpion_minimal_score_for_action;
     const double scorpion_rotation_angle_precision;
     const std::string neuronal_scorpion_texture;
+    const double scorpion_energy_starving;
+
     // sensor
     const double sensor_intensity_threshold;
     const double sensor_inhibition_factor;

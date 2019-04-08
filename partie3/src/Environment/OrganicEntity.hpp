@@ -61,9 +61,19 @@ public:
      * Getter to current energy level.
      * @return energy level
      */
-    double getEngeryLevel() const;
+    double getEnergyLevel() const;
 
+    /*!
+     * Increases the animals age by dt
+     * @param dt time to add to age
+     */
     void aging(sf::Time dt);
+
+    /*!
+     * Reduces the energyLevel by energySpend
+     * @param energySpend is the amount of energy that has been used
+     */
+    void spendEnergy(double energySpend);
 
     const sf::Time &getAge() const;
 

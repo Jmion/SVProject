@@ -50,7 +50,8 @@ void Animal::draw(sf::RenderTarget &targetWindow) const{
 
         //textual details about the animal
         std::string stateString = ToString(state);
-        auto text = buildText("State: " + stateString  + " \nenergy level: " + to_nice_string(getEngeryLevel())+"\nage:" + to_nice_string(getAge().asSeconds()),
+        auto text = buildText("State: " + stateString  + " \nenergy level: " +
+                to_nice_string(getEnergyLevel())+"\nage:" + to_nice_string(getAge().asSeconds()) + "\nenergy:"+to_nice_string(getEnergyLevel()),
                               convertToGlobalCoord(Vec2d(-100, 0)), getAppFont(), getAppConfig().default_debug_text_size,
                               sf::Color::Black, getRotation() / DEG_TO_RAD + 90);
         targetWindow.draw(text);
@@ -69,9 +70,7 @@ void Animal::drawVision(sf::RenderTarget& target) const {
 
 void Animal::update(sf::Time dt) {
     updateState(dt);
-    aging(dt);
 
-    //auto targetList = getAppEnv().getEntitiesInSightForAnimal(this);
     Vec2d attraction_force = Vec2d(0, 0);
     switch(state) {
         case WANDERING:
@@ -86,16 +85,10 @@ void Animal::update(sf::Time dt) {
             attraction_force = Vec2d(0, 0);
     }
 
-    /*if (!targetList.empty()) {
-        setTargetPosition(*targetList.begin());
-        hasTarget = true;
-    }else{
-        attraction_force = randomWalk();
-        hasTarget = false;
-    }*/
     updateMovementVariables(attraction_force, dt);
 
-    //TODO do we need to take the closest target?
+    aging(dt);
+    spendEnergy(dt);
 }
 
 void Animal::updateState(sf::Time dt) {
@@ -207,6 +200,8 @@ bool Animal::getIsFemale() const {
 }
 
 double Animal::getMaxSpeed() const {
+    if(getEnergyLevel()<getStarvingEnergyLevel())
+        return getStandardMaxSpeed()*getAppConfig().animal_starving_speed_factor;
     switch (state){
         case FOOD_IN_SIGHT:
             return getStandardMaxSpeed() * 3;
@@ -217,6 +212,10 @@ double Animal::getMaxSpeed() const {
         default:
             return getStandardMaxSpeed();
     }
+}
+
+void Animal::spendEnergy(sf::Time dt) {
+    OrganicEntity::spendEnergy(getAppConfig().animal_base_energy_consumption + speed * getEnergyLossFactor() * dt.asSeconds());
 }
 
 
