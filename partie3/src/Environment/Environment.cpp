@@ -5,6 +5,7 @@
 #include "Environment.hpp"
 #include <Animal/Animal.hpp>
 #include <Environment/OrganicEntity.hpp>
+#include <algorithm>
 
 /*!
  * Add animal to environment fauna.
@@ -39,6 +40,20 @@ void Environment::update(sf::Time dt){
     for(FoodGenerator* generator: generators){
         generator->update(dt);
     }
+
+    std::list<OrganicEntity*> toDelete;
+    for(OrganicEntity* o : organicEntities){
+        if(o != nullptr && o->isDead()){
+            toDelete.push_back(o);
+        }
+    }
+
+    for (OrganicEntity *o: toDelete) {
+        organicEntities.remove(o);
+        delete (o);
+    }
+
+    toDelete.clear();
 }
 
 /*!

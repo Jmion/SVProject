@@ -46,6 +46,7 @@ public:
 
     bool eatableBy(Food const *food) const override;
 
+
 protected:
     double getRandomWalkRadius() const override;
 
@@ -58,6 +59,10 @@ protected:
     double getInitialEnergy() const override;
 
     const std::string getTexturePath() const override;
+
+private:
+    sf::Time getLongevity() const override;
+
 };
 
 

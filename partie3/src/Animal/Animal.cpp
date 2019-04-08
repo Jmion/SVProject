@@ -50,7 +50,7 @@ void Animal::draw(sf::RenderTarget &targetWindow) const{
 
         //textual details about the animal
         std::string stateString = ToString(state);
-        auto text = buildText("State: " + stateString  + " \nenergy level: " + to_nice_string(getEngeryLevel())+"",
+        auto text = buildText("State: " + stateString  + " \nenergy level: " + to_nice_string(getEngeryLevel())+"\nage:" + to_nice_string(getAge().asSeconds()),
                               convertToGlobalCoord(Vec2d(-100, 0)), getAppFont(), getAppConfig().default_debug_text_size,
                               sf::Color::Black, getRotation() / DEG_TO_RAD + 90);
         targetWindow.draw(text);
@@ -69,6 +69,7 @@ void Animal::drawVision(sf::RenderTarget& target) const {
 
 void Animal::update(sf::Time dt) {
     updateState(dt);
+    aging(dt);
 
     //auto targetList = getAppEnv().getEntitiesInSightForAnimal(this);
     Vec2d attraction_force = Vec2d(0, 0);

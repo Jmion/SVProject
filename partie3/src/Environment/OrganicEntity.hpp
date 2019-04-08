@@ -25,6 +25,15 @@ public:
 
 
     /*!
+     * Determins if the organic entity is dead.
+     *
+     * An organic entity is considered to be dead when it has less energy than
+     * the value returned by getMinEnergy, or is it's age is greated than is longevity
+     * @return
+     */
+    bool isDead() const;
+
+    /*!
      * Determins if entity is eatable.
      *
      * To achive this this methode uses double dispatche. It will call the methode eatableBy.
@@ -34,10 +43,6 @@ public:
      * @return true if it is eatable
      */
     virtual bool eatable(OrganicEntity const* entity) const = 0;
-
-
-
-
 
     /*!
     * Determins if this can be eaten by a scorpion.
@@ -52,15 +57,41 @@ public:
      */
     virtual bool eatableBy(Food const* food) const = 0;
 
+    /*!
+     * Getter to current energy level.
+     * @return energy level
+     */
     double getEngeryLevel() const;
 
+    void aging(sf::Time dt);
+
+    const sf::Time &getAge() const;
 
 private:
+
+
+    /*!
+     * Returns the minimum amount of energy that an organic entity needs to have
+     * to stay alive
+     * @return min amount of energy for survival
+     */
+    virtual double getMinEnergy() const;
+
+    /*!
+     * How old can an OrganicEntity live before it dies.
+     * @return max age of organic entity
+     */
+    virtual sf::Time getLongevity() const;
+
+
     /*!
      * Energy level of the animal
      */
     double  energyLevel;
 
+    /*!
+     * How long the animal has been born. Affected by update
+     */
     sf::Time age;
 
 };

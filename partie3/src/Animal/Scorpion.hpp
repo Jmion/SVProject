@@ -9,6 +9,7 @@
 
 class Scorpion : public Animal{
 
+
 public:
 
     Scorpion(const Vec2d& position, double energyLevel, bool isFemale);
@@ -23,16 +24,6 @@ public:
 
     double getViewDistance() const override;
 
-protected:
-    double getRandomWalkRadius() const override;
-
-    double getRandomWalkDistance() const override;
-
-    double getRandomWalkJitter() const override;
-
-    const std::string getTexturePath() const override;
-
-public:
     ~Scorpion() override;
 
     bool eatable(OrganicEntity const *entity) const override;
@@ -43,10 +34,23 @@ public:
 
     bool eatableBy(Food const *food) const override;
 
+
 protected:
+    double getRandomWalkRadius() const override;
+
+    double getRandomWalkDistance() const override;
+
+    double getRandomWalkJitter() const override;
+
+    const std::string getTexturePath() const override;
+
     double getSize() const override;
 
     double getInitialEnergy() const override;
+
+private:
+    sf::Time getLongevity() const override;
+
 };
 
 

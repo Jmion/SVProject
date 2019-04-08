@@ -14,3 +14,24 @@ double OrganicEntity::getEngeryLevel() const{
 }
 
 
+double OrganicEntity::getMinEnergy() const {
+    return getAppConfig().animal_min_energy;
+}
+
+sf::Time OrganicEntity::getLongevity() const {
+    return sf::seconds(1e9);
+}
+
+bool OrganicEntity::isDead() const {
+    return age > getLongevity() || energyLevel < getMinEnergy();
+}
+
+const sf::Time &OrganicEntity::getAge() const {
+    return age;
+}
+
+void OrganicEntity::aging(sf::Time dt) {
+    age += dt;
+}
+
+

@@ -71,3 +71,7 @@ bool Gerbil::eatableBy(A_Unused Gerbil const *gerbil) const {
 bool Gerbil::eatableBy(A_Unused Food const *food) const {
     return false;
 }
+
+sf::Time Gerbil::getLongevity() const {
+    return getAppConfig().gerbil_longevity;
+}

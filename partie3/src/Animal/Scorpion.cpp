@@ -74,3 +74,7 @@ bool Scorpion::eatableBy(A_Unused Food const *food) const {
     return false;
 }
 
+sf::Time Scorpion::getLongevity() const {
+    return getAppConfig().scorpion_longevity;
+}
+
