@@ -8,6 +8,7 @@
 #include <Utility/Utility.hpp>
 #include <Environment/OrganicEntity.hpp>
 #include <string>
+#include <list>
 
 class Animal: public OrganicEntity {
 public:
@@ -20,6 +21,39 @@ public:
      * in the getDecelerationRate method present in this class.
      */
     enum Deceleration {WEAK,MEDIUM,STRONG};
+
+    /*!
+     * The action decide how the animal is currently behaving. These are the different states that the animal
+     * can be in.
+     */
+    enum State {
+        FOOD_IN_SIGHT, // nourriture en vue
+        FEEDING,       // en train de manger (là en principe il arrête de se déplacer)
+        RUNNING_AWAY,  // en fuite
+        MATE_IN_SIGHT, // partenaire en vue
+        MATING,        // vie privée (rencontre avec un partenaire!)
+        GIVING_BIRTH,  // donne naissance
+        WANDERING,     // déambule
+    };
+
+    std::string getStateString() const{
+        switch (state) {
+            case FOOD_IN_SIGHT:
+                return "Food in sight";
+            case FEEDING:
+                return "Feeding";
+            case RUNNING_AWAY:
+                return "Running away";
+            case MATE_IN_SIGHT:
+                return "Mate in sight";
+            case MATING:
+                return "Mating";
+            case GIVING_BIRTH:
+                return "Giving birth";
+            case WANDERING:
+                return "Wandering";
+        }
+    }
 
     /*!
      * Will return values predefined in the config file applying to this.
@@ -161,6 +195,12 @@ protected:
      */
     bool getIsFemale() const;
 
+    /*!
+     * Gets the maximum speed that the animal can move given it's current state.
+     * @return max move speed of the animal
+     */
+    double getMaxSpeed() const;
+
 private:
 
     /*!
@@ -186,6 +226,16 @@ private:
      */
     Deceleration deceleration;
 
+
+    /*!
+     * Current state that the animal is in.
+     */
+    State state;
+
+    /*!
+     * Updates the state of the animal
+     */
+    void updateState(sf::Time dt);
 
     /*!
     * Makes the automaton moved based of of the force that it is experiencing.

@@ -52,6 +52,8 @@ public:
      */
     virtual bool eatableBy(Food const* food) const = 0;
 
+    double getEngeryLevel() const;
+private:
     /*!
      * Energy level of the animal
      */

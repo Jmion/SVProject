@@ -122,3 +122,4 @@ We need to chnage the line where energy is indicated. For example:
 ## QUESTIONS
 Why are we declaring the eatable method in all the subclasses? It is the same everywhere. And why not use a visitor.
 * See for access rights to eatable methods
+* Whay are we not using the state running away to make the animals run away from the scorpion. Need to check what is wrongs

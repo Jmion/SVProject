@@ -9,17 +9,6 @@
 #include <Random/Uniform.hpp>
 #include <Environment/OrganicEntity.hpp>
 
-/*
-double Animal::getMass() const{
-    return ANIMAL_MASS;
-}
-
-double Animal::getStandardMaxSpeed() const {
-    return ANIMAL_MAX_SPEED;
-}
-
- */
-
 Animal& Animal::setTargetPosition(const Vec2d &target) {
     targetPosition = target;
     return *this;
@@ -39,24 +28,6 @@ Animal::Animal(const Vec2d& _position, double size, double energyLevel, bool isF
 
 }
 
-void Animal::update(sf::Time dt) {
-
-    /*
-    auto targetList = getAppEnv().getTargetsInSightForAnimal(this);
-    Vec2d attraction_force = attractionForce();
-    if (targetList.size() > 0) {
-        setTargetPosition(*targetList.begin());
-        hasTarget = true;
-    }else{
-        attraction_force = randomWalk();
-        hasTarget = false;
-    }
-    updateMovementVariables(attraction_force, dt);
-    */
-    //TODO do we need to take the closest target?
-}
-
-
 void Animal::draw(sf::RenderTarget &targetWindow) const{
     sf::Texture& texture = getAppTexture(getTexturePath());
     auto image_to_draw(buildSprite(getPosition(),getRadius()*2,texture, getRotation()/DEG_TO_RAD));
@@ -74,6 +45,10 @@ void Animal::draw(sf::RenderTarget &targetWindow) const{
             targetWindow.draw(buildCircle(convertToGlobalCoord(current_target + Vec2d(getRandomWalkDistance(), 0)), 5,
                                           sf::Color::Blue));
         }
+
+        auto text = buildText("State: " + getStateString() + " \nenergy level: " + to_nice_string(getEngeryLevel())+"",
+                              convertToGlobalCoord(Vec2d(1, 0)), getAppFont(), getAppConfig().default_debug_text_size,
+                              sf::Color::Black, getRotation() / DEG_TO_RAD + 90);
     }
 }
 
@@ -84,9 +59,66 @@ void Animal::drawVision(sf::RenderTarget& target) const {
     target.draw(arc);
 }
 
+
+void Animal::update(sf::Time dt) {
+    updateState(dt);
+
+    //auto targetList = getAppEnv().getEntitiesInSightForAnimal(this);
+    Vec2d attraction_force = Vec2d(0, 0);
+    switch(state) {
+        case WANDERING:
+            std::cout << "wandering" << std::endl;
+            hasTarget=false;
+            attraction_force = randomWalk();
+            break;
+        case FOOD_IN_SIGHT:
+            std::cout<<"FOOD!!!" <<std::endl;
+            hasTarget = true;
+            attraction_force = attractionForce();
+            break;
+        default:
+            attraction_force = Vec2d(0, 0);
+    }
+
+    /*if (!targetList.empty()) {
+        setTargetPosition(*targetList.begin());
+        hasTarget = true;
+    }else{
+        attraction_force = randomWalk();
+        hasTarget = false;
+    }*/
+    updateMovementVariables(attraction_force, dt);
+
+    //TODO do we need to take the closest target?
+}
+
+void Animal::updateState(sf::Time dt) {
+    std::list<OrganicEntity*> entities = getAppEnv().getEntitiesInSightForAnimal(this);
+
+    //default behaviour if nothing in sight
+    state = WANDERING;
+
+    OrganicEntity* closestEntity = nullptr;
+    for(auto e: entities){
+        if (eatable(e)) {
+            if (closestEntity == nullptr) {
+                closestEntity = e;
+            } else {
+                if (distanceTo(e->getPosition()) < distanceTo(closestEntity->getPosition())) {
+                    closestEntity = e;
+                }
+            }
+            state = FOOD_IN_SIGHT;
+        }
+    }
+    if(closestEntity != nullptr){
+        targetPosition = closestEntity->getPosition();
+    }
+}
+
 Vec2d Animal::attractionForce() const {
     Vec2d toTarget = targetPosition - getPosition();
-    double speed = fmin(toTarget.length() / getDecelerationRate(), getStandardMaxSpeed());
+    double speed = fmin(toTarget.length() / getDecelerationRate(), getMaxSpeed());
     Vec2d v_target = toTarget/toTarget.length()*speed;
     return v_target-getSpeedVector();
 }
@@ -94,7 +126,7 @@ Vec2d Animal::attractionForce() const {
 void Animal::updateMovementVariables(const Vec2d& acceleration, const sf::Time dt) {
     Vec2d new_speed = getSpeedVector() + acceleration * dt.asSeconds();
     Vec2d new_direction = new_speed.normalised();
-    speed = fmin(getStandardMaxSpeed(), new_speed.length());
+    speed = fmin(getMaxSpeed(), new_speed.length());
     //setTargetPosition(targetPosition + new_speed * dt.asSeconds());
     direction = new_direction;
     move(getSpeedVector() * dt.asSeconds());
@@ -161,3 +193,18 @@ Vec2d Animal::convertToGlobalCoord(const Vec2d& v) const{
 bool Animal::getIsFemale() const {
     return isFemale;
 }
+
+double Animal::getMaxSpeed() const {
+    switch (state){
+        case FOOD_IN_SIGHT:
+            return getStandardMaxSpeed() * 3;
+        case MATE_IN_SIGHT:
+            return getStandardMaxSpeed() * 2;
+        case RUNNING_AWAY:
+            return getStandardMaxSpeed() * 4;
+        default:
+            return getStandardMaxSpeed();
+    }
+}
+
+
