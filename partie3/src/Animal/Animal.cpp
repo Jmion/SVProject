@@ -47,8 +47,9 @@ void Animal::draw(sf::RenderTarget &targetWindow) const{
         }
 
         auto text = buildText("State: " + getStateString() + " \nenergy level: " + to_nice_string(getEngeryLevel())+"",
-                              convertToGlobalCoord(Vec2d(1, 0)), getAppFont(), getAppConfig().default_debug_text_size,
+                              convertToGlobalCoord(Vec2d(-100, 0)), getAppFont(), getAppConfig().default_debug_text_size,
                               sf::Color::Black, getRotation() / DEG_TO_RAD + 90);
+        targetWindow.draw(text);
     }
 }
 
@@ -67,12 +68,10 @@ void Animal::update(sf::Time dt) {
     Vec2d attraction_force = Vec2d(0, 0);
     switch(state) {
         case WANDERING:
-            std::cout << "wandering" << std::endl;
             hasTarget=false;
             attraction_force = randomWalk();
             break;
         case FOOD_IN_SIGHT:
-            std::cout<<"FOOD!!!" <<std::endl;
             hasTarget = true;
             attraction_force = attractionForce();
             break;
