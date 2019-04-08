@@ -7,6 +7,7 @@
 #include <cfloat>
 #include <cmath>
 #include "../Utility/Vec2d.hpp"
+#include <Utility/Utility.hpp>
 
 
 const Vec2d& CircularCollider::getPosition() const {
@@ -104,6 +105,13 @@ bool CircularCollider::operator|(const CircularCollider &other) const{
 
 bool CircularCollider::operator>(const Vec2d &point) const{
     return isPointInside(point);
+}
+
+void CircularCollider::draw(sf::RenderTarget &target) const {
+    if(isDebugOn()){
+        sf::CircleShape circle = buildCircle(getPosition(), getRadius(), sf::Color::White);
+        target.draw(circle);
+    }
 }
 
 

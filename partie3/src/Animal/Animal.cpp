@@ -29,6 +29,7 @@ Animal::Animal(const Vec2d& _position, double size, double energyLevel, bool isF
 }
 
 void Animal::draw(sf::RenderTarget &targetWindow) const{
+    CircularCollider::draw(targetWindow);
     sf::Texture& texture = getAppTexture(getTexturePath());
     auto image_to_draw(buildSprite(getPosition(),getRadius()*2,texture, getRotation()/DEG_TO_RAD));
     targetWindow.draw(image_to_draw);
@@ -46,10 +47,13 @@ void Animal::draw(sf::RenderTarget &targetWindow) const{
                                           sf::Color::Blue));
         }
 
+        //textual details about the animal
         auto text = buildText("State: " + getStateString() + " \nenergy level: " + to_nice_string(getEngeryLevel())+"",
                               convertToGlobalCoord(Vec2d(-100, 0)), getAppFont(), getAppConfig().default_debug_text_size,
                               sf::Color::Black, getRotation() / DEG_TO_RAD + 90);
         targetWindow.draw(text);
+
+        //circularCollider visualisation.
     }
 }
 
@@ -97,6 +101,7 @@ void Animal::updateState(sf::Time dt) {
     //default behaviour if nothing in sight
     state = WANDERING;
 
+    //***** COULD BE A METHODE analyzeEnvironment ******
     OrganicEntity* closestEntity = nullptr;
     for(auto e: entities){
         if (eatable(e)) {
@@ -107,8 +112,13 @@ void Animal::updateState(sf::Time dt) {
                     closestEntity = e;
                 }
             }
-            state = FOOD_IN_SIGHT;
+
         }
+    }
+    //**************
+
+    if(closestEntity!= nullptr && eatable(closestEntity)){
+        state = FOOD_IN_SIGHT;
     }
     if(closestEntity != nullptr){
         targetPosition = closestEntity->getPosition();

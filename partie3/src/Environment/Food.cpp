@@ -6,6 +6,7 @@
 #include <Application.hpp>
 #include <SFML/Graphics/Texture.hpp>
 #include <Utility/Utility.hpp>
+#include <Utility/Macros.hpp>
 
 
 void Food::draw(sf::RenderTarget &target) const {
@@ -38,14 +39,14 @@ bool Food::eatable(OrganicEntity const *entity) const {
     return entity->eatableBy(this);
 }
 
-bool Food::eatableBy(Scorpion const *scorpion) const {
+bool Food::eatableBy(A_Unused Scorpion const *scorpion) const {
     return false;
 }
 
-bool Food::eatableBy(Gerbil const *gerbil) const {
+bool Food::eatableBy(A_Unused Gerbil const *gerbil) const {
     return true;
 }
 
-bool Food::eatableBy(Food const *food) const {
+bool Food::eatableBy(A_Unused Food const *food) const {
     return false;
 }

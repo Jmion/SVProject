@@ -117,9 +117,17 @@ We need to chnage the line where energy is indicated. For example:
             },
 ```
 
-##
+## Q.3.5
+
+It is interesting to implement the draw method for the circular collider in it's own class. It makes sense that a circular collider is in charge of displaying itself for debugging purposes. We therefor changed the inheritance of Drawable, moving it up from OrganicEnity to CircularCollider. For the moment there is no specific need / or logic to justify the circular collider having an update method. Therefor the implementation of the Updatable "interface" will remain in Animal. A explicit call to CircularCollider::draw needs to be made at the beginning of the draw method of any children to enable the drawing of the circular collider.
 
 ## QUESTIONS
 Why are we declaring the eatable method in all the subclasses? It is the same everywhere. And why not use a visitor.
 * See for access rights to eatable methods
 * Whay are we not using the state running away to make the animals run away from the scorpion. Need to check what is wrongs
+* Why is there no to string on a enum.
+
+
+## CONCEPTION
+
+I added a macros utility file where I will put all the macros that will be utilities for this project. This includes for now the parameters to supress unused attributes for GCC. This is done here to allow flexibility in case we change compilers since the suppress warning flags are not part of the C norm but are specific to GCC.

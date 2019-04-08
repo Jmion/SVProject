@@ -13,7 +13,7 @@ class Gerbil;
 class Food;
 
 
-class OrganicEntity : public CircularCollider, public Drawable, public Updatable{
+class OrganicEntity : public CircularCollider, public Updatable{
 public:
     /*!
      * Creates an organic entity
@@ -53,6 +53,8 @@ public:
     virtual bool eatableBy(Food const* food) const = 0;
 
     double getEngeryLevel() const;
+
+
 private:
     /*!
      * Energy level of the animal

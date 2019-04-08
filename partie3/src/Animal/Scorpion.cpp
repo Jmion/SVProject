@@ -6,6 +6,8 @@
 #include <Application.hpp>
 #include <Random/Uniform.hpp>
 #include <string>
+#include <Utility/Macros.hpp>
+
 double Scorpion::getStandardMaxSpeed() const {
     return getAppConfig().scorpion_max_speed;
 }
@@ -60,15 +62,15 @@ bool Scorpion::eatable(OrganicEntity const *entity) const {
     return entity->eatableBy(this);
 }
 
-bool Scorpion::eatableBy(Scorpion const *scorpion) const {
+bool Scorpion::eatableBy(A_Unused Scorpion const *scorpion) const {
     return false;
 }
 
-bool Scorpion::eatableBy(Gerbil const *gerbil) const {
+bool Scorpion::eatableBy(A_Unused Gerbil const *gerbil) const {
     return false;
 }
 
-bool Scorpion::eatableBy(Food const *food) const {
+bool Scorpion::eatableBy(A_Unused Food const *food) const {
     return false;
 }
 

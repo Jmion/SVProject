@@ -14,6 +14,8 @@ void Environment::addEntity(OrganicEntity* entity){
     //TODO could imagine copying the animal passed in to gurantee that there will be not issues with organicEntities in a list that no not exist.
     if(entity != nullptr){
         organicEntities.push_back(entity);
+    }else{
+        std::cerr<< "Attempt to add entity that is a nullprt"<<std::endl;
     }
 }
 

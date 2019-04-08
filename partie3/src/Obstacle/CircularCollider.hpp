@@ -11,8 +11,8 @@
 
 #include "../Utility/Vec2d.hpp"
 #include <iostream>
-
-class CircularCollider {
+#include <Interface/Drawable.hpp>
+class CircularCollider : public Drawable{
 private:
     Vec2d position; // position of center
     double radius;
@@ -151,6 +151,11 @@ public:
      */
     bool operator>(const Vec2d& point) const;
 
+    /*!
+     * Draws in white the visualisation of the circular collider
+     * @param target where to draw the cirucularCollider
+     */
+    void draw(sf::RenderTarget &target) const override;
 
 };
 std::ostream& operator<<(std::ostream&, CircularCollider const&);

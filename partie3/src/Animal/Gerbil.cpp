@@ -6,6 +6,7 @@
 #include <Application.hpp>
 #include <random>
 #include <Random/Uniform.hpp>
+#include <Utility/Macros.hpp>
 
 double Gerbil::getRandomWalkJitter() const {
     return getAppConfig().gerbil_random_walk_jitter;
@@ -59,14 +60,14 @@ bool Gerbil::eatable(OrganicEntity const *entity) const {
     return entity->eatableBy(this);
 }
 
-bool Gerbil::eatableBy(Scorpion const *scorpion) const {
+bool Gerbil::eatableBy(A_Unused Scorpion const * scorpion) const {
     return true;
 }
 
-bool Gerbil::eatableBy(Gerbil const *gerbil) const {
+bool Gerbil::eatableBy(A_Unused Gerbil const *gerbil) const {
     return false;
 }
 
-bool Gerbil::eatableBy(Food const *food) const {
+bool Gerbil::eatableBy(A_Unused Food const *food) const {
     return false;
 }
