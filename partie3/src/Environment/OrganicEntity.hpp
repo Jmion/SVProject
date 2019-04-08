@@ -61,6 +61,8 @@ private:
      */
     double  energyLevel;
 
+    sf::Time age;
+
 };
 
 
