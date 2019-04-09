@@ -19,7 +19,8 @@
          "feed time":0.4,
 	  "base consumption" : 0.1,
 	  "min energy" : 20,
-         "reproduction":{
+        "starving speed factor": 0.5,
+        "reproduction":{
                "delivery time":10,
                "mating time":5
          },
@@ -49,7 +50,8 @@
                "min mating female":800,
                "loss mating male":200,
                "loss female per child":100,
-               "loss factor":0.002
+               "loss factor":0.002,
+               "starving":40
             },
 	    "wave" : {
 		"frequency" : 0.3,
@@ -92,7 +94,8 @@
                "min mating female":600,
                "loss mating male":250,
                "loss female per child":130,
-               "loss factor":0.01
+               "loss factor":0.01,
+               "starving":40
             },
             "idle":{
                "min":5,
