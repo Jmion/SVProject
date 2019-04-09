@@ -82,7 +82,6 @@ std::list<OrganicEntity*> organicEntities;
 std::list<Vec2d> targets;
 std::list<FoodGenerator*> generators;
 
-    void cleanUpDeadOrganic();
 };
 
 

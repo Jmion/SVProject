@@ -5,6 +5,10 @@
          "factor":1,
          "max dt":0.05
       },
+     "organic entity" : {
+       "transfer factor": 0.7,
+       "wait after feeding" : 1
+     },
        "food generator" : {
 	   "delta" : 4
        },

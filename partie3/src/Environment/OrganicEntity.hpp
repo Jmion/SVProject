@@ -75,7 +75,28 @@ public:
      */
     void spendEnergy(double energySpend);
 
+    /*!
+     * Gettier to current age of the organicEntity
+     * @return age
+     */
     const sf::Time &getAge() const;
+
+protected:
+
+    /*!
+     * Allows this to eat another organic entity. Eating an organic entity will cause the energy level of the animal eating
+     * to increase.
+     * @param eaten organic entity. The organic entity that is for supper.
+     */
+    void eat(OrganicEntity* & eaten);
+
+    /*!
+     * Updates the time that the entity has spend waiting after feeding.
+     * It will also return if it has already waited long enough to allow for state change
+     * @param dt time spent since last call
+     * @return true if entity has spend at least entity_wait_time waiting after having eaten.
+     */
+    bool updateAndHasWaitedLongEnough(sf::Time dt);
 
 private:
 
@@ -103,6 +124,12 @@ private:
      * How long the animal has been born. Affected by update
      */
     sf::Time age;
+
+    /*!
+     * This varaible is used to express the wait time that the Orgnaic entity has before being able to continue to
+     * change state.
+     */
+    sf::Time feedingWait;
 
 };
 

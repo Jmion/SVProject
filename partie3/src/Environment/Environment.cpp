@@ -33,33 +33,26 @@ void Environment::addTarget(const Vec2d& target){
  * @param dt time between updates
  */
 void Environment::update(sf::Time dt){
-    for(OrganicEntity* o : organicEntities){
-        o->update(dt);
-    }
 
     for(FoodGenerator* generator: generators){
         generator->update(dt);
     }
 
-    cleanUpDeadOrganic();
-
-}
-
-void Environment::cleanUpDeadOrganic(){
-    std::__cxx11::list<OrganicEntity*> toDelete;
-    for(OrganicEntity* o : organicEntities){
-        if(o != nullptr && o->isDead()){
-            toDelete.push_back(o);
+    for(auto& o : organicEntities){
+        if(o != nullptr){
+            o->update(dt);
+            if(o->isDead()){
+                delete (o);
+                o = nullptr;
+            }
         }
+
     }
 
-    for (OrganicEntity *o: toDelete) {
-        organicEntities.remove(o);
-        delete (o);
-    }
+    organicEntities.erase(std::remove(organicEntities.begin(),organicEntities.end(), nullptr),organicEntities.end());
 
-    toDelete.clear();
 }
+
 
 /*!
  * draws the animals and targets onto the window

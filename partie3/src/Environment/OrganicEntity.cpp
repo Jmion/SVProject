@@ -38,4 +38,19 @@ void OrganicEntity::spendEnergy(double energySpend) {
     energyLevel -= energySpend;
 }
 
+void OrganicEntity::eat(OrganicEntity* &eaten) {
+    if(eaten!= nullptr && eatable(eaten)) {
+
+        energyLevel += eaten->energyLevel * getAppConfig().entity_energy_transfer_factor;
+        eaten->energyLevel = 0;
+        feedingWait = sf::Time::Zero;
+        std::cerr << "end of fofod" << std::endl;
+    }
+}
+
+bool OrganicEntity::updateAndHasWaitedLongEnough(sf::Time dt) {
+    feedingWait += dt;
+    return feedingWait>=getAppConfig().entity_wait_after_feeding;
+}
+
 

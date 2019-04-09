@@ -74,6 +74,8 @@ public:
     // organic entity
     const std::string entity_texture_tracked = "target.png";
     const double entity_energy_critical = 5;
+    const double entity_energy_transfer_factor;
+    const sf::Time entity_wait_after_feeding;
 
     //food generator
     const double food_generator_delta;

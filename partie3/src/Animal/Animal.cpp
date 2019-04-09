@@ -34,8 +34,6 @@ void Animal::draw(sf::RenderTarget &targetWindow) const{
     sf::Texture& texture = getAppTexture(getTexturePath());
     auto image_to_draw(buildSprite(getPosition(),getRadius()*2,texture, getRotation()/DEG_TO_RAD));
     targetWindow.draw(image_to_draw);
-    sf::Color red(255,0,0);
-    targetWindow.draw(buildCircle(targetPosition,5,sf::Color::Red));
     if(isDebugOn()){
         drawVision(targetWindow);
         //Visuallization virtual target
@@ -69,7 +67,9 @@ void Animal::drawVision(sf::RenderTarget& target) const {
 
 
 void Animal::update(sf::Time dt) {
-    updateState(dt);
+    OrganicEntity* closestEntity = updateState(dt);
+
+    std::cerr << (closestEntity == nullptr?"yes":"no") << " " << ToString(state)<<std::endl;
 
     Vec2d attraction_force = Vec2d(0, 0);
     switch(state) {
@@ -81,6 +81,12 @@ void Animal::update(sf::Time dt) {
             hasTarget = true;
             attraction_force = attractionForce();
             break;
+        case FEEDING:
+            eat(closestEntity);
+            break;
+        case DIESTING:
+            attraction_force = stoppingAttractionForce();
+            break;
         default:
             attraction_force = Vec2d(0, 0);
     }
@@ -91,7 +97,13 @@ void Animal::update(sf::Time dt) {
     spendEnergy(dt);
 }
 
-void Animal::updateState(sf::Time dt) {
+OrganicEntity* Animal::updateState(sf::Time dt) {
+    //Digestion wait time.
+    /*if(!this->updateAndHasWaitedLongEnough(dt)){
+        state = DIESTING;
+        return nullptr;
+    }*/
+
     std::list<OrganicEntity*> entities = getAppEnv().getEntitiesInSightForAnimal(this);
 
     //default behaviour if nothing in sight
@@ -108,17 +120,20 @@ void Animal::updateState(sf::Time dt) {
                     closestEntity = e;
                 }
             }
-
         }
     }
     //**************
 
     if(closestEntity!= nullptr && eatable(closestEntity)){
         state = FOOD_IN_SIGHT;
+        if(isColliding(*closestEntity)){
+            state = FEEDING;
+        }
     }
     if(closestEntity != nullptr){
         targetPosition = closestEntity->getPosition();
     }
+    return closestEntity;
 }
 
 Vec2d Animal::attractionForce() const {
@@ -216,6 +231,13 @@ double Animal::getMaxSpeed() const {
 
 void Animal::spendEnergy(sf::Time dt) {
     OrganicEntity::spendEnergy(getAppConfig().animal_base_energy_consumption + speed * getEnergyLossFactor() * dt.asSeconds());
+}
+
+Vec2d Animal::stoppingAttractionForce() const {
+    if (speed == 0) {
+        return Vec2d(0, 0);
+    }
+    return convertToGlobalCoord(Vec2d(-1, 0));
 }
 
 

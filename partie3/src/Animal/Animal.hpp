@@ -30,7 +30,7 @@ public:
      * can be in.
      */
     DEFINE_ENUM_WITH_STRING_CONVERSIONS(State,(FOOD_IN_SIGHT)(FEEDING)(RUNNING_AWAY)
-    (MATE_IN_SIGHT)(MATING)(GIVING_BIRTH)(WANDERING))
+    (MATE_IN_SIGHT)(MATING)(GIVING_BIRTH)(WANDERING)(DIESTING))
 
 
     /*!
@@ -212,8 +212,9 @@ private:
 
     /*!
      * Updates the state of the animal
+     * @return the pointer to the closest eatable entity in the list of entities in sight of the animal.
      */
-    void updateState(sf::Time dt);
+    OrganicEntity* updateState(sf::Time dt);
 
     /*!
     * Makes the automaton moved based of of the force that it is experiencing.
@@ -270,6 +271,13 @@ private:
      * @return energy level for starvation
      */
     virtual double getStarvingEnergyLevel() const = 0;
+
+
+    /*!
+     * Calculates the force that will slow and stop the animal
+     * @return the force to stop the animal
+     */
+    Vec2d stoppingAttractionForce() const;
 
 };
 

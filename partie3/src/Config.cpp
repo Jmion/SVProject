@@ -19,7 +19,9 @@ Config::Config(std::string path) : mConfig(j::readFromFile(path))
     , simulation_world_size(mConfig["simulation"]["world"]["size"].toDouble())
     , simulation_time_factor(mConfig["simulation"]["time"]["factor"].toDouble())
     , simulation_time_max_dt(sf::seconds(mConfig["simulation"]["time"]["max dt"].toDouble()))
-
+    // organic entity
+    , entity_energy_transfer_factor(mConfig["simulation"]["organic entity"]["transfer factor"].toDouble())
+    , entity_wait_after_feeding(sf::seconds(mConfig["simulation"]["organic entity"]["wait after feeding"].toDouble()))
 // food generator
     , food_generator_delta(mConfig["simulation"]["food generator"]["delta"].toDouble())
 // food
