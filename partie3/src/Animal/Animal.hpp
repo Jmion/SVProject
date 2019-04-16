@@ -212,9 +212,8 @@ private:
 
     /*!
      * Updates the state of the animal
-     * @return the pointer to the closest eatable entity in the list of entities in sight of the animal.
      */
-    OrganicEntity* updateState(sf::Time dt);
+    void updateState(sf::Time dt);
 
     /*!
     * Makes the automaton moved based of of the force that it is experiencing.
@@ -277,7 +276,7 @@ private:
      * Calculates the force that will slow and stop the animal
      * @return the force to stop the animal
      */
-    Vec2d stoppingAttractionForce() const;
+    Vec2d stoppingAttractionForce();
 
 };
 

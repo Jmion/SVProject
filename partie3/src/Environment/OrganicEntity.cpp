@@ -7,7 +7,7 @@
 #include <Application.hpp>
 
 OrganicEntity::OrganicEntity(const Vec2d& position, double size, double energyLevel):
-        CircularCollider(position,size/2.0),energyLevel(energyLevel), age(sf::Time::Zero)  {}
+        CircularCollider(position,size/2.0),energyLevel(energyLevel), age(sf::Time::Zero),feedingWait(getAppConfig().entity_wait_after_feeding)  {}
 
 double OrganicEntity::getEnergyLevel() const{
     return energyLevel;
