@@ -41,16 +41,28 @@ void Environment::update(sf::Time dt){
     for(auto& o : organicEntities){
         if(o != nullptr){
             o->update(dt);
-            if(o->isDead()){
-                delete (o);
-                o = nullptr;
-            }
         }
 
     }
 
-    organicEntities.erase(std::remove(organicEntities.begin(),organicEntities.end(), nullptr),organicEntities.end());
+    cleanUpDeadOrganic();
 
+}
+
+void Environment::cleanUpDeadOrganic(){
+    std::__cxx11::list<OrganicEntity*> toDelete;
+    for(OrganicEntity* o : organicEntities){
+        if(o != nullptr && o->isDead()){
+            toDelete.push_back(o);
+        }
+    }
+
+    for (OrganicEntity *o: toDelete) {
+        organicEntities.remove(o);
+        delete (o);
+    }
+
+    toDelete.clear();
 }
 
 
