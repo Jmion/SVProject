@@ -7,7 +7,8 @@
 
 #include <Animal/Animal.hpp>
 
-class Scorpion : public Animal{
+class Scorpion : public Animal
+{
 
 
 public:

@@ -8,7 +8,8 @@
 #include <Utility/Utility.hpp>
 #include <Interface/Updatable.hpp>
 
-class FoodGenerator : public Updatable {
+class FoodGenerator : public Updatable
+{
 public:
     void update(sf::Time dt) override;
     explicit FoodGenerator();

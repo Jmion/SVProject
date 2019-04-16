@@ -16,7 +16,8 @@
 #include <Environment/FoodGenerator.hpp>
 class Animal;
 
-class Environment : public Drawable, public Updatable{
+class Environment : public Drawable, public Updatable
+{
 public:
     /*!
      * Add animal to environment fauna.
@@ -78,11 +79,11 @@ public:
     void addGenerator(FoodGenerator* foodGenerator);
 
 private:
-std::list<OrganicEntity*> organicEntities;
-std::list<Vec2d> targets;
-std::list<FoodGenerator*> generators;
+    std::list<OrganicEntity*> organicEntities;
+    std::list<Vec2d> targets;
+    std::list<FoodGenerator*> generators;
 
-void cleanUpDeadOrganic();
+    void cleanUpDeadOrganic();
 };
 
 

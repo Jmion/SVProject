@@ -13,7 +13,8 @@ class Gerbil;
 class Food;
 
 
-class OrganicEntity : public CircularCollider, public Updatable{
+class OrganicEntity : public CircularCollider, public Updatable
+{
 public:
     /*!
      * Creates an organic entity

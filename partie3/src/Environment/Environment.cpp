@@ -11,11 +11,12 @@
  * Add animal to environment fauna.
  * @param animal
  */
-void Environment::addEntity(OrganicEntity* entity){
+void Environment::addEntity(OrganicEntity* entity)
+{
     //TODO could imagine copying the animal passed in to gurantee that there will be not issues with organicEntities in a list that no not exist.
-    if(entity != nullptr){
+    if(entity != nullptr) {
         organicEntities.push_back(entity);
-    }else{
+    } else {
         std::cerr<< "Attempt to add entity that is a nullprt"<<std::endl;
     }
 }
@@ -24,7 +25,8 @@ void Environment::addEntity(OrganicEntity* entity){
  * Add ressources to environment. These are targets for the fauna. (Food)
  * @param target of the resource to add to the environment
  */
-void Environment::addTarget(const Vec2d& target){
+void Environment::addTarget(const Vec2d& target)
+{
     targets.push_back(target); //we can pass a ref since the method copies the reference when adding to list
 }
 
@@ -32,14 +34,15 @@ void Environment::addTarget(const Vec2d& target){
  * Make the animals in the environment evolve.
  * @param dt time between updates
  */
-void Environment::update(sf::Time dt){
+void Environment::update(sf::Time dt)
+{
 
-    for(FoodGenerator* generator: generators){
+    for(FoodGenerator* generator: generators) {
         generator->update(dt);
     }
 
-    for(auto& o : organicEntities){
-        if(o != nullptr){
+    for(auto& o : organicEntities) {
+        if(o != nullptr) {
             o->update(dt);
         }
 
@@ -49,10 +52,11 @@ void Environment::update(sf::Time dt){
 
 }
 
-void Environment::cleanUpDeadOrganic(){
+void Environment::cleanUpDeadOrganic()
+{
     std::__cxx11::list<OrganicEntity*> toDelete;
-    for(OrganicEntity* o : organicEntities){
-        if(o != nullptr && o->isDead()){
+    for(OrganicEntity* o : organicEntities) {
+        if(o != nullptr && o->isDead()) {
             toDelete.push_back(o);
         }
     }
@@ -70,13 +74,14 @@ void Environment::cleanUpDeadOrganic(){
  * draws the animals and targets onto the window
  * @param targetWindow to display on
  */
-void Environment::draw(sf::RenderTarget& targetWindow) const{
-    for(OrganicEntity* o: organicEntities){
+void Environment::draw(sf::RenderTarget& targetWindow) const
+{
+    for(OrganicEntity* o: organicEntities) {
         o->draw(targetWindow);
     }
 
     sf::Color red(255,0,0);
-    for(const auto& t : targets){
+    for(const auto& t : targets) {
         targetWindow.draw(buildCircle(t,5,red));
     }
 }
@@ -85,8 +90,9 @@ void Environment::draw(sf::RenderTarget& targetWindow) const{
 /*!
  * Removes all animals and targets from the environment.
  */
-void Environment::clean() {
-    for(OrganicEntity* o: organicEntities){
+void Environment::clean()
+{
+    for(OrganicEntity* o: organicEntities) {
         delete (o);
         o = nullptr;
     }
@@ -96,9 +102,10 @@ void Environment::clean() {
 /*!
  * Will free all the animals attached to it.
  */
-Environment::~Environment(){
+Environment::~Environment()
+{
     for (OrganicEntity *o: organicEntities) {
-        if(o!= nullptr){
+        if(o!= nullptr) {
             delete (o);
             o = nullptr;
         }
@@ -113,9 +120,10 @@ Environment::~Environment(){
 }
 
 //TODO check complexity of this call
-std::list<OrganicEntity*> Environment::getEntitiesInSightForAnimal(Animal* animal){
+std::list<OrganicEntity*> Environment::getEntitiesInSightForAnimal(Animal* animal)
+{
     std::list<OrganicEntity*> targetsInSight;
-    for(OrganicEntity* entity: organicEntities){
+    for(OrganicEntity* entity: organicEntities) {
         if (animal->isTargetInSight(entity->getPosition())) {
             targetsInSight.push_back(entity);
         }
@@ -123,6 +131,7 @@ std::list<OrganicEntity*> Environment::getEntitiesInSightForAnimal(Animal* anima
     return targetsInSight;
 }
 
-void Environment::addGenerator(FoodGenerator *foodGenerator) {
+void Environment::addGenerator(FoodGenerator *foodGenerator)
+{
     generators.push_back(foodGenerator);
 }

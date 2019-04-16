@@ -11,7 +11,8 @@
 #include <list>
 #include <Utility/Macros.hpp>
 
-class Animal: public OrganicEntity {
+class Animal: public OrganicEntity
+{
 public:
 
 
@@ -30,7 +31,7 @@ public:
      * can be in.
      */
     DEFINE_ENUM_WITH_STRING_CONVERSIONS(State,(FOOD_IN_SIGHT)(FEEDING)(RUNNING_AWAY)
-    (MATE_IN_SIGHT)(MATING)(GIVING_BIRTH)(WANDERING)(DIESTING))
+                                        (MATE_IN_SIGHT)(MATING)(GIVING_BIRTH)(WANDERING)(DIESTING))
 
 
     /*!

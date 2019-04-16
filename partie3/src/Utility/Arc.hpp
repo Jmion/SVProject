@@ -22,7 +22,7 @@
  * @endcode
  */
 class Arc : public sf::Drawable,
-            public sf::Transformable
+    public sf::Transformable
 {
 public:
     /*!
