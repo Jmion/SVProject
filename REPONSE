@@ -117,6 +117,14 @@ We need to chnage the line where energy is indicated. For example:
             },
 ```
 
+## Q.3.3
+
+The classes Updatable and Drawable are being used as interfaces. The concept of interfaces does not exist in C++ but can be mocked with a 100% abstract class. The idea is that all objects that can be drawn can be seen as drawable objects. It is a contract that all subclasses have to fulfill. In our project we will consider that a CircularCollider is Drawable. The idea of implementing at this level is that all the subclasses can and should call the implementation of there parent class. They will therefor all inherit of the possibility of drawing a visual representation of the collider in debug mode. In our project we will assume that we can have circularCollider's that are static object and therefor don't need to be updated. We will consider that all OrganicEnity are Updatable.
+
+## Q.3.4
+
+It a way to build a program not makes modifications not easy due to the lack of maintainability. Removing or adding new classes require a large amount of work to rework existing code to add new tests. Using a double dispatch is a much better way of doing things since it relinquishes the control of who can eat what to the class itself.
+
 ## Q.3.5
 
 It is interesting to implement the draw method for the circular collider in it's own class. It makes sense that a circular collider is in charge of displaying itself for debugging purposes. We therefor changed the inheritance of Drawable, moving it up from OrganicEnity to CircularCollider. For the moment there is no specific need / or logic to justify the circular collider having an update method. Therefor the implementation of the Updatable "interface" will remain in Animal. A explicit call to CircularCollider::draw needs to be made at the beginning of the draw method of any children to enable the drawing of the circular collider.
@@ -129,9 +137,10 @@ The best implementation in this case is to provide 2 methods that are used in th
 
 When the OrganicEntities die of old age the environment needs to free the memory that was allocated when we created the animal. This is crucial to avoid memory leeks. The environment is in charge of checking at each update cycle if the entity is dead and unregistering them. If this task becomes a large overhead one would imagine using a queue for every type of animal. This would improve performance significantly if there is a lot of animals being simulated. We will consider this in case performance becomes an issue.
 
-## Q.3.7
+## Q.3.8
 
  First of all we we need to define the condition when the Animal will be starving. This information will be used in getMaxSpeed. For the definition of when an animal is starving we decided that each animal can be starving at a different energy level. For proper use we therefor added an *scorpion_energy_starving* and *gerbil_energy_starving* to our app JSON config file. We used a virtual method to define the updateState leaving the choice of the value to return up to the non abstract animals. With this solution we are respecting the app design and choice of keeping all of these parameters modifiable at run time. We also added *animal_starving_speed_factor* to the JSON because it is the only logical place where such a setting should go. We do not want to affect the state that the animal is in since we would like the animal to behave is it normally does but in a weaker form (moving less fast).
+
 
 ## QUESTIONS
 Why are we declaring the eatable method in all the subclasses? It is the same everywhere. And why not use a visitor.

@@ -10,6 +10,7 @@
 
 
 void Food::draw(sf::RenderTarget &target) const {
+    CircularCollider::draw(target);
     sf::Texture& texture = getAppTexture(getTexturePath());
     auto image_to_draw(buildSprite(getPosition(),getRadius()*2,texture));
     target.draw(image_to_draw);
