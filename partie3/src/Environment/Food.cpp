@@ -61,3 +61,19 @@ bool Food::eatableBy(A_Unused Food const *food) const
 {
     return false;
 }
+
+bool Food::matable(OrganicEntity const *other) const {
+    return other->canMate(this);
+}
+
+bool Food::canMate(A_Unused Scorpion const *scorpion) const {
+    return false;
+}
+
+bool Food::canMate(A_Unused Gerbil const *gerbil) const {
+    return false;
+}
+
+bool Food::canMate(A_Unused Food const *food) const {
+    return false;
+}

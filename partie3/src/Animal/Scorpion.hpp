@@ -54,6 +54,23 @@ private:
 
     double getEnergyLossFactor() const override;
 
+public:
+    bool matable(OrganicEntity const *other) const override;
+
+    bool canMate(Scorpion const *scorpion) const override;
+
+    bool canMate(Gerbil const *gerbil) const override;
+
+    bool canMate(Food const *food) const override;
+
+protected:
+    double getMinimumMatingEnergyMale() const override;
+
+    double getMinimumMatingEnergyFemale() const override;
+
+    double getMinimumMatingAge() const override;
+
+private:
     double getStarvingEnergyLevel() const override;
 };
 

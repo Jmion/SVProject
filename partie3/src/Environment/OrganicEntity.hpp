@@ -82,6 +82,34 @@ public:
      */
     const sf::Time &getAge() const;
 
+    /*!
+    * Determins if entity is matable.
+    *
+    * To achive this this methode uses double dispatche. It will call the methode canMate.
+    * This allows the management of how can eat each animal up to itself. this is usefull
+    * because it gives the management to the animal itself.
+     *
+     * For animals to mate we need that p2->matable(p1) and p1->matable(p1). Some checks like for
+     * example determining if the animal is pregnent is only done for the argument.
+    * @param entity that we want to know if this mate with
+    * @return true if it is matable
+    */
+    virtual bool matable(OrganicEntity const* other) const = 0;
+
+    /*!
+     * @return true is this can mate with scorpion
+     */
+    virtual bool canMate(Scorpion const* scorpion) const = 0;
+    /*!
+     * @return true is this can mate with gerbil
+     */
+    virtual bool canMate(Gerbil const* gerbil) const = 0;
+    /*!
+     * @return true is this can mate with food
+     */
+    virtual bool canMate(Food const* food) const = 0;
+
+
 protected:
 
     /*!
@@ -98,6 +126,7 @@ protected:
      * @return true if entity has spend at least entity_wait_time waiting after having eaten.
      */
     bool updateAndHasWaitedLongEnough(sf::Time dt);
+
 
 private:
 

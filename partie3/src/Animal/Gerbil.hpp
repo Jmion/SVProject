@@ -47,6 +47,14 @@ public:
 
     bool eatableBy(Food const *food) const override;
 
+    bool matable(OrganicEntity const *other) const override;
+
+    bool canMate(Scorpion const *scorpion) const override;
+
+    bool canMate(Gerbil const *gerbil) const override;
+
+    bool canMate(Food const *food) const override;
+
 
 protected:
     double getRandomWalkRadius() const override;
@@ -60,6 +68,12 @@ protected:
     double getInitialEnergy() const override;
 
     const std::string getTexturePath() const override;
+
+    double getMinimumMatingEnergyMale() const override;
+
+    double getMinimumMatingEnergyFemale() const override;
+
+    double getMinimumMatingAge() const override;
 
 private:
     sf::Time getLongevity() const override;

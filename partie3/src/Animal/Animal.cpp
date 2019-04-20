@@ -18,6 +18,7 @@ Animal::Animal(const Vec2d& _position, double size, double energyLevel, bool isF
     current_target(Vec2d(1, 0)),
     targetPosition(Vec2d(0, 0)),
     isFemale(isFemale),
+    isPregnant(false),
     deceleration(_deceleration),state(WANDERING) {}
 
 Animal& Animal::setTargetPosition(const Vec2d &target)
@@ -253,5 +254,15 @@ Vec2d Animal::stoppingAttractionForce()
     setTargetPosition(convertToGlobalCoord(Vec2d(-1,0)));
     return attractionForce();
 }
+
+bool Animal::getIsPregnant() const {
+    return isPregnant && getIsFemale();
+}
+
+bool Animal::canMate(Animal const *animal) const {
+    return (getIsFemale() != animal->getIsFemale()) && !animal->getIsPregnant() && animal->state!=GIVING_BIRTH && (isFemale?getMinimumMatingEnergyFemale():getMinimumMatingEnergyMale())<=getEnergyLevel() && getAge().asSeconds() >= getMinimumMatingAge();
+}
+
+
 
 

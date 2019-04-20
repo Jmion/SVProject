@@ -105,3 +105,31 @@ double Scorpion::getStarvingEnergyLevel() const
     return getAppConfig().scorpion_energy_starving;
 }
 
+bool Scorpion::matable(OrganicEntity const *other) const {
+    return other->canMate(this);
+}
+
+bool Scorpion::canMate(Scorpion const *scorpion) const {
+    return Animal::canMate(scorpion);
+}
+
+bool Scorpion::canMate(A_Unused Gerbil const *gerbil) const {
+    return false;
+}
+
+bool Scorpion::canMate(A_Unused Food const *food) const {
+    return false;
+}
+
+double Scorpion::getMinimumMatingEnergyMale() const {
+    return getAppConfig().scorpion_energy_min_mating_male;
+}
+
+double Scorpion::getMinimumMatingEnergyFemale() const {
+    return getAppConfig().scorpion_energy_min_mating_male;
+}
+
+double Scorpion::getMinimumMatingAge() const {
+    return getAppConfig().scorpion_min_age_mating;
+}
+

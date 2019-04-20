@@ -162,6 +162,22 @@ protected:
      */
     virtual double getInitialEnergy() const = 0;
 
+    /*!
+     * The minimum amount of energy needed to mate. Male animals
+     *
+     * @throws runtime_error unsuportedOperation is animal is female
+     * @return minimum mating energy for male
+     */
+    virtual double getMinimumMatingEnergyMale() const = 0;
+    /*!
+     * The minimum amount of energy needed to mate
+     *
+     * @throws runtime_error unsuportedOperation is animal is male
+     * @return minimum mating energy for male
+     */
+    virtual double getMinimumMatingEnergyFemale() const = 0;
+
+    virtual double getMinimumMatingAge() const = 0;
 
     /*!
      * Returns the path to the image of the animal.
@@ -175,10 +191,20 @@ protected:
     bool getIsFemale() const;
 
     /*!
+     * Is the animal pregnant.
+     * All always return false if isFemale returns true
+     * @return true if animal is pregnent
+     */
+    bool getIsPregnant() const;
+
+    /*!
      * Gets the maximum speed that the animal can move given it's current state.
      * @return max move speed of the animal
      */
     double getMaxSpeed() const;
+
+    virtual bool canMate(Animal const* animal) const;
+
 
 private:
 
@@ -199,6 +225,11 @@ private:
      * Indicates if the animal is female. If false it is male.
      */
     bool isFemale;
+
+    /*!
+     * only applies to animals if isFemale is true.
+     */
+    bool isPregnant;
 
     /*!
      * Deceleration rate when animal approaches target.

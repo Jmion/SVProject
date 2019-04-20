@@ -61,16 +61,7 @@ Gerbil::Gerbil(const Vec2d &position, double energyLevel, bool isFemale) : Anima
 Gerbil::Gerbil(const Vec2d &position) : Gerbil(position, getInitialEnergy(), uniform(0, 1) == 0) {}
 
 Gerbil::~Gerbil()
-{
-}
-
-const std::string Gerbil::getTexturePath() const
-{
-    if (getIsFemale())
-        return getAppConfig().gerbil_texture_female;
-    return getAppConfig().gerbil_texture_male;
-}
-
+{}
 
 bool Gerbil::eatable(OrganicEntity const *entity) const
 {
@@ -92,6 +83,31 @@ bool Gerbil::eatableBy(A_Unused Food const *food) const
     return false;
 }
 
+
+bool Gerbil::matable(OrganicEntity const *other) const {
+    return other->canMate(this);
+}
+
+bool Gerbil::canMate(A_Unused Scorpion const *scorpion) const {
+    return false;
+}
+
+bool Gerbil::canMate(Gerbil const *gerbil) const {
+    return Animal::canMate(gerbil);
+}
+
+bool Gerbil::canMate(A_Unused Food const *food) const {
+    return false;
+}
+
+
+const std::string Gerbil::getTexturePath() const
+{
+    if (getIsFemale())
+        return getAppConfig().gerbil_texture_female;
+    return getAppConfig().gerbil_texture_male;
+}
+
 sf::Time Gerbil::getLongevity() const
 {
     return getAppConfig().gerbil_longevity;
@@ -106,4 +122,16 @@ double Gerbil::getEnergyLossFactor() const
 double Gerbil::getStarvingEnergyLevel() const
 {
     return getAppConfig().gerbil_energy_starving;
+}
+
+double Gerbil::getMinimumMatingEnergyMale() const {
+    return getAppConfig().gerbil_energy_min_mating_male;
+}
+
+double Gerbil::getMinimumMatingEnergyFemale() const {
+    return getAppConfig().gerbil_energy_min_mating_female;
+}
+
+double Gerbil::getMinimumMatingAge() const {
+    return getAppConfig().gerbil_min_age_mating;
 }
