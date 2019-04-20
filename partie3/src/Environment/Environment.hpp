@@ -70,7 +70,7 @@ public:
      * @param animal that is looking for targets
      * @return list of all targets that can be seen by the animal
      */
-    std::list<OrganicEntity*> getEntitiesInSightForAnimal(Animal* animal);
+    std::list<OrganicEntity*> getEntitiesInSightForAnimal(Animal* animal) const;
 
     /*!
      * Adds a FoodGenerator to the list of generators.

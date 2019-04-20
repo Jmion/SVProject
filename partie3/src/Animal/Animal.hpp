@@ -10,6 +10,7 @@
 #include <string>
 #include <list>
 #include <Utility/Macros.hpp>
+#include <array>
 
 class Animal: public OrganicEntity
 {
@@ -203,7 +204,12 @@ protected:
      */
     double getMaxSpeed() const;
 
-    virtual bool canMate(Animal const* animal) const;
+    /*!
+     * This method defines the global criteria that determins if 2 animals can mate.
+     * @param partner that we want to check if we can mate with
+     * @return true if mate is available for mating.
+     */
+    virtual bool canMate(Animal const* partner) const;
 
 
 private:
@@ -310,6 +316,27 @@ private:
      */
     Vec2d stoppingAttractionForce();
 
+    /*!
+     * Array containing other entities that this animal might react with.
+     * For the specifics of what each element of the array is for this animal
+     * please refer to the table bellow.
+     *
+     *
+     * +----------+----------------+
+     *  | location | description    |
+     *  +----------+----------------+
+     *  | 0        |                |
+     *  |          | Food           |
+     *  +----------+----------------+
+     *  | 1        | Potential mate |
+     *  +----------+----------------+
+     *  | 2        | closest Enemy  |
+     *  +----------+----------------+
+     *
+     * Elements of the array will be nullptr if there is no organicEntity that fits the description.
+     * @return first element is the organicEntity that is a source of food, second potential mate, third closest enemy.
+     */
+    std::array<OrganicEntity *,3> analyseEnvironment() const;
 };
 
 
