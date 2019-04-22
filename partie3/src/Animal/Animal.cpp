@@ -9,17 +9,18 @@
 #include <Random/Uniform.hpp>
 #include <Environment/OrganicEntity.hpp>
 #include <Utility/Macros.hpp>
+#include <array>
 
 
 
 Animal::Animal(const Vec2d& _position, double size, double energyLevel, bool isFemale, Deceleration _deceleration):
-    OrganicEntity(_position, size, energyLevel),
-    speed(0), direction(Vec2d(1, 0)),
-    current_target(Vec2d(1, 0)),
-    targetPosition(Vec2d(0, 0)),
-    isFemale(isFemale),
-    isPregnant(false),
-    deceleration(_deceleration),state(WANDERING) {}
+        OrganicEntity(_position, size, energyLevel),
+        speed(0), direction(Vec2d(1, 0)),
+        current_target(Vec2d(1, 0)),
+        targetPosition(Vec2d(0, 0)),
+        isFemale(isFemale),
+        isPregnant(false),
+        deceleration(_deceleration),state(WANDERING) {}
 
 Animal& Animal::setTargetPosition(const Vec2d &target)
 {
@@ -44,8 +45,8 @@ void Animal::draw(sf::RenderTarget &targetWindow) const
         if(!hasTarget) {
             sf::Color yellow(255, 150, 0);
             targetWindow.draw(
-                buildAnnulus(convertToGlobalCoord(Vec2d(getRandomWalkDistance(), 0)), getRandomWalkRadius(),
-                             yellow, 2));
+                    buildAnnulus(convertToGlobalCoord(Vec2d(getRandomWalkDistance(), 0)), getRandomWalkRadius(),
+                                 yellow, 2));
             targetWindow.draw(buildCircle(convertToGlobalCoord(current_target + Vec2d(getRandomWalkDistance(), 0)), 5,
                                           sf::Color::Blue));
         }
@@ -76,22 +77,22 @@ void Animal::update(sf::Time dt)
 
     Vec2d attraction_force = Vec2d(0, 0);
     switch(state) {
-    case WANDERING:
-        hasTarget=false;
-        attraction_force = randomWalk();
-        break;
-    case FOOD_IN_SIGHT:
-        hasTarget = true;
-        attraction_force = attractionForce();
-        break;
-    case FEEDING:
-        break;
-    case DIESTING:
-        hasTarget = true;
-        attraction_force = stoppingAttractionForce();
-        break;
-    default:
-        attraction_force = Vec2d(0, 0);
+        case WANDERING:
+            hasTarget=false;
+            attraction_force = randomWalk();
+            break;
+        case FOOD_IN_SIGHT:
+            hasTarget = true;
+            attraction_force = attractionForce();
+            break;
+        case FEEDING:
+            break;
+        case DIESTING:
+            hasTarget = true;
+            attraction_force = stoppingAttractionForce();
+            break;
+        default:
+            attraction_force = Vec2d(0, 0);
     }
 
     updateMovementVariables(attraction_force, dt);
@@ -106,24 +107,11 @@ void Animal::updateState(sf::Time dt)
     if(!this->updateAndHasWaitedLongEnough(dt)) {
         state = DIESTING;
     } else {
-        std::list<OrganicEntity *> entities = getAppEnv().getEntitiesInSightForAnimal(this);
-
         //default behaviour if nothing in sight
         state = WANDERING;
 
-        //***** COULD BE A METHODE analyzeEnvironment ******
-        OrganicEntity *closestEntity = nullptr;
-        for (auto e: entities) {
-            if (eatable(e)) {
-                if (closestEntity == nullptr) {
-                    closestEntity = e;
-                } else {
-                    if (distanceTo(e->getPosition()) < distanceTo(closestEntity->getPosition())) {
-                        closestEntity = e;
-                    }
-                }
-            }
-        }
+        OrganicEntity *closestEntity = analyseEnvironment().at(0);
+
         //**************
 
         if (closestEntity != nullptr && eatable(closestEntity)) {
@@ -137,6 +125,25 @@ void Animal::updateState(sf::Time dt)
             targetPosition = closestEntity->getPosition();
         }
     }
+}
+
+std::array<OrganicEntity *,3> Animal::analyseEnvironment() const {
+    std::list<OrganicEntity *> entities = getAppEnv().getEntitiesInSightForAnimal(this);
+
+
+    std::array<OrganicEntity *, 3> closestEntities {nullptr, nullptr, nullptr};
+    for (auto e: entities) {
+            if (eatable(e)) {
+                if (closestEntities.at(0) == nullptr) {
+                    closestEntities.at(0) = e;
+                } else {
+                    if (distanceTo(e->getPosition()) < distanceTo(closestEntities.at(0)->getPosition())) {
+                        closestEntities.at(0) = e;
+                    }
+                }
+            }
+        }
+    return closestEntities;
 }
 
 Vec2d Animal::attractionForce() const
@@ -160,12 +167,12 @@ void Animal::updateMovementVariables(const Vec2d& acceleration, const sf::Time d
 double Animal::getDecelerationRate() const
 {
     switch (deceleration) {
-    case WEAK:
-        return 0.9;
-    case MEDIUM:
-        return 0.6;
-    default: // STRONG
-        return 0.3;
+        case WEAK:
+            return 0.9;
+        case MEDIUM:
+            return 0.6;
+        default: // STRONG
+            return 0.3;
     }
 }
 
@@ -232,14 +239,14 @@ double Animal::getMaxSpeed() const
     if(getEnergyLevel()<getStarvingEnergyLevel())
         return getStandardMaxSpeed()*getAppConfig().animal_starving_speed_factor;
     switch (state) {
-    case FOOD_IN_SIGHT:
-        return getStandardMaxSpeed() * 3;
-    case MATE_IN_SIGHT:
-        return getStandardMaxSpeed() * 2;
-    case RUNNING_AWAY:
-        return getStandardMaxSpeed() * 4;
-    default:
-        return getStandardMaxSpeed();
+        case FOOD_IN_SIGHT:
+            return getStandardMaxSpeed() * 3;
+        case MATE_IN_SIGHT:
+            return getStandardMaxSpeed() * 2;
+        case RUNNING_AWAY:
+            return getStandardMaxSpeed() * 4;
+        default:
+            return getStandardMaxSpeed();
     }
 }
 
@@ -260,8 +267,8 @@ bool Animal::getIsPregnant() const {
     return isPregnant && getIsFemale();
 }
 
-bool Animal::canMate(Animal const *animal) const {
-    return (getIsFemale() != animal->getIsFemale()) && !animal->getIsPregnant() && animal->state!=GIVING_BIRTH && (isFemale?getMinimumMatingEnergyFemale():getMinimumMatingEnergyMale())<=getEnergyLevel() && getAge().asSeconds() >= getMinimumMatingAge();
+bool Animal::canMate(Animal const *partner) const {
+    return (getIsFemale() != partner->getIsFemale()) && !partner->getIsPregnant() && partner->state!=GIVING_BIRTH && (isFemale?getMinimumMatingEnergyFemale():getMinimumMatingEnergyMale())<=getEnergyLevel() && getAge().asSeconds() >= getMinimumMatingAge();
 }
 
 
