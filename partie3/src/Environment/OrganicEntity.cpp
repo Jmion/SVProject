@@ -62,4 +62,8 @@ bool OrganicEntity::updateAndHasWaitedLongEnough(sf::Time dt)
     return feedingWait>=getAppConfig().entity_wait_after_feeding;
 }
 
+void OrganicEntity::update(sf::Time dt) {
+    aging(dt);
+}
+
 

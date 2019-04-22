@@ -19,7 +19,7 @@ void Food::draw(sf::RenderTarget &target) const
 
 void Food::update(sf::Time dt)
 {
-
+    OrganicEntity::update(dt);
 }
 
 Food::Food(const Vec2d &position) :OrganicEntity(position,getSize(),getEnergy())

@@ -71,6 +71,7 @@ void Animal::drawVision(sf::RenderTarget& target) const
 
 void Animal::update(sf::Time dt)
 {
+    OrganicEntity::update(dt);
     updateState(dt);
 
     Vec2d attraction_force = Vec2d(0, 0);
@@ -95,7 +96,7 @@ void Animal::update(sf::Time dt)
 
     updateMovementVariables(attraction_force, dt);
 
-    aging(dt);
+    //aging(dt);
     spendEnergy(dt);
 }
 

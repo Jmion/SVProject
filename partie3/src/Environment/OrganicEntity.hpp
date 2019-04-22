@@ -16,6 +16,9 @@ class Food;
 class OrganicEntity : public CircularCollider, public Updatable
 {
 public:
+
+    void update(sf::Time dt) override;
+
     /*!
      * Creates an organic entity
      * @param position that the organic entity will be placed initially
