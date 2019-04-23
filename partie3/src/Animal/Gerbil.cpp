@@ -141,18 +141,14 @@ double Gerbil::getMinimumMatingAge() const {
 bool Gerbil::meetManagement(Gerbil *mate) {
     procreate();
     mate->procreate();
-
-    //TODO fix this part 3.3.
-
-
     return true;
 }
 
-bool Gerbil::meetManagement(Scorpion *mate) {
+bool Gerbil::meetManagement(A_Unused Scorpion *mate) {
     return false;
 }
 
-bool Gerbil::meetManagement(Food *mate) {
+bool Gerbil::meetManagement(A_Unused Food *mate) {
     return false;
 }
 

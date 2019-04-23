@@ -22,7 +22,7 @@ Animal::Animal(const Vec2d& _position, double size, double energyLevel, bool isF
         isPregnant(false),
         deceleration(_deceleration),
         state(WANDERING),
-        gestationTimeRemaining(sf::Time::Zero){}
+        gestationTimeRemaining(0.0){}
 
 Animal& Animal::setTargetPosition(const Vec2d &target)
 {
@@ -93,6 +93,13 @@ void Animal::update(sf::Time dt)
             hasTarget = true;
             attraction_force = stoppingAttractionForce();
             break;
+        case MATE_IN_SIGHT:
+            hasTarget = true;
+            attraction_force = attractionForce();
+            break;
+        case MATING:
+            //TODO..........
+            break;
         default:
             attraction_force = Vec2d(0, 0);
     }
@@ -114,7 +121,7 @@ void Animal::updateState(sf::Time dt)
 
         std::array<OrganicEntity *,3> closestEntities = analyseEnvironment();
 
-        //**************
+        //FOOD
 
         if (closestEntities.at(0) != nullptr && eatable(closestEntities.at(0))) {
             state = FOOD_IN_SIGHT;
@@ -123,15 +130,21 @@ void Animal::updateState(sf::Time dt)
                 eat(closestEntities.at(0));
             }
         }
-        if(closestEntities.at(1) != nullptr && matable(closestEntities.at(1))) {
-            state = MATE_IN_SIGHT;
-            if (isColliding(*closestEntities.at(1))) {
-                state = MATING;
-            }
-        }
         if (closestEntities.at(0) != nullptr) {
             targetPosition = closestEntities.at(0)->getPosition();
         }
+
+        //MATTING
+        if(closestEntities.at(1) != nullptr && matable(closestEntities.at(1))) {
+            if (isColliding(*closestEntities.at(1)) && state == MATE_IN_SIGHT) {
+                state = MATING;
+            }
+            state = MATE_IN_SIGHT;
+        }
+        if(closestEntities.at(1) != nullptr) {
+            targetPosition = closestEntities.at(1)->getPosition();
+        }
+
 
 
     }

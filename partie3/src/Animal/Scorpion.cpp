@@ -144,11 +144,11 @@ bool Scorpion::meetManagement(Scorpion *mate) {
     return true;
 }
 
-bool Scorpion::meetManagement(Gerbil *mate) {
+bool Scorpion::meetManagement(A_Unused Gerbil *mate) {
     return false;
 }
 
-bool Scorpion::meetManagement(Food *mate) {
+bool Scorpion::meetManagement(A_Unused Food *mate) {
     return false;
 }
 

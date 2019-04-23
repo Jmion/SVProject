@@ -82,14 +82,14 @@ bool Food::meet(OrganicEntity *mate) {
     return mate->meetManagement(this);
 }
 
-bool Food::meetManagement(Scorpion *mate) {
+bool Food::meetManagement(A_Unused Scorpion *mate) {
     return false;
 }
 
-bool Food::meetManagement(Gerbil *mate) {
+bool Food::meetManagement(A_Unused Gerbil *mate) {
     return false;
 }
 
-bool Food::meetManagement(Food *mate) {
+bool Food::meetManagement(A_Unused Food *mate) {
     return false;
 }

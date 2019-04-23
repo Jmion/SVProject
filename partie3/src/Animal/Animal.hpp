@@ -311,7 +311,7 @@ private:
     /*!
      * Time that is left before female give birth.
      */
-    sf::Time gestationTimeRemaining;
+    double gestationTimeRemaining;
 
     /*!
      * Updates the state of the animal
