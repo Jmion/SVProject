@@ -20,7 +20,9 @@ Animal::Animal(const Vec2d& _position, double size, double energyLevel, bool isF
         targetPosition(Vec2d(0, 0)),
         isFemale(isFemale),
         isPregnant(false),
-        deceleration(_deceleration),state(WANDERING) {}
+        deceleration(_deceleration),
+        state(WANDERING),
+        gestationTimeRemaining(sf::Time::Zero){}
 
 Animal& Animal::setTargetPosition(const Vec2d &target)
 {
@@ -110,20 +112,28 @@ void Animal::updateState(sf::Time dt)
         //default behaviour if nothing in sight
         state = WANDERING;
 
-        OrganicEntity *closestEntity = analyseEnvironment().at(0);
+        std::array<OrganicEntity *,3> closestEntities = analyseEnvironment();
 
         //**************
 
-        if (closestEntity != nullptr && eatable(closestEntity)) {
+        if (closestEntities.at(0) != nullptr && eatable(closestEntities.at(0))) {
             state = FOOD_IN_SIGHT;
-            if (isColliding(*closestEntity)) {
+            if (isColliding(*closestEntities.at(0))) {
                 state = FEEDING;
-                eat(closestEntity);
+                eat(closestEntities.at(0));
             }
         }
-        if (closestEntity != nullptr) {
-            targetPosition = closestEntity->getPosition();
+        if(closestEntities.at(1) != nullptr && matable(closestEntities.at(1))) {
+            state = MATE_IN_SIGHT;
+            if (isColliding(*closestEntities.at(1))) {
+                state = MATING;
+            }
         }
+        if (closestEntities.at(0) != nullptr) {
+            targetPosition = closestEntities.at(0)->getPosition();
+        }
+
+
     }
 }
 
@@ -136,10 +146,16 @@ std::array<OrganicEntity *,3> Animal::analyseEnvironment() const {
             if (eatable(e)) {
                 if (closestEntities.at(0) == nullptr) {
                     closestEntities.at(0) = e;
-                } else {
-                    if (distanceTo(e->getPosition()) < distanceTo(closestEntities.at(0)->getPosition())) {
+                } else if (distanceTo(e->getPosition()) < distanceTo(closestEntities.at(0)->getPosition())) {
                         closestEntities.at(0) = e;
-                    }
+
+                }
+            }
+            if(matable(e)){
+                if (closestEntities.at(1) == nullptr) {
+                    closestEntities.at(1) = e;
+                } else if (distanceTo(e->getPosition()) < distanceTo(closestEntities.at(1)->getPosition())) {
+                    closestEntities.at(1) = e;
                 }
             }
         }
@@ -269,6 +285,26 @@ bool Animal::getIsPregnant() const {
 
 bool Animal::canMate(Animal const *partner) const {
     return (getIsFemale() != partner->getIsFemale()) && !partner->getIsPregnant() && partner->state!=GIVING_BIRTH && (isFemale?getMinimumMatingEnergyFemale():getMinimumMatingEnergyMale())<=getEnergyLevel() && getAge().asSeconds() >= getMinimumMatingAge();
+}
+
+int Animal::getNumberOfChildren() const {
+    if(isFemale){
+        return numberOfChildren;
+    }
+    return 0;
+}
+
+void Animal::procreate() {
+    if(getIsFemale()){
+        numberOfChildren = uniform(getMinimumNumberOfChildren(),getMaximumNumberOfChildren());
+        double energyLost = getEnergyLossFemalePerChild() * numberOfChildren;
+        OrganicEntity::spendEnergy(energyLost);
+        gestationTimeRemaining=getGestationTime();
+        isPregnant = true;
+    }else{
+        OrganicEntity::spendEnergy(getEnergyLossMaleMatting());
+    }
+
 }
 
 

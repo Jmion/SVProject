@@ -35,6 +35,25 @@ public:
 
     bool eatableBy(Food const *food) const override;
 
+    bool meet(OrganicEntity *mate) override;
+
+    bool meetManagement(Scorpion *mate) override;
+
+    bool meetManagement(Gerbil *mate) override;
+
+    bool meetManagement(Food *mate) override;
+
+protected:
+    double getEnergyLossFemalePerChild() const override;
+
+    int getMinimumNumberOfChildren() const override;
+
+    int getMaximumNumberOfChildren() const override;
+
+    double getGestationTime() const override;
+
+    double getEnergyLossMaleMatting() const override;
+
 
 protected:
     double getRandomWalkRadius() const override;

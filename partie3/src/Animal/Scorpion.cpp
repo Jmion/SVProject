@@ -133,3 +133,42 @@ double Scorpion::getMinimumMatingAge() const {
     return getAppConfig().scorpion_min_age_mating;
 }
 
+bool Scorpion::meet(OrganicEntity *mate) {
+    return mate->meetManagement(this);
+}
+
+bool Scorpion::meetManagement(Scorpion *mate) {
+    procreate();
+    mate->procreate();
+
+    return true;
+}
+
+bool Scorpion::meetManagement(Gerbil *mate) {
+    return false;
+}
+
+bool Scorpion::meetManagement(Food *mate) {
+    return false;
+}
+
+double Scorpion::getEnergyLossFemalePerChild() const {
+    return getAppConfig().scorpion_energy_loss_female_per_child;
+}
+
+int Scorpion::getMinimumNumberOfChildren() const {
+    return getAppConfig().scorpion_min_children;
+}
+
+int Scorpion::getMaximumNumberOfChildren() const {
+    return getAppConfig().scorpion_max_children;
+}
+
+double Scorpion::getGestationTime() const {
+    return getAppConfig().scorpion_gestation_time;
+}
+
+double Scorpion::getEnergyLossMaleMatting() const {
+    return getAppConfig().scorpion_energy_loss_mating_male;
+}
+

@@ -67,11 +67,6 @@ public:
      */
     double getEnergyLevel() const;
 
-    /*!
-     * Increases the animals age by dt
-     * @param dt time to add to age
-     */
-    void aging(sf::Time dt);
 
     /*!
      * Reduces the energyLevel by energySpend
@@ -113,7 +108,13 @@ public:
     virtual bool canMate(Food const* food) const = 0;
 
 
+    virtual bool meet(OrganicEntity* mate) = 0;
+    virtual bool meetManagement(Scorpion * mate) = 0;
+    virtual bool meetManagement(Gerbil * mate) = 0;
+    virtual bool meetManagement(Food * mate) = 0;
+
 protected:
+
 
     /*!
      * Allows this to eat another organic entity. Eating an organic entity will cause the energy level of the animal eating
@@ -133,6 +134,11 @@ protected:
 
 private:
 
+    /*!
+    * Increases the animals age by dt
+    * @param dt time to add to age
+    */
+    void aging(sf::Time dt);
 
     /*!
      * Returns the minimum amount of energy that an organic entity needs to have

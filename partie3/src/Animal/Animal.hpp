@@ -110,6 +110,14 @@ public:
     */
     void setDeleleration(Deceleration decel);
 
+    /*!
+     * Gets number of children that this animal has.
+     * Pregnant animals have children. If the animal is a male then
+     * this methode will return 0.
+     * @return Number of children that the animal has (pregnancy, number that are going to be born)
+     */
+    int getNumberOfChildren() const;
+
 
 protected:
 
@@ -170,6 +178,7 @@ protected:
      * @return minimum mating energy for male
      */
     virtual double getMinimumMatingEnergyMale() const = 0;
+
     /*!
      * The minimum amount of energy needed to mate
      *
@@ -178,6 +187,10 @@ protected:
      */
     virtual double getMinimumMatingEnergyFemale() const = 0;
 
+    /*!
+     * The minimum age that an animal must be before being able to reprocude
+     * @return min mating age
+     */
     virtual double getMinimumMatingAge() const = 0;
 
     /*!
@@ -211,8 +224,48 @@ protected:
      */
     virtual bool canMate(Animal const* partner) const;
 
+    /*!
+     * Amount of energy lost per children born
+     * @return energy required per children
+     */
+    virtual double getEnergyLossFemalePerChild() const = 0;
+
+    /*!
+     * Gets from the config file the minimum number of children that a pregnant
+     * animal can have.
+     * @return minimum number of children
+     */
+    virtual int getMinimumNumberOfChildren() const = 0;
+
+
+    /*!
+     * Gets from the config file the maximum number of children that a pregnant
+     * animal can have.
+     * @return maximum number of children
+     */
+    virtual int getMaximumNumberOfChildren() const = 0;
+
+    /*!
+     * Time in seconds that the animal needs for gestation
+     * @return time in seconds for gestation
+     */
+    virtual double getGestationTime() const = 0;
+
+    /*!
+     * Energy lost by male when matting.
+     * @return amount of energy lost by male when matting
+     */
+    virtual double getEnergyLossMaleMatting() const = 0;
+
+    /*!
+     * Makes animal fornicate.
+     * Will only modify one animal. Needs to be called on both animals fornicating to have the proper effect
+     */
+    void procreate();
+
 
 private:
+
 
     /*!
      * speed at which the animal moves
@@ -238,6 +291,13 @@ private:
     bool isPregnant;
 
     /*!
+     * The number of children that a pregnent animal is carrying.
+     */
+    int numberOfChildren;
+
+private:
+
+    /*!
      * Deceleration rate when animal approaches target.
      */
     Deceleration deceleration;
@@ -247,6 +307,11 @@ private:
      * Current state that the animal is in.
      */
     State state;
+
+    /*!
+     * Time that is left before female give birth.
+     */
+    sf::Time gestationTimeRemaining;
 
     /*!
      * Updates the state of the animal

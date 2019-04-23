@@ -49,6 +49,14 @@ public:
 
     bool eatableBy(Food const *food) const override;
 
+    bool meet(OrganicEntity *mate) override;
+
+    bool meetManagement(Scorpion *mate) override;
+
+    bool meetManagement(Gerbil *mate) override;
+
+    bool meetManagement(Food *mate) override;
+
     bool matable(OrganicEntity const *other) const override;
 
     bool canMate(Scorpion const *scorpion) const override;

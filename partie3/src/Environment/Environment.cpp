@@ -120,7 +120,7 @@ Environment::~Environment()
 }
 
 //TODO check complexity of this call
-std::list<OrganicEntity*> Environment::getEntitiesInSightForAnimal(Animal* animal)
+std::list<OrganicEntity*> Environment::getEntitiesInSightForAnimal(const Animal * animal) const
 {
     std::list<OrganicEntity*> targetsInSight;
     for(OrganicEntity* entity: organicEntities) {

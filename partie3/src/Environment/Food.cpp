@@ -77,3 +77,19 @@ bool Food::canMate(A_Unused Gerbil const *gerbil) const {
 bool Food::canMate(A_Unused Food const *food) const {
     return false;
 }
+
+bool Food::meet(OrganicEntity *mate) {
+    return mate->meetManagement(this);
+}
+
+bool Food::meetManagement(Scorpion *mate) {
+    return false;
+}
+
+bool Food::meetManagement(Gerbil *mate) {
+    return false;
+}
+
+bool Food::meetManagement(Food *mate) {
+    return false;
+}

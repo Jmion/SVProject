@@ -135,3 +135,48 @@ double Gerbil::getMinimumMatingEnergyFemale() const {
 double Gerbil::getMinimumMatingAge() const {
     return getAppConfig().gerbil_min_age_mating;
 }
+
+
+
+bool Gerbil::meetManagement(Gerbil *mate) {
+    procreate();
+    mate->procreate();
+
+    //TODO fix this part 3.3.
+
+
+    return true;
+}
+
+bool Gerbil::meetManagement(Scorpion *mate) {
+    return false;
+}
+
+bool Gerbil::meetManagement(Food *mate) {
+    return false;
+}
+
+double Gerbil::getEnergyLossFemalePerChild() const {
+    return getAppConfig().gerbil_energy_loss_female_per_child;
+}
+
+int Gerbil::getMinimumNumberOfChildren() const {
+    return getAppConfig().gerbil_min_children;
+}
+
+int Gerbil::getMaximumNumberOfChildren() const {
+    return getAppConfig().gerbil_max_children;
+}
+
+double Gerbil::getGestationTime() const {
+    return getAppConfig().gerbil_gestation_time;
+}
+
+double Gerbil::getEnergyLossMaleMatting() const {
+    return getAppConfig().gerbil_energy_loss_mating_male;
+}
+
+bool Gerbil::meet(OrganicEntity *mate) {
+    return mate->meetManagement(this);
+}
+
