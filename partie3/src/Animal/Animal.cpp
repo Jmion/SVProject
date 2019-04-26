@@ -21,8 +21,7 @@ Animal::Animal(const Vec2d& _position, double size, double energyLevel, bool isF
         isFemale(isFemale),
         isPregnant(false),
         deceleration(_deceleration),
-        state(WANDERING),
-        gestationTimeRemaining(0.0){}
+        state(WANDERING){}
 
 Animal& Animal::setTargetPosition(const Vec2d &target)
 {
@@ -98,7 +97,13 @@ void Animal::update(sf::Time dt)
             attraction_force = attractionForce();
             break;
         case MATING:
-            //TODO..........
+            procreate();
+            attraction_force = stoppingAttractionForce();
+           break;
+        case GIVING_BIRTH:
+            hasTarget = true;
+            giveBirth();
+            attraction_force = stoppingAttractionForce();
             break;
         default:
             attraction_force = Vec2d(0, 0);
@@ -112,10 +117,19 @@ void Animal::update(sf::Time dt)
 
 void Animal::updateState(sf::Time dt)
 {
-    //Digestion wait time.
-    if(!this->updateAndHasWaitedLongEnough(dt)) {
+
+    bool feedingHasWaitedLongEnough = updateAndHasWaitedLongEnoughFeeding(dt);
+    bool mattingHasWaitedLongEnough = updateAndHasWaitedLongEnoughMatting(dt);
+    bool gestationWaitedLongEnough = updateAndHasWaitedLongEnoughGestationTime(dt);
+
+    if(!feedingHasWaitedLongEnough) {
         state = DIESTING;
-    } else {
+    }else if(!mattingHasWaitedLongEnough){
+        state = MATING;
+    }else if(gestationWaitedLongEnough ){
+        state = GIVING_BIRTH;
+    }
+    else {
         //default behaviour if nothing in sight
         state = WANDERING;
 
@@ -135,7 +149,7 @@ void Animal::updateState(sf::Time dt)
         }
 
         //MATTING
-        if(closestEntities.at(1) != nullptr && matable(closestEntities.at(1))) {
+        if(closestEntities.at(1) != nullptr && matable(closestEntities.at(1)) && closestEntities.at(1)->matable(this)) {
             if (isColliding(*closestEntities.at(1)) && state == MATE_IN_SIGHT) {
                 state = MATING;
             }
@@ -183,12 +197,11 @@ Vec2d Animal::attractionForce() const
     return v_target-getSpeedVector();
 }
 
-void Animal::updateMovementVariables(const Vec2d& acceleration, const sf::Time dt)
+void Animal::updateMovementVariables(const Vec2d& acceleration, const sf::Time &dt)
 {
     Vec2d new_speed = getSpeedVector() + acceleration * dt.asSeconds();
     Vec2d new_direction = new_speed.normalised();
     speed = fmin(getMaxSpeed(), new_speed.length());
-    //setTargetPosition(targetPosition + new_speed * dt.asSeconds());
     direction = new_direction;
     move(getSpeedVector() * dt.asSeconds());
 }
@@ -309,10 +322,12 @@ int Animal::getNumberOfChildren() const {
 
 void Animal::procreate() {
     if(getIsFemale()){
+        hasTarget=true;
+        mattingWaitTime = sf::Time::Zero;
         numberOfChildren = uniform(getMinimumNumberOfChildren(),getMaximumNumberOfChildren());
         double energyLost = getEnergyLossFemalePerChild() * numberOfChildren;
         OrganicEntity::spendEnergy(energyLost);
-        gestationTimeRemaining=getGestationTime();
+        gestationTime = sf::Time::Zero;
         isPregnant = true;
     }else{
         OrganicEntity::spendEnergy(getEnergyLossMaleMatting());
@@ -320,6 +335,23 @@ void Animal::procreate() {
 
 }
 
+bool Animal::updateAndHasWaitedLongEnoughMatting(sf::Time dt) {
+    mattingWaitTime += dt;
+    return mattingWaitTime.asSeconds() >= getAppConfig().animal_mating_time;
+}
+
+bool Animal::updateAndHasWaitedLongEnoughGestationTime(sf::Time dt) {
+    gestationTime += dt;
+    return gestationTime.asSeconds() >= getGestationTimeConfig() && gestationTime.asSeconds() < getGestationTimeConfig() + getAppConfig().animal_delivery_time;
+}
+
+bool Animal::giveBirth() {
+    if(isPregnant && isFemale){
+        isPregnant = false;
+        return true;
+    }
+    return false;
+}
 
 
 

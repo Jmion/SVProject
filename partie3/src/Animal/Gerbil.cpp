@@ -164,8 +164,10 @@ int Gerbil::getMaximumNumberOfChildren() const {
     return getAppConfig().gerbil_max_children;
 }
 
-double Gerbil::getGestationTime() const {
-    return getAppConfig().gerbil_gestation_time;
+double Gerbil::getGestationTimeConfig() const {
+    if(getIsFemale())
+        return getAppConfig().gerbil_gestation_time;
+    return 0;
 }
 
 double Gerbil::getEnergyLossMaleMatting() const {
@@ -174,5 +176,13 @@ double Gerbil::getEnergyLossMaleMatting() const {
 
 bool Gerbil::meet(OrganicEntity *mate) {
     return mate->meetManagement(this);
+}
+
+bool Gerbil::giveBirth() {
+    if(Animal::giveBirth()){
+        getAppEnv().addEntity(new Gerbil(getPosition()));
+        return true;
+    }
+    return false;
 }
 

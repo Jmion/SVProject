@@ -164,11 +164,21 @@ int Scorpion::getMaximumNumberOfChildren() const {
     return getAppConfig().scorpion_max_children;
 }
 
-double Scorpion::getGestationTime() const {
-    return getAppConfig().scorpion_gestation_time;
+double Scorpion::getGestationTimeConfig() const {
+    if (getIsFemale())
+        return getAppConfig().scorpion_gestation_time;
+    return 0;
 }
 
 double Scorpion::getEnergyLossMaleMatting() const {
     return getAppConfig().scorpion_energy_loss_mating_male;
+}
+
+bool Scorpion::giveBirth() {
+    if(Animal::giveBirth()){
+        getAppEnv().addEntity(new Scorpion(getPosition()));
+        return true;
+    }
+    return false;
 }
 

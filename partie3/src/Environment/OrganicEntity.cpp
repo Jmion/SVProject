@@ -56,15 +56,19 @@ void OrganicEntity::eat(OrganicEntity* &eaten)
     }
 }
 
-bool OrganicEntity::updateAndHasWaitedLongEnough(sf::Time dt)
+bool OrganicEntity::updateAndHasWaitedLongEnoughFeeding(sf::Time dt)
 {
     feedingWait += dt;
     return feedingWait>=getAppConfig().entity_wait_after_feeding;
 }
 
+
+
 void OrganicEntity::update(sf::Time dt) {
     aging(dt);
 }
+
+
 
 
 

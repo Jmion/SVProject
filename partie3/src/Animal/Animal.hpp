@@ -247,9 +247,9 @@ protected:
 
     /*!
      * Time in seconds that the animal needs for gestation
-     * @return time in seconds for gestation
+     * @return time in seconds for gestation. If animal is male will return gestation time of 0.
      */
-    virtual double getGestationTime() const = 0;
+    virtual double getGestationTimeConfig() const = 0;
 
     /*!
      * Energy lost by male when matting.
@@ -263,6 +263,28 @@ protected:
      */
     void procreate();
 
+    /*!
+    * Updates the time that the entity has spend waiting after matting.
+    * It will also return true if it has already waited long enough to allow for state change
+    * @param dt time spent since last call
+    * @return true if entity has spend at least entity_wait_time waiting after having procreated.
+    */
+    bool updateAndHasWaitedLongEnoughMatting(sf::Time dt);
+
+
+    /*!
+    * Updates the time that the entity has spend waiting after matting.
+    * It will also return true if it has already waited long enough to allow for state change
+    * @param dt time spent since last call
+    * @return true if entity has spend at least entity_wait_time waiting after having procreated.
+    */
+    bool updateAndHasWaitedLongEnoughGestationTime(sf::Time dt);
+
+    /*!
+    * Creates children on animal if animal is pregnant. And spaws then into the world. Needs to be the same type as the animal that caller is.
+    * @return true is sucessfull spawning.
+    */
+    virtual bool giveBirth() ;
 
 private:
 
@@ -295,7 +317,6 @@ private:
      */
     int numberOfChildren;
 
-private:
 
     /*!
      * Deceleration rate when animal approaches target.
@@ -308,10 +329,16 @@ private:
      */
     State state;
 
+
     /*!
-     * Time that is left before female give birth.
+    * Used to express the wait that the animal has waited after matting
+    */
+    sf::Time mattingWaitTime;
+
+    /*!
+     * Wait that the time that the femal has been pregnent
      */
-    double gestationTimeRemaining;
+    sf::Time gestationTime;
 
     /*!
      * Updates the state of the animal
@@ -323,7 +350,7 @@ private:
     * @param force that the robot is experiencing
     * @param dt time that has passed since previous update
     */
-    void updateMovementVariables(const Vec2d& force, const sf::Time dt );
+    void updateMovementVariables(const Vec2d& force, const sf::Time &dt );
 
     /*!
      * This methode will resolve the Deceleration enum to a double value which is the rate of deceleration. It will return the rate of deceleration bassed on the attribute deceleration of the class
@@ -402,6 +429,7 @@ private:
      * @return first element is the organicEntity that is a source of food, second potential mate, third closest enemy.
      */
     std::array<OrganicEntity *,3> analyseEnvironment() const;
+
 };
 
 

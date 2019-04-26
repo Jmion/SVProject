@@ -97,6 +97,7 @@ public:
     const float animal_base_energy_consumption;
     const float animal_starving_speed_factor;
 
+
     // gerbils
     const double gerbil_max_speed;
     const double gerbil_mass;

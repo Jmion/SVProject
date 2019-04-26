@@ -70,7 +70,7 @@ protected:
 
     int getMaximumNumberOfChildren() const override;
 
-    double getGestationTime() const override;
+    double getGestationTimeConfig() const override;
 
     double getEnergyLossMaleMatting() const override;
 
@@ -102,6 +102,8 @@ private:
     double getStarvingEnergyLevel() const override;
 
     double getEnergyLossFactor() const override;
+
+    bool giveBirth() override;
 };
 
 

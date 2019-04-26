@@ -125,11 +125,14 @@ protected:
 
     /*!
      * Updates the time that the entity has spend waiting after feeding.
-     * It will also return if it has already waited long enough to allow for state change
+     * It will also return true if it has already waited long enough to allow for state change
      * @param dt time spent since last call
      * @return true if entity has spend at least entity_wait_time waiting after having eaten.
      */
-    bool updateAndHasWaitedLongEnough(sf::Time dt);
+    bool updateAndHasWaitedLongEnoughFeeding(sf::Time dt);
+
+
+
 
 
 private:
@@ -165,8 +168,7 @@ private:
     sf::Time age;
 
     /*!
-     * This varaible is used to express the wait time that the Orgnaic entity has before being able to continue to
-     * change state.
+     * This varaible is used to express the wait time that the Organic entity has spend waiting after feeding;
      */
     sf::Time feedingWait;
 
