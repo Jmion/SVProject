@@ -108,6 +108,11 @@ public:
     virtual bool canMate(Food const* food) const = 0;
 
 
+    /*!
+     * Takes car
+     * @param mate
+     * @return
+     */
     virtual bool meet(OrganicEntity* mate) = 0;
     virtual bool meetManagement(Scorpion * mate) = 0;
     virtual bool meetManagement(Gerbil * mate) = 0;

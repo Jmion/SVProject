@@ -15,14 +15,18 @@
 
 Animal::Animal(const Vec2d& _position, double size, double energyLevel, bool isFemale, Deceleration _deceleration):
         OrganicEntity(_position, size, energyLevel),
-        speed(0), direction(Vec2d(1, 0)),
+        speed(0),
+        hasTarget(false),
+        direction(Vec2d(1, 0)),
         current_target(Vec2d(1, 0)),
         targetPosition(Vec2d(0, 0)),
         isFemale(isFemale),
         isPregnant(false),
+        numberOfChildren(0),
         deceleration(_deceleration),
-        mattingWaitTime(sf::Time::Zero),
         state(WANDERING),
+        mattingWaitTime(sf::Time::Zero),
+        gestationTime(sf::Time::Zero),
         givingBirthTime(sf::Time::Zero){}
 
 Animal& Animal::setTargetPosition(const Vec2d &target)
@@ -61,7 +65,11 @@ void Animal::draw(sf::RenderTarget &targetWindow) const
         std::string stateString = ToString(state);
         std::string sexString = isFemale?"Female":"Male";
         auto text = buildText("State: " + stateString  + " \nenergy level: " +
-                              to_nice_string(getEnergyLevel())+"\nage:" + to_nice_string(getAge().asSeconds()) + "\ngivingBirth:"+to_nice_string(givingBirthTime.asSeconds())+ "\n"+sexString+"\nenergy:"+to_nice_string(getEnergyLevel()),
+                              to_nice_string(getEnergyLevel())+"\nage:" + to_nice_string(getAge().asSeconds()) +
+                              "\ngivingBirth:"+to_nice_string(givingBirthTime.asSeconds())+
+                              "\n"+sexString+
+                              "\nnumber of children:"+to_nice_string(getNumberOfChildren())+
+                              "\nenergy:"+to_nice_string(getEnergyLevel()),
                               convertToGlobalCoord(Vec2d(-100, 0)), getAppFont(), getAppConfig().default_debug_text_size,
                               sf::Color::Black, getRotation() / DEG_TO_RAD + 90);
         targetWindow.draw(text);
@@ -154,14 +162,9 @@ void Animal::updateState(sf::Time dt)
             targetPosition = closestEntities.at(1)->getPosition();
         }
     }
-
-
     else {
-        //default behaviour if nothing in sight
         state = WANDERING;
         givingBirthTime= sf::Time::Zero;
-
-
         //FOOD
 
         if (closestEntities.at(0) != nullptr && eatable(closestEntities.at(0))) {
@@ -174,12 +177,6 @@ void Animal::updateState(sf::Time dt)
         if (closestEntities.at(0) != nullptr) {
             targetPosition = closestEntities.at(0)->getPosition();
         }
-
-        //MATTING
-
-
-        //
-
 
     }
 }
@@ -205,6 +202,9 @@ std::array<OrganicEntity *,3> Animal::analyseEnvironment() const {
                     closestEntities.at(1) = e;
                 }
             }
+            /*if(e->eatable(this)){
+                predatorPosition.push_back()
+            }*/
         }
     return closestEntities;
 }
@@ -330,7 +330,12 @@ bool Animal::getIsPregnant() const {
 }
 
 bool Animal::canMate(Animal const *partner) const {
-    return (getIsFemale() != partner->getIsFemale()) && !partner->getIsPregnant() && partner->state!=GIVING_BIRTH && (isFemale?getMinimumMatingEnergyFemale():getMinimumMatingEnergyMale())<=getEnergyLevel() && getAge().asSeconds() >= getMinimumMatingAge();
+    return (getIsFemale() != partner->getIsFemale())
+    && !partner->getIsPregnant()
+    && partner->state!=GIVING_BIRTH
+    && partner->state!=MATING
+    && (isFemale?getMinimumMatingEnergyFemale():getMinimumMatingEnergyMale())<=getEnergyLevel()
+    && getAge().asSeconds() >= getMinimumMatingAge();
 }
 
 int Animal::getNumberOfChildren() const {

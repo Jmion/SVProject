@@ -52,7 +52,6 @@ void OrganicEntity::eat(OrganicEntity* &eaten)
         energyLevel += eaten->energyLevel * getAppConfig().entity_energy_transfer_factor;
         eaten->energyLevel = 0;
         feedingWait = sf::Time::Zero;
-        std::cerr << "end of fofod" << std::endl;
     }
 }
 

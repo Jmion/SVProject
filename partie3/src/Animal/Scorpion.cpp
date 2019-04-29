@@ -176,7 +176,9 @@ double Scorpion::getEnergyLossMaleMatting() const {
 
 bool Scorpion::giveBirth() {
     if(Animal::giveBirth()){
-        getAppEnv().addEntity(new Scorpion(getPosition()));
+        for(int i(0); i < getNumberOfChildren(); i++) {
+            getAppEnv().addEntity(new Scorpion(getPosition()));
+        }
         return true;
     }
     return false;

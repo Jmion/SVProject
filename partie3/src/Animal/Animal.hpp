@@ -111,17 +111,18 @@ public:
     */
     void setDeleleration(Deceleration decel);
 
-    /*!
+
+
+
+protected:
+
+/*!
      * Gets number of children that this animal has.
      * Pregnant animals have children. If the animal is a male then
      * this methode will return 0.
      * @return Number of children that the animal has (pregnancy, number that are going to be born)
      */
     int getNumberOfChildren() const;
-
-
-protected:
-
 
     /*!
      * Calculates the attraction force that the automaton is experiencing
@@ -357,6 +358,11 @@ private:
      */
     sf::Time givingBirthTime;
 
+
+    /*!
+     * List of predators position in sight
+     */
+    std::list<Vec2d> predatorPosition;
 
 private:
 

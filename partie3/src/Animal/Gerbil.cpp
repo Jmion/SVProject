@@ -60,8 +60,7 @@ Gerbil::Gerbil(const Vec2d &position, double energyLevel, bool isFemale) : Anima
 
 Gerbil::Gerbil(const Vec2d &position) : Gerbil(position, getInitialEnergy(), uniform(0, 1) == 0) {}
 
-Gerbil::~Gerbil()
-{}
+Gerbil::~Gerbil() = default;
 
 bool Gerbil::eatable(OrganicEntity const *entity) const
 {
@@ -180,7 +179,9 @@ bool Gerbil::meet(OrganicEntity *mate) {
 
 bool Gerbil::giveBirth() {
     if(Animal::giveBirth()){
-        getAppEnv().addEntity(new Gerbil(getPosition()));
+        for(int i(0); i < getNumberOfChildren(); i++){
+            getAppEnv().addEntity(new Gerbil(getPosition()));
+        }
         return true;
     }
     return false;

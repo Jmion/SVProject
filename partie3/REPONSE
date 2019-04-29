@@ -104,7 +104,7 @@ All of these methods are declared as abstract : *etStandardMaxSpeed, getMass, ge
 
 ## Q.3.2
 
-We need to chnage the line where energy is indicated. For example:
+We need to change the line where energy is indicated. For example:
 
 ```JSON
 "energy":{
@@ -141,6 +141,30 @@ When the OrganicEntities die of old age the environment needs to free the memory
 
  First of all we we need to define the condition when the Animal will be starving. This information will be used in getMaxSpeed. For the definition of when an animal is starving we decided that each animal can be starving at a different energy level. For proper use we therefor added an *scorpion_energy_starving* and *gerbil_energy_starving* to our app JSON config file. We used a virtual method to define the updateState leaving the choice of the value to return up to the non abstract animals. With this solution we are respecting the app design and choice of keeping all of these parameters modifiable at run time. We also added *animal_starving_speed_factor* to the JSON because it is the only logical place where such a setting should go. We do not want to affect the state that the animal is in since we would like the animal to behave is it normally does but in a weaker form (moving less fast).
 
+## Q.3.8
+Exacly in the same way as previous methodes. But only thing that we will change that we haven't done in previous double dispatch is to define the method in animal. This default implementation 
+
+## Q.3.9
+#What is wanted???
+
+## Q.3.10
+Exactly like for mate we use double dispatch to have the type of both this and mate. We define method *meet* and *meetManagement*. *Meet* calls *meetManagemetn* which takes care of dealing with the animals matting. The matting involves changes to the animals matting. Since all the fields are defined in animal we have defined a *procreate* method that will take car of making the appropriate changes to the animal.
+
+## Q.3.11
+
+We will put in place the gestation time by creating a sf::Time variable that will be used to track the amount of time that the animal has been in gestation.
+
+## Q.3.12
+
+The method give birth is defined in the *Animal* class and all of it's children. The definition in the *Animal* class only determines if the animal can give birth. It is another check to ensure that no male animals give birth. This check should be redundant since this method should only be called by females. But to avoid missus of this method in the future we felt like the proper way of defining this giveBirth method was to provide a check.
+
+## Q.3.13
+The number of babies is stored in the animal. This attribute has a getter provided for it ensuring that if a male animal calls the method it will return 0. It is logical that a male cannot have children.
+
+
+## Q.3.14
+It is better to avoid storing pointers to organic entity in the animal if possible. This provides storage for pointers that could be used when the organic entity disappears from the field of view.
+
 
 ## QUESTIONS
 Why are we declaring the eatable method in all the subclasses? It is the same everywhere. And why not use a visitor.
@@ -151,4 +175,4 @@ Why are we declaring the eatable method in all the subclasses? It is the same ev
 
 ## CONCEPTION
 
-I added a macros utility file where I will put all the macros that will be utilities for this project. This includes for now the parameters to supress unused attributes for GCC. This is done here to allow flexibility in case we change compilers since the suppress warning flags are not part of the C norm but are specific to GCC.
+I added a macros utility file where I will put all the macros that will be utilities for this project. This includes for now the parameters to suppress unused attributes for GCC. This is done here to allow flexibility in case we change compilers since the suppress warning flags are not part of the C norm but are specific to GCC.
