@@ -38,6 +38,8 @@ Config::Config(std::string path) : mConfig(j::readFromFile(path))
     , animal_min_energy(mConfig["simulation"]["animal"]["min energy"].toDouble())
     , animal_base_energy_consumption(mConfig["simulation"]["animal"]["base consumption"].toDouble())
     , animal_starving_speed_factor(mConfig["simulation"]["animal"]["starving speed factor"].toDouble())
+    , animal_running_away_amplification_factor(mConfig["simulation"]["animal"]["running away amplification factor"].toDouble())
+    , animal_running_away_distance_ratio(mConfig["simulation"]["animal"]["running away distance ratio"].toDouble())
 // gerbil
     , gerbil_max_speed(mConfig["simulation"]["animal"]["gerbil"]["max speed"].toDouble())
     , gerbil_mass(mConfig["simulation"]["animal"]["gerbil"]["mass"].toDouble())

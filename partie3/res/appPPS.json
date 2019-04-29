@@ -24,6 +24,8 @@
 	  "base consumption" : 0.1,
 	  "min energy" : 20,
         "starving speed factor": 0.5,
+        "running away amplification factor": 500,
+        "running away distance ratio": 1.2,
         "reproduction":{
                "delivery time":10,
                "mating time":5

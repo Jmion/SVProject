@@ -163,7 +163,7 @@ The number of babies is stored in the animal. This attribute has a getter provid
 
 
 ## Q.3.14
-It is better to avoid storing pointers to organic entity in the animal if possible. This provides storage for pointers that could be used when the organic entity disappears from the field of view.
+It is better to avoid storing pointers to organic entity in the animal if possible. This would provide storage for pointers that could be used when the organic entity disappears from the environment. We instead decide to store a list of locations where we have last seen predators.
 
 
 ## QUESTIONS

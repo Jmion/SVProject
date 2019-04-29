@@ -27,7 +27,8 @@ Animal::Animal(const Vec2d& _position, double size, double energyLevel, bool isF
         state(WANDERING),
         mattingWaitTime(sf::Time::Zero),
         gestationTime(sf::Time::Zero),
-        givingBirthTime(sf::Time::Zero){}
+        givingBirthTime(sf::Time::Zero),
+        predatorPosition(){}
 
 Animal& Animal::setTargetPosition(const Vec2d &target)
 {
@@ -119,6 +120,9 @@ void Animal::update(sf::Time dt)
             giveBirth();
             attraction_force = stoppingAttractionForce();
             break;
+        case RUNNING_AWAY:
+            attraction_force = runningAwayForce();
+            break;
         default:
             attraction_force = Vec2d(0, 0);
     }
@@ -138,7 +142,10 @@ void Animal::updateState(sf::Time dt)
     bool gestationWaitedLongEnough = updateAndHasWaitedLongEnoughGestationTime(dt);
     bool givingBirthWaitedLongEnough = updateAndHasWaitedLongEnoughGivingBirthTime(dt);
 
-    if(!feedingHasWaitedLongEnough) {
+    if(!predatorPosition.empty()){
+        state = RUNNING_AWAY;
+    }
+    else if(!feedingHasWaitedLongEnough) {
         state = DIESTING;
     }else if(state == MATING){
         if(mattingHasWaitedLongEnough){
@@ -181,7 +188,7 @@ void Animal::updateState(sf::Time dt)
     }
 }
 
-std::array<OrganicEntity *,3> Animal::analyseEnvironment() const {
+std::array<OrganicEntity *,3> Animal::analyseEnvironment() {
     std::list<OrganicEntity *> entities = getAppEnv().getEntitiesInSightForAnimal(this);
 
 
@@ -202,9 +209,9 @@ std::array<OrganicEntity *,3> Animal::analyseEnvironment() const {
                     closestEntities.at(1) = e;
                 }
             }
-            /*if(e->eatable(this)){
-                predatorPosition.push_back()
-            }*/
+            if(e->eatable(this)){
+                predatorPosition.push_back(e->getPosition());
+            }
         }
     return closestEntities;
 }
@@ -385,6 +392,23 @@ bool Animal::updateAndHasWaitedLongEnoughGivingBirthTime(sf::Time dt) {
     if(state == GIVING_BIRTH)
         givingBirthTime += dt;
     return givingBirthTime.asSeconds() >  (getIsFemale()?getAppConfig().animal_delivery_time:0);
+}
+
+Vec2d Animal::runningAwayForce() {
+    Vec2d force(0,0);
+    std::list<Vec2d> toDelete;
+    for (auto &it : predatorPosition) {
+        Vec2d dir = it -getPosition();
+        if(dir.length() > getAppConfig().simulation_world_size/1.4)
+            toDelete.push_back(it);
+        else
+            force -= getAppConfig().animal_running_away_amplification_factor*(dir)/pow(dir.length(),getAppConfig().animal_running_away_distance_ratio);
+    }
+    for (auto &d : toDelete) {
+        predatorPosition.remove(d);
+    }
+
+    return force;
 }
 
 

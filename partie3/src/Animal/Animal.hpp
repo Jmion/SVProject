@@ -454,7 +454,13 @@ private:
      * Elements of the array will be nullptr if there is no organicEntity that fits the description.
      * @return first element is the organicEntity that is a source of food, second potential mate, third closest enemy.
      */
-    std::array<OrganicEntity *, 3> analyseEnvironment() const;
+    std::array<OrganicEntity *, 3> analyseEnvironment();
+
+    /*!
+     * Calculates the repulsive force beween the animal and the predators last know location.
+     * @return the force that will act on the animal to make it run away
+     */
+    Vec2d runningAwayForce();
 
 };
 

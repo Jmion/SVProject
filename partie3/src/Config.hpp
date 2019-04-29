@@ -96,6 +96,8 @@ public:
     const double animal_min_energy;
     const float animal_base_energy_consumption;
     const float animal_starving_speed_factor;
+    const float animal_running_away_amplification_factor;
+    const float animal_running_away_distance_ratio;
 
 
     // gerbils
