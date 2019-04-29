@@ -14,7 +14,14 @@
 
 class Animal : public OrganicEntity {
 public:
+    /*!
+     * Allow modification of target position
+     * @param target position of chasing automaton
+     * @return Reference to this to allow chaining calls
+     */
+    Animal &setTargetPosition(const Vec2d &target);
 
+    virtual ~Animal() = default;
 
     /*!
      * Amount of deceleration that the automaton has when approaching the target.
@@ -47,13 +54,6 @@ public:
      * @return mass
      */
     virtual double getMass() const = 0;
-
-    /*!
-     * Allow modification of target position
-     * @param target position of chasing automaton
-     * @return Reference to this to allow chaining calls
-     */
-    Animal &setTargetPosition(const Vec2d &target);
 
 
     /*!

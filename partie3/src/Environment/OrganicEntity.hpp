@@ -27,6 +27,8 @@ public:
      */
     OrganicEntity(const Vec2d& position, double size, double energyLevel);
 
+    virtual ~OrganicEntity() = default;
+
 
     /*!
      * Determins if the organic entity is dead.

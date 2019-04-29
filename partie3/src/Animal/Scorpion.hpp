@@ -7,15 +7,14 @@
 
 #include <Animal/Animal.hpp>
 
-class Scorpion : public Animal
-{
+class Scorpion : public Animal {
 
 
 public:
 
-    Scorpion(const Vec2d& position, double energyLevel, bool isFemale);
+    Scorpion(const Vec2d &position, double energyLevel, bool isFemale);
 
-    explicit Scorpion(const Vec2d& position);
+    explicit Scorpion(const Vec2d &position);
 
     double getStandardMaxSpeed() const override;
 
