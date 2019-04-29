@@ -21,7 +21,9 @@ Animal::Animal(const Vec2d& _position, double size, double energyLevel, bool isF
         isFemale(isFemale),
         isPregnant(false),
         deceleration(_deceleration),
-        state(WANDERING){}
+        mattingWaitTime(sf::Time::Zero),
+        state(WANDERING),
+        givingBirthTime(sf::Time::Zero){}
 
 Animal& Animal::setTargetPosition(const Vec2d &target)
 {
@@ -51,11 +53,15 @@ void Animal::draw(sf::RenderTarget &targetWindow) const
             targetWindow.draw(buildCircle(convertToGlobalCoord(current_target + Vec2d(getRandomWalkDistance(), 0)), 5,
                                           sf::Color::Blue));
         }
+        if(getIsPregnant()){
+            targetWindow.draw(buildAnnulus(getPosition(), getRadius(), sf::Color::Magenta,4 ));
+        }
 
         //textual details about the animal
         std::string stateString = ToString(state);
+        std::string sexString = isFemale?"Female":"Male";
         auto text = buildText("State: " + stateString  + " \nenergy level: " +
-                              to_nice_string(getEnergyLevel())+"\nage:" + to_nice_string(getAge().asSeconds()) + "\nenergy:"+to_nice_string(getEnergyLevel()),
+                              to_nice_string(getEnergyLevel())+"\nage:" + to_nice_string(getAge().asSeconds()) + "\ngivingBirth:"+to_nice_string(givingBirthTime.asSeconds())+ "\n"+sexString+"\nenergy:"+to_nice_string(getEnergyLevel()),
                               convertToGlobalCoord(Vec2d(-100, 0)), getAppFont(), getAppConfig().default_debug_text_size,
                               sf::Color::Black, getRotation() / DEG_TO_RAD + 90);
         targetWindow.draw(text);
@@ -97,7 +103,7 @@ void Animal::update(sf::Time dt)
             attraction_force = attractionForce();
             break;
         case MATING:
-            procreate();
+            hasTarget = true;
             attraction_force = stoppingAttractionForce();
            break;
         case GIVING_BIRTH:
@@ -117,23 +123,44 @@ void Animal::update(sf::Time dt)
 
 void Animal::updateState(sf::Time dt)
 {
+    std::array<OrganicEntity *,3> closestEntities = analyseEnvironment();
 
     bool feedingHasWaitedLongEnough = updateAndHasWaitedLongEnoughFeeding(dt);
     bool mattingHasWaitedLongEnough = updateAndHasWaitedLongEnoughMatting(dt);
     bool gestationWaitedLongEnough = updateAndHasWaitedLongEnoughGestationTime(dt);
+    bool givingBirthWaitedLongEnough = updateAndHasWaitedLongEnoughGivingBirthTime(dt);
 
     if(!feedingHasWaitedLongEnough) {
         state = DIESTING;
-    }else if(!mattingHasWaitedLongEnough){
-        state = MATING;
-    }else if(gestationWaitedLongEnough ){
+    }else if(state == MATING){
+        if(mattingHasWaitedLongEnough){
+            state = WANDERING;
+            mattingWaitTime = sf::Time::Zero;
+        }
+    }else if(gestationWaitedLongEnough && getIsFemale()){
         state = GIVING_BIRTH;
+        if(givingBirthWaitedLongEnough){
+            state = WANDERING;
+            gestationTime = sf::Time::Zero;
+        }
     }
+    else if(closestEntities.at(1) != nullptr && matable(closestEntities.at(1)) && closestEntities.at(1)->matable(this)) {
+        if (isColliding(*closestEntities.at(1)) && state == MATE_IN_SIGHT) {
+            meet(closestEntities.at(1));
+        }else {
+            state = MATE_IN_SIGHT;
+        }
+        if(closestEntities.at(1) != nullptr) {
+            targetPosition = closestEntities.at(1)->getPosition();
+        }
+    }
+
+
     else {
         //default behaviour if nothing in sight
         state = WANDERING;
+        givingBirthTime= sf::Time::Zero;
 
-        std::array<OrganicEntity *,3> closestEntities = analyseEnvironment();
 
         //FOOD
 
@@ -149,16 +176,9 @@ void Animal::updateState(sf::Time dt)
         }
 
         //MATTING
-        if(closestEntities.at(1) != nullptr && matable(closestEntities.at(1)) && closestEntities.at(1)->matable(this)) {
-            if (isColliding(*closestEntities.at(1)) && state == MATE_IN_SIGHT) {
-                state = MATING;
-            }
-            state = MATE_IN_SIGHT;
-        }
-        if(closestEntities.at(1) != nullptr) {
-            targetPosition = closestEntities.at(1)->getPosition();
-        }
 
+
+        //
 
 
     }
@@ -299,7 +319,7 @@ void Animal::spendEnergy(sf::Time dt)
 
 Vec2d Animal::stoppingAttractionForce()
 {
-    if(speed <0.01)
+    if(speed <0.04)
         return Vec2d(0, 0);
     setTargetPosition(convertToGlobalCoord(Vec2d(-1,0)));
     return attractionForce();
@@ -321,6 +341,7 @@ int Animal::getNumberOfChildren() const {
 }
 
 void Animal::procreate() {
+    state = MATING;
     if(getIsFemale()){
         hasTarget=true;
         mattingWaitTime = sf::Time::Zero;
@@ -336,13 +357,15 @@ void Animal::procreate() {
 }
 
 bool Animal::updateAndHasWaitedLongEnoughMatting(sf::Time dt) {
-    mattingWaitTime += dt;
+    if(state == MATING)
+        mattingWaitTime += dt;
     return mattingWaitTime.asSeconds() >= getAppConfig().animal_mating_time;
 }
 
 bool Animal::updateAndHasWaitedLongEnoughGestationTime(sf::Time dt) {
-    gestationTime += dt;
-    return gestationTime.asSeconds() >= getGestationTimeConfig() && gestationTime.asSeconds() < getGestationTimeConfig() + getAppConfig().animal_delivery_time;
+    if(getIsPregnant())
+        gestationTime += dt;
+    return gestationTime.asSeconds() >= getGestationTimeConfig();
 }
 
 bool Animal::giveBirth() {
@@ -352,6 +375,13 @@ bool Animal::giveBirth() {
     }
     return false;
 }
+
+bool Animal::updateAndHasWaitedLongEnoughGivingBirthTime(sf::Time dt) {
+    if(state == GIVING_BIRTH)
+        givingBirthTime += dt;
+    return givingBirthTime.asSeconds() >  (getIsFemale()?getAppConfig().animal_delivery_time:0);
+}
+
 
 
 

@@ -5,6 +5,10 @@
          "factor":2,
          "max dt":0.05
       },
+     "organic entity" : {
+       "transfer factor": 0.7,
+       "wait after feeding" : 1
+     },
        "food generator" : {
 	   "delta" : 4
        },
@@ -19,6 +23,7 @@
          "feed time":0.4,
 	  "base consumption" : 0.1,
 	  "min energy" : 20,
+        "starving speed factor": 0.5,
          "reproduction":{
                "delivery time":10,
                "mating time":5
@@ -44,12 +49,13 @@
                "distance":160
             },
             "energy":{
-               "initial":1000,
+               "initial":10000,
                "min mating male":450,
                "min mating female":800,
                "loss mating male":200,
                "loss female per child":100,
-               "loss factor":0.001
+               "loss factor":0.001,
+               "starving":40
             },
 	    "wave" : {
 		"frequency" : 0.3,
@@ -92,7 +98,8 @@
                "min mating female":800,
                "loss mating male":200,
                "loss female per child":100,
-               "loss factor":0.001
+               "loss factor":0.001,
+               "starving":40
             },
             "idle":{
                "min":5,

@@ -12,8 +12,7 @@
 #include <Utility/Macros.hpp>
 #include <array>
 
-class Animal: public OrganicEntity
-{
+class Animal : public OrganicEntity {
 public:
 
 
@@ -24,15 +23,17 @@ public:
      * If adding new states to this enum do not forget to configure the values that are wanted
      * in the getDecelerationRate method present in this class.
      */
-    enum Deceleration {WEAK,MEDIUM,STRONG};
+    enum Deceleration {
+        WEAK, MEDIUM, STRONG
+    };
 
 
     /*!
      * The action decide how the animal is currently behaving. These are the different states that the animal
      * can be in.
      */
-    DEFINE_ENUM_WITH_STRING_CONVERSIONS(State,(FOOD_IN_SIGHT)(FEEDING)(RUNNING_AWAY)
-                                        (MATE_IN_SIGHT)(MATING)(GIVING_BIRTH)(WANDERING)(DIESTING))
+    DEFINE_ENUM_WITH_STRING_CONVERSIONS(State, (FOOD_IN_SIGHT)(FEEDING)(RUNNING_AWAY)
+            (MATE_IN_SIGHT)(MATING)(GIVING_BIRTH)(WANDERING)(DIESTING))
 
 
     /*!
@@ -52,14 +53,14 @@ public:
      * @param target position of chasing automaton
      * @return Reference to this to allow chaining calls
      */
-    Animal& setTargetPosition(const Vec2d& target);
+    Animal &setTargetPosition(const Vec2d &target);
 
 
     /*!
      * Calculates the speed vector of the automaton
      * @return
      */
-    Vec2d getSpeedVector() const ;
+    Vec2d getSpeedVector() const;
 
 
     /*!
@@ -73,7 +74,7 @@ public:
      * draws the automaton and it's target in the targetWindow
      * @param targetWindow where to draw the automaton
      */
-    void draw(sf::RenderTarget& targetWindow) const override;
+    void draw(sf::RenderTarget &targetWindow) const override;
 
     /*!
      * Creates a new ChasingAutomaton. The deceleration parameter allows for the control of how fast the automaton slows down
@@ -84,7 +85,7 @@ public:
      * @param isFemale that indicates the sex of the animal. If true the sex is female.
      * @param _deceleration constant that defines how quickly the automatons will slow down when approaching there target.
      */
-    Animal(const Vec2d& _position, double size, double energyLevel, bool isFemale, Deceleration _deceleration=WEAK);
+    Animal(const Vec2d &_position, double size, double energyLevel, bool isFemale, Deceleration _deceleration = WEAK);
 
     /*!
      * @return Viewing animal range in radians
@@ -101,7 +102,7 @@ public:
      * @param target that needs to be tested if it can be seen
      * @return true if target can be seen by the animal, false otherwise
      */
-    bool isTargetInSight(const Vec2d& target) const;
+    bool isTargetInSight(const Vec2d &target) const;
 
 
     /*!
@@ -126,7 +127,7 @@ protected:
      * Calculates the attraction force that the automaton is experiencing
      * @return force that are being applied to the robot.
      */
-    Vec2d attractionForce() const ;
+    Vec2d attractionForce() const;
 
 
     /*!
@@ -134,7 +135,7 @@ protected:
     * @param angle in radians of the new direction vector
     * @return reference to this
     */
-    Animal& setRotation(double angle);
+    Animal &setRotation(double angle);
 
     /*!
     * @return the angle in radians of the direction vector
@@ -222,7 +223,7 @@ protected:
      * @param partner that we want to check if we can mate with
      * @return true if mate is available for mating.
      */
-    virtual bool canMate(Animal const* partner) const;
+    virtual bool canMate(Animal const *partner) const;
 
     /*!
      * Amount of energy lost per children born
@@ -280,11 +281,20 @@ protected:
     */
     bool updateAndHasWaitedLongEnoughGestationTime(sf::Time dt);
 
+
+    /*!
+     * Update the time that the entity has spend waiting in givingBirth state.
+     * It will return true if the animal has spend enough time in givingBirth state.
+     * @param dt time spent since last call
+     * @return true if animal has spend at least animal_delivery_time is giving birth state. Note methode will return true if called by a male.
+     */
+    bool updateAndHasWaitedLongEnoughGivingBirthTime(sf::Time dt);
+
     /*!
     * Creates children on animal if animal is pregnant. And spaws then into the world. Needs to be the same type as the animal that caller is.
     * @return true is sucessfull spawning.
     */
-    virtual bool giveBirth() ;
+    virtual bool giveBirth();
 
 private:
 
@@ -309,8 +319,10 @@ private:
 
     /*!
      * only applies to animals if isFemale is true.
+     * Indicates that the animal is pregnant.
      */
     bool isPregnant;
+
 
     /*!
      * The number of children that a pregnent animal is carrying.
@@ -336,9 +348,17 @@ private:
     sf::Time mattingWaitTime;
 
     /*!
-     * Wait that the time that the femal has been pregnent
+     * Wait that the time that the femal has been pregnent before giving birth
      */
     sf::Time gestationTime;
+
+    /*!
+     * Time that the animal has been in GivingBirth state
+     */
+    sf::Time givingBirthTime;
+
+
+private:
 
     /*!
      * Updates the state of the animal
@@ -350,7 +370,7 @@ private:
     * @param force that the robot is experiencing
     * @param dt time that has passed since previous update
     */
-    void updateMovementVariables(const Vec2d& force, const sf::Time &dt );
+    void updateMovementVariables(const Vec2d &force, const sf::Time &dt);
 
     /*!
      * This methode will resolve the Deceleration enum to a double value which is the rate of deceleration. It will return the rate of deceleration bassed on the attribute deceleration of the class
@@ -363,7 +383,7 @@ private:
     * Draws the semi circular arc centered on the animal. This is the animals viewing angle
     * @param target that is used to draw on
     */
-    void drawVision(sf::RenderTarget& target) const;
+    void drawVision(sf::RenderTarget &target) const;
 
     /*!
      * Generates a virtual target for the animal. It will calculate the attraction force between the target and the animal.
@@ -379,7 +399,7 @@ private:
      * @param v in animal coordinates
      * @return v in the global coordinates
      */
-    Vec2d convertToGlobalCoord(const Vec2d& v) const;
+    Vec2d convertToGlobalCoord(const Vec2d &v) const;
 
     /*!
      * Updates the energy level of the animal given that it has lived for a instant dt.
@@ -428,11 +448,9 @@ private:
      * Elements of the array will be nullptr if there is no organicEntity that fits the description.
      * @return first element is the organicEntity that is a source of food, second potential mate, third closest enemy.
      */
-    std::array<OrganicEntity *,3> analyseEnvironment() const;
+    std::array<OrganicEntity *, 3> analyseEnvironment() const;
 
 };
-
-
 
 
 #endif //PARTIE1_ANIMAL_HPP
