@@ -165,8 +165,8 @@ void Animal::updateState(sf::Time dt) {
     } else {
         state = WANDERING;
         givingBirthTime = sf::Time::Zero;
-        //FOOD
 
+        //FOOD
         if (closestEntities.at(0) != nullptr && eatable(closestEntities.at(0))) {
             state = FOOD_IN_SIGHT;
             if (isColliding(*closestEntities.at(0))) {
