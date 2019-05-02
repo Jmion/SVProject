@@ -166,6 +166,16 @@ The number of babies is stored in the animal. This attribute has a getter provid
 It is better to avoid storing pointers to organic entity in the animal if possible. This would provide storage for pointers that could be used when the organic entity disappears from the environment. We instead decide to store a list of locations where we have last seen predators.
 
 
+## Q.4.1
+A wave should inherit from a circular collider and it would be updatable, drawable. We do not implement the drawable interface since a circularCollider already does.
+
+## Q.4.2
+A wave does not need to keep track of time. Since it would be easier and logical to offer the possibility to a circularCollider to change it's radius this functionality was added in the circularCollider class. We therefor only need to update the radius when a call to update is made.
+
+## Q.4.3
+An environment will have a list of waves* that will be updated, drawn, and deleted. We also need to add a method to add a wave. And of course not forget to clear the remaining waves from the list at the destruction of the environment.
+
+
 ## QUESTIONS
 Why are we declaring the eatable method in all the subclasses? It is the same everywhere. And why not use a visitor.
 * See for access rights to eatable methods

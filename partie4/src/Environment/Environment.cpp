@@ -6,6 +6,8 @@
 #include <Animal/Animal.hpp>
 #include <Environment/OrganicEntity.hpp>
 #include <algorithm>
+#include <Environment/Wave.hpp>
+#include <Application.hpp>
 
 /*!
  * Add animal to environment fauna.
@@ -45,11 +47,16 @@ void Environment::update(sf::Time dt)
         if(o != nullptr) {
             o->update(dt);
         }
+    }
 
+    for (auto &w: waves) {
+        if (w != nullptr) {
+            w->update(dt);
+        }
     }
 
     cleanUpDeadOrganic();
-
+    cleanUpWave();
 }
 
 void Environment::cleanUpDeadOrganic()
@@ -69,6 +76,21 @@ void Environment::cleanUpDeadOrganic()
     toDelete.clear();
 }
 
+void Environment::cleanUpWave() {
+    std::list<Wave*> toDelete;
+    for (auto &w: waves) {
+        if (w != nullptr && w->isWaveToBeDeleted()) {
+            toDelete.push_back(w);
+        }
+    }
+
+    for (auto &w : toDelete) {
+        waves.remove(w);
+        delete (w);
+    }
+    toDelete.clear();
+}
+
 
 /*!
  * draws the animals and targets onto the window
@@ -78,6 +100,10 @@ void Environment::draw(sf::RenderTarget& targetWindow) const
 {
     for(OrganicEntity* o: organicEntities) {
         o->draw(targetWindow);
+    }
+
+    for (auto &w: waves) {
+        w->draw(targetWindow);
     }
 
     sf::Color red(255,0,0);
@@ -111,6 +137,12 @@ Environment::~Environment()
         }
     }
 
+    for(Wave* w: waves) {
+        if (w != nullptr) {
+            delete (w);
+        }
+    }
+
     for (auto gen : generators) {
         if(gen != nullptr) {
             delete (gen);
@@ -135,3 +167,9 @@ void Environment::addGenerator(FoodGenerator *foodGenerator)
 {
     generators.push_back(foodGenerator);
 }
+
+void Environment::addWave(Wave *wave) {
+    waves.push_back(wave);
+}
+
+

@@ -131,6 +131,10 @@ void CircularCollider::draw(sf::RenderTarget &target) const
     }
 }
 
+void CircularCollider::setRadius(double radius) {
+    this->radius = radius;
+}
+
 
 std::ostream& operator<<(std::ostream & out, CircularCollider const & collider)
 {

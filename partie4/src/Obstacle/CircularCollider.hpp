@@ -48,11 +48,16 @@ public:
      */
     const Vec2d& getPosition() const;
 
-    /*!
+     /*!
      * The radius of the collider.
      * @return the radius of the collider
      */
-    double getRadius() const;
+     double getRadius() const;
+
+     /*!
+      * Sets a new radius to the circularCollider
+      */
+     void setRadius(double radius);
 
     /*!
      * Default copy constructor will go a surface copy of the attributes.

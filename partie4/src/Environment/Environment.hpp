@@ -15,6 +15,7 @@
 #include <Interface/Updatable.hpp>
 #include <Environment/FoodGenerator.hpp>
 class Animal;
+class Wave;
 
 class Environment : public Drawable, public Updatable
 {
@@ -35,13 +36,13 @@ public:
      * Make the animals in the environment evolve.
      * @param dt time between updates
      */
-    void update(sf::Time dt);
+    void update(sf::Time dt) override;
 
     /*!
      * draws the animals and targets onto the window
      * @param targetWindow to display on
      */
-    void draw(sf::RenderTarget& targetWindow) const;
+    void draw(sf::RenderTarget& targetWindow) const override;
 
 
     /*!
@@ -78,12 +79,27 @@ public:
      */
     void addGenerator(FoodGenerator* foodGenerator);
 
+    /*!
+     * Adds a Wave to the list of waves.
+     * @param wave being added to the environment
+     */
+    void addWave(Wave* wave);
+
 private:
     std::list<OrganicEntity*> organicEntities;
     std::list<Vec2d> targets;
     std::list<FoodGenerator*> generators;
+    std::list<Wave*> waves;
 
+    /*!
+     * Removes organicEntities from the environment list when they are dead
+     */
     void cleanUpDeadOrganic();
+
+    /*!
+     * Remvoes waves from the environment when there intensity is to low
+     */
+    void cleanUpWave();
 };
 
 
