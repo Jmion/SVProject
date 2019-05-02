@@ -154,5 +154,10 @@
 	"control":{
             "width":300
 	}
+    },
+  "obstacles": {
+    "rock": {
+      "texture": "rock.png"
     }
+  }
 }
