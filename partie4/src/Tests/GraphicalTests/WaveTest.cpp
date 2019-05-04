@@ -8,7 +8,7 @@
 #include <Utility/Utility.hpp>
 #include <Config.hpp>
 #include <Environment/Wave.hpp>
-//#include <Obstacle/Rock.hpp> // UNCOMMENT ME WHEN Rock IS CODED
+#include <Obstacle/Rock.hpp> // UNCOMMENT ME WHEN Rock IS CODED
 
 IMPLEMENT_MAIN(WaveTest)
 
@@ -34,10 +34,10 @@ void WaveTest::onEvent(sf::Event event, sf::RenderWindow&)
 void WaveTest::newObstacle(Vec2d const& cursor)
 {
     // UNCOMMENT ME WHEN Rock AND addObstacle ARE CODED:
-    /*
+
     Obstacle* obstacle = new Rock(cursor);
     getEnv().addObstacle(obstacle);
-    */
+
 }
 
 void WaveTest::newWave(Vec2d const& cursor)

@@ -175,14 +175,19 @@ A wave does not need to keep track of time. Since it would be easier and logical
 ## Q.4.3
 An environment will have a list of waves* that will be updated, drawn, and deleted. We also need to add a method to add a wave. And of course not forget to clear the remaining waves from the list at the destruction of the environment.
 
+## Q.4.4
+We need to create a method addObstacle. Modify the *Environment* delete, draw, methods.
+
 
 ## QUESTIONS
 Why are we declaring the eatable method in all the subclasses? It is the same everywhere. And why not use a visitor.
 * See for access rights to eatable methods
-* Whay are we not using the state running away to make the animals run away from the scorpion. Need to check what is wrongs
+* Why are we not using the state running away to make the animals run away from the scorpion. Need to check what is wrongs
 * Why is there no to string on a enum.
 
 
 ## CONCEPTION
 
 I added a macros utility file where I will put all the macros that will be utilities for this project. This includes for now the parameters to suppress unused attributes for GCC. This is done here to allow flexibility in case we change compilers since the suppress warning flags are not part of the C norm but are specific to GCC.
+
+I decided to structure the obstacles such Rocks into a abstract class that defines solideObstacles and let Rocks be an instance of a solideObstacle. This allows for easy definition of other types of solid obstacles. Some changes where made to the WaveTest.h . To be specific we changed the typedef of Obstacle to SolidObstacle instead of leaving as defined in the handout as a CircularCollider. This means that in our definition only solidObstactles will have the effect of breaking a wave.

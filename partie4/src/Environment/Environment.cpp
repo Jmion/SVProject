@@ -4,10 +4,13 @@
 
 #include "Environment.hpp"
 #include <Animal/Animal.hpp>
+#include <Obstacle/SolideObstacle.hpp>
 #include <Environment/OrganicEntity.hpp>
 #include <algorithm>
 #include <Environment/Wave.hpp>
 #include <Application.hpp>
+
+
 
 /*!
  * Add animal to environment fauna.
@@ -99,11 +102,18 @@ void Environment::cleanUpWave() {
 void Environment::draw(sf::RenderTarget& targetWindow) const
 {
     for(OrganicEntity* o: organicEntities) {
-        o->draw(targetWindow);
+        if(o != nullptr)
+            o->draw(targetWindow);
     }
 
     for (auto &w: waves) {
-        w->draw(targetWindow);
+        if(w!= nullptr)
+            w->draw(targetWindow);
+    }
+
+    for (auto &o: solidObstacles) {
+        if(o != nullptr)
+            o->draw(targetWindow);
     }
 
     sf::Color red(255,0,0);
@@ -124,7 +134,7 @@ void Environment::clean()
     }
     organicEntities.clear();
     targets.clear();
-};
+}
 /*!
  * Will free all the animals attached to it.
  */
@@ -133,7 +143,6 @@ Environment::~Environment()
     for (OrganicEntity *o: organicEntities) {
         if(o!= nullptr) {
             delete (o);
-            o = nullptr;
         }
     }
 
@@ -143,12 +152,22 @@ Environment::~Environment()
         }
     }
 
+    for (SolideObstacle *s : solidObstacles) {
+        if (s != nullptr) {
+            delete (s);
+        }
+    }
+
     for (auto gen : generators) {
         if(gen != nullptr) {
             delete (gen);
-            gen = nullptr;
         }
     }
+
+    organicEntities.clear();
+    waves.clear();
+    solidObstacles.clear();
+    generators.clear();
 }
 
 //TODO check complexity of this call
@@ -170,6 +189,21 @@ void Environment::addGenerator(FoodGenerator *foodGenerator)
 
 void Environment::addWave(Wave *wave) {
     waves.push_back(wave);
+}
+
+void Environment::addObstacle(SolideObstacle *obstacle) {
+    std::cerr << "Adding obstactle" << std::endl;
+    solidObstacles.push_back(obstacle);
+}
+
+std::list<SolideObstacle *> Environment::getSolideObstaclesCollidingForWave(const Wave *wave) const {
+    std::list<SolideObstacle*> solideObstaclesCol;
+    for(auto & s : solidObstacles) {
+        if(s != nullptr && wave->isColliding(*s) && !wave->isCircularColliderInside(*s))
+            solideObstaclesCol.push_back(s);
+    }
+    return solideObstaclesCol;
+
 }
 
 

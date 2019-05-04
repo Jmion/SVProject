@@ -14,8 +14,10 @@
 #include <Interface/Drawable.hpp>
 #include <Interface/Updatable.hpp>
 #include <Environment/FoodGenerator.hpp>
+
 class Animal;
 class Wave;
+class SolideObstacle;
 
 class Environment : public Drawable, public Updatable
 {
@@ -73,6 +75,8 @@ public:
      */
     std::list<OrganicEntity*> getEntitiesInSightForAnimal(const Animal *animal) const;
 
+    std::list<SolideObstacle*> getSolideObstaclesCollidingForWave(const Wave* wave) const;
+
     /*!
      * Adds a FoodGenerator to the list of generators.
      * @param foodGenerator being added to the environment
@@ -85,11 +89,18 @@ public:
      */
     void addWave(Wave* wave);
 
+    /*!
+     * Adds a solide obstacle to the list of obstacles
+     * @param obstacle being added to the environment
+     */
+    void addObstacle(SolideObstacle* obstacle);
+
 private:
     std::list<OrganicEntity*> organicEntities;
     std::list<Vec2d> targets;
     std::list<FoodGenerator*> generators;
     std::list<Wave*> waves;
+    std::list<SolideObstacle*> solidObstacles;
 
     /*!
      * Removes organicEntities from the environment list when they are dead

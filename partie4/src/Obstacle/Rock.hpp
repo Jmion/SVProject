@@ -6,7 +6,20 @@
 #define PARTIE1_ROCK_HPP
 
 
-class Rock {
+#include "SolideObstacle.hpp"
+
+class Rock : public SolideObstacle{
+public:
+
+    explicit Rock(const Vec2d& position);
+
+
+    static double getInitialRadius();
+
+    ~Rock() override;
+
+protected:
+    std::string getTexturePath() const override;
 
 };
 

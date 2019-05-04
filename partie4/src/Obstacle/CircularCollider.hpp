@@ -42,6 +42,8 @@ public:
      */
     CircularCollider(Vec2d position, double radius);
 
+    virtual ~CircularCollider()  = default;
+
     /*!
      * Gets the current position of the collider
      * @return the position of the collider
@@ -117,7 +119,7 @@ public:
 
     /*!
      * Will check whether other is inside this. In case where they are touching at
-     * the edge it is still constidered inidee.
+     * the edge it is still constidered inside.
      * @param other circular collider
      * @return true if other is inside this. Otherwise returns false
      */

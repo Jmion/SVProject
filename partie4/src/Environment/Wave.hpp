@@ -38,7 +38,20 @@ private:
     double speed;
 
 public:
+
+    /*!
+     * Creates a wave
+     * @param position of the source of the wave
+     * @param initialEnergy of the wave
+     * @param radius at time 0. Inital radius
+     * @param mu carateristic contant that effects speed that energy decreases in funtion of distance.
+     * @param speed of propagation
+     */
     Wave(const Vec2d &position, double initialEnergy, double radius, double mu,double speed);
+
+    /*!
+     * Free memory of object
+     */
     ~Wave() = default;
 
 

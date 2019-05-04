@@ -116,7 +116,14 @@ public:
 
 protected:
 
-/*!
+     /*!
+     * Converts from animal coordinates to global coordinates.
+     * @param v in animal coordinates
+     * @return v in the global coordinates
+     */
+    Vec2d convertToGlobalCoord(const Vec2d &v) const;
+
+    /*!
      * Gets number of children that this animal has.
      * Pregnant animals have children. If the animal is a male then
      * this methode will return 0.
@@ -399,13 +406,7 @@ private:
      */
     Vec2d randomWalk();
 
-    //Try to const v and ref it
-    /*!
-     * Converts from animal coordinates to global coordinates.
-     * @param v in animal coordinates
-     * @return v in the global coordinates
-     */
-    Vec2d convertToGlobalCoord(const Vec2d &v) const;
+
 
     /*!
      * Updates the energy level of the animal given that it has lived for a instant dt.
