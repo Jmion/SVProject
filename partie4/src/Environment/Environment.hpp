@@ -14,10 +14,12 @@
 #include <Interface/Drawable.hpp>
 #include <Interface/Updatable.hpp>
 #include <Environment/FoodGenerator.hpp>
+#include <Utility/Vec2d.hpp>
 
 class Animal;
 class Wave;
 class SolideObstacle;
+class NeuronalScorpion;
 
 class Environment : public Drawable, public Updatable
 {
@@ -75,7 +77,19 @@ public:
      */
     std::list<OrganicEntity*> getEntitiesInSightForAnimal(const Animal *animal) const;
 
+    /*!
+     * Allows acces to solideObstacles that are currently colliding with wave
+     * @param wave that is being used to know what it is hitting
+     * @return list of obstacles that the wave is colliding with.
+     */
     std::list<SolideObstacle*> getSolideObstaclesCollidingForWave(const Wave* wave) const;
+
+    /*!
+     * Allows access to Waves that are currently colliding with sensor
+     * @param location of the sensor
+     * @return list of waves that are colliding with the sensor
+     */
+    std::list<Wave *> getWaveCollidingWithSensor(const Vec2d& location ) const;
 
     /*!
      * Adds a FoodGenerator to the list of generators.

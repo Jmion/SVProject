@@ -12,8 +12,17 @@ class Scorpion : public Animal {
 
 public:
 
+    /*!
+     *
+     * @param position initial position of the scorpion
+     * @param energyLevel at spaw of scorpion
+     * @param isFemale represents the sex of the animal. If true animal is female.
+     */
     Scorpion(const Vec2d &position, double energyLevel, bool isFemale);
 
+    /*!
+     * Builds a scorpion by specifying it's position
+     */
     explicit Scorpion(const Vec2d &position);
 
     double getStandardMaxSpeed() const override;

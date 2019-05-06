@@ -10,7 +10,7 @@
 #include <Application.hpp>
 #include <Obstacle/CircularCollider.hpp>
 
-typedef CircularCollider Obstacle;
+typedef SolideObstacle Obstacle;
 
 /*!
  * Test the neuronal scorpion.

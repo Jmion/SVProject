@@ -206,4 +206,18 @@ std::list<SolideObstacle *> Environment::getSolideObstaclesCollidingForWave(cons
 
 }
 
+std::list<Wave *> Environment::getWaveCollidingWithSensor(const Vec2d &v) const {
+    std::list<Wave*> wavesColliding;
+    for (auto &w: waves) {
+        double ditanceFromWaveCenter = (v - w->getPosition()).length();
+        double delta = getAppConfig().wave_on_wave_marging;
+        if (w->getRadius() - delta <= ditanceFromWaveCenter &&
+            w->getRadius() + delta >= ditanceFromWaveCenter) {
+            wavesColliding.push_back(w);
+        }
+    }
+    return wavesColliding;
+}
+
+
 

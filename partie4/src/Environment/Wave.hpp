@@ -10,6 +10,7 @@
 #include <Obstacle/CircularCollider.hpp>
 #include <Utility/Arc.hpp>
 #include <list>
+#include <set>
 
 
 class Wave : public CircularCollider, public Updatable {
@@ -17,7 +18,7 @@ class Wave : public CircularCollider, public Updatable {
 private:
 
     /*!
-     * Arcs than compose the wave
+     * Arcs than compose the wave. Values in radians
      */
     std::list<std::pair<double,double>> arcs;
 
@@ -36,6 +37,11 @@ private:
      * Speed of propagation of the wave
      */
     double speed;
+
+    /*!
+     * Gives memory to wave for obstacles wich it has already collided with
+     */
+    std::set<SolideObstacle*> collidedWith;
 
 public:
 
@@ -81,6 +87,13 @@ public:
      * @return true is wave intensity to weak for simulation
      */
     bool isWaveToBeDeleted();
+
+    /*!
+     * Determins if a vec2d is in a direction where the wave is still active (not broken by a solideObstacle)
+     * @param vec2D position to test.
+     * @return true is it is within the waves active arcs.
+     */
+    bool isPointWithinArcs(const Vec2d &vec2D);
 
     void draw(sf::RenderTarget &target) const override;
 };

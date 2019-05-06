@@ -8,11 +8,13 @@
 #include <Animal/Gerbil.hpp>
 class WaveGerbil : public Gerbil{
 private:
+    /*!
+     * Time since the Gerbil last emited a Wave
+     */
     sf::Time timeSinceLastWave = sf::Time::Zero;
 public:
     void update(sf::Time dt) override;
     using Gerbil::Gerbil;
-
     void draw(sf::RenderTarget &targetWindow) const override;
 };
 
