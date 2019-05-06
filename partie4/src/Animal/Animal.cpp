@@ -59,7 +59,7 @@ void Animal::draw(sf::RenderTarget &targetWindow) const {
         }
 
         //textual details about the animal
-        std::string stateString = ToString(state);
+        std::string stateString = getStateString();
         std::string sexString = isFemale ? "Female" : "Male";
         auto text = buildText("State: " + stateString + " \nenergy level: " +
                               to_nice_string(getEnergyLevel()) + "\nage:" + to_nice_string(getAge().asSeconds()) +
@@ -210,7 +210,7 @@ std::array<OrganicEntity *, 3> Animal::analyseEnvironment() {
 }
 
 Vec2d Animal::attractionForce() const {
-    Vec2d toTarget = targetPosition - getPosition();
+    Vec2d toTarget = getTargetPosition() - getPosition();
     double speed = fmin(toTarget.length() / getDecelerationRate(), getMaxSpeed());
     Vec2d v_target = toTarget / toTarget.length() * speed;
     return v_target - getSpeedVector();
@@ -391,6 +391,19 @@ Vec2d Animal::runningAwayForce() {
     }
 
     return force;
+}
+
+void Animal::updateMovementVariables(const Vec2d &force, const sf::Time &dt, bool hasTarget) {
+    this->hasTarget = hasTarget;
+    updateMovementVariables(force, dt);
+}
+
+const Vec2d &Animal::getTargetPosition() const {
+    return targetPosition;
+}
+
+std::string Animal::getStateString() const{
+    return ToString(state);
 }
 
 

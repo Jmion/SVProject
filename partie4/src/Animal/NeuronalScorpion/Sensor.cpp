@@ -32,10 +32,10 @@ void Sensor::setInhibitor(double inhibitor) {
 
 void Sensor::update(sf::Time dt) {
     if (actif) {
-        score += 2.0 * (1.0 - inhibitor);
         for (auto &s : sensorsToInhibit) {
             s->inhibit(score);
         }
+        score += 2.0 * (1.0 - inhibitor);
     }else if(getIntensity() >= getAppConfig().sensor_intensity_threshold){
         actif = true;
     }
@@ -56,9 +56,10 @@ Vec2d Sensor::getPositionOfSensor() {
     return owner->getPositionOfSensor(this);
 }
 
-void Sensor::resetSensor() {
+void Sensor:: resetSensor() {
     inhibitor = 0;
     score = 0;
+    actif = false;
 }
 
 void Sensor::setInhibitSensor(std::array<Sensor *, 3> sensorsToInhibit) {
@@ -67,6 +68,18 @@ void Sensor::setInhibitSensor(std::array<Sensor *, 3> sensorsToInhibit) {
 
 void Sensor::inhibit(double score) {
     setInhibitor(inhibitor + score * getAppConfig().sensor_inhibition_factor);
+}
+
+bool Sensor::isActif() const {
+    return actif;
+}
+
+double Sensor::getScore() const {
+    return score;
+}
+
+double Sensor::getInhibitor() const {
+    return inhibitor;
 }
 
 

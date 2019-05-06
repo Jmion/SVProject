@@ -16,7 +16,7 @@ private:
     NeuronalScorpion* owner;
 
     /*!
-     * Angle from scorpion
+     * Angle from scorpion in radians
      */
     double angleFromScorpion;
 
@@ -65,6 +65,12 @@ private:
     void inhibit(double score);
 
 public:
+
+    /*!
+     * @return true is sensor is active
+     */
+    bool isActif() const;
+
     Sensor(double angleFromScorpion, NeuronalScorpion* neuronalScorpion);
 
     /*!
@@ -84,6 +90,16 @@ public:
      * @param sensorsToInhibit list of sensors to inhibit.
      */
     void setInhibitSensor(std::array<Sensor *,3> sensorsToInhibit);
+
+    /*!
+     * @return score of the sensor
+     */
+    double getScore() const;
+
+    /*!
+     * @return inhibitor value
+     */
+    double getInhibitor() const;
 
     /*!
      * resets the sensors score and inhibition value to zero

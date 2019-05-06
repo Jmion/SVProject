@@ -79,7 +79,7 @@
                "angle precision":.125663706
             },
 	     "neuronal texture": "scorpion.png",
-            "score for action":50,
+            "score for action":300,
             "reproduction":{
                "gestation time":25,
                "min children":1,
@@ -109,7 +109,7 @@
                "probability":0.05
             },
              "texture":"scorpion.png",
-	     "sensor radius" : 100
+	     "sensor radius" : 50
          }
       },
        "sensor" : {

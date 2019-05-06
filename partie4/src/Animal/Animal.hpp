@@ -67,14 +67,14 @@ public:
      * Calculates the position and speed of the automaton.
      * @param dt time since previous update
      */
-    void update(sf::Time dt) override;
+    virtual void update(sf::Time dt) override;
 
 
     /*!
      * draws the automaton and it's target in the targetWindow
      * @param targetWindow where to draw the automaton
      */
-    void draw(sf::RenderTarget &targetWindow) const override;
+    virtual void draw(sf::RenderTarget &targetWindow) const override;
 
     /*!
      * Creates a new ChasingAutomaton. The deceleration parameter allows for the control of how fast the automaton slows down
@@ -111,16 +111,25 @@ public:
     */
     void setDeleleration(Deceleration decel);
 
+public:
 
-
+    /*!
+     * @return Getter for target position
+     */
+    virtual const Vec2d &getTargetPosition() const;
 
 protected:
 
-     /*!
-     * Converts from animal coordinates to global coordinates.
-     * @param v in animal coordinates
-     * @return v in the global coordinates
+    /*!
+     * @return string representation of the state
      */
+    virtual std::string getStateString() const;
+
+    /*!
+    * Converts from animal coordinates to global coordinates.
+    * @param v in animal coordinates
+    * @return v in the global coordinates
+    */
     Vec2d convertToGlobalCoord(const Vec2d &v) const;
 
     /*!
@@ -304,8 +313,65 @@ protected:
     */
     virtual bool giveBirth();
 
+    /*!
+    * Makes the automaton moved based of of the force that it is experiencing.
+    * @param force that the robot is experiencing
+    * @param dt time that has passed since previous update
+    * @param hasTarget true if animal has a real target. If false virtual target will show on debug
+    */
+    void updateMovementVariables(const Vec2d &force, const sf::Time &dt, bool hasTarget);
+
+    /*!
+     * Calculates the force that will slow and stop the animal
+     * @return the force to stop the animal
+     */
+    Vec2d stoppingAttractionForce();
+
+    /*!
+     * Generates a virtual target for the animal. It will calculate the attraction force between the target and the animal.
+     *
+     * The calculation of the force is done as follows: virtualTargetPosition-position
+     * @return force vector due to the virtual target
+     */
+    Vec2d randomWalk();
+
+    /*!
+     * Array containing other entities that this animal might react with.
+     * For the specifics of what each element of the array is for this animal
+     * please refer to the table bellow.
+     *
+     *
+     * +----------+----------------+
+     *  | location | description    |
+     *  +----------+----------------+
+     *  | 0        |                |
+     *  |          | Food           |
+     *  +----------+----------------+
+     *  | 1        | Potential mate |
+     *  +----------+----------------+
+     *  | 2        | closest Enemy  |
+     *  +----------+----------------+
+     *
+     * Elements of the array will be nullptr if there is no organicEntity that fits the description.
+     * @return first element is the organicEntity that is a source of food, second potential mate, third closest enemy.
+     */
+    std::array<OrganicEntity *, 3> analyseEnvironment();
+
+
+    /*!
+    * Draws the semi circular arc centered on the animal. This is the animals viewing angle
+    * @param target that is used to draw on
+    */
+    void drawVision(sf::RenderTarget &target) const;
+
+
 private:
 
+
+    /*!
+     * Current state that the animal is in.
+     */
+    State state;
 
     /*!
      * speed at which the animal moves
@@ -345,12 +411,6 @@ private:
 
 
     /*!
-     * Current state that the animal is in.
-     */
-    State state;
-
-
-    /*!
     * Used to express the wait that the animal has waited after matting
     */
     sf::Time mattingWaitTime;
@@ -371,7 +431,6 @@ private:
      */
     std::list<Vec2d> predatorPosition;
 
-private:
 
     /*!
      * Updates the state of the animal
@@ -391,20 +450,6 @@ private:
      */
     double getDecelerationRate() const;
 
-
-    /*!
-    * Draws the semi circular arc centered on the animal. This is the animals viewing angle
-    * @param target that is used to draw on
-    */
-    void drawVision(sf::RenderTarget &target) const;
-
-    /*!
-     * Generates a virtual target for the animal. It will calculate the attraction force between the target and the animal.
-     *
-     * The calculation of the force is done as follows: virtualTargetPosition-position
-     * @return force vector due to the virtual target
-     */
-    Vec2d randomWalk();
 
 
 
@@ -428,34 +473,6 @@ private:
      */
     virtual double getStarvingEnergyLevel() const = 0;
 
-
-    /*!
-     * Calculates the force that will slow and stop the animal
-     * @return the force to stop the animal
-     */
-    Vec2d stoppingAttractionForce();
-
-    /*!
-     * Array containing other entities that this animal might react with.
-     * For the specifics of what each element of the array is for this animal
-     * please refer to the table bellow.
-     *
-     *
-     * +----------+----------------+
-     *  | location | description    |
-     *  +----------+----------------+
-     *  | 0        |                |
-     *  |          | Food           |
-     *  +----------+----------------+
-     *  | 1        | Potential mate |
-     *  +----------+----------------+
-     *  | 2        | closest Enemy  |
-     *  +----------+----------------+
-     *
-     * Elements of the array will be nullptr if there is no organicEntity that fits the description.
-     * @return first element is the organicEntity that is a source of food, second potential mate, third closest enemy.
-     */
-    std::array<OrganicEntity *, 3> analyseEnvironment();
 
     /*!
      * Calculates the repulsive force beween the animal and the predators last know location.
