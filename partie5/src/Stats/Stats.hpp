@@ -29,7 +29,7 @@ class Stats {
     /*!
      * Labels for graphs
      */
-    std::unordered_map<int,std::string> labels;
+    std::unordered_map<std::string,int> labels;
 
 public:
     void setActif(int actif);

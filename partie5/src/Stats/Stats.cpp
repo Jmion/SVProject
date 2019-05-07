@@ -35,6 +35,7 @@ void Stats::draw(sf::RenderTarget & target) const {
 
 void Stats::addGraph(int currentGraphId, std::string const &title, std::vector<std::string> const &series, double min,
                      double max, Vec2d statSize) {
+    labels.insert(std::pair<std::string, int>(title, currentGraphId));
     auto it = graphs.find(currentGraphId);
     if (it == graphs.end()) {
         graphs.insert(std::pair<int, std::unique_ptr<Graph>>(currentGraphId,std::unique_ptr<Graph>(new Graph(series,statSize,min,max))));
@@ -45,7 +46,7 @@ void Stats::addGraph(int currentGraphId, std::string const &title, std::vector<s
 }
 
 void Stats::focusOn(std::string title) {
-//TODO
+    actif = labels.at(title);
 }
 
 
