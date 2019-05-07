@@ -24,8 +24,6 @@ NeuronalScorpion::NeuronalScorpion(const Vec2d &position) : Scorpion(position),
     initializeSensors();
 }
 
-
-
 Vec2d NeuronalScorpion::getPositionOfSensor(const Sensor* s) const {
     if(s!= nullptr){
         double distanceSensorFromScorpion = s->radiusFromScorpion();

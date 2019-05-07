@@ -42,6 +42,11 @@ private:
 
     std::array<Sensor*,nbSensor> sensor;
 
+    /*!
+     * To be called during constructor. Will initialize the list of sensors.
+     * This method will take care of giving to each sensor a list of sensors that it
+     * needs to inhibit.
+     */
     void initializeSensors();
 
     /*!
