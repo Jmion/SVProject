@@ -32,10 +32,10 @@ void Sensor::setInhibitor(double inhibitor) {
 
 void Sensor::update(sf::Time dt) {
     if (actif) {
+        score += 2.0 * (1.0 - inhibitor);
         for (auto &s : sensorsToInhibit) {
             s->inhibit(score);
         }
-        score += 2.0 * (1.0 - inhibitor);
     }else if(getIntensity() >= getAppConfig().sensor_intensity_threshold){
         actif = true;
     }

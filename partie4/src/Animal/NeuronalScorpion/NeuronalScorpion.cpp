@@ -46,7 +46,7 @@ void NeuronalScorpion::initializeSensors() {
     for (int j = 0; j < nbSensor; ++j) {
         std::array<Sensor*, 3> inhibitSensors = {nullptr, nullptr, nullptr};
         for (int i = 3; i <= 5; i++) {
-            inhibitSensors.at(i-3) = sensor.at((j+i-3) % nbSensor);
+            inhibitSensors.at(i-3) = sensor.at((j+i) % nbSensor);
         }
         sensor.at(j)->setInhibitSensor(inhibitSensors);
     }
@@ -153,7 +153,6 @@ void NeuronalScorpion::updateState(sf::Time dt, bool sensorActif) {
                 }
                 break;
             case IDLE:
-                std::cerr << scoreEstimation() << std::endl;
                 if (scoreEstimation() >= getAppConfig().scorpion_minimal_score_for_action) {
                     state = MOVING;
                     stateTimer = sf::Time::Zero;
@@ -172,7 +171,6 @@ Vec2d NeuronalScorpion::estimateDirectionCalculation() const {
     double theta = getRotation();
     for (auto &s : sensor) {
         double alpha = s->getAngle();
-        std::cerr << "sensor score" << s->getScore() << std::endl;
         direction += (s->radiusFromScorpion() * Vec2d(cos(alpha + theta), sin(alpha + theta))) * s->getScore();
     }
     return direction;

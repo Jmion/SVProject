@@ -30,7 +30,6 @@ void WaveGerbil::draw(sf::RenderTarget &targetWindow) const {
                               sf::Color::Black, getRotation() / DEG_TO_RAD + 90);
         targetWindow.draw(text);
     }
-
 }
 
 
