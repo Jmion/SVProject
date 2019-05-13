@@ -19,23 +19,49 @@ public:
     static constexpr int MAX_WAIT_IN_IDLE = 5;
     static constexpr int MAX_WAIT_IN_MOVING = 3;
 
+    /*!
+     * Builds a neuronal scorpion
+     * @param position where the scorpion is born
+     * @param energyLevel at time 0
+     * @param isFemale true if it is female
+     */
     NeuronalScorpion(const Vec2d &position, double energyLevel, bool isFemale);
 
-    virtual ~NeuronalScorpion();
+    /*!
+     * Destrucor in charge of freeing up scorpion and sensors
+     */
+    virtual ~NeuronalScorpion() override ;
 
     void draw(sf::RenderTarget &targetWindow) const override;
 
+    /*!
+     * Build a neuronal scorpion specifiying it's position
+     * @param position of the neuronal scorpion
+     */
     explicit NeuronalScorpion(const Vec2d &position);
 
+    /*!
+     * Calculation of the position of the sensors
+     * @param s the sensor that we want to know the position of.
+     * @return position of the sensor
+     */
     Vec2d getPositionOfSensor(const Sensor* s) const;
 
     const Vec2d &getTargetPosition() const override;
+
+    void update(sf::Time dt) override;
+
+    /*!
+     * Resets all the sensors to default config.
+     */
+    void resetSensors() const;
 
 
 protected:
 
     std::string getStateString() const override;
 
+    double getMaxSpeed() const override;
 
 private:
     static constexpr int nbSensor = 8;
@@ -71,8 +97,6 @@ private:
      */
     Vec2d estimateDirection;
 
-private:
-
     /*!
      * Sets current state to state and resets timer
      */
@@ -98,18 +122,6 @@ private:
      */
     double scoreEstimation();
 
-
-
-public:
-    void update(sf::Time dt) override;
-
-    /*!
-     * Resets all the sensors to default config.
-     */
-    void resetSensors() const;
-
-protected:
-    double getMaxSpeed() const override;
 };
 
 

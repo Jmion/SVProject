@@ -191,10 +191,10 @@ bool Gerbil::giveBirth() {
 }
 
 void Gerbil::registerAnimalWithEnvironment() const {
-    getAppEnv().addGerbil();
+    getAppEnv().incrementCounter(s::GERBILS);
 }
 
 void Gerbil::removeAnimalWithEnvironment() const {
-    getAppEnv().removeGerbil();
+    getAppEnv().decrementCounter(s::GERBILS);
 }
 

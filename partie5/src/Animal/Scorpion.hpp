@@ -97,7 +97,6 @@ protected:
 
     double getMinimumMatingAge() const override;
 
-private:
     double getStarvingEnergyLevel() const override;
 
 protected:

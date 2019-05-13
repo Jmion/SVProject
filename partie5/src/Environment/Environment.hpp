@@ -119,29 +119,15 @@ public:
     std::unordered_map<std::string,double> fetchData(const std::string& graphTitle);
 
     /*!
-     * increments scorpion counter of environment
+     * If counter exsits in entityCounter increments the counter. Otherwise does nothing
+     * @param animalType string constant from Utility/Constant.h that are unqiue to the animal
      */
-    void addScorpion();
+    void incrementCounter(const std::string& animalType);
     /*!
-     * decrements scorpion counter of environment
+     * If counter exsits in entityCounter decrements the counter. Otherwise does nothing
+     * @param animalType string constant from Utility/Constant.h that are unqiue to the animal
      */
-    void removeScorpion();
-    /*!
-     * increments gerbil counter of environment
-     */
-    void addGerbil();
-    /*!
-     * decrements gerbil counter of environment
-     */
-    void removeGerbil();
-    /*!
-     * increments food counter of environment
-     */
-    void addFood();
-    /*!
-     * decrements food counter of environment
-     */
-    void removeFood();
+    void decrementCounter(const std::string& animalType);
 
 private:
     std::list<OrganicEntity*> organicEntities;
@@ -164,6 +150,9 @@ private:
      */
     void cleanUpWave();
 
+    /*!
+     * resets all the
+     */
     void clearCounter();
 };
 

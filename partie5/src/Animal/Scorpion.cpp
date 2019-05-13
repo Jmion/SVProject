@@ -188,10 +188,10 @@ bool Scorpion::giveBirth() {
 }
 
 void Scorpion::registerAnimalWithEnvironment() const {
-    getAppEnv().addScorpion();
+    getAppEnv().incrementCounter(s::SCORPIONS);
 }
 
 void Scorpion::removeAnimalWithEnvironment() const {
-    getAppEnv().removeScorpion();
+    getAppEnv().decrementCounter(s::SCORPIONS);
 }
 

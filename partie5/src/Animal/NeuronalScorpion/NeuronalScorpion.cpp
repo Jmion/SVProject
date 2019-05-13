@@ -235,7 +235,14 @@ std::string NeuronalScorpion::getStateString() const {
 }
 
 double NeuronalScorpion::getMaxSpeed() const {
-    Animal::getMaxSpeed();
+    if (getEnergyLevel() < getStarvingEnergyLevel())
+        return getStandardMaxSpeed() * getAppConfig().animal_starving_speed_factor;
+    switch (state) {
+        case TARGET_IN_SIGHT:
+            return getStandardMaxSpeed() * 3;
+        default:
+            return getStandardMaxSpeed();
+    }
 }
 
 
