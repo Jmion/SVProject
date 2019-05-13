@@ -7,6 +7,7 @@
 
 
 #include "Animal.hpp"
+#include <SFML/Audio.hpp>
 
 class Dragon : public Animal{
 
@@ -113,7 +114,7 @@ private:
     /*!
      * Time since start of fireball
      */
-    sf::Time spitFireTimer = sf::Time::Zero;
+    sf::Time spriteFireTimer = sf::seconds(2);
 
     void registerAnimalWithEnvironment() const override;
 
@@ -122,6 +123,8 @@ private:
     double getEnergyLossFactor() const override;
 
     void spitFire() const;
+
+
 };
 
 

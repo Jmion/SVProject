@@ -41,9 +41,9 @@ void NeuronalScorpion::initializeSensors() {
     for (int i = 0; i < nbSensor; ++i) {
         sensor[i] = new Sensor(sensorAngles[i]*DEG_TO_RAD,this);
     }
-    for (int j = 0; j < nbSensor; ++j) {
+    for (unsigned long j = 0; j < nbSensor; ++j) {
         std::array<Sensor*, 3> inhibitSensors = {nullptr, nullptr, nullptr};
-        for (int i = 3; i <= 5; i++) {
+        for (unsigned long i = 3; i <= 5; i++) {
             inhibitSensors.at(i-3) = sensor.at((j+i) % nbSensor);
         }
         sensor.at(j)->setInhibitSensor(inhibitSensors);
@@ -111,7 +111,7 @@ void NeuronalScorpion::update(sf::Time dt) {
             break;
     }
 
-    updateState(dt,sensorActive);
+    updateState(sensorActive);
 
     updateMovementVariables(attraction_force, dt, hasTarget);
     OrganicEntity::update(dt);
@@ -124,7 +124,7 @@ void NeuronalScorpion::resetSensors() const {
     }
 }
 
-void NeuronalScorpion::updateState(sf::Time dt, bool sensorActif) {
+void NeuronalScorpion::updateState(bool sensorActif) {
     std::array<OrganicEntity *, 3> closestEnities = analyseEnvironment();
 
     if(closestEnities.at(0) != nullptr){
@@ -188,7 +188,7 @@ void NeuronalScorpion::draw(sf::RenderTarget &targetWindow) const {
     Animal::draw(targetWindow);
     if (isDebugOn()) {
         for (auto &s: sensor) {
-            sf::Color c = sf::Color::Black;
+            sf::Color c;
             if (s->isActif()) {
                 if (s->getInhibitor() > 0.2) {
                     c = sf::Color::Magenta;

@@ -115,7 +115,7 @@
           "mass":3,
           "size":150,
           "longevity":70000,
-          "min age mating" : 5,
+          "min age mating" : 360,
           "max speed":150,
           "reproduction":{
             "gestation time":15,
@@ -146,8 +146,15 @@
             "d3":"dragon3.png",
             "d4":"dragon4.png"
           },"burn":{
-            "distance": 300,
-            "range": 0.5
+            "distance": 160,
+            "range": 0.5,
+            "command": "./res/GoTSoundExtract.wav",
+            "fire": {
+              "img1":"fire1.png",
+              "img2":"fire2.png",
+              "img3":"fire3.png",
+              "img4":"fire4.png"
+            }
           }
         }
       },

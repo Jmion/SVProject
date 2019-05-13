@@ -98,16 +98,11 @@ private:
     Vec2d estimateDirection;
 
     /*!
-     * Sets current state to state and resets timer
-     */
-    void setState(State state1);
-
-    /*!
      * Updates the state of the animal
      * @param dt time since last update
      * @param sensorActif true is a sensor is actif
      */
-    void updateState(sf::Time dt, bool sensorActif);
+    void updateState(bool sensorActif);
 
     /*!
      * Estimate direction of target using sensor information.

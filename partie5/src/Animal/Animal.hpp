@@ -67,14 +67,14 @@ public:
      * Calculates the position and speed of the automaton.
      * @param dt time since previous update
      */
-    virtual void update(sf::Time dt) override;
+    void update(sf::Time dt) override;
 
 
     /*!
      * draws the automaton and it's target in the targetWindow
      * @param targetWindow where to draw the automaton
      */
-    virtual void draw(sf::RenderTarget &targetWindow) const override;
+    void draw(sf::RenderTarget &targetWindow) const override;
 
     /*!
      * Creates a new ChasingAutomaton. The deceleration parameter allows for the control of how fast the automaton slows down

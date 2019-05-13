@@ -6,6 +6,7 @@
 #include "Dragon.hpp"
 #include <Random/Uniform.hpp>
 #include <Utility/Vec2d.hpp>
+#include <SFML/Audio.hpp>
 
 double Dragon::getStandardMaxSpeed() const {
     return getAppConfig().dragon_max_speed;
@@ -180,15 +181,17 @@ bool Dragon::meetManagement(Dragon *mate) {
 
 void Dragon::update(sf::Time dt) {
     Animal::update(dt);
-    spitFireTimer += dt;
+    spriteFireTimer += dt;
+
     if (animationTimer.asMilliseconds() > 1000) {
         animationTimer = sf::Time::Zero;
     }
     if(getState() != GIVING_BIRTH && getState() != MATING)
         animationTimer += dt;
     if(getAppEnv().isDragonFireTrigger()) {
+        spriteFireTimer = sf::Time::Zero;
+    }if(spriteFireTimer.asMilliseconds()>1100){
         spitFire();
-        spitFireTimer = sf::Time::Zero;
     }
 }
 
@@ -205,9 +208,21 @@ bool Dragon::giveBirth() {
 void Dragon::draw(sf::RenderTarget &targetWindow) const {
     Animal::draw(targetWindow);
 
-    if(spitFireTimer.asMilliseconds() < 750) {
-        sf::CircleShape circle = buildCircle(convertToGlobalCoord(Vec2d(100,0)), 30, sf::Color::Red);
-        targetWindow.draw(circle);
+
+    if(spriteFireTimer.asMilliseconds() > 1100 && spriteFireTimer.asMilliseconds() < 1800) {
+        sf::Texture &texture = getAppTexture(getAppConfig().dragon_fire_d1);
+        int nbMillisecond = spriteFireTimer.asMilliseconds();
+        if(nbMillisecond < 1100 )
+            texture = getAppTexture(getAppConfig().dragon_fire_d1);
+        else if(nbMillisecond < 1400)
+            texture = getAppTexture(getAppConfig().dragon_fire_d2);
+        else if(nbMillisecond < 1600)
+            texture = getAppTexture(getAppConfig().dragon_fire_d3);
+        else
+            texture = getAppTexture(getAppConfig().dragon_fire_d4);
+
+        auto image_to_draw(buildSprite(convertToGlobalCoord(Vec2d(100,0)), 80, texture, getRotation() / DEG_TO_RAD));
+        targetWindow.draw(image_to_draw);
     }
 }
 

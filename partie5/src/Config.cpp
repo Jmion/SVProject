@@ -117,8 +117,14 @@ Config::Config(std::string path) : mConfig(j::readFromFile(path))
         , dragon_size(mConfig["simulation"]["animal"]["dragon"]["size"].toDouble())
         , dragon_min_age_mating(mConfig["simulation"]["animal"]["dragon"]["min age mating"].toDouble())
         , dragon_energy_starving(mConfig["simulation"]["animal"]["dragon"]["energy"]["starving"].toDouble())
-        , dragon_burn_distance(mConfig["simulation"]["animal"]["dragon"]["burn"]["distance"].toDouble())
         , dragon_burn_range(mConfig["simulation"]["animal"]["dragon"]["burn"]["range"].toDouble())
+        , dragon_burn_distance(mConfig["simulation"]["animal"]["dragon"]["burn"]["distance"].toDouble())
+        , dragon_burn_command_sound(mConfig["simulation"]["animal"]["dragon"]["burn"]["command"].toString())
+        , dragon_fire_d1(mConfig["simulation"]["animal"]["dragon"]["burn"]["fire"]["img1"].toString())
+        , dragon_fire_d2(mConfig["simulation"]["animal"]["dragon"]["burn"]["fire"]["img2"].toString())
+        , dragon_fire_d3(mConfig["simulation"]["animal"]["dragon"]["burn"]["fire"]["img3"].toString())
+        , dragon_fire_d4(mConfig["simulation"]["animal"]["dragon"]["burn"]["fire"]["img4"].toString())
+
 
 // sensor
     ,sensor_intensity_threshold(mConfig["simulation"]["sensor"]["intensity threshold"].toDouble())

@@ -14,6 +14,7 @@
 
 Animal::Animal(const Vec2d &_position, double size, double energyLevel, bool isFemale, Deceleration _deceleration) :
         OrganicEntity(_position, size, energyLevel),
+        state(WANDERING),
         speed(0),
         hasTarget(false),
         direction(Vec2d(1, 0)),
@@ -23,7 +24,6 @@ Animal::Animal(const Vec2d &_position, double size, double energyLevel, bool isF
         isPregnant(false),
         numberOfChildren(0),
         deceleration(_deceleration),
-        state(WANDERING),
         mattingWaitTime(sf::Time::Zero),
         gestationTime(sf::Time::Zero),
         givingBirthTime(sf::Time::Zero),

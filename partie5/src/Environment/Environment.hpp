@@ -16,6 +16,7 @@
 #include <Environment/FoodGenerator.hpp>
 #include <Utility/Vec2d.hpp>
 #include <unordered_map>
+#include <SFML/Audio.hpp>
 
 
 class Animal;
@@ -176,6 +177,16 @@ private:
      * Used as triger to tell all dragons to spit fire.
      */
     bool dragonFireTrigger;
+
+    /*!
+     * Sound to play when dragons are instructed to fire.
+     */
+    sf::Sound dragonCommand;
+    /*!
+     * Sound buffer to play when dragons are instructed to fire.
+     */
+    sf::SoundBuffer dragonCommandBuffer;
+
 };
 
 

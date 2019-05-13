@@ -182,6 +182,11 @@ public:
     const double dragon_energy_starving;
     const double dragon_burn_range;
     const double dragon_burn_distance;
+    const std::string dragon_burn_command_sound;
+    const std::string dragon_fire_d1;
+    const std::string dragon_fire_d2;
+    const std::string dragon_fire_d3;
+    const std::string dragon_fire_d4;
 
     // sensor
     const double sensor_intensity_threshold;

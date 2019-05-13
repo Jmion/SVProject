@@ -34,7 +34,7 @@ if int(debug):
 else:
     env.Append(CCFLAGS = '-std=c++11 -Wall -Wextra ' + includeFlags)
 
-env.Append(LIBS = ['sfml-system', 'sfml-window', 'sfml-graphics'])
+env.Append(LIBS = ['sfml-system', 'sfml-window', 'sfml-graphics','sfml-audio'])
 
 if int(debug):
    #env.Append(LINKFLAGS = '-L/usr/local/softs/SFML/lib -fsanitize=address -fno-omit-frame-pointer ')

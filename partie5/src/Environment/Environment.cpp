@@ -174,6 +174,7 @@ Environment::~Environment()
     waves.clear();
     solidObstacles.clear();
     generators.clear();
+    dragonCommand.stop();
 }
 
 std::list<OrganicEntity*> Environment::getEntitiesInSightForAnimal(const Animal * animal) const
@@ -243,6 +244,9 @@ std::unordered_map<std::string, double> Environment::fetchData(const std::string
 }
 
 Environment::Environment()  {
+    sf::SoundBuffer buffer;
+    dragonCommandBuffer.loadFromFile(getAppConfig().dragon_burn_command_sound);
+    dragonCommand.setBuffer(dragonCommandBuffer);
     clearCounter();
 }
 
@@ -275,6 +279,11 @@ bool Environment::isDragonFireTrigger() const {
 
 void Environment::setDragonFireTrigger(bool dragonFireTrigger) {
     Environment::dragonFireTrigger = dragonFireTrigger;
+    if(dragonFireTrigger) {
+        if(entityCounter[s::DRAGON] > 0) {
+            dragonCommand.play();
+        }
+    }
 }
 
 
