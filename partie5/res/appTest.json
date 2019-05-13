@@ -148,7 +148,7 @@
           },"burn":{
             "distance": 160,
             "range": 0.5,
-            "command": "./res/GoTSoundExtract.wav",
+            "command": "./res/DracarysAndFire.wav",
             "fire": {
               "img1":"fire1.png",
               "img2":"fire2.png",

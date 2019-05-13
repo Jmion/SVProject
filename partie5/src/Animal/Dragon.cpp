@@ -209,19 +209,19 @@ void Dragon::draw(sf::RenderTarget &targetWindow) const {
     Animal::draw(targetWindow);
 
 
-    if(spriteFireTimer.asMilliseconds() > 1100 && spriteFireTimer.asMilliseconds() < 1800) {
+    if(spriteFireTimer.asMilliseconds() > 1100 && spriteFireTimer.asMilliseconds() < 2600) {
         sf::Texture &texture = getAppTexture(getAppConfig().dragon_fire_d1);
         int nbMillisecond = spriteFireTimer.asMilliseconds();
-        if(nbMillisecond < 1100 )
+        if(nbMillisecond < 1475 )
             texture = getAppTexture(getAppConfig().dragon_fire_d1);
-        else if(nbMillisecond < 1400)
+        else if(nbMillisecond < 1950)
             texture = getAppTexture(getAppConfig().dragon_fire_d2);
-        else if(nbMillisecond < 1600)
+        else if(nbMillisecond < 2370)
             texture = getAppTexture(getAppConfig().dragon_fire_d3);
         else
             texture = getAppTexture(getAppConfig().dragon_fire_d4);
 
-        auto image_to_draw(buildSprite(convertToGlobalCoord(Vec2d(100,0)), 80, texture, getRotation() / DEG_TO_RAD));
+        auto image_to_draw(buildSprite(convertToGlobalCoord(Vec2d(100,0)), 100, texture, getRotation() / DEG_TO_RAD));
         targetWindow.draw(image_to_draw);
     }
 }
