@@ -20,7 +20,452 @@
 * End of 3.3 and preparation for hand-in of files
 
 ### week 7
-All of the parts completed are working.
+* Start of 3.4
+
+
+### week 8
+* More work on part 3.4
+
+
+### week 9
+* enf of part 3
+
+### week 10
+* start of part 4
+
+
+### week 11
+* end of part 4
+* start of part 5
+
+
+### week 12
+
+
 
 Please find bellow the details of the work done (output from a git log):
 
+commit 65c245e09a1b7d8350f8fe6c2a235fbedfd9e959
+Author: Jeremy Mion <jeremy@mion.pro>
+Date:   Tue May 7 23:41:44 2019 +0200
+
+    test 28 reached but not working
+
+commit 60e60394c62b9cf7c949ddc21a4f3e12e880daf3
+Author: Jeremy Mion <jeremy@mion.pro>
+Date:   Tue May 7 23:35:18 2019 +0200
+
+    test 28 reached but not working
+
+commit fbb343fe71c6611848bc900674c94c3a8aea4e84
+Author: Jeremy Mion <jeremy@mion.pro>
+Date:   Tue May 7 21:26:44 2019 +0200
+
+    remove git log from journal
+
+commit e3845d7e75ffc1d21d121561ad161bbfdc0caa20
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Tue May 7 21:23:48 2019 +0200
+
+    Initialize part 5
+
+commit 87f2cab23d363c0ad26cebd89d601cf037bf2c21
+Author: Unknown <jeremy.mion@yahoo.ca>
+Date:   Tue May 7 11:35:22 2019 +0200
+
+    REPONSE file completed for part 4
+
+commit 94001ccbaf9df23faecadf4351bacd71cf43ecef
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Tue May 7 10:44:33 2019 +0200
+
+    end of 4.2
+
+commit 3791e90ce7780e51991d097c12f59e1c3ac5cefc
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Mon May 6 23:54:50 2019 +0200
+
+    fix state issue
+
+commit 1927f1c88631da759aa897c9cf692a2d54ce392d
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Mon May 6 12:27:59 2019 +0200
+
+    Neuronal Scorpion start
+
+commit 4ead99995c03150dc13db00366bc597a71261d35
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Sat May 4 18:15:17 2019 +0200
+
+    end of part 4.1
+
+commit f60e1607e37e4f3995366be740cbfd9fb9adbd7d
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Thu May 2 19:18:03 2019 +0200
+
+    Added obstacle texture rock to json
+
+commit 3827772b132fd56be11289c1db7163e23e4ec557
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Thu May 2 18:08:58 2019 +0200
+
+    waves work. passes test 22
+
+commit ad0a46860f75bd1f182cfe3e0e3eb7a14192b4bd
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Tue Apr 30 06:30:20 2019 +0200
+
+    start of part 4
+
+commit 0040bdcd8f82249c6600daa99060d5ddf530dc8e
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Tue Apr 30 06:22:30 2019 +0200
+
+    end of part 3
+
+commit e5ee0fb48ae584836898f12fc3b24c06bb58e68a
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Tue Apr 30 06:21:52 2019 +0200
+
+    update gitignore to not trask .o
+
+commit 34fad513da40cc9552c1d7600877d04b932d354c
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Mon Apr 29 23:22:35 2019 +0200
+
+    fix, missing virtual destructor
+
+commit c4fe2e9e431f072e046b45e7eb0a9b9769098258
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Mon Apr 29 18:39:20 2019 +0200
+
+    3.5 working
+
+commit e01a84b86506b74c79d27e67a6c6f75206e540c0
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Mon Apr 29 17:45:54 2019 +0200
+
+    fix orgy probleme
+
+commit 43275d670ca22a6e65493f5acfc0c5048a1012c5
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Mon Apr 29 16:18:17 2019 +0200
+
+    working part 3.3
+
+commit e4ae18d8db13d5ebe82e3f6330c9587ce2053ae7
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Fri Apr 26 19:12:56 2019 +0200
+
+    matting with no debug
+
+commit 988f1f75f2dc582e640075978af8c7b82af9b4f6
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Tue Apr 23 12:04:29 2019 +0200
+
+    Fix unsued warnings and addapted update state
+
+commit cb43d36b827ccc25b76033d79a387d2f6306189e
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Tue Apr 23 11:49:19 2019 +0200
+
+    done upto q3.11
+
+commit b53f46b8c26a127818a2e3376d041963692ba33c
+Merge: a943f09 6cf9d74
+Author: Unknown <jeremy.mion@yahoo.ca>
+Date:   Mon Apr 22 22:27:41 2019 +0200
+
+    Merge remote-tracking branch 'origin/master'
+
+commit a943f097737723adb15e1a7c2de296748cce8ce0
+Author: Unknown <jeremy.mion@yahoo.ca>
+Date:   Mon Apr 22 11:31:05 2019 +0200
+
+    Fix issue with tests
+
+commit 6cf9d7466967edc4a49b1b8e392f11207858104a
+Author: Unknown <jeremy.mion@yahoo.ca>
+Date:   Sun Apr 21 00:32:58 2019 +0200
+
+    Extracted analyseEnvironment
+    
+    Extracted analyse envirnment
+
+commit 62ef431acc47df5d5b857e026f2d117c0207b2c6
+Author: Unknown <jeremy.mion@yahoo.ca>
+Date:   Sat Apr 20 20:36:52 2019 +0200
+
+    Auto stash before rebase of "origin/master"
+
+commit 7551d0f7ea234a8951f35e9d94324905654db9df
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Sat Apr 20 18:21:58 2019 +0200
+
+    test 19 not working
+
+commit 296c283aaf0842d04586e67be0c2ded61f06da4a
+Author: Unknown <jeremy.mion@yahoo.ca>
+Date:   Tue Apr 16 12:12:01 2019 +0200
+
+    Astyle format for hand in
+
+commit 92edd1fee0aa80ca0847e48fbd6f7044b13fab93
+Author: Unknown <jeremy.mion@yahoo.ca>
+Date:   Tue Apr 16 12:03:58 2019 +0200
+
+    Added journal and drawing to cirlcular collider of food
+
+commit 0ce5b4af695b2073d90d429425329c4be94b1d8e
+Author: Unknown <jeremy.mion@yahoo.ca>
+Date:   Tue Apr 16 11:36:18 2019 +0200
+
+    Part 3.3 working
+
+commit 8c1ccb5fe25bfab01faf60419671f3f77df4c8e9
+Author: Unknown <jeremy.mion@yahoo.ca>
+Date:   Tue Apr 16 10:33:38 2019 +0200
+
+    Fix of segfault
+
+commit e528b4079d74c221ee8254b4ae9f5cc0326ed0b5
+Author: Unknown <jeremy.mion@yahoo.ca>
+Date:   Tue Apr 9 11:48:02 2019 +0200
+
+    NOT WORKING
+
+commit 025f02a9b1c4057877da375714b0fb96803cc34f
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Tue Apr 9 09:30:37 2019 +0200
+
+    Added starving and parameters to config class
+
+commit e80a5bdfed44977b6d7f8a7e1407ec78e5b8bf7e
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Tue Apr 9 00:20:06 2019 +0200
+
+    Animals use energy when aging and moving
+
+commit 958f58991aeccf8058c57c7ac4d7c04ee4d978a9
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Mon Apr 8 22:59:44 2019 +0200
+
+    Animals die of old age
+
+commit ac4d72d58756867ad95adb75c5c9f5fe00915321
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Mon Apr 8 20:51:20 2019 +0200
+
+    Added macro for enum and fixed enivironment for support of foodGenerator pointer + destruction of pointer
+
+commit e420683d261f615a941ddcacf788e8ada3bd30b0
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Mon Apr 8 20:21:37 2019 +0200
+
+    Added age parameter
+
+commit bcec6a8748b13190ed0ab21f404f98b290a89d92
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Mon Apr 8 19:11:57 2019 +0200
+
+    Added visualisation of circularCollider
+    
+    Signed-off-by: Jeremy Mion <jeremy.mion@yahoo.ca>
+
+commit 51dcb0e06a82e7fbdd1c1293cf40593787ce624a
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Mon Apr 8 11:57:45 2019 +0200
+
+    part 3.2 working
+
+commit fd62a00b4f27e9b8547b871347791b3cdfd59688
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Mon Apr 8 10:52:30 2019 +0200
+
+    part 3.2
+
+commit 8016adaa14c0804a6ce6b0c099117d50755d9425
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Wed Apr 3 22:53:27 2019 +0200
+
+    part 3.2 food dispatcher working
+
+commit 11304ef9ba38026e6226ec5e57232b49d2fb8f41
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Wed Apr 3 21:25:38 2019 +0200
+
+    part 3.2 start
+
+commit 37dfe5981d4c99532b5cfd47228c5802f93be58e
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Wed Apr 3 20:27:22 2019 +0200
+
+    part 3.1 working
+
+commit 11441612781d2bb367b03bd99521cdde08c2f74e
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Tue Apr 2 11:25:24 2019 +0200
+
+    part 3.1 done and working
+
+commit ceb4dc8353f12a517018a8ecb0110189cc0870ba
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Tue Apr 2 10:23:39 2019 +0200
+
+    Almot done part 3.1
+
+commit eea3544e61f7ba8955e40500bed57c717ff7e453
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Tue Mar 26 09:20:19 2019 +0100
+
+    Added some doc and changed ghost to scorpion
+
+commit 7495c52a5f8ed09a6ebeacdaa244f2ba4ace20b4
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Mon Mar 25 23:11:12 2019 +0100
+
+    Added some checks when manipulating animal pointers
+
+commit c8acd1f82ee37bb77ca4ec4f48fb4487a56b1b1c
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Tue Mar 19 23:59:34 2019 +0100
+
+    part 2.3 done. Need to awnser Q. Debug circle does not vanish
+
+commit 4ed888075ec85139bb9e5e6eb255bf7e7b810380
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Tue Mar 19 22:59:37 2019 +0100
+
+    part 2.3 test 7 working, added const to some methodes
+
+commit 0ab1e62b48f308b8119a3512129ef93022392d11
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Tue Mar 19 22:51:28 2019 +0100
+
+    part 2.3 test 7 working
+
+commit 4447f16f130a2477fecf0db621aa3b8127ff5603
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Tue Mar 19 11:49:08 2019 +0100
+
+    to complete perception in sight
+
+commit a45e4998ab2722306274340db8d8eb017d58f4c3
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Tue Mar 19 11:25:36 2019 +0100
+
+    part 2.2 is working
+
+commit 83c82974b0334c8e2c18fc2fd1577cb88b81cd35
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Tue Mar 19 11:22:26 2019 +0100
+
+    part 2.2 is working
+
+commit e861c58ff3eb9bf8c6c238c9e2e21a627172e523
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Tue Mar 19 09:34:33 2019 +0100
+
+    added getRotation and setRotation to part 2.2
+
+commit 2ffa7c54280c441154c38a9c8892d3142eb6842c
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Mon Mar 18 17:55:40 2019 +0100
+
+    part 2.2. Kind of works robot's dont stop on target
+
+commit 75afcf195aa2dfc16211149f048e90cb07c33c25
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Mon Mar 18 16:18:45 2019 +0100
+
+    Part 2.2 compilling and some error fixed. Autom not moving
+
+commit f27bfa36f079767865ba7b4dd15573a273acac3a
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Sun Mar 17 21:47:23 2019 +0100
+
+    Added doc to constructor of ChasingAutomaton
+
+commit e648e4b5de166e60dba07f3cd152b6d380c80a10
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Sun Mar 17 21:40:26 2019 +0100
+
+    Part 2.2 firt draft with bugs
+
+commit 97701c263afee553e6baf999ac43ba5a89935f2d
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Sun Mar 17 17:56:01 2019 +0100
+
+    need to define update of part 2.2
+
+commit a32b3dbacb5be65292e0facfb3009f255f08f652
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Sun Mar 17 17:16:16 2019 +0100
+
+    part 2.1 done and working
+
+commit a516918335a15e7c467d3a826674f37cf9d4d7ea
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Sun Mar 17 15:54:20 2019 +0100
+
+    REPONSE to markdow format
+
+commit f9e843ac6454ab3f6239a3758703e3b2f3c09f06
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Sun Mar 17 15:19:25 2019 +0100
+
+    part2 init commit
+
+commit 03cd0b9e75b6ee952b1554257fa62ed8dc048764
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Thu Mar 14 20:56:25 2019 +0100
+
+    finished part 1
+
+commit e6b399bbd48bc75c69680e5776979704107688d1
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Tue Mar 12 23:44:24 2019 +0100
+
+    change return of move to match +=, and finish doc
+
+commit de6bd8b46a2e7022dd9c2accb03a9415c7848f13
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Tue Mar 12 23:32:45 2019 +0100
+
+    Added the REPONSE file
+
+commit 1f54cfccf7e585f321432652f31063c1e501af3e
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Tue Mar 12 23:30:39 2019 +0100
+
+    first version done, some bugs are present
+
+commit 3041e299a6eb4323c8d8f374da0216ba76a70a1c
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Tue Mar 12 09:23:34 2019 +0100
+
+    headers for part 1
+
+commit 4454cc9500ce1e7e0f8272dada617f039e9287e8
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Mon Mar 11 21:27:00 2019 +0100
+
+    update gitignore
+
+commit 9746dade476404a2f39842eeb783fe53e27dd632
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Mon Mar 11 21:26:24 2019 +0100
+
+    update gitignore
+
+commit c22d31747034b232fb507bd4fda069a3c6832a54
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Mon Mar 11 21:25:20 2019 +0100
+
+    Adding gitignore
+
+commit 2bb512a588d6494f61c90a6b2a7fa8c8c869257a
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Mon Mar 11 21:19:39 2019 +0100
+
+    part 1 inital commit

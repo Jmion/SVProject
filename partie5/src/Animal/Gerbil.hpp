@@ -74,10 +74,10 @@ protected:
 
     double getEnergyLossMaleMatting() const override;
 
+    void registerAnimalWithEnvironment() const override;
 
+    void removeAnimalWithEnvironment() const override;
 
-
-protected:
     double getRandomWalkRadius() const override;
 
     double getRandomWalkDistance() const override;

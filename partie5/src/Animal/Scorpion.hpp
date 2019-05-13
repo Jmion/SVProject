@@ -102,6 +102,11 @@ private:
 
 protected:
     bool giveBirth() override;
+
+private:
+    void registerAnimalWithEnvironment() const override;
+
+    void removeAnimalWithEnvironment() const override;
 };
 
 

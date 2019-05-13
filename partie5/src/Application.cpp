@@ -174,10 +174,13 @@ Application::Application(int argc, char const** argv)
 Application::~Application()
 {
     // Destroy lab and stats, in reverse order
+    if(getSimulationMode()== SimulationMode::PPS){
+        delete mEnvNeuronal;
+        mEnvNeuronal = nullptr;
+    }
     delete mEnvPPS;
     mEnvPPS = nullptr;
-	delete mEnvNeuronal;
-    mEnvNeuronal = nullptr;
+
     delete mStats;	
 	delete mConfig;
 	
@@ -466,6 +469,7 @@ void Application::handleEvent(sf::Event event, sf::RenderWindow& window)
 
         // Reset the simulation
         case sf::Keyboard::R:
+            std::cerr << "RRRRRRRRRRRRRR"<< std::endl;
 			getEnv().clean();
 			getStats().reset();
             break;

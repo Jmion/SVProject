@@ -18,6 +18,8 @@ public:
      */
     explicit Food(const Vec2d &position);
 
+    ~Food();
+
     void draw(sf::RenderTarget &target) const override;
 
     void update(sf::Time dt) override;

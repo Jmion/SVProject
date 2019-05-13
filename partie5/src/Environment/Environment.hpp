@@ -15,6 +15,8 @@
 #include <Interface/Updatable.hpp>
 #include <Environment/FoodGenerator.hpp>
 #include <Utility/Vec2d.hpp>
+#include <unordered_map>
+
 
 class Animal;
 class Wave;
@@ -57,7 +59,7 @@ public:
     /*!
      * Default constructor
      */
-    Environment() = default;
+    Environment();
 
     /*!
      * Disabeling copy constructor since this is a large object that should not be copied.
@@ -109,12 +111,48 @@ public:
      */
     void addObstacle(SolideObstacle* obstacle);
 
+    /*!
+     * Calculates the number of each time of animal that the environment has
+     * @param graphTitle
+     * @return a map containing the name of the animal, and how many instances of it are in the environment
+     */
+    std::unordered_map<std::string,double> fetchData(const std::string& graphTitle);
+
+    /*!
+     * increments scorpion counter of environment
+     */
+    void addScorpion();
+    /*!
+     * decrements scorpion counter of environment
+     */
+    void removeScorpion();
+    /*!
+     * increments gerbil counter of environment
+     */
+    void addGerbil();
+    /*!
+     * decrements gerbil counter of environment
+     */
+    void removeGerbil();
+    /*!
+     * increments food counter of environment
+     */
+    void addFood();
+    /*!
+     * decrements food counter of environment
+     */
+    void removeFood();
+
 private:
     std::list<OrganicEntity*> organicEntities;
     std::list<Vec2d> targets;
     std::list<FoodGenerator*> generators;
     std::list<Wave*> waves;
     std::list<SolideObstacle*> solidObstacles;
+    /*!
+     * Counts the number of entities that are registered in the environment
+     */
+    std::unordered_map<std::string,double> entityCounter;
 
     /*!
      * Removes organicEntities from the environment list when they are dead
@@ -125,6 +163,8 @@ private:
      * Remvoes waves from the environment when there intensity is to low
      */
     void cleanUpWave();
+
+    void clearCounter();
 };
 
 

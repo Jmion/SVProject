@@ -9,6 +9,7 @@
 #include <algorithm>
 #include <Environment/Wave.hpp>
 #include <Application.hpp>
+#include <Utility/Constants.hpp>
 
 
 
@@ -128,12 +129,14 @@ void Environment::draw(sf::RenderTarget& targetWindow) const
  */
 void Environment::clean()
 {
+    std::cerr<< "Clearing env" << std::endl;
     for(OrganicEntity* o: organicEntities) {
         delete (o);
         o = nullptr;
     }
     organicEntities.clear();
     targets.clear();
+    clearCounter();
 }
 /*!
  * Will free all the animals attached to it.
@@ -217,6 +220,73 @@ std::list<Wave *> Environment::getWaveCollidingWithSensor(const Vec2d &v) const 
         }
     }
     return wavesColliding;
+}
+
+
+
+void Environment::addScorpion() {
+    std::cerr << "addEnity1" << std::endl;
+
+    if(entityCounter.find(s::SCORPIONS) != entityCounter.end())
+        entityCounter[s::SCORPIONS] += 1;
+    else
+        entityCounter.insert(std::pair<std::string, int>(s::SCORPIONS, 1));
+}
+
+void Environment::removeScorpion() {
+    std::cerr << "addEnity2" << std::endl;
+    if(entityCounter.find(s::SCORPIONS) != entityCounter.end())
+        entityCounter[s::SCORPIONS] -= 1;
+}
+
+void Environment::addGerbil() {
+    std::cerr << "addEnity3" << std::endl;
+    if(entityCounter.find(s::GERBILS) != entityCounter.end())
+        entityCounter[s::GERBILS] += 1;
+    else
+        entityCounter.insert(std::pair<std::string, int>(s::GERBILS, 1));
+}
+
+void Environment::removeGerbil() {
+    std::cerr << "addEnity4" << std::endl;
+    if(entityCounter.find(s::GERBILS) != entityCounter.end())
+        entityCounter[s::GERBILS] -= 1;
+}
+
+void Environment::addFood() {
+    std::cerr << "addEnity5" << std::endl;
+    if(entityCounter.find(s::FOOD) != entityCounter.end())
+        entityCounter[s::FOOD] += 1;
+    else
+        entityCounter.insert(std::pair<std::string,int>(s::FOOD, 1));
+}
+
+void Environment::removeFood() {
+    std::cerr << "addEnity6" << std::endl;
+    if(entityCounter.find(s::FOOD) != entityCounter.end()) {
+        std::cerr << "addEnity6" << std::endl;
+        entityCounter[s::FOOD] -= 1;
+    }
+}
+
+std::unordered_map<std::string, double> Environment::fetchData(const std::string& graphTitle) {
+    if(graphTitle == s::GENERAL){
+        entityCounter.at(s::WAVES) = waves.size();
+        return entityCounter;
+    }
+    return std::unordered_map<std::string, double>();
+}
+
+Environment::Environment()  {
+    clearCounter();
+}
+
+void Environment::clearCounter() {
+    entityCounter.insert(std::pair<std::string, double>(s::GERBILS, 0));
+    entityCounter.insert(std::pair<std::string, double>(s::SCORPIONS, 0));
+    entityCounter.insert(std::pair<std::string, double>(s::FOOD, 0));
+    entityCounter.insert(std::pair<std::string, double>(s::NEURONAL, 0));
+    entityCounter.insert(std::pair<std::string, double>(s::WAVES, 0));
 }
 
 

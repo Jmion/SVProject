@@ -7,6 +7,7 @@
 #include <cmath>
 #include "NeuronalScorpion.hpp"
 #include <Environment/Wave.hpp>
+#include <Utility/Macros.hpp>
 
 double Sensor::radiusFromScorpion() const{
     return getAppConfig().scorpion_sensor_radius;
@@ -30,7 +31,7 @@ void Sensor::setInhibitor(double inhibitor) {
     this->inhibitor = fmax(0, fmin(getAppConfig().sensor_inhibition_max, inhibitor));
 }
 
-void Sensor::update(sf::Time dt) {
+void Sensor::update(sf::Time A_Unused dt) {
     if (actif) {
         score += 2.0 * (1.0 - inhibitor);
         for (auto &s : sensorsToInhibit) {

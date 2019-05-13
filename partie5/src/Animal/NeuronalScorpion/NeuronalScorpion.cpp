@@ -84,7 +84,6 @@ void NeuronalScorpion::update(sf::Time dt) {
     }
 
 
-    updateState(dt,sensorActive);
 
     bool hasTarget = false;
     Vec2d attraction_force = Vec2d(0, 0);
@@ -111,6 +110,9 @@ void NeuronalScorpion::update(sf::Time dt) {
             attraction_force = Vec2d(0, 0);
             break;
     }
+
+    updateState(dt,sensorActive);
+
     updateMovementVariables(attraction_force, dt, hasTarget);
     OrganicEntity::update(dt);
 
@@ -230,6 +232,10 @@ void NeuronalScorpion::draw(sf::RenderTarget &targetWindow) const {
 
 std::string NeuronalScorpion::getStateString() const {
     return ToString(state);
+}
+
+double NeuronalScorpion::getMaxSpeed() const {
+    Animal::getMaxSpeed();
 }
 
 

@@ -27,9 +27,11 @@ class Stats {
     std::unordered_map<int,std::unique_ptr<Graph>> graphs;
 
     /*!
-     * Labels for graphs
+     * Labels for graphs. Given a name what graph should be used. Return key for map graphs.
      */
     std::unordered_map<std::string,int> labels;
+
+    sf::Time timeSinceLastUpdate = sf::Time::Zero;
 
 public:
     void setActif(int actif);

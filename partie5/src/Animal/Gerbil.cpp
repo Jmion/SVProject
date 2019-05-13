@@ -56,11 +56,14 @@ double Gerbil::getInitialEnergy() const
 Gerbil::Gerbil(const Vec2d &position, double energyLevel, bool isFemale) : Animal(position, getSize(), energyLevel,
             isFemale)
 {
+    registerAnimalWithEnvironment();
 }
 
 Gerbil::Gerbil(const Vec2d &position) : Gerbil(position, getInitialEnergy(), uniform(0, 1) == 0) {}
 
-Gerbil::~Gerbil() = default;
+Gerbil::~Gerbil() {
+    removeAnimalWithEnvironment();
+}
 
 bool Gerbil::eatable(OrganicEntity const *entity) const
 {
@@ -185,5 +188,13 @@ bool Gerbil::giveBirth() {
         return true;
     }
     return false;
+}
+
+void Gerbil::registerAnimalWithEnvironment() const {
+    getAppEnv().addGerbil();
+}
+
+void Gerbil::removeAnimalWithEnvironment() const {
+    getAppEnv().removeGerbil();
 }
 

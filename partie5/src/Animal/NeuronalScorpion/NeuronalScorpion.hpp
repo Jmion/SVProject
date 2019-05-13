@@ -107,6 +107,9 @@ public:
      * Resets all the sensors to default config.
      */
     void resetSensors() const;
+
+protected:
+    double getMaxSpeed() const override;
 };
 
 

@@ -43,7 +43,9 @@ double Scorpion::getRandomWalkJitter() const
     return getAppConfig().scorpion_random_walk_jitter;
 }
 
-Scorpion::~Scorpion() = default;
+Scorpion::~Scorpion() {
+    removeAnimalWithEnvironment();
+}
 
 double Scorpion::getSize() const
 {
@@ -58,6 +60,7 @@ double Scorpion::getInitialEnergy() const
 Scorpion::Scorpion(const Vec2d &position, double energyLevel, bool isFemale) : Animal(position, getSize(), energyLevel,
             isFemale)
 {
+    registerAnimalWithEnvironment();
 }
 
 Scorpion::Scorpion(const Vec2d &position) : Scorpion(position, getInitialEnergy(), uniform(0, 1) == 0)
@@ -182,5 +185,13 @@ bool Scorpion::giveBirth() {
         return true;
     }
     return false;
+}
+
+void Scorpion::registerAnimalWithEnvironment() const {
+    getAppEnv().addScorpion();
+}
+
+void Scorpion::removeAnimalWithEnvironment() const {
+    getAppEnv().removeScorpion();
 }
 

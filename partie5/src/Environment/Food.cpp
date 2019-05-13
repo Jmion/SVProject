@@ -24,7 +24,7 @@ void Food::update(sf::Time dt)
 
 Food::Food(const Vec2d &position) :OrganicEntity(position,getSize(),getEnergy())
 {
-
+    getAppEnv().addFood();
 }
 
 double Food::getSize() const
@@ -92,4 +92,8 @@ bool Food::meetManagement(A_Unused Gerbil *mate) {
 
 bool Food::meetManagement(A_Unused Food *mate) {
     return false;
+}
+
+Food::~Food() {
+    getAppEnv().removeFood();
 }

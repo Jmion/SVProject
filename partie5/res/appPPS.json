@@ -42,7 +42,7 @@
                "max children":2
             },
             "view":{
-		"range":6.283185307,
+		"range":1.04719755,
                "distance":450
             },
             "random walk":{
@@ -86,7 +86,7 @@
                "max children":1
             },
             "view":{
-               "range":1.04719755,
+               "range":6.283185307,
                "distance":300
             },
             "random walk":{
@@ -149,7 +149,7 @@
             "height": 700
 	},
 	"stats":{
-            "width":1
+            "width":250
 	},
 	"control":{
             "width":300

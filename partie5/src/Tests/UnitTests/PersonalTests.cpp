@@ -1,8 +1,8 @@
 //
 // Created by jeremy on 5/5/19.
 //
-#include <Vec2d.hpp>
-#include <Mat2d.hpp>
+#include <Utility/Vec2d.hpp>
+#include <Utility/Mat2d.hpp>
 #include <iostream>
 
 int main(){

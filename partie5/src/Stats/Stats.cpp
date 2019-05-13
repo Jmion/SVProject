@@ -6,6 +6,9 @@
 #include "Graph.hpp"
 #include <unordered_map>
 #include <memory>
+#include <Application.hpp>
+
+//TODO define builder
 
 int Stats::getActif() const {
     return actif;
@@ -13,16 +16,24 @@ int Stats::getActif() const {
 
 void Stats::setActif(int actif) {
     Stats::actif = actif;
+
 }
 
 
 void Stats::update(sf::Time dt) {
-    //TODO
+    std::cerr << "update" << std::endl;
+
+    timeSinceLastUpdate += dt;
+    if(timeSinceLastUpdate.asSeconds() >= getAppConfig().stats_refresh_rate && actif != -1 && actif < graphs.size()){
+        std::unordered_map<std::string,double> statMap = getAppEnv().fetchData(s::GENERAL);
+        graphs.at(actif)->updateData(timeSinceLastUpdate, statMap);
+        timeSinceLastUpdate = sf::Time::Zero;
+    }
 }
 
 void Stats::reset() {
     for (auto it = graphs.begin(); it != graphs.end(); it++) {
-        it->second.reset();
+        it->second->reset();
     }
 }
 
@@ -35,6 +46,7 @@ void Stats::draw(sf::RenderTarget & target) const {
 
 void Stats::addGraph(int currentGraphId, std::string const &title, std::vector<std::string> const &series, double min,
                      double max, Vec2d statSize) {
+    std::cerr << "addGraph" << std::endl;
     labels.insert(std::pair<std::string, int>(title, currentGraphId));
     auto it = graphs.find(currentGraphId);
     if (it == graphs.end()) {

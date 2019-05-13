@@ -111,7 +111,6 @@ public:
     */
     void setDeleleration(Deceleration decel);
 
-public:
 
     /*!
      * @return Getter for target position
@@ -233,7 +232,7 @@ protected:
      * Gets the maximum speed that the animal can move given it's current state.
      * @return max move speed of the animal
      */
-    double getMaxSpeed() const;
+    virtual double getMaxSpeed() const;
 
     /*!
      * This method defines the global criteria that determins if 2 animals can mate.
@@ -364,9 +363,17 @@ protected:
     */
     void drawVision(sf::RenderTarget &target) const;
 
+    /*!
+     * Returns the level of energy at which the animal is considered to be starving
+     * @return energy level for starvation
+     */
+    virtual double getStarvingEnergyLevel() const = 0;
 
 private:
 
+    virtual void registerAnimalWithEnvironment() const = 0;
+
+    virtual void removeAnimalWithEnvironment() const = 0;
 
     /*!
      * Current state that the animal is in.
@@ -466,12 +473,6 @@ private:
      * @return energy loss factor
      */
     virtual double getEnergyLossFactor() const = 0;
-
-    /*!
-     * Returns the level of energy at which the animal is considered to be starving
-     * @return energy level for starvation
-     */
-    virtual double getStarvingEnergyLevel() const = 0;
 
 
     /*!
