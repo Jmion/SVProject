@@ -151,6 +151,11 @@ public:
      */
     virtual bool meetManagement(Dragon *mate) = 0;
 
+    /*!
+     * @return true if organicEntity can be hurt by fire
+     */
+    virtual bool isBurnable();
+
 protected:
 
 
@@ -168,6 +173,7 @@ protected:
      * @return true if entity has spend at least entity_wait_time waiting after having eaten.
      */
     bool updateAndHasWaitedLongEnoughFeeding(sf::Time dt);
+
 
 
 

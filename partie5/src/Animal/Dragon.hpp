@@ -98,6 +98,7 @@ protected:
 
     bool giveBirth() override;
 
+    bool isBurnable() override;
 
 public:
     void draw(sf::RenderTarget &targetWindow) const override;

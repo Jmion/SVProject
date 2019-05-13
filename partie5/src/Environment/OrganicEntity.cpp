@@ -67,6 +67,10 @@ void OrganicEntity::update(sf::Time dt) {
     aging(dt);
 }
 
+bool OrganicEntity::isBurnable() {
+    return true;
+}
+
 
 
 

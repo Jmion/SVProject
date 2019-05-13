@@ -136,6 +136,16 @@ public:
      */
     void decrementCounter(const std::string& animalType);
 
+    /*!
+     * @return true to indicate that dragons need to spit fire
+     */
+    bool isDragonFireTrigger() const;
+
+    /*!
+     * @param dragonFireTrigger allows for the user to activate dragon fire.
+     */
+    void setDragonFireTrigger(bool dragonFireTrigger);
+
 private:
     std::list<OrganicEntity*> organicEntities;
     std::list<Vec2d> targets;
@@ -161,6 +171,11 @@ private:
      * resets all the
      */
     void clearCounter();
+
+    /*!
+     * Used as triger to tell all dragons to spit fire.
+     */
+    bool dragonFireTrigger;
 };
 
 

@@ -104,6 +104,9 @@ void FinalApplication::onEventPPS(sf::Event event, sf::RenderWindow&)
                 break;
             case sf::Keyboard::Q:
                 getAppEnv().addEntity(new Dragon(getCursorPositionInView()));
+                break;
+            case sf::Keyboard::A:
+                getAppEnv().setDragonFireTrigger(true);
             default:
                 break;
         }
@@ -158,6 +161,7 @@ std::vector<std::string> FinalApplication::getHelperText() const
 			     	"C   : Reload config file",
                     "G   : Add a gerbil at MP",
                     "Q   : Add a dragon at MP",
+                    "A   : Dracarys (dragons fire)",
                     "S   : Add a scorpion at MP",
 					"F   : Add a food at MP",
                     "D   : Toggle debug mode",

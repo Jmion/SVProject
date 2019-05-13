@@ -183,11 +183,13 @@ void Dragon::update(sf::Time dt) {
     spitFireTimer += dt;
     if (animationTimer.asMilliseconds() > 1000) {
         animationTimer = sf::Time::Zero;
-        spitFire();
-        spitFireTimer = sf::Time::Zero;
     }
     if(getState() != GIVING_BIRTH && getState() != MATING)
         animationTimer += dt;
+    if(getAppEnv().isDragonFireTrigger()) {
+        spitFire();
+        spitFireTimer = sf::Time::Zero;
+    }
 }
 
 bool Dragon::giveBirth() {
@@ -204,7 +206,7 @@ void Dragon::draw(sf::RenderTarget &targetWindow) const {
     Animal::draw(targetWindow);
 
     if(spitFireTimer.asMilliseconds() < 750) {
-        sf::CircleShape circle = buildCircle(convertToGlobalCoord(Vec2d(10,0)), 30, sf::Color::Red);
+        sf::CircleShape circle = buildCircle(convertToGlobalCoord(Vec2d(100,0)), 30, sf::Color::Red);
         targetWindow.draw(circle);
     }
 }
@@ -226,8 +228,13 @@ bool Dragon::isTargetInBurnRange(const Vec2d &target) const {
 void Dragon::spitFire() const {
     std::list<OrganicEntity*> burnList = getAppEnv().getEntitiesInBurnRangeOfDragon(this);
     for (auto &i : burnList) {
-        i->spendEnergy(10000);
+        if(i->isBurnable())
+            i->spendEnergy(10000);
     }
+}
+
+bool Dragon::isBurnable() {
+    return false;
 }
 
 

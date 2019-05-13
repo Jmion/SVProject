@@ -62,6 +62,8 @@ void Environment::update(sf::Time dt)
 
     cleanUpDeadOrganic();
     cleanUpWave();
+
+    dragonFireTrigger = false;
 }
 
 void Environment::cleanUpDeadOrganic()
@@ -122,6 +124,7 @@ void Environment::draw(sf::RenderTarget& targetWindow) const
     for(const auto& t : targets) {
         targetWindow.draw(buildCircle(t,5,red));
     }
+
 }
 
 
@@ -264,6 +267,14 @@ void Environment::decrementCounter(const std::string& animalType) {
     if(it != entityCounter.end() && it->second>0){
         entityCounter[animalType] -= 1;
     }
+}
+
+bool Environment::isDragonFireTrigger() const {
+    return dragonFireTrigger;
+}
+
+void Environment::setDragonFireTrigger(bool dragonFireTrigger) {
+    Environment::dragonFireTrigger = dragonFireTrigger;
 }
 
 
