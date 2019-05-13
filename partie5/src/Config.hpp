@@ -180,6 +180,8 @@ public:
     const double dragon_size;
     const double dragon_min_age_mating;
     const double dragon_energy_starving;
+    const double dragon_burn_range;
+    const double dragon_burn_distance;
 
     // sensor
     const double sensor_intensity_threshold;

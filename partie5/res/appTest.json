@@ -145,6 +145,9 @@
             "d2":"dragon2.png",
             "d3":"dragon3.png",
             "d4":"dragon4.png"
+          },"burn":{
+            "distance": 300,
+            "range": 0.5
           }
         }
       },

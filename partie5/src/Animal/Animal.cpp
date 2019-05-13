@@ -410,4 +410,8 @@ Animal::State Animal::getState() const {
     return state;
 }
 
+Vec2d Animal::getDirection() const {
+    return direction;
+}
+
 

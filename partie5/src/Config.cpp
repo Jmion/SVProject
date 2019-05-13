@@ -117,6 +117,9 @@ Config::Config(std::string path) : mConfig(j::readFromFile(path))
         , dragon_size(mConfig["simulation"]["animal"]["dragon"]["size"].toDouble())
         , dragon_min_age_mating(mConfig["simulation"]["animal"]["dragon"]["min age mating"].toDouble())
         , dragon_energy_starving(mConfig["simulation"]["animal"]["dragon"]["energy"]["starving"].toDouble())
+        , dragon_burn_distance(mConfig["simulation"]["animal"]["dragon"]["burn"]["distance"].toDouble())
+        , dragon_burn_range(mConfig["simulation"]["animal"]["dragon"]["burn"]["range"].toDouble())
+
 // sensor
     ,sensor_intensity_threshold(mConfig["simulation"]["sensor"]["intensity threshold"].toDouble())
     ,sensor_inhibition_factor(mConfig["simulation"]["sensor"]["inhibition"]["factor"].toDouble())

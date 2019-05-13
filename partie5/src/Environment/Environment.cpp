@@ -4,6 +4,7 @@
 
 #include "Environment.hpp"
 #include <Animal/Animal.hpp>
+#include <Animal/Dragon.hpp>
 #include <Obstacle/SolideObstacle.hpp>
 #include <Environment/OrganicEntity.hpp>
 #include <algorithm>
@@ -172,12 +173,21 @@ Environment::~Environment()
     generators.clear();
 }
 
-//TODO check complexity of this call
 std::list<OrganicEntity*> Environment::getEntitiesInSightForAnimal(const Animal * animal) const
 {
     std::list<OrganicEntity*> targetsInSight;
     for(OrganicEntity* entity: organicEntities) {
         if (animal->isTargetInSight(entity->getPosition())) {
+            targetsInSight.push_back(entity);
+        }
+    }
+    return targetsInSight;
+}
+
+std::list<OrganicEntity *> Environment::getEntitiesInBurnRangeOfDragon(const Dragon *dragon) const {
+    std::list<OrganicEntity*> targetsInSight;
+    for(OrganicEntity* entity: organicEntities) {
+        if (dragon->isTargetInBurnRange(entity->getPosition())) {
             targetsInSight.push_back(entity);
         }
     }
@@ -255,6 +265,8 @@ void Environment::decrementCounter(const std::string& animalType) {
         entityCounter[animalType] -= 1;
     }
 }
+
+
 
 
 

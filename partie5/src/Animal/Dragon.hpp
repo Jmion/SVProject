@@ -58,6 +58,13 @@ public:
 
     bool meetManagement(Dragon *mate) override;
 
+    /*!
+     * Will determine if the target can be burnt by the Dragon
+     * @param target that needs to be tested if it can be burnt
+     * @return true if target can be burnt by the animal, false otherwise
+     */
+    bool isTargetInBurnRange(const Vec2d &target) const;
+
 protected:
     double getRandomWalkRadius() const override;
 
@@ -102,12 +109,18 @@ private:
      */
     sf::Time animationTimer = sf::Time::Zero;
 
+    /*!
+     * Time since start of fireball
+     */
+    sf::Time spitFireTimer = sf::Time::Zero;
+
     void registerAnimalWithEnvironment() const override;
 
     void removeAnimalWithEnvironment() const override;
 
     double getEnergyLossFactor() const override;
 
+    void spitFire() const;
 };
 
 

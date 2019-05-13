@@ -80,6 +80,13 @@ public:
     std::list<OrganicEntity*> getEntitiesInSightForAnimal(const Animal *animal) const;
 
     /*!
+     * Determins which targets are within burn range of dragon
+     * @param dragon that is going to breath fire
+     * @return list of all targets that can be burnt from this dragon
+     */
+    std::list<OrganicEntity*> getEntitiesInBurnRangeOfDragon(const Dragon * dragon) const;
+
+    /*!
      * Allows acces to solideObstacles that are currently colliding with wave
      * @param wave that is being used to know what it is hitting
      * @return list of obstacles that the wave is colliding with.

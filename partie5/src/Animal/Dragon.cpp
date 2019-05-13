@@ -5,6 +5,7 @@
 #include <Application.hpp>
 #include "Dragon.hpp"
 #include <Random/Uniform.hpp>
+#include <Utility/Vec2d.hpp>
 
 double Dragon::getStandardMaxSpeed() const {
     return getAppConfig().dragon_max_speed;
@@ -179,8 +180,11 @@ bool Dragon::meetManagement(Dragon *mate) {
 
 void Dragon::update(sf::Time dt) {
     Animal::update(dt);
+    spitFireTimer += dt;
     if (animationTimer.asMilliseconds() > 1000) {
         animationTimer = sf::Time::Zero;
+        spitFire();
+        spitFireTimer = sf::Time::Zero;
     }
     if(getState() != GIVING_BIRTH && getState() != MATING)
         animationTimer += dt;
@@ -199,4 +203,32 @@ bool Dragon::giveBirth() {
 void Dragon::draw(sf::RenderTarget &targetWindow) const {
     Animal::draw(targetWindow);
 
+    if(spitFireTimer.asMilliseconds() < 750) {
+        sf::CircleShape circle = buildCircle(convertToGlobalCoord(Vec2d(10,0)), 30, sf::Color::Red);
+        targetWindow.draw(circle);
+    }
 }
+
+bool Dragon::isTargetInBurnRange(const Vec2d &target) const {
+    Vec2d d = target - getPosition();
+    if (d.lengthSquared() <= getAppConfig().dragon_burn_distance * getAppConfig().dragon_burn_distance) {
+        Vec2d this_to_target = target - getPosition();
+        double length = this_to_target.lengthSquared();
+        if (isEqual(length, 0)) {
+            return true;
+        }
+        this_to_target = this_to_target.normalised();
+        return getDirection().dot(this_to_target) >= cos((getAppConfig().dragon_burn_range + 0.001) / 2);
+    }
+    return false;
+}
+
+void Dragon::spitFire() const {
+    std::list<OrganicEntity*> burnList = getAppEnv().getEntitiesInBurnRangeOfDragon(this);
+    for (auto &i : burnList) {
+        i->spendEnergy(10000);
+    }
+}
+
+
+

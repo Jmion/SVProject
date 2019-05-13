@@ -280,7 +280,7 @@ protected:
      */
     void procreate();
 
-    /*!
+    virtual /*!
     * Updates the time that the entity has spend waiting after matting.
     * It will also return true if it has already waited long enough to allow for state change
     * @param dt time spent since last call
@@ -370,7 +370,16 @@ protected:
     virtual double getStarvingEnergyLevel() const = 0;
 
 
+    /*!
+     * Returns current state of the animal
+     * @return
+     */
     State getState() const;
+
+    /*!
+     * Reurns current direction of the animal
+     */
+     Vec2d getDirection() const;
 
 private:
 

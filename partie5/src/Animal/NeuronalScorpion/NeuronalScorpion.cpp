@@ -205,16 +205,16 @@ void NeuronalScorpion::draw(sf::RenderTarget &targetWindow) const {
 
             //draw the NeuronalScorpion's direction
             sf::RectangleShape scorpion_dir(sf::Vector2f(100, 2));
+            scorpion_dir.setFillColor(sf::Color::Red);
             scorpion_dir.rotate(getRotation()/DEG_TO_RAD);
             scorpion_dir.setPosition(getPosition());
-            scorpion_dir.setFillColor(sf::Color::Red);
             targetWindow.draw(scorpion_dir);
 
             //draw the estimated target of the NeuronalScorpion
             sf::RectangleShape line(sf::Vector2f(100, 2));
+            line.setFillColor(sf::Color::Blue);
             line.rotate(estimateDirection.angle()/DEG_TO_RAD);
             line.setPosition(getPosition());
-            line.setFillColor(sf::Color::Blue);
             targetWindow.draw(line);
 
             targetWindow.draw(buildCircle(getPositionOfSensor(s),getRadius()/5, c));
