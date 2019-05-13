@@ -7,6 +7,7 @@
 #include "FinalApplication.hpp"
 #include <Animal/Gerbil.hpp>
 #include <Animal/Scorpion.hpp>
+#include <Animal/Dragon.hpp>
 #include <Animal/NeuronalScorpion/NeuronalScorpion.hpp>
 #include <Animal/NeuronalScorpion/WaveGerbil.hpp>
 #include <Environment/Food.hpp>
@@ -19,7 +20,7 @@ void FinalApplication::onRun()
 {
     // Setup stats
 	Application::onRun();
-	addGraph(s::GENERAL, { s::SCORPIONS, s::GERBILS, s::FOOD,}, 0, 200);
+	addGraph(s::GENERAL, { s::SCORPIONS, s::GERBILS, s::FOOD,s::DRAGON,}, 0, 200);
 	addGraph(s::WAVES, { s::WAVES}, 0, 100);
 	focusOnStat(s::GENERAL);
 }
@@ -101,7 +102,8 @@ void FinalApplication::onEventPPS(sf::Event event, sf::RenderWindow&)
             case sf::Keyboard::F:
                 getAppEnv().addEntity(new Food(getCursorPositionInView()));
                 break;
-
+            case sf::Keyboard::Q:
+                getAppEnv().addEntity(new Dragon(getCursorPositionInView()));
             default:
                 break;
         }
@@ -155,6 +157,7 @@ std::vector<std::string> FinalApplication::getHelperText() const
 					"Esc : End of program",
 			     	"C   : Reload config file",
                     "G   : Add a gerbil at MP",
+                    "Q   : Add a dragon at MP",
                     "S   : Add a scorpion at MP",
 					"F   : Add a food at MP",
                     "D   : Toggle debug mode",

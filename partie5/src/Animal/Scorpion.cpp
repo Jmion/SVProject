@@ -93,6 +93,11 @@ bool Scorpion::eatableBy(A_Unused Food const *food) const
     return false;
 }
 
+bool Scorpion::eatableBy(A_Unused Dragon const *dragon) const {
+    return true;
+}
+
+
 sf::Time Scorpion::getLongevity() const
 {
     return getAppConfig().scorpion_longevity;
@@ -194,4 +199,14 @@ void Scorpion::registerAnimalWithEnvironment() const {
 void Scorpion::removeAnimalWithEnvironment() const {
     getAppEnv().decrementCounter(s::SCORPIONS);
 }
+
+bool Scorpion::meetManagement(A_Unused Dragon *mate) {
+    return false;
+}
+
+bool Scorpion::canMate(A_Unused Dragon const *dragon) const {
+    return false;
+}
+
+
 

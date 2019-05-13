@@ -406,6 +406,8 @@ std::string Animal::getStateString() const{
     return ToString(state);
 }
 
-
+Animal::State Animal::getState() const {
+    return state;
+}
 
 

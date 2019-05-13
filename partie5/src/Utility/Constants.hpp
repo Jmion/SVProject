@@ -48,6 +48,7 @@ std::string const SCORPIONS = "Scorpions";
 std::string const GERBILS   = "Gerbils";
 std::string const FOOD  = "Food sources";
 std::string const WAVES  = "Waves";
+std::string const DRAGON = "Dragons";
 } // s
 
 #endif // INFOSV_CONSTANTS_HPP

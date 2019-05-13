@@ -85,6 +85,9 @@ bool Gerbil::eatableBy(A_Unused Food const *food) const
     return false;
 }
 
+bool Gerbil::eatableBy(A_Unused Dragon const *dragon) const {
+    return true;
+}
 
 bool Gerbil::matable(OrganicEntity const *other) const {
     return other->canMate(this);
@@ -101,6 +104,7 @@ bool Gerbil::canMate(Gerbil const *gerbil) const {
 bool Gerbil::canMate(A_Unused Food const *food) const {
     return false;
 }
+
 
 
 const std::string Gerbil::getTexturePath() const
@@ -197,4 +201,14 @@ void Gerbil::registerAnimalWithEnvironment() const {
 void Gerbil::removeAnimalWithEnvironment() const {
     getAppEnv().decrementCounter(s::GERBILS);
 }
+
+bool Gerbil::canMate(A_Unused Dragon const *dragon) const {
+    return false;
+}
+
+bool Gerbil::meetManagement(A_Unused Dragon *mate) {
+    return false;
+}
+
+
 

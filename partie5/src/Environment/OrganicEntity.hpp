@@ -11,6 +11,7 @@
 class Scorpion;
 class Gerbil;
 class Food;
+class Dragon;
 
 
 class OrganicEntity : public CircularCollider, public Updatable
@@ -64,6 +65,11 @@ public:
     virtual bool eatableBy(Food const* food) const = 0;
 
     /*!
+     * Determins if this can be eaten by a dragon.
+     */
+    virtual bool eatableBy(Dragon const* dragon) const = 0;
+
+    /*!
      * Getter to current energy level.
      * @return energy level
      */
@@ -108,17 +114,42 @@ public:
      * @return true is this can mate with food
      */
     virtual bool canMate(Food const* food) const = 0;
-
+    /*!
+     * @return true is this can mate with dragon
+     */
+    virtual bool canMate(Dragon const* dragon) const = 0;
 
     /*!
-     * Takes car
-     * @param mate
-     * @return
+     * Takes care of animals fornicating.
+     * @param mate other animal that is being met.
+     * @return true if they had kids (met sucesfully), otherwise false
      */
     virtual bool meet(OrganicEntity* mate) = 0;
+    /*!
+     * Determins how these 2 animals can fornicate (have kids).
+     * @param mate other partner
+     * @return false if no kids can be had
+     */
     virtual bool meetManagement(Scorpion * mate) = 0;
+    /*!
+     * Determins how these 2 animals can fornicate (have kids).
+     * @param mate other partner
+     * @return false if no kids can be had
+     */
     virtual bool meetManagement(Gerbil * mate) = 0;
+    /*!
+     * Determins how these 2 animals can fornicate (have kids).
+     * @param mate other partner
+     * @return false if no kids can be had
+     */
     virtual bool meetManagement(Food * mate) = 0;
+
+    /*!
+     * Determins how these 2 animals can fornicate (have kids).
+     * @param mate other partner
+     * @return false if no kids can be had
+     */
+    virtual bool meetManagement(Dragon *mate) = 0;
 
 protected:
 

@@ -369,6 +369,9 @@ protected:
      */
     virtual double getStarvingEnergyLevel() const = 0;
 
+
+    State getState() const;
+
 private:
 
     virtual void registerAnimalWithEnvironment() const = 0;

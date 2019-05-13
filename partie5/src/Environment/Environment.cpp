@@ -239,6 +239,8 @@ void Environment::clearCounter() {
     entityCounter.insert(std::pair<std::string, double>(s::FOOD, 0));
     entityCounter.insert(std::pair<std::string, double>(s::NEURONAL, 0));
     entityCounter.insert(std::pair<std::string, double>(s::WAVES, 0));
+    entityCounter.insert(std::pair<std::string, double>(s::DRAGON, 0));
+
 }
 
 void Environment::incrementCounter(const std::string& animalType) {

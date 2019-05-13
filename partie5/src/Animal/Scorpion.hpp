@@ -43,6 +43,8 @@ public:
 
     bool eatableBy(Food const *food) const override;
 
+    bool eatableBy(Dragon const *dragon) const override;
+
     bool meet(OrganicEntity *mate) override;
 
     bool meetManagement(Scorpion *mate) override;
@@ -50,6 +52,8 @@ public:
     bool meetManagement(Gerbil *mate) override;
 
     bool meetManagement(Food *mate) override;
+
+    bool meetManagement(Dragon *mate) override;
 
 protected:
     double getEnergyLossFemalePerChild() const override;
@@ -89,6 +93,8 @@ public:
     bool canMate(Gerbil const *gerbil) const override;
 
     bool canMate(Food const *food) const override;
+
+    bool canMate(Dragon const *dragon) const override;
 
 protected:
     double getMinimumMatingEnergyMale() const override;

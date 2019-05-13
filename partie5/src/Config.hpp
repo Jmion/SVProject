@@ -155,6 +155,32 @@ public:
     const std::string neuronal_scorpion_texture;
     const double scorpion_energy_starving;
 
+    //DRAGON
+    const double dragon_max_speed;
+    const double dragon_mass;
+    const double dragon_energy_loss_factor;
+    const double dragon_view_range;
+    const double dragon_view_distance;
+    const double dragon_random_walk_jitter;
+    const double dragon_random_walk_radius;
+    const double dragon_random_walk_distance;
+    const sf::Time dragon_longevity;
+    const double dragon_energy_initial;
+    const double dragon_energy_min_mating_female;
+    const double dragon_energy_min_mating_male;
+    const int dragon_min_children;
+    const int dragon_max_children;
+    const double dragon_gestation_time;
+    const double dragon_energy_loss_female_per_child;
+    const double dragon_energy_loss_mating_male;
+    const std::string dragon_texture_d1;
+    const std::string dragon_texture_d2;
+    const std::string dragon_texture_d3;
+    const std::string dragon_texture_d4;
+    const double dragon_size;
+    const double dragon_min_age_mating;
+    const double dragon_energy_starving;
+
     // sensor
     const double sensor_intensity_threshold;
     const double sensor_inhibition_factor;

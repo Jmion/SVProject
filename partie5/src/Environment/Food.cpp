@@ -62,6 +62,10 @@ bool Food::eatableBy(A_Unused Food const *food) const
     return false;
 }
 
+bool Food::eatableBy(A_Unused Dragon const *dragon) const {
+    return false;
+}
+
 bool Food::matable(OrganicEntity const *other) const {
     return other->canMate(this);
 }
@@ -97,3 +101,13 @@ bool Food::meetManagement(A_Unused Food *mate) {
 Food::~Food() {
     getAppEnv().decrementCounter(s::FOOD);
 }
+
+bool Food::meetManagement(A_Unused Dragon *mate) {
+    return false;
+}
+
+bool Food::canMate(A_Unused Dragon const *dragon) const {
+    return false;
+}
+
+
