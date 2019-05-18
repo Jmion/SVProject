@@ -212,6 +212,14 @@ We will have a stateTimer in the NeuronalScorpion that will be tasked with doing
 Each time we change states we will reset the **stateTimer**. The **stateTimer** will be incremented every time update is called and that we are in *MOVING* or *IDLE*.
 
  
+# Q5
+
+## Q.5.1
+
+## Q.5.2
+
+We have made the choice to add quite a bit of mechanics to all the classes that we want to monitor. We did this because it allows for almost no overhead when we are updating the graph. The environment has a mad that counts the number of 
+
 
 ## QUESTIONS
 Why are we declaring the eatable method in all the subclasses? It is the same everywhere. And why not use a visitor.

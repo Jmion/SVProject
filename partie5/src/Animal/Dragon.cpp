@@ -190,7 +190,7 @@ void Dragon::update(sf::Time dt) {
         animationTimer += dt;
     if(getAppEnv().isDragonFireTrigger()) {
         spriteFireTimer = sf::Time::Zero;
-    }if(spriteFireTimer.asMilliseconds()>1100){
+    }if(spriteFireTimer.asMilliseconds()>1100&& spriteFireTimer.asMilliseconds()<2600){
         spitFire();
     }
 }

@@ -32,6 +32,11 @@ public:
      */
     virtual ~NeuronalScorpion() override ;
 
+    /*!
+     * Avoid deep copy of neuronalScorpion and sensor. Costly and has no purpose.
+     */
+    NeuronalScorpion(NeuronalScorpion const& other) = delete;
+
     void draw(sf::RenderTarget &targetWindow) const override;
 
     /*!
