@@ -94,9 +94,25 @@ protected:
 
 
 private:
+    /*!
+     * Speed that the chasingAutomaton is moving
+     */
     double speed;
+    /*!
+     * Direction of travel of the automaton.
+     *
+     * Position of the target that the automaton is chasing.
+     */
     Vec2d direction, targetPosition;
+    /*!
+     * rate of deceleration.
+     */
     Deceleration deceleration;
+
+    /*!
+     * Converter from enum to numerical value for Deceleration enum
+     * @return numeric value that represents the deceleration rate.
+     */
     double getDecelerationRate() const;
 
 };
