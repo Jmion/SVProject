@@ -24,7 +24,9 @@ void Food::update(sf::Time dt)
 
 Food::Food(const Vec2d &position) :OrganicEntity(position,getSize(),getEnergy())
 {
-    getAppEnv().incrementCounter(s::FOOD);
+    Environment* e = &getAppEnv();
+    if(e != nullptr)
+        e->incrementCounter(s::FOOD);
 }
 
 double Food::getSize() const
@@ -99,7 +101,9 @@ bool Food::meetManagement(A_Unused Food *mate) {
 }
 
 Food::~Food() {
-    getAppEnv().decrementCounter(s::FOOD);
+    Environment* e = &getAppEnv();
+    if(e!= nullptr)
+        e->decrementCounter(s::FOOD);
 }
 
 bool Food::meetManagement(A_Unused Dragon *mate) {

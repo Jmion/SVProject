@@ -119,6 +119,17 @@ public:
 
 protected:
 
+
+    /*!
+    * registers animal with environment
+    */
+    virtual void registerAnimalWithEnvironment(std::string) const;
+
+    /*!
+     * Removes animal from environment
+     */
+    virtual void removeAnimalWithEnvironment(std::string) const;
+
     /*!
      * @return string representation of the state
      */
@@ -383,9 +394,7 @@ protected:
 
 private:
 
-    virtual void registerAnimalWithEnvironment() const = 0;
 
-    virtual void removeAnimalWithEnvironment() const = 0;
 
     /*!
      * Current state that the animal is in.

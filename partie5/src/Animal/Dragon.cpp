@@ -144,11 +144,11 @@ double Dragon::getStarvingEnergyLevel() const {
 }
 
 void Dragon::registerAnimalWithEnvironment() const {
-    getAppEnv().incrementCounter(s::DRAGON);
+    Animal::registerAnimalWithEnvironment(s::DRAGON);
 }
 
 void Dragon::removeAnimalWithEnvironment() const {
-    getAppEnv().decrementCounter(s::DRAGON);
+    Animal::removeAnimalWithEnvironment(s::DRAGON);
 }
 
 double Dragon::getEnergyLossFactor() const {

@@ -109,9 +109,9 @@ protected:
     bool giveBirth() override;
 
 private:
-    void registerAnimalWithEnvironment() const override;
+    void registerAnimalWithEnvironment() const;
 
-    void removeAnimalWithEnvironment() const override;
+    void removeAnimalWithEnvironment() const;
 };
 
 

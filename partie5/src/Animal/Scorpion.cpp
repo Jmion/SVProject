@@ -193,11 +193,11 @@ bool Scorpion::giveBirth() {
 }
 
 void Scorpion::registerAnimalWithEnvironment() const {
-    getAppEnv().incrementCounter(s::SCORPIONS);
+    Animal::registerAnimalWithEnvironment(s::SCORPIONS);
 }
 
 void Scorpion::removeAnimalWithEnvironment() const {
-    getAppEnv().decrementCounter(s::SCORPIONS);
+    Animal::removeAnimalWithEnvironment(s::SCORPIONS);
 }
 
 bool Scorpion::meetManagement(A_Unused Dragon *mate) {

@@ -55,6 +55,7 @@ void Stats::addGraph(int currentGraphId, std::string const &title, std::vector<s
 
 void Stats::focusOn(std::string title) {
     actif = labels.at(title);
+    reset();
 }
 
 

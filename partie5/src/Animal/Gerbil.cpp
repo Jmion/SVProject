@@ -195,11 +195,11 @@ bool Gerbil::giveBirth() {
 }
 
 void Gerbil::registerAnimalWithEnvironment() const {
-    getAppEnv().incrementCounter(s::GERBILS);
+    Animal::registerAnimalWithEnvironment(s::GERBILS);
 }
 
 void Gerbil::removeAnimalWithEnvironment() const {
-    getAppEnv().decrementCounter(s::GERBILS);
+    Animal::removeAnimalWithEnvironment(s::GERBILS);
 }
 
 bool Gerbil::canMate(A_Unused Dragon const *dragon) const {

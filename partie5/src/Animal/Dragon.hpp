@@ -116,9 +116,9 @@ private:
      */
     sf::Time spriteFireTimer = sf::seconds(2);
 
-    void registerAnimalWithEnvironment() const override;
+    void registerAnimalWithEnvironment() const;
 
-    void removeAnimalWithEnvironment() const override;
+    void removeAnimalWithEnvironment() const;
 
     double getEnergyLossFactor() const override;
 

@@ -8,10 +8,17 @@
 #include <Utility/Utility.hpp>
 #include <Interface/Updatable.hpp>
 
+/*!
+ * A Food generator creates food and adds it to the environment periodically.
+ */
 class FoodGenerator : public Updatable
 {
 public:
     void update(sf::Time dt) override;
+
+    /*!
+     * Builds a food generator.
+     */
     explicit FoodGenerator();
 
 private:
