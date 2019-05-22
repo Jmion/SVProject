@@ -71,6 +71,10 @@ protected:
 private:
     static constexpr int nbSensor = 8;
 
+    /*!
+     * Array of sensors that the scorpion has. A scorpion is in charge of freeing memory
+     * when scorpion is destroyed.
+     */
     std::array<Sensor*,nbSensor> sensor;
 
     /*!
@@ -85,6 +89,9 @@ private:
      */
     sf::Time stateTimer;
 
+    /*!
+     * State the the scorpion is in.
+     */
     State state;
 
     /*!

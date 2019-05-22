@@ -78,7 +78,10 @@ private:
      */
     double inhibitor;
 
-    std::array<Sensor *, 3> sensorsToInhibit = {nullptr, nullptr, nullptr};
+    /*!
+     * List of sensors that this needs to inhibit if it becomes active.
+     */
+    std::array<Sensor *, 3> sensorsToInhibit;
 
     /*!
      * Intensity of the waves that the sensor is detecting
