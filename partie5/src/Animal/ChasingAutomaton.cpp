@@ -43,8 +43,8 @@ void ChasingAutomaton::draw(sf::RenderTarget &targetWindow)
     sf::Texture& texture = getAppTexture(GHOST_TEXTURE);
     auto image_to_draw(buildSprite(getPosition(),getRadius()*2,texture));
     targetWindow.draw(image_to_draw);
-    //sf::Color red(255,0,0);
-    //targetWindow.draw(buildCircle(targetPosition,5,red));
+    sf::Color red(255,0,0);
+    targetWindow.draw(buildCircle(targetPosition,5,red));
 }
 
 Vec2d ChasingAutomaton::attractionForce() const

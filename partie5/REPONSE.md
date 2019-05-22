@@ -92,10 +92,13 @@ The animal is a seperate entity. Therefor we can imagine that classes that exten
 In the method draw of the Environment we need to call the draw of Animals.
 
 ## Q.2.9
-This is done to break encapsulation to be able to test the animal class by setting the rotation. We need this for the test
+This is done to break encapsulation to be able to test the animal class by setting the rotation. We need this for the test.
 
 ## Q.2.10
-A list of Vect2. This wo...
+A list of targets. We are using a list because it allows use to return as many elements as we want. At this point in time since we are only intrested in targets a list of Vec2d should be enough even though we can forsee that in the future we might need to change this to pointers towards targets.
+
+## Q.2.11
+We simply need to update the animals from the update methode of environment. This is how most games and simutations are build where the environment is in charge of updating when it wants all of the objects that are evolving within it.
 
 # Q.3
 
@@ -141,8 +144,6 @@ When the OrganicEntities die of old age the environment needs to free the memory
 
  First of all we we need to define the condition when the Animal will be starving. This information will be used in getMaxSpeed. For the definition of when an animal is starving we decided that each animal can be starving at a different energy level. For proper use we therefor added an *scorpion_energy_starving* and *gerbil_energy_starving* to our app JSON config file. We used a virtual method to define the updateState leaving the choice of the value to return up to the non abstract animals. With this solution we are respecting the app design and choice of keeping all of these parameters modifiable at run time. We also added *animal_starving_speed_factor* to the JSON because it is the only logical place where such a setting should go. We do not want to affect the state that the animal is in since we would like the animal to behave is it normally does but in a weaker form (moving less fast).
 
-## Q.3.8
-Exacly in the same way as previous methodes. But only thing that we will change that we haven't done in previous double dispatch is to define the method in animal. This default implementation 
 
 ## Q.3.9
 #What is wanted???
