@@ -114,7 +114,7 @@ private:
     /*!
      * Time since start of fireball
      */
-    sf::Time spriteFireTimer = sf::seconds(2);
+    sf::Time spriteFireTimer = sf::seconds(500);
 
     void registerAnimalWithEnvironment() const;
 

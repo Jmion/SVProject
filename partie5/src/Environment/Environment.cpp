@@ -243,7 +243,7 @@ std::unordered_map<std::string, double> Environment::fetchData(const std::string
     return std::unordered_map<std::string, double>();
 }
 
-Environment::Environment()  {
+Environment::Environment() : dragonFireTrigger(false) {
     sf::SoundBuffer buffer;
     dragonCommandBuffer.loadFromFile(getAppConfig().dragon_burn_command_sound);
     dragonCommand.setBuffer(dragonCommandBuffer);
