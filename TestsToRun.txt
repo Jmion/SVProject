@@ -1,0 +1,17 @@
+* Test1: scons ColliderTest / works in part 5
+* Test2: scons EnvTest-run / works in part 2
+* Test3: scons ChasingTest-run
+* Test4: scons ChasingTest-run
+* Test5: scons AnimalTest-run / works in part 2
+* Test6: scons TargetInSightTest-run / works in part 2 (no longer working in part 3 due to changes)
+* Test7: scons AminalTest-run / works in part 2
+* Test8: scons AminalTest-run / works in part 2
+* Test9: scons AminalTest-run / works in part 2
+* Test10: scons PPSTest-run / works in part 5
+* Test11: scons PPSTeset-run / works in part 5
+* Test12: scons PPSTeset-run / works in part 5
+* Test13: scons EatableTest-run / works in part 5
+* Test14: scons PPSTest-run / works in part 5
+* Test15: scons PPSTest-run / works in part 5 (More debug info than requested)
+* Test16: scons PPSTest-run / works in part 5
+* Test17: : scons PPSTest-run / works in part  5
