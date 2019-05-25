@@ -14,10 +14,11 @@ double Sensor::radiusFromScorpion() const{
 }
 
 Sensor::Sensor(double angleFromScorpion, NeuronalScorpion* neuronalScorpion) :
-angleFromScorpion(angleFromScorpion),
-actif(false),
-score(0),
-inhibitor(0), owner(neuronalScorpion){
+        owner(neuronalScorpion),
+        angleFromScorpion(angleFromScorpion),
+        actif(false),
+        score(0),
+        inhibitor(0) {
     if (neuronalScorpion == nullptr) {
         throw std::invalid_argument("neuronalScorpion of class Sensor is nullptr.");
     }

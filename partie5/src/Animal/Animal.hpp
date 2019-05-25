@@ -371,8 +371,14 @@ protected:
 
 private:
 
+    /*!
+     * Registers this with the environment
+     */
     virtual void registerAnimalWithEnvironment() const = 0;
 
+    /*!
+     * Removes this from the environment.
+     */
     virtual void removeAnimalWithEnvironment() const = 0;
 
     /*!
