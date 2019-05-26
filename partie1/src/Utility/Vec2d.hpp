@@ -67,7 +67,7 @@ public:
      * @return n such that this · n = 0
      */
     Vec2d normal() const;
-    
+
     /*!
      * @brief Compute the angle of this in polar coordinates
      *
@@ -85,9 +85,9 @@ public:
 
     /*!
      * @brief Compare two vectors' angle
-     * 
-     * @return 1 if other is clockwise of this vector, -1 otherwise (anticlockwise), 
-     *         or 0 if other is null or equal to this vector. 
+     *
+     * @return 1 if other is clockwise of this vector, -1 otherwise (anticlockwise),
+     *         or 0 if other is null or equal to this vector.
      */
     int sign(Vec2d const& other) const;
 

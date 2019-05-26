@@ -131,7 +131,8 @@ void CircularCollider::draw(sf::RenderTarget &target) const
     }
 }
 
-void CircularCollider::setRadius(double radius) {
+void CircularCollider::setRadius(double radius)
+{
     this->radius = radius;
 }
 

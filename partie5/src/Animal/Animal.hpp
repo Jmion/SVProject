@@ -12,7 +12,8 @@
 #include <Utility/Macros.hpp>
 #include <array>
 
-class Animal : public OrganicEntity {
+class Animal : public OrganicEntity
+{
 public:
     /*!
      * Allow modification of target position
@@ -40,7 +41,7 @@ public:
      * can be in.
      */
     DEFINE_ENUM_WITH_STRING_CONVERSIONS(State, (FOOD_IN_SIGHT)(FEEDING)(RUNNING_AWAY)
-            (MATE_IN_SIGHT)(MATING)(GIVING_BIRTH)(WANDERING)(DIESTING))
+                                        (MATE_IN_SIGHT)(MATING)(GIVING_BIRTH)(WANDERING)(DIESTING))
 
 
     /*!
@@ -390,7 +391,7 @@ protected:
     /*!
      * Reurns current direction of the animal
      */
-     Vec2d getDirection() const;
+    Vec2d getDirection() const;
 
 private:
 

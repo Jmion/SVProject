@@ -9,7 +9,8 @@
 #include <Utility/Macros.hpp>
 class Sensor;
 
-class NeuronalScorpion  : public Scorpion{
+class NeuronalScorpion  : public Scorpion
+{
 public:
 
     DEFINE_ENUM_WITH_STRING_CONVERSIONS(State,(IDLE)(WANDERING)(TARGET_IN_SIGHT)(MOVING))

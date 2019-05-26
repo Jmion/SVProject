@@ -67,7 +67,7 @@ sf::Sprite buildSprite(Vec2d const& position, double size, sf::Texture const& te
  */
 sf::Text buildText(std::string const& msg, Vec2d const& position, sf::Font const& font, unsigned int size,
                    sf::Color color,
-				   float rotation = 0.f);
+                   float rotation = 0.f);
 
 /*!
  * @brief Construct a circle with a sf::CircleShape.
@@ -192,7 +192,7 @@ std::vector<std::string> split(std::string const& str, char delim);
  *
  */
 CellCoord vec2dToCellCoord(const Vec2d& position, double substrateWidth,
-					  double substrateHeight, float cellSize);
+                           double substrateHeight, float cellSize);
 
 /*!
  * @brief difference between two sizes (unsigned)

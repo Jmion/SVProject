@@ -16,14 +16,15 @@ namespace
 {
 
 std::vector<sf::Color> const& COLORS = { sf::Color::Red, sf::Color::Green, sf::Color::Yellow, sf::Color::Cyan,
-                                         sf::Color::White, sf::Color::Magenta };
+                                         sf::Color::White, sf::Color::Magenta
+                                       };
 
 } // anonymous
 
 Graph::Graph(std::vector<std::string> const& titles, Vec2d const& size, double min, double max)
-: mSize(size)
-, mYMin(std::min(max, min))
-, mYMax(std::max(max, min))
+    : mSize(size)
+    , mYMin(std::min(max, min))
+    , mYMax(std::max(max, min))
 {
     assert(titles.size() <= COLORS.size());
 
@@ -59,7 +60,9 @@ void Graph::updateData(sf::Time deltaEpoch, std::unordered_map<std::string, doub
         }
 
         // Remove vertices from the previous buffer that overlap with the current buffer
-        auto shouldBeRemove = [&](sf::Vertex const& v) { return v.position.x <= newEpoch.asSeconds() * X_SCALE; };
+        auto shouldBeRemove = [&](sf::Vertex const& v) {
+            return v.position.x <= newEpoch.asSeconds() * X_SCALE;
+        };
         serie.pastVertices.erase(std::remove_if(serie.pastVertices.begin(), serie.pastVertices.end(), shouldBeRemove),
                                  serie.pastVertices.end());
 
@@ -88,7 +91,7 @@ void Graph::draw(sf::RenderTarget& target) const
     auto const LEGEND_MARGIN = 10;
     auto const FONT_SIZE = 13;
     auto lastLegendY = LEGEND_MARGIN;
-	auto lastLegendX = LEGEND_MARGIN;
+    auto lastLegendX = LEGEND_MARGIN;
     // Draw for each serie:
     for (auto const& serie : mSeries) {
         // The curve
@@ -114,35 +117,37 @@ void Graph::draw(sf::RenderTarget& target) const
     }
 }
 
-std::string Graph::getSeriesInString() const{
+std::string Graph::getSeriesInString() const
+{
 
-auto const Y_SCALE = 1.0 / (mYMax - mYMin) * mSize.y;
+    auto const Y_SCALE = 1.0 / (mYMax - mYMin) * mSize.y;
 
-std::string output;
+    std::string output;
 //add titles
-for (Serie const& serie : mSeries){
+    for (Serie const& serie : mSeries) {
         output += serie.title + "\t";
     }
     output.back() = '\n';
 // add past vertices
 
-	for (size_t i(0); i < mSeries[0].pastVertices.size(); ++i){
-    for (Serie const& serie : mSeries){
-        std::stringstream tmpStream;
-        tmpStream << std::fixed << std::setprecision(3) << mYMax - serie.pastVertices[i].position.y/Y_SCALE;
-        output += tmpStream.str() + "\t";
+    for (size_t i(0); i < mSeries[0].pastVertices.size(); ++i) {
+        for (Serie const& serie : mSeries) {
+            std::stringstream tmpStream;
+            tmpStream << std::fixed << std::setprecision(3) << mYMax - serie.pastVertices[i].position.y/Y_SCALE;
+            output += tmpStream.str() + "\t";
+        }
+        output.back() = '\n';
     }
-    output.back() = '\n';
-}
 // add present vertices
-	for (size_t i(0); i < mSeries[0].presentVertices.size(); ++i){
-    for (Serie const& serie : mSeries){
-        std::stringstream tmpStream;
-        tmpStream << std::fixed << std::setprecision(3) << mYMax - serie.presentVertices[i].position.y/Y_SCALE;
-        output += tmpStream.str() + "\t";    }
-    output.back() = '\n';
-}
-std::cout << output << std::endl;
-return output;
+    for (size_t i(0); i < mSeries[0].presentVertices.size(); ++i) {
+        for (Serie const& serie : mSeries) {
+            std::stringstream tmpStream;
+            tmpStream << std::fixed << std::setprecision(3) << mYMax - serie.presentVertices[i].position.y/Y_SCALE;
+            output += tmpStream.str() + "\t";
+        }
+        output.back() = '\n';
+    }
+    std::cout << output << std::endl;
+    return output;
 }
 

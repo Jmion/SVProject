@@ -12,7 +12,8 @@
 #include "../Utility/Vec2d.hpp"
 #include <iostream>
 
-class CircularCollider {
+class CircularCollider
+{
 private:
     Vec2d position; // position of center
     double radius;

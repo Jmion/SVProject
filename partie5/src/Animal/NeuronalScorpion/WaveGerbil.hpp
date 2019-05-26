@@ -6,7 +6,8 @@
 #define PARTIE1_WAVEGERBIL_HPP
 
 #include <Animal/Gerbil.hpp>
-class WaveGerbil : public Gerbil{
+class WaveGerbil : public Gerbil
+{
 private:
     /*!
      * Time since the Gerbil last emited a Wave

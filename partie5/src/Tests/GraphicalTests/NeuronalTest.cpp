@@ -72,13 +72,13 @@ void NeuronalTest::newWave(Vec2d const& cursor)
 
 std::vector<std::string> NeuronalTest::getHelperText() const
 {
-   	return {    "---------------------",
-			"(all entities added at ",
-			  " mouse position)",
+    return {    "---------------------",
+                "(all entities added at ",
+                " mouse position)",
                 "Left mouse button   : add wave",
                 "Right mouse button   : add ",
                 " obstacle",
-     			"N   : add neuronal scorpion",
+                "N   : add neuronal scorpion",
                 "Esc : End of program",
                 "C   : Reload config file",
                 "D   : Toggle debug mode",

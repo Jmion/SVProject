@@ -9,13 +9,13 @@
 #include <Utility/Constants.hpp>
 
 Arc::Arc(double start, double end, double radius, sf::Color color, float thickness, unsigned int pointCount)
-: mVertices(sf::PrimitiveType::TrianglesStrip)
-, mStart(start)
-, mEnd(end)
-, mRadius(radius)
-, mColor(color)
-, mThickness(thickness)
-, mPointCount(pointCount)
+    : mVertices(sf::PrimitiveType::TrianglesStrip)
+    , mStart(start)
+    , mEnd(end)
+    , mRadius(radius)
+    , mColor(color)
+    , mThickness(thickness)
+    , mPointCount(pointCount)
 {
     update();
 }
@@ -95,8 +95,7 @@ void Arc::update()
 {
     // Compute the normalised normal of [a, b] segment.
     // Note: we do it here just to reduce a little bit the inter-dependencies.
-    auto const normalisedNormal = [](sf::Vector2f const& a, sf::Vector2f const& b) -> sf::Vector2f
-    {
+    auto const normalisedNormal = [](sf::Vector2f const& a, sf::Vector2f const& b) -> sf::Vector2f {
         sf::Vector2f const v = a - b;
         sf::Vector2f const n = { v.y, -v.x };
         float const length = std::sqrt(n.x * n.x + n.y * n.y);
@@ -106,8 +105,9 @@ void Arc::update()
 
     // Fonction used to compute each point
     auto const f = [this](double t) -> sf::Vector2f {
-        return { float(std::cos(t * DEG_TO_RAD) * mRadius + mRadius),
-                 float(std::sin(t * DEG_TO_RAD) * mRadius + mRadius) };
+        return {
+            float(std::cos(t * DEG_TO_RAD) * mRadius + mRadius),
+            float(std::sin(t * DEG_TO_RAD) * mRadius + mRadius) };
         // «+ mRadius» because we compute from the top left corner like all SFML shapes.
     };
 

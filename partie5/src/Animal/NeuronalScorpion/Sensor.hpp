@@ -7,7 +7,8 @@
 
 class NeuronalScorpion;
 
-class Sensor : public Updatable{
+class Sensor : public Updatable
+{
 public:
 
     /*!

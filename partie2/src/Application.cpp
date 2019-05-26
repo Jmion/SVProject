@@ -40,7 +40,7 @@ std::string configFileRelativePath(int argc, char const** argv)
     if (argc >= 2) {
         return RES_LOCATION + argv[1];
     } else {
-			return RES_LOCATION + DEFAULT_CFG;
+        return RES_LOCATION + DEFAULT_CFG;
     }
 }
 
@@ -50,22 +50,22 @@ std::string configFileRelativePath(int argc, char const** argv)
 
 Vec2d getWindowSize()
 {
-   	auto width =
-		getAppConfig().window_simulation_width +
-		getAppConfig().window_control_width;;
+    auto width =
+        getAppConfig().window_simulation_width +
+        getAppConfig().window_control_width;;
     auto height =
-		getAppConfig().window_simulation_height +
-		getAppConfig().window_stats_width;
+        getAppConfig().window_simulation_height +
+        getAppConfig().window_stats_width;
     return { width, height };
 }
 
 Vec2d getSimulationSize()
 {
     auto width = getAppConfig().window_simulation_width;
-	auto height = getAppConfig().window_simulation_height;
+    auto height = getAppConfig().window_simulation_height;
     return { width, height };
 }
-	
+
 Vec2d getWorldSize()
 {
     double size(getAppConfig().simulation_world_size);
@@ -74,14 +74,14 @@ Vec2d getWorldSize()
 
 Vec2d getControlSize()
 {
-	auto width = getAppConfig().window_control_width;
-	auto height = getAppConfig().window_simulation_height/2;
+    auto width = getAppConfig().window_control_width;
+    auto height = getAppConfig().window_simulation_height/2;
     return { width, height };
 }
 Vec2d getControlPosition()
 {
     return { getAppConfig().window_simulation_width, 0 };
-}	
+}
 Vec2d getSimulationPosition()
 {
     return { 0, 0 };
@@ -89,15 +89,15 @@ Vec2d getSimulationPosition()
 
 Vec2d getStatsSize()
 {
-	auto width = getAppConfig().window_simulation_width
-		+ getAppConfig().window_control_width;
-	auto height = getAppConfig().window_stats_width;
+    auto width = getAppConfig().window_simulation_width
+                 + getAppConfig().window_control_width;
+    auto height = getAppConfig().window_stats_width;
     return { width, height };
 }
 
 Vec2d getStatsPosition()
 {
-	return { 0 , getAppConfig().window_simulation_height};
+    return { 0, getAppConfig().window_simulation_height};
 }
 
 Vec2d getHelpSize()
@@ -136,20 +136,20 @@ sf::View setupView(Vec2d const& viewSize,
 } // anonymous
 
 Application::Application(int argc, char const** argv)
-: mAppDirectory(applicationDirectory(argc, argv))
-, mCfgFile(configFileRelativePath(argc, argv))
+    : mAppDirectory(applicationDirectory(argc, argv))
+    , mCfgFile(configFileRelativePath(argc, argv))
 //, mJSONRead(mAppDirectory + mCfgFile)
-, mConfig(new Config(mAppDirectory + mCfgFile))
-, mCurrentGraphId(-1)
-,mEnvPPS(nullptr)
-, mEnvNeuronal(nullptr) 
-, mPaused(false)
-, mIsResetting(false)
-, mIsSwitchingView(false)
-, mIsDragging(false)
+    , mConfig(new Config(mAppDirectory + mCfgFile))
+    , mCurrentGraphId(-1)
+    ,mEnvPPS(nullptr)
+    , mEnvNeuronal(nullptr)
+    , mPaused(false)
+    , mIsResetting(false)
+    , mIsSwitchingView(false)
+    , mIsDragging(false)
 
 {
-	 setSimulationMode(SimulationMode::PPS);
+    setSimulationMode(SimulationMode::PPS);
     // Set global singleton
     assert(currentApp == nullptr);
     currentApp = this;
@@ -160,13 +160,13 @@ Application::Application(int argc, char const** argv)
     if (!mFont.loadFromFile(mAppDirectory + FONT_LOCATION)) {
         std::cerr << "Couldn't load " << FONT_LOCATION << std::endl;
     }
-	// prepare simulation background
-	mSimulationBackground = sf::RectangleShape();
+    // prepare simulation background
+    mSimulationBackground = sf::RectangleShape();
     mSimulationBackground.setSize(getWorldSize());
     //simulationBackground.setFillColor(sf::Color::Black);
-	mSimulationBackground.setOutlineColor(sf::Color::Black);
+    mSimulationBackground.setOutlineColor(sf::Color::Black);
     mSimulationBackground.setOutlineThickness(5);
-	chooseBackground();
+    chooseBackground();
 }
 
 
@@ -175,10 +175,10 @@ Application::~Application()
     // Destroy lab and stats, in reverse order
     delete mEnvPPS;
     mEnvPPS = nullptr;
-	delete mEnvNeuronal;
+    delete mEnvNeuronal;
     mEnvNeuronal = nullptr;
-	delete mConfig;
-	
+    delete mConfig;
+
     // Release textures
     for (auto& kv : mTextures) {
         delete kv.second;
@@ -193,7 +193,7 @@ Application::~Application()
 void Application::run()
 {
     // Load Environment and stats
-	mEnvPPS = new Environment();
+    mEnvPPS = new Environment();
     mEnvNeuronal = new Environment();
     // Set up subclasses
     onRun();
@@ -209,17 +209,17 @@ void Application::run()
     auto statsBackground = sf::RectangleShape();
     statsBackground.setSize(getStatsSize());
     statsBackground.setFillColor(sf::Color::Black);
-	// Create the control background (grey board)
+    // Create the control background (grey board)
     auto controlBackground = sf::RectangleShape();
     controlBackground.setSize(getControlSize());
     controlBackground.setFillColor(sf::Color(128, 128, 128));
-	    // Use a clock to track time
+    // Use a clock to track time
     sf::Clock clk;
 
     // FPS counter
     sf::Clock fpsClk;
     int frameCount = 0;
-	int nbCycles = 10;
+    int nbCycles = 10;
     // Main loop
     while (mRenderWindow.isOpen()) {
         // Handle events
@@ -230,7 +230,7 @@ void Application::run()
 
 
         // Update logics
-		
+
         float timeFactor = getAppConfig().simulation_time_factor;
         auto elapsedTime = clk.restart() * timeFactor; // Always reset the clock!
 
@@ -245,16 +245,16 @@ void Application::run()
             while (elapsedTime > sf::Time::Zero) {
                 auto dt = std::min(elapsedTime, maxDt);
                 elapsedTime -= dt;
-				getEnv().update(dt);
+                getEnv().update(dt);
                 onUpdate(dt);
-				--nbCycles;
+                --nbCycles;
 
             }
         }
-		// Render everything
-		render(mSimulationBackground, statsBackground, controlBackground);
-		++frameCount;
-		
+        // Render everything
+        render(mSimulationBackground, statsBackground, controlBackground);
+        ++frameCount;
+
         // In case we were resetting the simulation
         mIsResetting = false;
 
@@ -306,7 +306,7 @@ sf::Texture& Application::getTexture(std::string const& name)
         sf::Texture* newTexture = new sf::Texture;
         if (newTexture->loadFromFile(getResPath() + name)) {
             // The texture was correctly loaded so we save it
-			newTexture->setRepeated(true); 
+            newTexture->setRepeated(true);
             mTextures[name] = newTexture;
             // And return the texture
             return *newTexture;
@@ -329,24 +329,24 @@ std::string Application::getResPath() const
 
 Vec2d Application::getCentre() const
 {
-	// TODO : add organ
+    // TODO : add organ
     return getSimulationSize() / 2.0;
 }
 
 void Application::onRun()
 {
     // By default nothing is done here
-	chooseBackground();
+    chooseBackground();
 }
 
 void Application::chooseBackground()
 {
 
-	mSimulationBackground = mSimulationBackground;
-	mSimulationBackground.setTexture(&getAppTexture(isDebugOn() ?
-													getAppConfig().simulation_world_debug_texture :
-													getAppConfig().simulation_world_texture)
-									 , true);
+    mSimulationBackground = mSimulationBackground;
+    mSimulationBackground.setTexture(&getAppTexture(isDebugOn() ?
+                                     getAppConfig().simulation_world_debug_texture :
+                                     getAppConfig().simulation_world_texture)
+                                     , true);
 
 }
 
@@ -394,7 +394,7 @@ void Application::createWindow(Vec2d const& size)
 
 void Application::createViews()
 {
-   //   WINDOW STRUCTURE
+    //   WINDOW STRUCTURE
     //
     //   ----------------------------
     //   |                      |   | <- mControlFrame
@@ -405,24 +405,24 @@ void Application::createViews()
     //   |                      |   | <- mCommandsHelpFrame
     //   |                      |   |
     //   ----------------------------
-	//   |                          | <- mStatsFrame
-	//   ----------------------------
+    //   |                          | <- mStatsFrame
+    //   ----------------------------
 
-	
+
     mSimulationView = setupView(getWorldSize(),
                                 getSimulationPosition(), getSimulationSize(),
                                 mRenderWindow.getSize());
-	
+
     mStatsView = setupView(getStatsSize(),
                            getStatsPosition(), getStatsSize(),
                            mRenderWindow.getSize());
 
     mHelpView = setupView(getHelpSize(),
-                        getHelpPosition(), getHelpSize(),
-                        mRenderWindow.getSize());
-	mControlView = setupView(getControlSize(),
-                        getControlPosition(), getControlSize(),
-                        mRenderWindow.getSize());
+                          getHelpPosition(), getHelpSize(),
+                          mRenderWindow.getSize());
+    mControlView = setupView(getControlSize(),
+                             getControlPosition(), getControlSize(),
+                             mRenderWindow.getSize());
 
 }
 
@@ -443,17 +443,17 @@ void Application::handleEvent(sf::Event event, sf::RenderWindow& window)
         case sf::Keyboard::Escape:
             window.close();
             break;
-			
-		// Toggle pause for simulation
+
+        // Toggle pause for simulation
         case sf::Keyboard::Space:
             mPaused = !mPaused;
             break;
 
         // Reset the simulation
         case sf::Keyboard::R:
-			getEnv().clean();
-			
-            break;	
+            getEnv().clean();
+
+            break;
         case sf::Keyboard::Right:
             mSimulationView.move(100, 0);
             break;
@@ -474,7 +474,7 @@ void Application::handleEvent(sf::Event event, sf::RenderWindow& window)
         break;
 
 
-    // Handle zoom for SFML 2.3+ and older versions as well
+        // Handle zoom for SFML 2.3+ and older versions as well
 #if SFML_VERSION_MAJOR >= 2 && (SFML_VERSION_MINOR > 3 || (SFML_VERSION_MINOR == 3 && SFML_VERSION_PATCH >= 2))
     case sf::Event::MouseWheelScrolled:
         if (event.mouseWheelScroll.wheel == sf::Mouse::VerticalWheel) {
@@ -554,25 +554,25 @@ void Application::render(sf::Drawable const& simulationBackground, sf::Drawable 
     updateSimulationView();
     mRenderWindow.setView(mSimulationView);
     mRenderWindow.draw(simulationBackground);
-	getEnv().draw(mRenderWindow);
-	onDraw(mRenderWindow);
-	
-	// Render the command help 
-	mRenderWindow.setView(mHelpView);
-	mRenderWindow.draw(controlBackground);
-	drawOnHelp(mRenderWindow);
-	// Render the controls
-	mRenderWindow.setView(mControlView);
-	mRenderWindow.draw(controlBackground);
+    getEnv().draw(mRenderWindow);
+    onDraw(mRenderWindow);
 
-	// Render the controls
-	drawControls(mRenderWindow);
+    // Render the command help
+    mRenderWindow.setView(mHelpView);
+    mRenderWindow.draw(controlBackground);
+    drawOnHelp(mRenderWindow);
+    // Render the controls
+    mRenderWindow.setView(mControlView);
+    mRenderWindow.draw(controlBackground);
+
+    // Render the controls
+    drawControls(mRenderWindow);
 
 
-	// Render the stats
-	mRenderWindow.setView(mStatsView);
-	mRenderWindow.draw(statsBackground);
-	
+    // Render the stats
+    mRenderWindow.setView(mStatsView);
+    mRenderWindow.draw(statsBackground);
+
     // Finally, publish everything onto the screen
     mRenderWindow.display();
 
@@ -632,34 +632,34 @@ void Application::updateSimulationView()
     //     auto pos = getAnimalTracker().getTrackedAnimalPosition();
     //     mSimulationView.setCenter(pos);
     // }
-/*
-	 mSimulationView = setupView(getWorldSize(),
-                                getSimulationPosition(), getSimulationSize(),
+    /*
+    	 mSimulationView = setupView(getWorldSize(),
+                                    getSimulationPosition(), getSimulationSize(),
 
-								mRenderWindow.getSize());
-*/
-	/*
-	 auto viewSize = getWorldSize();
-	 mSimulationView.reset({ { 0, 0 }, viewSize });
-	*/
-	 /*
+    								mRenderWindow.getSize());
+    */
+    /*
+     auto viewSize = getWorldSize();
+     mSimulationView.reset({ { 0, 0 }, viewSize });
+    */
+    /*
     mSimulationView.setViewport({ static_cast<float>(position.x / windowSize.x),
-                       static_cast<float>(position.y / windowSize.y),
-                       static_cast<float>(allocation.x / windowSize.x),
-                       static_cast<float>(allocation.y / windowSize.y) });
-	 */
+                      static_cast<float>(position.y / windowSize.y),
+                      static_cast<float>(allocation.x / windowSize.x),
+                      static_cast<float>(allocation.y / windowSize.y) });
+    */
 }
 
 void Application::switchDebug()
 {
-	getAppConfig().switchDebug();
-	chooseBackground();
+    getAppConfig().switchDebug();
+    chooseBackground();
 }
 
-std::vector<std::string> Application::getHelperText() const 
+std::vector<std::string> Application::getHelperText() const
 {
-	// by default no helper text displayed
-	return { };
+    // by default no helper text displayed
+    return { };
 }
 
 void Application::drawOnHelp(sf::RenderWindow& window) const
@@ -668,11 +668,10 @@ void Application::drawOnHelp(sf::RenderWindow& window) const
     auto const FONT_SIZE = 20;
     auto lastLegendY = LEGEND_MARGIN;
 
-	auto text(getHelperText());
+    auto text(getHelperText());
 
-    for (auto& command : text)
-    {
-        auto legend = sf::Text(command, getAppFont(), FONT_SIZE);        
+    for (auto& command : text) {
+        auto legend = sf::Text(command, getAppFont(), FONT_SIZE);
         legend.setPosition(LEGEND_MARGIN, lastLegendY);
 #if SFML_VERSION_MAJOR >= 2 && SFML_VERSION_MINOR >= 4
         legend.setFillColor(sf::Color::Black);
@@ -726,91 +725,92 @@ bool isDebugOn()
 }
 
 
-void Application::drawControls(sf::RenderWindow& target) {
-	auto const LEGEND_MARGIN(10);
-	auto lastLegendY(std::max (10., getSimulationSize().y/5));
-	auto const FONT_SIZE = 20;
-	drawTitle(target, sf::Color::White, LEGEND_MARGIN, lastLegendY, FONT_SIZE);
-	lastLegendY += FONT_SIZE + 4;
-	/*
-	drawOneControl(target, s::DELTAGLUC, mLab->getDelta(GLUCOSE),
-				   sf::Color::Blue, LEGEND_MARGIN, lastLegendY, FONT_SIZE);
-	lastLegendY += FONT_SIZE + 4;
+void Application::drawControls(sf::RenderWindow& target)
+{
+    auto const LEGEND_MARGIN(10);
+    auto lastLegendY(std::max (10., getSimulationSize().y/5));
+    auto const FONT_SIZE = 20;
+    drawTitle(target, sf::Color::White, LEGEND_MARGIN, lastLegendY, FONT_SIZE);
+    lastLegendY += FONT_SIZE + 4;
+    /*
+    drawOneControl(target, s::DELTAGLUC, mLab->getDelta(GLUCOSE),
+    			   sf::Color::Blue, LEGEND_MARGIN, lastLegendY, FONT_SIZE);
+    lastLegendY += FONT_SIZE + 4;
 
-	drawOneControl(target, s::DELTABROM, mLab->getDelta(BROMOPYRUVATE),
-				   sf::Color::Yellow, LEGEND_MARGIN, lastLegendY, FONT_SIZE);
-	lastLegendY += FONT_SIZE + 4;
+    drawOneControl(target, s::DELTABROM, mLab->getDelta(BROMOPYRUVATE),
+    			   sf::Color::Yellow, LEGEND_MARGIN, lastLegendY, FONT_SIZE);
+    lastLegendY += FONT_SIZE + 4;
 
-	drawOneControl(target, s::DELTAVGEF, mLab->getDelta(VGEF),
-				   sf::Color::Green, LEGEND_MARGIN, lastLegendY, FONT_SIZE);
-	*/
+    drawOneControl(target, s::DELTAVGEF, mLab->getDelta(VGEF),
+    			   sf::Color::Green, LEGEND_MARGIN, lastLegendY, FONT_SIZE);
+    */
 }
 
 void Application::drawTitle(sf::RenderWindow& target
-								 , sf::Color color
-								 , size_t xcoord
-								 , size_t ycoord
-								 , size_t font_size
-							) 
+                            , sf::Color color
+                            , size_t xcoord
+                            , size_t ycoord
+                            , size_t font_size
+                           )
 {
-	std::string text;
-	
-	switch(mMode){
-		case SimulationMode::PPS :
-			text = s::PPS;
-			break;
-		case SimulationMode::NEURONAL :
-			text = s::NEURONAL;
-			break;
-		case SimulationMode::TEST :
-		default:
-			text = s::TEST;
-			break;
-	}
-	
-	auto legend = sf::Text(text, getAppFont(), font_size);
-	legend.setPosition(xcoord, ycoord);
+    std::string text;
+
+    switch(mMode) {
+    case SimulationMode::PPS :
+        text = s::PPS;
+        break;
+    case SimulationMode::NEURONAL :
+        text = s::NEURONAL;
+        break;
+    case SimulationMode::TEST :
+    default:
+        text = s::TEST;
+        break;
+    }
+
+    auto legend = sf::Text(text, getAppFont(), font_size);
+    legend.setPosition(xcoord, ycoord);
 #if SFML_VERSION_MAJOR >= 2 && SFML_VERSION_MINOR >= 4
-	legend.setFillColor(color);
+    legend.setFillColor(color);
 #else
-	legend.setColor(color);
+    legend.setColor(color);
 #endif
-	legend.setStyle(sf::Text::Bold);
-	legend.setStyle(sf::Text::Underlined);
-	target.draw(legend);
+    legend.setStyle(sf::Text::Bold);
+    legend.setStyle(sf::Text::Underlined);
+    target.draw(legend);
 }
 void Application::drawOneControl(sf::RenderWindow& target
-								 , std::string name
-								 , double value
-								 , sf::Color color
-								 , size_t xcoord
-								 , size_t ycoord
-								 , size_t font_size
-								 ) 
+                                 , std::string name
+                                 , double value
+                                 , sf::Color color
+                                 , size_t xcoord
+                                 , size_t ycoord
+                                 , size_t font_size
+                                )
 {
-	std::stringstream tmpStream;
-	
-	tmpStream << std::fixed << std::setprecision(2) << value;
-	auto value_str = tmpStream.str();
-	value_str = value_str.substr(0, value_str.find_last_not_of("0"));
-	auto text = name + " : " +  value_str;
-	auto legend = sf::Text(text, getAppFont(), font_size);
-	legend.setPosition(xcoord, ycoord);
+    std::stringstream tmpStream;
+
+    tmpStream << std::fixed << std::setprecision(2) << value;
+    auto value_str = tmpStream.str();
+    value_str = value_str.substr(0, value_str.find_last_not_of("0"));
+    auto text = name + " : " +  value_str;
+    auto legend = sf::Text(text, getAppFont(), font_size);
+    legend.setPosition(xcoord, ycoord);
 #if SFML_VERSION_MAJOR >= 2 && SFML_VERSION_MINOR >= 4
-	legend.setFillColor(color);
+    legend.setFillColor(color);
 #else
-	legend.setColor(color);
+    legend.setColor(color);
 #endif
-	target.draw(legend);
+    target.draw(legend);
 }
 
 void Application::setSimulationMode(SimulationMode mode)
 {
-	mMode = mode;
+    mMode = mode;
 }
 
 Application::SimulationMode Application::getSimulationMode() const
 {
-	return mMode;
+    return mMode;
 }
 

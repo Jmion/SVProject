@@ -40,14 +40,14 @@ double const ANIMAL_RANDOM_WALK_DISTANCE = 160;
 namespace s
 {
 
-	std::string const PPS = "Predator Prey Simulation";
-	std::string const NEURONAL = "Neuronal Simulation";
-	std::string const GENERAL = "General";
-	std::string const TEST    = "Test";
-	std::string const SCORPIONS = "Scorpions";
-	std::string const GERBILS   = "Gerbils";
-	std::string const FOOD  = "Food sources";
-	std::string const WAVES  = "Waves";
+std::string const PPS = "Predator Prey Simulation";
+std::string const NEURONAL = "Neuronal Simulation";
+std::string const GENERAL = "General";
+std::string const TEST    = "Test";
+std::string const SCORPIONS = "Scorpions";
+std::string const GERBILS   = "Gerbils";
+std::string const FOOD  = "Food sources";
+std::string const WAVES  = "Waves";
 } // s
 
 #endif // INFOSV_CONSTANTS_HPP

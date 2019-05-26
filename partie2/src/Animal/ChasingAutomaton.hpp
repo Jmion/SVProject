@@ -8,16 +8,17 @@
 #include <Utility/Utility.hpp>
 #include <Obstacle/CircularCollider.hpp>
 
-class ChasingAutomaton: public CircularCollider {
+class ChasingAutomaton: public CircularCollider
+{
 public:
 
     /*!
      * Amount of deceleration that the automaton has when approaching the target.
      */
-     /*
-      * If adding new states to this enum do not forget to configure the values that are wanted
-      * in the getDecelerationRate method present in this class.
-      */
+    /*
+     * If adding new states to this enum do not forget to configure the values that are wanted
+     * in the getDecelerationRate method present in this class.
+     */
     enum Deceleration {WEAK,MEDIUM,STRONG};
 
     /*!

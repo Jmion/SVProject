@@ -12,7 +12,8 @@
 #include <Utility/Macros.hpp>
 #include <array>
 
-class Animal : public OrganicEntity {
+class Animal : public OrganicEntity
+{
 public:
     /*!
      * Allow modification of target position
@@ -40,7 +41,7 @@ public:
      * can be in.
      */
     DEFINE_ENUM_WITH_STRING_CONVERSIONS(State, (FOOD_IN_SIGHT)(FEEDING)(RUNNING_AWAY)
-            (MATE_IN_SIGHT)(MATING)(GIVING_BIRTH)(WANDERING)(DIESTING))
+                                        (MATE_IN_SIGHT)(MATING)(GIVING_BIRTH)(WANDERING)(DIESTING))
 
 
     /*!
@@ -116,12 +117,12 @@ public:
 
 protected:
 
-/*!
-     * Gets number of children that this animal has.
-     * Pregnant animals have children. If the animal is a male then
-     * this methode will return 0.
-     * @return Number of children that the animal has (pregnancy, number that are going to be born)
-     */
+    /*!
+         * Gets number of children that this animal has.
+         * Pregnant animals have children. If the animal is a male then
+         * this methode will return 0.
+         * @return Number of children that the animal has (pregnancy, number that are going to be born)
+         */
     int getNumberOfChildren() const;
 
     /*!

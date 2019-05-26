@@ -28,7 +28,7 @@ void AnimalTest::onEvent(sf::Event event, sf::RenderWindow&)
             getAppEnv().clean();
 #if STEP  == 2
             double position(getAppConfig().simulation_world_size / 2);
-            getAppEnv().addAnimal(new Animal({ position , position }));
+            getAppEnv().addAnimal(new Animal({ position, position }));
 #endif
         }
 
@@ -50,7 +50,7 @@ void AnimalTest::onSimulationStart()
     setSimulationMode(SimulationMode::TEST);
 #if STEP  == 2
     double position(getAppConfig().simulation_world_size / 2);
-    getAppEnv().addAnimal(new Animal({ position , position }));
+    getAppEnv().addAnimal(new Animal({ position, position }));
 #else
     std::cout << "##WARNING : this test only works in step 2" << std::endl;
 #endif

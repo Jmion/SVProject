@@ -35,7 +35,7 @@
 class Application
 {
 public:
-	int mSimulationCycle;
+    int mSimulationCycle;
     /*!
      * @brief Constructor
      *
@@ -61,16 +61,16 @@ public:
      * @note Don't forget to call init() before run() !
      */
     void run();
- /*!
-     * @brief Get access to the execution environment of the application (the env)
-     *
-     * @note This breaks the encapsulation but simplify everything!
-     *
-     * @return the app's env
-     */
+    /*!
+        * @brief Get access to the execution environment of the application (the env)
+        *
+        * @note This breaks the encapsulation but simplify everything!
+        *
+        * @return the app's env
+        */
     Environment& getEnv();
     Environment const& getEnv() const;
- 
+
     /*!
      * @brief Get the animal tracker helper
      *
@@ -177,13 +177,13 @@ protected:
      * @param target a render target
      */
     virtual void onDraw(sf::RenderTarget& target);
-/*!
-     * @brief Subclass can override this method to change the policy for
-	 * background handling
-	 */
-	void chooseBackground();
+    /*!
+         * @brief Subclass can override this method to change the policy for
+    	 * background handling
+    	 */
+    void chooseBackground();
 
-	enum class SimulationMode { PPS, NEURONAL, TEST };
+    enum class SimulationMode { PPS, NEURONAL, TEST };
 
 protected:
     /*!
@@ -241,39 +241,39 @@ protected:
      */
     void updateSimulationView();
 
-   /*!
-     * @brief toggle debug mode
-     */
-	void switchDebug();
+    /*!
+      * @brief toggle debug mode
+      */
+    void switchDebug();
 
     void drawOnHelp(sf::RenderWindow& window) const;
 
     void drawControls(sf::RenderWindow& target);
-	
-	void drawOneControl(sf::RenderWindow& target
-						, std::string name
-						, double value
-						, sf::Color color
-						, size_t xcoord
-						, size_t ycoord
-						, size_t font_size
-						);
-	
-	void drawTitle(sf::RenderWindow& target, sf::Color color
-				  	, size_t xcoord
-				  , size_t ycoord
-				  , size_t font_size
-				  );
 
-	virtual std::vector<std::string> getHelperText() const;
-	
-	void setSimulationMode(SimulationMode mode);
+    void drawOneControl(sf::RenderWindow& target
+                        , std::string name
+                        , double value
+                        , sf::Color color
+                        , size_t xcoord
+                        , size_t ycoord
+                        , size_t font_size
+                       );
+
+    void drawTitle(sf::RenderWindow& target, sf::Color color
+                   , size_t xcoord
+                   , size_t ycoord
+                   , size_t font_size
+                  );
+
+    virtual std::vector<std::string> getHelperText() const;
+
+    void setSimulationMode(SimulationMode mode);
     SimulationMode getSimulationMode() const;
-	
+
 protected:
- /*!
-     * @brief toggle concentration view mode
-     */
+    /*!
+        * @brief toggle concentration view mode
+        */
     // The order is important since some fields need other to be initialised
     std::string const mAppDirectory; ///< Path to the executable's directory
     std::string const mCfgFile;      ///< Relative path to the CFG
@@ -281,11 +281,11 @@ protected:
     Config*          mConfig;       ///< Application configuration
 
     sf::View mStatsView;             ///< View for the stats area
-	sf::View mControlView;             ///< View for the control area	
+    sf::View mControlView;             ///< View for the control area
 
     int      mCurrentGraphId;        ///< Current graph ID
     SimulationMode mMode; ///< active simulation
-	Environment* mEnvPPS; ///< Simulated environment for prey predator simulation
+    Environment* mEnvPPS; ///< Simulated environment for prey predator simulation
     Environment* mEnvNeuronal; ///< Simulated environment for neuronal simulation
     sf::View mHelpView;         ///< View for commands help
 
@@ -303,18 +303,18 @@ protected:
 
     bool         mPaused;            ///< Tells if the application is in pause or not
     bool         mIsResetting;       ///< Is true for one main loop iteration when resetting.
-	bool         mIsSwitchingView;
-                                     ///  This is useful to pause the clock while generating
-                                     ///  a new world. Without this, a huge dt would result from
-                                     ///  rebuilding the world.
+    bool         mIsSwitchingView;
+    ///  This is useful to pause the clock while generating
+    ///  a new world. Without this, a huge dt would result from
+    ///  rebuilding the world.
     bool         mIsDragging;        ///< Tells whether or not the user is dragging the view
     sf::Vector2i mLastCursorPosition;///< For handling dragging logic
 //    AnimalTracker   mAnimalTracker;        ///< Helper to keep track of an animal (optional)
 
-	sf::RectangleShape mSimulationBackground;
-	// Views
+    sf::RectangleShape mSimulationBackground;
+    // Views
 
-	sf::View mCurrentView;
+    sf::View mCurrentView;
 };
 
 /*!

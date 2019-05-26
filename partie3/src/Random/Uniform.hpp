@@ -23,7 +23,7 @@ template <typename T>
 T uniform(T min, T max)
 {
     static std::default_random_engine algo;
-    
+
     static bool initialise = true;
     if (initialise) {
         initialise = false;
@@ -36,8 +36,8 @@ T uniform(T min, T max)
     typedef typename std::uniform_real_distribution<T> real_dist;
 
     typedef typename std::conditional<condition::value,
-                                      integer_dist,
-                                      real_dist>::type distribution_type;
+            integer_dist,
+            real_dist>::type distribution_type;
 
     distribution_type dist(min, max);
 

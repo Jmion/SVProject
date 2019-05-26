@@ -9,7 +9,8 @@
 #include "Animal.hpp"
 #include <SFML/Audio.hpp>
 
-class Dragon : public Animal{
+class Dragon : public Animal
+{
 
 public:
 

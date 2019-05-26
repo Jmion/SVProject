@@ -11,32 +11,32 @@
 #include <cmath>
 
 Vec2d::Vec2d()
-: Vec2d(0.0, 0.0)
+    : Vec2d(0.0, 0.0)
 {
     // Done.
 }
 
 Vec2d::Vec2d(double x_, double y_)
-: x(x_)
-, y(y_)
+    : x(x_)
+    , y(y_)
 {
     // Done.
 }
 
 Vec2d::Vec2d(sf::Vector2f const& sfvect)
-: Vec2d(sfvect.x, sfvect.y)
+    : Vec2d(sfvect.x, sfvect.y)
 {
     // Done.
 }
 
 Vec2d::Vec2d(sf::Vector2i const& sfvect)
-: Vec2d(sfvect.x, sfvect.y)
+    : Vec2d(sfvect.x, sfvect.y)
 {
     // Done.
 }
 
 Vec2d::Vec2d(Vec2d const& other)
-: Vec2d(other.x, other.y)
+    : Vec2d(other.x, other.y)
 {
     // Done.
 }
@@ -128,32 +128,32 @@ bool Vec2d::operator!=(Vec2d const& b) const
 double& Vec2d::operator[](int axis)
 {
     switch (axis) {
-        case 0:
-            return x;
+    case 0:
+        return x;
 
-        case 1:
-            return y;
+    case 1:
+        return y;
 
-        default:
-            // This should not happen
-            assert(false);
-            break;
+    default:
+        // This should not happen
+        assert(false);
+        break;
     }
 }
 
 double Vec2d::operator[](int axis) const
 {
     switch (axis) {
-        case 0:
-            return x;
+    case 0:
+        return x;
 
-        case 1:
-            return y;
+    case 1:
+        return y;
 
-        default:
-            // This should not happen
-            assert(false);
-            break;
+    default:
+        // This should not happen
+        assert(false);
+        break;
     }
 }
 

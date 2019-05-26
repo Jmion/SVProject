@@ -8,7 +8,8 @@
 #include <Utility/Utility.hpp>
 #include <Obstacle/CircularCollider.hpp>
 
-class Animal: public CircularCollider {
+class Animal: public CircularCollider
+{
 public:
 
     /*!

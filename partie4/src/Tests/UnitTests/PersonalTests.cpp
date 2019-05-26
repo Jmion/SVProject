@@ -5,7 +5,8 @@
 #include <Mat2d.hpp>
 #include <iostream>
 
-int main(){
+int main()
+{
     Vec2d v(1, 0);
     Mat2d m(PI/2);
     Vec2d res = m * v;

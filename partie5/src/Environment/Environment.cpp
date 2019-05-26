@@ -83,7 +83,8 @@ void Environment::cleanUpDeadOrganic()
     toDelete.clear();
 }
 
-void Environment::cleanUpWave() {
+void Environment::cleanUpWave()
+{
     std::list<Wave*> toDelete;
     for (auto &w: waves) {
         if (w != nullptr && w->isWaveToBeDeleted()) {
@@ -188,7 +189,8 @@ std::list<OrganicEntity*> Environment::getEntitiesInSightForAnimal(const Animal 
     return targetsInSight;
 }
 
-std::list<OrganicEntity *> Environment::getEntitiesInBurnRangeOfDragon(const Dragon *dragon) const {
+std::list<OrganicEntity *> Environment::getEntitiesInBurnRangeOfDragon(const Dragon *dragon) const
+{
     std::list<OrganicEntity*> targetsInSight;
     for(OrganicEntity* entity: organicEntities) {
         if (dragon->isTargetInBurnRange(entity->getPosition())) {
@@ -203,15 +205,18 @@ void Environment::addGenerator(FoodGenerator *foodGenerator)
     generators.push_back(foodGenerator);
 }
 
-void Environment::addWave(Wave *wave) {
+void Environment::addWave(Wave *wave)
+{
     waves.push_back(wave);
 }
 
-void Environment::addObstacle(SolideObstacle *obstacle) {
+void Environment::addObstacle(SolideObstacle *obstacle)
+{
     solidObstacles.push_back(obstacle);
 }
 
-std::list<SolideObstacle *> Environment::getSolideObstaclesCollidingForWave(const Wave *wave) const {
+std::list<SolideObstacle *> Environment::getSolideObstaclesCollidingForWave(const Wave *wave) const
+{
     std::list<SolideObstacle*> solideObstaclesCol;
     for(auto & s : solidObstacles) {
         if(s != nullptr && wave->isColliding(*s) && !wave->isCircularColliderInside(*s))
@@ -221,7 +226,8 @@ std::list<SolideObstacle *> Environment::getSolideObstaclesCollidingForWave(cons
 
 }
 
-std::list<Wave *> Environment::getWaveCollidingWithSensor(const Vec2d &v) const {
+std::list<Wave *> Environment::getWaveCollidingWithSensor(const Vec2d &v) const
+{
     std::list<Wave*> wavesColliding;
     for (auto &w: waves) {
         double ditanceFromWaveCenter = (v - w->getPosition()).length();
@@ -235,22 +241,25 @@ std::list<Wave *> Environment::getWaveCollidingWithSensor(const Vec2d &v) const 
 }
 
 
-std::unordered_map<std::string, double> Environment::fetchData(const std::string& graphTitle) {
-    if(graphTitle == s::GENERAL){
+std::unordered_map<std::string, double> Environment::fetchData(const std::string& graphTitle)
+{
+    if(graphTitle == s::GENERAL) {
         entityCounter.at(s::WAVES) = waves.size();
         return entityCounter;
     }
     return std::unordered_map<std::string, double>();
 }
 
-Environment::Environment() : dragonFireTrigger(false) {
+Environment::Environment() : dragonFireTrigger(false)
+{
     sf::SoundBuffer buffer;
     dragonCommandBuffer.loadFromFile(getAppConfig().dragon_burn_command_sound);
     dragonCommand.setBuffer(dragonCommandBuffer);
     clearCounter();
 }
 
-void Environment::clearCounter() {
+void Environment::clearCounter()
+{
     entityCounter.insert(std::pair<std::string, double>(s::GERBILS, 0));
     entityCounter.insert(std::pair<std::string, double>(s::SCORPIONS, 0));
     entityCounter.insert(std::pair<std::string, double>(s::FOOD, 0));
@@ -260,24 +269,28 @@ void Environment::clearCounter() {
 
 }
 
-void Environment::incrementCounter(const std::string& animalType) {
+void Environment::incrementCounter(const std::string& animalType)
+{
     if (entityCounter.find(animalType) != entityCounter.end()) {
         entityCounter[animalType] += 1;
     }
 }
 
-void Environment::decrementCounter(const std::string& animalType) {
+void Environment::decrementCounter(const std::string& animalType)
+{
     auto it = entityCounter.find(animalType);
-    if(it != entityCounter.end() && it->second>0){
+    if(it != entityCounter.end() && it->second>0) {
         entityCounter[animalType] -= 1;
     }
 }
 
-bool Environment::isDragonFireTrigger() const {
+bool Environment::isDragonFireTrigger() const
+{
     return dragonFireTrigger;
 }
 
-void Environment::setDragonFireTrigger(bool dragonFireTrigger) {
+void Environment::setDragonFireTrigger(bool dragonFireTrigger)
+{
     Environment::dragonFireTrigger = dragonFireTrigger;
     if(dragonFireTrigger) {
         if(entityCounter[s::DRAGON] > 0) {

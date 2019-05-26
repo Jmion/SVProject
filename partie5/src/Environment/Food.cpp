@@ -64,53 +64,65 @@ bool Food::eatableBy(A_Unused Food const *food) const
     return false;
 }
 
-bool Food::eatableBy(A_Unused Dragon const *dragon) const {
+bool Food::eatableBy(A_Unused Dragon const *dragon) const
+{
     return false;
 }
 
-bool Food::matable(OrganicEntity const *other) const {
+bool Food::matable(OrganicEntity const *other) const
+{
     return other->canMate(this);
 }
 
-bool Food::canMate(A_Unused Scorpion const *scorpion) const {
+bool Food::canMate(A_Unused Scorpion const *scorpion) const
+{
     return false;
 }
 
-bool Food::canMate(A_Unused Gerbil const *gerbil) const {
+bool Food::canMate(A_Unused Gerbil const *gerbil) const
+{
     return false;
 }
 
-bool Food::canMate(A_Unused Food const *food) const {
+bool Food::canMate(A_Unused Food const *food) const
+{
     return false;
 }
 
-bool Food::meet(OrganicEntity *mate) {
+bool Food::meet(OrganicEntity *mate)
+{
     return mate->meetManagement(this);
 }
 
-bool Food::meetManagement(A_Unused Scorpion *mate) {
+bool Food::meetManagement(A_Unused Scorpion *mate)
+{
     return false;
 }
 
-bool Food::meetManagement(A_Unused Gerbil *mate) {
+bool Food::meetManagement(A_Unused Gerbil *mate)
+{
     return false;
 }
 
-bool Food::meetManagement(A_Unused Food *mate) {
+bool Food::meetManagement(A_Unused Food *mate)
+{
     return false;
 }
 
-Food::~Food() {
+Food::~Food()
+{
     Environment* e = &getAppEnv();
     if(e!= nullptr)
         e->decrementCounter(s::FOOD);
 }
 
-bool Food::meetManagement(A_Unused Dragon *mate) {
+bool Food::meetManagement(A_Unused Dragon *mate)
+{
     return false;
 }
 
-bool Food::canMate(A_Unused Dragon const *dragon) const {
+bool Food::canMate(A_Unused Dragon const *dragon) const
+{
     return false;
 }
 

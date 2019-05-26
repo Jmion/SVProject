@@ -63,7 +63,8 @@ bool OrganicEntity::updateAndHasWaitedLongEnoughFeeding(sf::Time dt)
 
 
 
-void OrganicEntity::update(sf::Time dt) {
+void OrganicEntity::update(sf::Time dt)
+{
     aging(dt);
 }
 

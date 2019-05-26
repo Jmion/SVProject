@@ -12,7 +12,8 @@
 #include <list>
 class Animal;
 
-class Environment {
+class Environment
+{
 public:
     /*!
      * Add animal to environment fauna.
@@ -68,8 +69,8 @@ public:
     std::list<Vec2d> getTargetsInSightForAnimal(Animal* animal);
 
 private:
-std::list<Animal*> animals;
-std::list<Vec2d> targets;
+    std::list<Animal*> animals;
+    std::list<Vec2d> targets;
 
 };
 

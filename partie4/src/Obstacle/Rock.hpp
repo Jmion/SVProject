@@ -8,7 +8,8 @@
 
 #include "SolideObstacle.hpp"
 
-class Rock : public SolideObstacle{
+class Rock : public SolideObstacle
+{
 public:
 
     explicit Rock(const Vec2d& position);

@@ -14,7 +14,8 @@
 
 
 
-class Stats {
+class Stats
+{
 
     /*!
      * Graph number to draw

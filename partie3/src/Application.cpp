@@ -97,7 +97,7 @@ Vec2d getStatsSize()
 
 Vec2d getStatsPosition()
 {
-    return { 0 , getAppConfig().window_simulation_height};
+    return { 0, getAppConfig().window_simulation_height};
 }
 
 Vec2d getHelpSize()

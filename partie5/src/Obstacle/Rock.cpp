@@ -9,11 +9,13 @@
 
 
 Rock::Rock(const Vec2d &position) :
-SolideObstacle(position,getInitialRadius(),uniform(-PI,PI)){
+    SolideObstacle(position,getInitialRadius(),uniform(-PI,PI))
+{
 
 }
 
-double Rock::getInitialRadius() {
+double Rock::getInitialRadius()
+{
     double minRockSize = getAppConfig().simulation_world_size/50;
     double radius = uniform(minRockSize, 2 * minRockSize);
     return fmax(1, radius);
@@ -21,7 +23,8 @@ double Rock::getInitialRadius() {
 
 Rock::~Rock() = default;
 
-std::string Rock::getTexturePath() const {
+std::string Rock::getTexturePath() const
+{
     return getAppConfig().solid_obstacle_rock_texture;
 }
 

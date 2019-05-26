@@ -17,15 +17,15 @@
 class AnimalTest : public Application
 {
 public:
-     AnimalTest(int argc, char const** argv)
-    : Application(argc, argv)
+    AnimalTest(int argc, char const** argv)
+        : Application(argc, argv)
     {
     }
 
     virtual void onRun() override final;
     virtual void onSimulationStart() override final;
     virtual void onEvent(sf::Event event, sf::RenderWindow& window) override final;
-	virtual std::vector<std::string> getHelperText() const final override;
+    virtual std::vector<std::string> getHelperText() const final override;
 };
 
 #endif // INFOSV_ANIMAL_TEST_HPP

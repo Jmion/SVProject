@@ -63,11 +63,13 @@ bool OrganicEntity::updateAndHasWaitedLongEnoughFeeding(sf::Time dt)
 
 
 
-void OrganicEntity::update(sf::Time dt) {
+void OrganicEntity::update(sf::Time dt)
+{
     aging(dt);
 }
 
-bool OrganicEntity::isBurnable() {
+bool OrganicEntity::isBurnable()
+{
     return true;
 }
 

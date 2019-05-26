@@ -8,7 +8,8 @@
 
 #include "CircularCollider.hpp"
 
-class SolideObstacle : public CircularCollider{
+class SolideObstacle : public CircularCollider
+{
 private:
     /*!
      * Orientation of the rock in 3D space.

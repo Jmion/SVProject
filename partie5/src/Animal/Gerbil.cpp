@@ -61,7 +61,8 @@ Gerbil::Gerbil(const Vec2d &position, double energyLevel, bool isFemale) : Anima
 
 Gerbil::Gerbil(const Vec2d &position) : Gerbil(position, getInitialEnergy(), uniform(0, 1) == 0) {}
 
-Gerbil::~Gerbil() {
+Gerbil::~Gerbil()
+{
     removeAnimalWithEnvironment();
 }
 
@@ -85,23 +86,28 @@ bool Gerbil::eatableBy(A_Unused Food const *food) const
     return false;
 }
 
-bool Gerbil::eatableBy(A_Unused Dragon const *dragon) const {
+bool Gerbil::eatableBy(A_Unused Dragon const *dragon) const
+{
     return true;
 }
 
-bool Gerbil::matable(OrganicEntity const *other) const {
+bool Gerbil::matable(OrganicEntity const *other) const
+{
     return other->canMate(this);
 }
 
-bool Gerbil::canMate(A_Unused Scorpion const *scorpion) const {
+bool Gerbil::canMate(A_Unused Scorpion const *scorpion) const
+{
     return false;
 }
 
-bool Gerbil::canMate(Gerbil const *gerbil) const {
+bool Gerbil::canMate(Gerbil const *gerbil) const
+{
     return Animal::canMate(gerbil);
 }
 
-bool Gerbil::canMate(A_Unused Food const *food) const {
+bool Gerbil::canMate(A_Unused Food const *food) const
+{
     return false;
 }
 
@@ -130,63 +136,76 @@ double Gerbil::getStarvingEnergyLevel() const
     return getAppConfig().gerbil_energy_starving;
 }
 
-double Gerbil::getMinimumMatingEnergyMale() const {
+double Gerbil::getMinimumMatingEnergyMale() const
+{
     return getAppConfig().gerbil_energy_min_mating_male;
 }
 
-double Gerbil::getMinimumMatingEnergyFemale() const {
+double Gerbil::getMinimumMatingEnergyFemale() const
+{
     return getAppConfig().gerbil_energy_min_mating_female;
 }
 
-double Gerbil::getMinimumMatingAge() const {
+double Gerbil::getMinimumMatingAge() const
+{
     return getAppConfig().gerbil_min_age_mating;
 }
 
 
 
-bool Gerbil::meetManagement(Gerbil *mate) {
+bool Gerbil::meetManagement(Gerbil *mate)
+{
     procreate();
     mate->procreate();
     return true;
 }
 
-bool Gerbil::meetManagement(A_Unused Scorpion *mate) {
+bool Gerbil::meetManagement(A_Unused Scorpion *mate)
+{
     return false;
 }
 
-bool Gerbil::meetManagement(A_Unused Food *mate) {
+bool Gerbil::meetManagement(A_Unused Food *mate)
+{
     return false;
 }
 
-double Gerbil::getEnergyLossFemalePerChild() const {
+double Gerbil::getEnergyLossFemalePerChild() const
+{
     return getAppConfig().gerbil_energy_loss_female_per_child;
 }
 
-int Gerbil::getMinimumNumberOfChildren() const {
+int Gerbil::getMinimumNumberOfChildren() const
+{
     return getAppConfig().gerbil_min_children;
 }
 
-int Gerbil::getMaximumNumberOfChildren() const {
+int Gerbil::getMaximumNumberOfChildren() const
+{
     return getAppConfig().gerbil_max_children;
 }
 
-double Gerbil::getGestationTimeConfig() const {
+double Gerbil::getGestationTimeConfig() const
+{
     if(getIsFemale())
         return getAppConfig().gerbil_gestation_time;
     return 0;
 }
 
-double Gerbil::getEnergyLossMaleMatting() const {
+double Gerbil::getEnergyLossMaleMatting() const
+{
     return getAppConfig().gerbil_energy_loss_mating_male;
 }
 
-bool Gerbil::meet(OrganicEntity *mate) {
+bool Gerbil::meet(OrganicEntity *mate)
+{
     return mate->meetManagement(this);
 }
 
-bool Gerbil::giveBirth() {
-    if(Animal::giveBirth()){
-        for(int i(0); i < getNumberOfChildren(); i++){
+bool Gerbil::giveBirth()
+{
+    if(Animal::giveBirth()) {
+        for(int i(0); i < getNumberOfChildren(); i++) {
             getAppEnv().addEntity(new Gerbil(getPosition()));
         }
         return true;
@@ -194,19 +213,23 @@ bool Gerbil::giveBirth() {
     return false;
 }
 
-void Gerbil::registerAnimalWithEnvironment() const {
+void Gerbil::registerAnimalWithEnvironment() const
+{
     Animal::registerAnimalWithEnvironment(s::GERBILS);
 }
 
-void Gerbil::removeAnimalWithEnvironment() const {
+void Gerbil::removeAnimalWithEnvironment() const
+{
     Animal::removeAnimalWithEnvironment(s::GERBILS);
 }
 
-bool Gerbil::canMate(A_Unused Dragon const *dragon) const {
+bool Gerbil::canMate(A_Unused Dragon const *dragon) const
+{
     return false;
 }
 
-bool Gerbil::meetManagement(A_Unused Dragon *mate) {
+bool Gerbil::meetManagement(A_Unused Dragon *mate)
+{
     return false;
 }
 

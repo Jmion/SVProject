@@ -79,7 +79,8 @@ void Environment::cleanUpDeadOrganic()
     toDelete.clear();
 }
 
-void Environment::cleanUpWave() {
+void Environment::cleanUpWave()
+{
     std::list<Wave*> toDelete;
     for (auto &w: waves) {
         if (w != nullptr && w->isWaveToBeDeleted()) {
@@ -187,16 +188,19 @@ void Environment::addGenerator(FoodGenerator *foodGenerator)
     generators.push_back(foodGenerator);
 }
 
-void Environment::addWave(Wave *wave) {
+void Environment::addWave(Wave *wave)
+{
     waves.push_back(wave);
 }
 
-void Environment::addObstacle(SolideObstacle *obstacle) {
+void Environment::addObstacle(SolideObstacle *obstacle)
+{
     std::cerr << "Adding obstactle" << std::endl;
     solidObstacles.push_back(obstacle);
 }
 
-std::list<SolideObstacle *> Environment::getSolideObstaclesCollidingForWave(const Wave *wave) const {
+std::list<SolideObstacle *> Environment::getSolideObstaclesCollidingForWave(const Wave *wave) const
+{
     std::list<SolideObstacle*> solideObstaclesCol;
     for(auto & s : solidObstacles) {
         if(s != nullptr && wave->isColliding(*s) && !wave->isCircularColliderInside(*s))
@@ -206,7 +210,8 @@ std::list<SolideObstacle *> Environment::getSolideObstaclesCollidingForWave(cons
 
 }
 
-std::list<Wave *> Environment::getWaveCollidingWithSensor(const Vec2d &v) const {
+std::list<Wave *> Environment::getWaveCollidingWithSensor(const Vec2d &v) const
+{
     std::list<Wave*> wavesColliding;
     for (auto &w: waves) {
         double ditanceFromWaveCenter = (v - w->getPosition()).length();

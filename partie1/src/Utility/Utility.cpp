@@ -40,9 +40,9 @@ sf::Sprite buildSprite(Vec2d const& position, double size, sf::Texture const& te
     sprite.setPosition(position);
     double const maxSide = std::max(texture.getSize().x, texture.getSize().y);
     sprite.setScale(Vec2d(size, size) / maxSide);
-	if (rotation != 0.f) {
-		sprite.setRotation(rotation);
-	}
+    if (rotation != 0.f) {
+        sprite.setRotation(rotation);
+    }
     return sprite;
 }
 
@@ -53,16 +53,16 @@ sf::Text buildText(std::string const& msg, Vec2d const& position, sf::Font const
     txt.setPosition(position);
 #if SFML_VERSION_MAJOR >= 2 && (SFML_VERSION_MINOR > 3 || (SFML_VERSION_MINOR == 3 && SFML_VERSION_PATCH >= 2))
     //txt.setFillColor(color);
-	txt.setColor(color);
+    txt.setColor(color);
 #else
     txt.setColor(color);
 #endif
     txt.setCharacterSize(size);
     auto const bounds = txt.getLocalBounds();
     txt.setOrigin(bounds.width / 2, bounds.height / 2);
-	if (rotation != 0.f) {
-		txt.setRotation(rotation);
-	}
+    if (rotation != 0.f) {
+        txt.setRotation(rotation);
+    }
     return txt;
 }
 
@@ -174,30 +174,30 @@ std::vector<std::string> split(std::string const& str, char delim)
 }
 
 CellCoord vec2dToCellCoord(const Vec2d& pos, double width,
-					  double height,  float cellSize)
+                           double height,  float cellSize)
 {
-	// Clamp the position inside the substrate
+    // Clamp the position inside the substrate
 
-	auto position = pos;
+    auto position = pos;
 
     while (position.x < 0)       position.x += width;
     while (position.x >= width)  position.x -= width;
     while (position.y < 0)       position.y += height;
     while (position.y >= height) position.y -= height;
-	// Find the cell to which belong position
-	CellCoord coord = {
+    // Find the cell to which belong position
+    CellCoord coord = {
         static_cast<int>(position.x / cellSize),
         static_cast<int>(position.y / cellSize)
     };
-	
-	return coord;
+
+    return coord;
 }
 
 size_t count_diff(size_t value1, size_t value2)
 {
-	if (value1 >= value2){
-		return std::max<size_t>(0, value1-value2);
-	}
+    if (value1 >= value2) {
+        return std::max<size_t>(0, value1-value2);
+    }
 
-	return 0;
+    return 0;
 }

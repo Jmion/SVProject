@@ -31,12 +31,12 @@ Value readFromStream(std::istream& s);
 void writeValue(std::ostream& s, Value const& v, std::size_t indent = 0);
 
 BadPayload::BadPayload(std::string const& msg)
-: std::runtime_error(msg)
+    : std::runtime_error(msg)
 {
 }
 
 NoSuchFile::NoSuchFile(std::string const& msg)
-: std::runtime_error(msg)
+    : std::runtime_error(msg)
 {
 }
 
@@ -55,23 +55,23 @@ Value readString(std::istream& s)
     // Read the opening quote
     char open = '\0';
     s.get(open);
-    if (open != '"'){
-    // read problematic line
-    std::string content;
+    if (open != '"') {
+        // read problematic line
+        std::string content;
         bool loop = true;
-    do {
-        char c = '\0';
-        if (!s.get(c)) {
-            throw BadPayload("Error while reading string");
-        }
+        do {
+            char c = '\0';
+            if (!s.get(c)) {
+                throw BadPayload("Error while reading string");
+            }
 
-        if (c == '"') {
-            loop = false;
-        } else {
-            content += c;
-        }
-    } while (loop);
-    std::cout << "error reading line containing: " << content << std::endl;
+            if (c == '"') {
+                loop = false;
+            } else {
+                content += c;
+            }
+        } while (loop);
+        std::cout << "error reading line containing: " << content << std::endl;
 
         assert(false);
     }
