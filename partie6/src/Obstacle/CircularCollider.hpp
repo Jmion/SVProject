@@ -13,7 +13,8 @@
 #include <iostream>
 #include <Interface/Drawable.hpp>
 
-class CircularCollider : public Drawable {
+class CircularCollider : public Drawable
+{
 private:
     Vec2d position; // position of center
     double radius;

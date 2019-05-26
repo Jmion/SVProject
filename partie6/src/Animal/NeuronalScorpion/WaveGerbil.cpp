@@ -7,21 +7,23 @@
 #include <Environment/Wave.hpp>
 #include <Animal/Animal.hpp>
 
-void WaveGerbil::update(sf::Time dt) {
+void WaveGerbil::update(sf::Time dt)
+{
     Animal::update(dt);
     timeSinceLastWave += dt;
     if (timeSinceLastWave.asSeconds() > 1 / getAppConfig().wave_gerbil_frequency) {
         getAppEnv().addWave(new Wave(
-                getPosition(),
-                getAppConfig().wave_default_energy,
-                getAppConfig().wave_default_radius,
-                getAppConfig().wave_default_mu,
-                getAppConfig().wave_default_speed));
+                                getPosition(),
+                                getAppConfig().wave_default_energy,
+                                getAppConfig().wave_default_radius,
+                                getAppConfig().wave_default_mu,
+                                getAppConfig().wave_default_speed));
         timeSinceLastWave = sf::Time::Zero;
     }
 }
 
-void WaveGerbil::draw(sf::RenderTarget &targetWindow) const {
+void WaveGerbil::draw(sf::RenderTarget &targetWindow) const
+{
     Animal::draw(targetWindow);
     if (isDebugOn()) {
         auto text = buildText("frequency" + to_nice_string(getAppConfig().wave_gerbil_frequency),

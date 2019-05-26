@@ -7,11 +7,13 @@
 #include <Environment/Food.hpp>
 #include <Random/Normal.hpp>
 
-FoodGenerator::FoodGenerator() : timeSinceLastFoodSpawn(sf::Time::Zero) {
+FoodGenerator::FoodGenerator() : timeSinceLastFoodSpawn(sf::Time::Zero)
+{
 
 }
 
-void FoodGenerator::update(sf::Time dt) {
+void FoodGenerator::update(sf::Time dt)
+{
     timeSinceLastFoodSpawn += dt;
     if (timeSinceLastFoodSpawn > sf::seconds(getAppConfig().food_generator_delta)) {
         timeSinceLastFoodSpawn = sf::Time::Zero;

@@ -7,7 +7,8 @@
 
 #include <Animal/Animal.hpp>
 
-class Gerbil : public Animal {
+class Gerbil : public Animal
+{
 public:
 
     /*!

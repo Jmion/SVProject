@@ -8,162 +8,200 @@
 #include <string>
 #include <Utility/Macros.hpp>
 
-double Scorpion::getStandardMaxSpeed() const {
+double Scorpion::getStandardMaxSpeed() const
+{
     return getAppConfig().scorpion_max_speed;
 }
 
-double Scorpion::getMass() const {
+double Scorpion::getMass() const
+{
     return getAppConfig().scorpion_mass;
 }
 
-double Scorpion::getViewRange() const {
+double Scorpion::getViewRange() const
+{
     return getAppConfig().scorpion_view_range;
 }
 
-double Scorpion::getViewDistance() const {
+double Scorpion::getViewDistance() const
+{
     return getAppConfig().scorpion_view_distance;
 }
 
-double Scorpion::getRandomWalkRadius() const {
+double Scorpion::getRandomWalkRadius() const
+{
     return getAppConfig().scorpion_random_walk_radius;
 }
 
-double Scorpion::getRandomWalkDistance() const {
+double Scorpion::getRandomWalkDistance() const
+{
     return getAppConfig().scorpion_random_walk_distance;
 }
 
-double Scorpion::getRandomWalkJitter() const {
+double Scorpion::getRandomWalkJitter() const
+{
     return getAppConfig().scorpion_random_walk_jitter;
 }
 
-Scorpion::~Scorpion() {
+Scorpion::~Scorpion()
+{
     removeAnimalWithEnvironment();
 }
 
-double Scorpion::getSize() const {
+double Scorpion::getSize() const
+{
     return getAppConfig().scorpion_size;
 }
 
-double Scorpion::getInitialEnergy() const {
+double Scorpion::getInitialEnergy() const
+{
     return getAppConfig().scorpion_energy_initial;
 }
 
 Scorpion::Scorpion(const Vec2d &position, double energyLevel, bool isFemale) : Animal(position, getSize(), energyLevel,
-                                                                                      isFemale) {
+            isFemale)
+{
     registerAnimalWithEnvironment();
 }
 
-Scorpion::Scorpion(const Vec2d &position) : Scorpion(position, getInitialEnergy(), uniform(0, 1) == 0) {
+Scorpion::Scorpion(const Vec2d &position) : Scorpion(position, getInitialEnergy(), uniform(0, 1) == 0)
+{
 
 }
 
-const std::string Scorpion::getTexturePath() const {
+const std::string Scorpion::getTexturePath() const
+{
     return getAppConfig().scorpion_texture;
 }
 
-bool Scorpion::eatable(OrganicEntity const *entity) const {
+bool Scorpion::eatable(OrganicEntity const *entity) const
+{
     return entity->eatableBy(this);
 }
 
-bool Scorpion::eatableBy(A_Unused Scorpion const *scorpion) const {
+bool Scorpion::eatableBy(A_Unused Scorpion const *scorpion) const
+{
     return false;
 }
 
-bool Scorpion::eatableBy(A_Unused Gerbil const *gerbil) const {
+bool Scorpion::eatableBy(A_Unused Gerbil const *gerbil) const
+{
     return false;
 }
 
-bool Scorpion::eatableBy(A_Unused Food const *food) const {
+bool Scorpion::eatableBy(A_Unused Food const *food) const
+{
     return false;
 }
 
-bool Scorpion::eatableBy(A_Unused Dragon const *dragon) const {
+bool Scorpion::eatableBy(A_Unused Dragon const *dragon) const
+{
     return true;
 }
 
 
-sf::Time Scorpion::getLongevity() const {
+sf::Time Scorpion::getLongevity() const
+{
     return getAppConfig().scorpion_longevity;
 }
 
-double Scorpion::getEnergyLossFactor() const {
+double Scorpion::getEnergyLossFactor() const
+{
     return getAppConfig().scorpion_energy_loss_factor;
 }
 
-double Scorpion::getStarvingEnergyLevel() const {
+double Scorpion::getStarvingEnergyLevel() const
+{
     return getAppConfig().scorpion_energy_starving;
 }
 
-bool Scorpion::matable(OrganicEntity const *other) const {
+bool Scorpion::matable(OrganicEntity const *other) const
+{
     return other->canMate(this);
 }
 
-bool Scorpion::canMate(Scorpion const *scorpion) const {
+bool Scorpion::canMate(Scorpion const *scorpion) const
+{
     return Animal::canMate(scorpion);
 }
 
-bool Scorpion::canMate(A_Unused Gerbil const *gerbil) const {
+bool Scorpion::canMate(A_Unused Gerbil const *gerbil) const
+{
     return false;
 }
 
-bool Scorpion::canMate(A_Unused Food const *food) const {
+bool Scorpion::canMate(A_Unused Food const *food) const
+{
     return false;
 }
 
-double Scorpion::getMinimumMatingEnergyMale() const {
+double Scorpion::getMinimumMatingEnergyMale() const
+{
     return getAppConfig().scorpion_energy_min_mating_male;
 }
 
-double Scorpion::getMinimumMatingEnergyFemale() const {
+double Scorpion::getMinimumMatingEnergyFemale() const
+{
     return getAppConfig().scorpion_energy_min_mating_male;
 }
 
-double Scorpion::getMinimumMatingAge() const {
+double Scorpion::getMinimumMatingAge() const
+{
     return getAppConfig().scorpion_min_age_mating;
 }
 
-bool Scorpion::meet(OrganicEntity *mate) {
+bool Scorpion::meet(OrganicEntity *mate)
+{
     return mate->meetManagement(this);
 }
 
-bool Scorpion::meetManagement(Scorpion *mate) {
+bool Scorpion::meetManagement(Scorpion *mate)
+{
     procreate();
     mate->procreate();
 
     return true;
 }
 
-bool Scorpion::meetManagement(A_Unused Gerbil *mate) {
+bool Scorpion::meetManagement(A_Unused Gerbil *mate)
+{
     return false;
 }
 
-bool Scorpion::meetManagement(A_Unused Food *mate) {
+bool Scorpion::meetManagement(A_Unused Food *mate)
+{
     return false;
 }
 
-double Scorpion::getEnergyLossFemalePerChild() const {
+double Scorpion::getEnergyLossFemalePerChild() const
+{
     return getAppConfig().scorpion_energy_loss_female_per_child;
 }
 
-int Scorpion::getMinimumNumberOfChildren() const {
+int Scorpion::getMinimumNumberOfChildren() const
+{
     return getAppConfig().scorpion_min_children;
 }
 
-int Scorpion::getMaximumNumberOfChildren() const {
+int Scorpion::getMaximumNumberOfChildren() const
+{
     return getAppConfig().scorpion_max_children;
 }
 
-double Scorpion::getGestationTimeConfig() const {
+double Scorpion::getGestationTimeConfig() const
+{
     if (getIsFemale())
         return getAppConfig().scorpion_gestation_time;
     return 0;
 }
 
-double Scorpion::getEnergyLossMaleMatting() const {
+double Scorpion::getEnergyLossMaleMatting() const
+{
     return getAppConfig().scorpion_energy_loss_mating_male;
 }
 
-bool Scorpion::giveBirth() {
+bool Scorpion::giveBirth()
+{
     if (Animal::giveBirth()) {
         for (int i(0); i < getNumberOfChildren(); i++) {
             getAppEnv().addEntity(new Scorpion(getPosition()));
@@ -173,19 +211,23 @@ bool Scorpion::giveBirth() {
     return false;
 }
 
-void Scorpion::registerAnimalWithEnvironment() const {
+void Scorpion::registerAnimalWithEnvironment() const
+{
     Animal::registerAnimalWithEnvironment(s::SCORPIONS);
 }
 
-void Scorpion::removeAnimalWithEnvironment() const {
+void Scorpion::removeAnimalWithEnvironment() const
+{
     Animal::removeAnimalWithEnvironment(s::SCORPIONS);
 }
 
-bool Scorpion::meetManagement(A_Unused Dragon *mate) {
+bool Scorpion::meetManagement(A_Unused Dragon *mate)
+{
     return false;
 }
 
-bool Scorpion::canMate(A_Unused Dragon const *dragon) const {
+bool Scorpion::canMate(A_Unused Dragon const *dragon) const
+{
     return false;
 }
 

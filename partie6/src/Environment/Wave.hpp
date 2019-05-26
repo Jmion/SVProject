@@ -13,7 +13,8 @@
 #include <set>
 
 
-class Wave : public CircularCollider, public Updatable {
+class Wave : public CircularCollider, public Updatable
+{
 
 private:
 

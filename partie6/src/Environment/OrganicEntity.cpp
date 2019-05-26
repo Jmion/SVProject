@@ -7,39 +7,47 @@
 #include <Application.hpp>
 
 OrganicEntity::OrganicEntity(const Vec2d &position, double size, double energyLevel) :
-        CircularCollider(position, size / 2.0), energyLevel(energyLevel), age(sf::Time::Zero),
-        feedingWait(getAppConfig().entity_wait_after_feeding) {}
+    CircularCollider(position, size / 2.0), energyLevel(energyLevel), age(sf::Time::Zero),
+    feedingWait(getAppConfig().entity_wait_after_feeding) {}
 
-double OrganicEntity::getEnergyLevel() const {
+double OrganicEntity::getEnergyLevel() const
+{
     return energyLevel;
 }
 
 
-double OrganicEntity::getMinEnergy() const {
+double OrganicEntity::getMinEnergy() const
+{
     return getAppConfig().animal_min_energy;
 }
 
-sf::Time OrganicEntity::getLongevity() const {
+sf::Time OrganicEntity::getLongevity() const
+{
     return sf::seconds(1e9);
 }
 
-bool OrganicEntity::isDead() const {
+bool OrganicEntity::isDead() const
+{
     return age > getLongevity() || energyLevel < getMinEnergy();
 }
 
-const sf::Time &OrganicEntity::getAge() const {
+const sf::Time &OrganicEntity::getAge() const
+{
     return age;
 }
 
-void OrganicEntity::aging(sf::Time dt) {
+void OrganicEntity::aging(sf::Time dt)
+{
     age += dt;
 }
 
-void OrganicEntity::spendEnergy(double energySpend) {
+void OrganicEntity::spendEnergy(double energySpend)
+{
     energyLevel -= energySpend;
 }
 
-void OrganicEntity::eat(OrganicEntity *&eaten) {
+void OrganicEntity::eat(OrganicEntity *&eaten)
+{
     if (eaten != nullptr && eatable(eaten)) {
 
         energyLevel += eaten->energyLevel * getAppConfig().entity_energy_transfer_factor;
@@ -48,17 +56,20 @@ void OrganicEntity::eat(OrganicEntity *&eaten) {
     }
 }
 
-bool OrganicEntity::updateAndHasWaitedLongEnoughFeeding(sf::Time dt) {
+bool OrganicEntity::updateAndHasWaitedLongEnoughFeeding(sf::Time dt)
+{
     feedingWait += dt;
     return feedingWait >= getAppConfig().entity_wait_after_feeding;
 }
 
 
-void OrganicEntity::update(sf::Time dt) {
+void OrganicEntity::update(sf::Time dt)
+{
     aging(dt);
 }
 
-bool OrganicEntity::isBurnable() {
+bool OrganicEntity::isBurnable()
+{
     return true;
 }
 

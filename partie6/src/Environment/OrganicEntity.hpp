@@ -18,7 +18,8 @@ class Food;
 class Dragon;
 
 
-class OrganicEntity : public CircularCollider, public Updatable {
+class OrganicEntity : public CircularCollider, public Updatable
+{
 public:
 
     void update(sf::Time dt) override;

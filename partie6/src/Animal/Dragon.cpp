@@ -8,103 +8,128 @@
 #include <Utility/Vec2d.hpp>
 #include <SFML/Audio.hpp>
 
-double Dragon::getStandardMaxSpeed() const {
+double Dragon::getStandardMaxSpeed() const
+{
     return getAppConfig().dragon_max_speed;
 }
 
-double Dragon::getMass() const {
+double Dragon::getMass() const
+{
     return getAppConfig().dragon_mass;
 }
 
-double Dragon::getViewRange() const {
+double Dragon::getViewRange() const
+{
     return getAppConfig().dragon_view_range;
 }
 
-double Dragon::getViewDistance() const {
+double Dragon::getViewDistance() const
+{
     return getAppConfig().dragon_view_distance;
 }
 
-bool Dragon::eatable(OrganicEntity const *entity) const {
+bool Dragon::eatable(OrganicEntity const *entity) const
+{
     return entity->eatableBy(this);
 }
 
-bool Dragon::eatableBy(A_Unused Scorpion const *scorpion) const {
+bool Dragon::eatableBy(A_Unused Scorpion const *scorpion) const
+{
     return false;
 }
 
-bool Dragon::eatableBy(A_Unused Gerbil const *gerbil) const {
+bool Dragon::eatableBy(A_Unused Gerbil const *gerbil) const
+{
     return false;
 }
 
-bool Dragon::eatableBy(A_Unused Food const *food) const {
+bool Dragon::eatableBy(A_Unused Food const *food) const
+{
     return false;
 }
 
-bool Dragon::matable(OrganicEntity const *other) const {
+bool Dragon::matable(OrganicEntity const *other) const
+{
     return other->canMate(this);
 }
 
-bool Dragon::canMate(A_Unused Scorpion const *scorpion) const {
+bool Dragon::canMate(A_Unused Scorpion const *scorpion) const
+{
     return false;
 }
 
-bool Dragon::canMate(A_Unused Gerbil const *gerbil) const {
+bool Dragon::canMate(A_Unused Gerbil const *gerbil) const
+{
     return false;
 }
 
-bool Dragon::canMate(A_Unused Food const *food) const {
+bool Dragon::canMate(A_Unused Food const *food) const
+{
     return false;
 }
 
-bool Dragon::meet(OrganicEntity *mate) {
+bool Dragon::meet(OrganicEntity *mate)
+{
     return mate->meetManagement(this);
 }
 
-bool Dragon::meetManagement(A_Unused Scorpion *mate) {
+bool Dragon::meetManagement(A_Unused Scorpion *mate)
+{
     return false;
 }
 
-bool Dragon::meetManagement(A_Unused Gerbil *mate) {
+bool Dragon::meetManagement(A_Unused Gerbil *mate)
+{
     return false;
 }
 
-bool Dragon::meetManagement(A_Unused Food *mate) {
+bool Dragon::meetManagement(A_Unused Food *mate)
+{
     return false;
 }
 
-double Dragon::getRandomWalkRadius() const {
+double Dragon::getRandomWalkRadius() const
+{
     return getAppConfig().dragon_random_walk_radius;
 }
 
-double Dragon::getRandomWalkDistance() const {
+double Dragon::getRandomWalkDistance() const
+{
     return getAppConfig().dragon_random_walk_distance;
 }
 
-double Dragon::getRandomWalkJitter() const {
+double Dragon::getRandomWalkJitter() const
+{
     return getAppConfig().dragon_random_walk_jitter;
 }
 
-double Dragon::getSize() const {
+double Dragon::getSize() const
+{
     return getAppConfig().dragon_size;
 }
 
-double Dragon::getInitialEnergy() const {
+double Dragon::getInitialEnergy() const
+{
     return getAppConfig().dragon_energy_initial;
 }
 
-double Dragon::getMinimumMatingEnergyMale() const {
+double Dragon::getMinimumMatingEnergyMale() const
+{
     return getAppConfig().dragon_energy_min_mating_male;
 }
 
-double Dragon::getMinimumMatingEnergyFemale() const {
+double Dragon::getMinimumMatingEnergyFemale() const
+{
     return getAppConfig().dragon_energy_min_mating_female;
 }
 
-double Dragon::getMinimumMatingAge() const {
+double Dragon::getMinimumMatingAge() const
+{
     return getAppConfig().dragon_min_age_mating;
 }
 
-const std::string Dragon::getTexturePath() const {
+const std::string Dragon::getTexturePath() const
+{
     if (animationTimer.asMilliseconds() < 250) {
 
         return getAppConfig().dragon_texture_d1;
@@ -119,68 +144,83 @@ const std::string Dragon::getTexturePath() const {
     return getAppConfig().dragon_texture_d4;
 }
 
-double Dragon::getEnergyLossFemalePerChild() const {
+double Dragon::getEnergyLossFemalePerChild() const
+{
     return getAppConfig().dragon_energy_loss_female_per_child;
 }
 
-int Dragon::getMinimumNumberOfChildren() const {
+int Dragon::getMinimumNumberOfChildren() const
+{
     return getAppConfig().dragon_min_children;
 }
 
-int Dragon::getMaximumNumberOfChildren() const {
+int Dragon::getMaximumNumberOfChildren() const
+{
     return getAppConfig().dragon_max_children;
 }
 
-double Dragon::getGestationTimeConfig() const {
+double Dragon::getGestationTimeConfig() const
+{
     return getAppConfig().dragon_gestation_time;
 }
 
-double Dragon::getEnergyLossMaleMatting() const {
+double Dragon::getEnergyLossMaleMatting() const
+{
     return getAppConfig().dragon_energy_loss_mating_male;
 }
 
-double Dragon::getStarvingEnergyLevel() const {
+double Dragon::getStarvingEnergyLevel() const
+{
     return getAppConfig().dragon_energy_starving;
 }
 
-void Dragon::registerAnimalWithEnvironment() const {
+void Dragon::registerAnimalWithEnvironment() const
+{
     Animal::registerAnimalWithEnvironment(s::DRAGON);
 }
 
-void Dragon::removeAnimalWithEnvironment() const {
+void Dragon::removeAnimalWithEnvironment() const
+{
     Animal::removeAnimalWithEnvironment(s::DRAGON);
 }
 
-double Dragon::getEnergyLossFactor() const {
+double Dragon::getEnergyLossFactor() const
+{
     return getAppConfig().dragon_energy_loss_factor;
 }
 
 Dragon::Dragon(const Vec2d &position, double energyLevel, bool isFemale) : Animal(position, getSize(), energyLevel,
-                                                                                  isFemale) {
+            isFemale)
+{
     registerAnimalWithEnvironment();
 }
 
 Dragon::Dragon(const Vec2d &position) : Dragon(position, getInitialEnergy(), uniform(0, 1) == 0) {}
 
-Dragon::~Dragon() {
+Dragon::~Dragon()
+{
     removeAnimalWithEnvironment();
 }
 
-bool Dragon::eatableBy(A_Unused Dragon const *dragon) const {
+bool Dragon::eatableBy(A_Unused Dragon const *dragon) const
+{
     return false;
 }
 
-bool Dragon::canMate(Dragon const *dragon) const {
+bool Dragon::canMate(Dragon const *dragon) const
+{
     return Animal::canMate(dragon);
 }
 
-bool Dragon::meetManagement(Dragon *mate) {
+bool Dragon::meetManagement(Dragon *mate)
+{
     procreate();
     mate->procreate();
     return true;
 }
 
-void Dragon::update(sf::Time dt) {
+void Dragon::update(sf::Time dt)
+{
     Animal::update(dt);
     spriteFireTimer += dt;
 
@@ -197,7 +237,8 @@ void Dragon::update(sf::Time dt) {
     }
 }
 
-bool Dragon::giveBirth() {
+bool Dragon::giveBirth()
+{
     if (Animal::giveBirth()) {
         for (int i(0); i < getNumberOfChildren(); i++) {
             getAppEnv().addEntity(new Dragon(getPosition()));
@@ -207,7 +248,8 @@ bool Dragon::giveBirth() {
     return false;
 }
 
-void Dragon::draw(sf::RenderTarget &targetWindow) const {
+void Dragon::draw(sf::RenderTarget &targetWindow) const
+{
     Animal::draw(targetWindow);
 
 
@@ -228,7 +270,8 @@ void Dragon::draw(sf::RenderTarget &targetWindow) const {
     }
 }
 
-bool Dragon::isTargetInBurnRange(const Vec2d &target) const {
+bool Dragon::isTargetInBurnRange(const Vec2d &target) const
+{
     Vec2d d = target - getPosition();
     if (d.lengthSquared() <= getAppConfig().dragon_burn_distance * getAppConfig().dragon_burn_distance) {
         Vec2d this_to_target = target - getPosition();
@@ -242,7 +285,8 @@ bool Dragon::isTargetInBurnRange(const Vec2d &target) const {
     return false;
 }
 
-void Dragon::spitFire() const {
+void Dragon::spitFire() const
+{
     std::list<OrganicEntity *> burnList = getAppEnv().getEntitiesInBurnRangeOfDragon(this);
     for (auto &i : burnList) {
         if (i->isBurnable())
@@ -250,7 +294,8 @@ void Dragon::spitFire() const {
     }
 }
 
-bool Dragon::isBurnable() {
+bool Dragon::isBurnable()
+{
     return false;
 }
 

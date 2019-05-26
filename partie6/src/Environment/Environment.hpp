@@ -27,7 +27,8 @@ class SolideObstacle;
 
 class NeuronalScorpion;
 
-class Environment : public Drawable, public Updatable {
+class Environment : public Drawable, public Updatable
+{
 public:
     /*!
      * Add animal to environment fauna.

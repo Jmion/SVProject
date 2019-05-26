@@ -9,24 +9,28 @@
 #include <Obstacle/SolideObstacle.hpp>
 
 Wave::Wave(const Vec2d &position, double initialEnergy, double radius, double mu, double speed) :
-        CircularCollider(position, radius),
-        arcs(),
-        initialEnergy(initialEnergy),
-        mu(mu),
-        speed(speed),
-        collidedWith() {
+    CircularCollider(position, radius),
+    arcs(),
+    initialEnergy(initialEnergy),
+    mu(mu),
+    speed(speed),
+    collidedWith()
+{
     arcs.emplace_back(-PI, PI);
 }
 
-double Wave::getEnergy() const {
+double Wave::getEnergy() const
+{
     return initialEnergy * exp(-getRadius() / mu);
 }
 
-double Wave::getIntensity() const {
+double Wave::getIntensity() const
+{
     return getEnergy() / (2 * PI * getRadius());
 }
 
-void Wave::draw(sf::RenderTarget &target) const {
+void Wave::draw(sf::RenderTarget &target) const
+{
     for (auto &p : arcs) {
         Arc arc(p.first / DEG_TO_RAD, p.second / DEG_TO_RAD, getRadius(), sf::Color::Black, getIntensity());
         arc.setOrigin(getRadius(), getRadius());
@@ -35,7 +39,8 @@ void Wave::draw(sf::RenderTarget &target) const {
     }
 }
 
-void Wave::update(sf::Time dt) {
+void Wave::update(sf::Time dt)
+{
     setRadius(dt.asSeconds() * getAppConfig().wave_default_speed + getRadius());
 
     //Wave splitting of rock
@@ -64,11 +69,13 @@ void Wave::update(sf::Time dt) {
     }
 }
 
-bool Wave::isWaveToBeDeleted() {
+bool Wave::isWaveToBeDeleted()
+{
     return getIntensity() < getAppConfig().wave_intensity_threshold;
 }
 
-bool Wave::isPointWithinArcs(const Vec2d &vec2D) {
+bool Wave::isPointWithinArcs(const Vec2d &vec2D)
+{
     double angleOfTarget = (vec2D - getPosition()).angle();
     for (auto &a : arcs) {
         if (angleOfTarget >= a.first && angleOfTarget <= a.second)

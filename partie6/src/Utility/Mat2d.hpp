@@ -15,7 +15,8 @@
  *
  *
  */
-class Mat2d {
+class Mat2d
+{
 public:
     /*!
      * Builds the indentity matrix

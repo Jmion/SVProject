@@ -18,7 +18,7 @@ void ChasingTest::onSimulationStart()
 {
     setSimulationMode(SimulationMode::TEST);
     double position(getAppConfig().simulation_world_size / 2);
-    mAutomaton = new ChasingAutomaton({ position , position });
+    mAutomaton = new ChasingAutomaton({ position, position });
 }
 
 void ChasingTest::onEvent(sf::Event event, sf::RenderWindow&)

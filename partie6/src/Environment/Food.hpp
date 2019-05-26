@@ -7,7 +7,8 @@
 
 #include <Environment/OrganicEntity.hpp>
 
-class Food : public OrganicEntity {
+class Food : public OrganicEntity
+{
 
 public:
 

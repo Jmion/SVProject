@@ -9,31 +9,36 @@
 #include <Environment/Wave.hpp>
 #include <Utility/Macros.hpp>
 
-double Sensor::radiusFromScorpion() const {
+double Sensor::radiusFromScorpion() const
+{
     return getAppConfig().scorpion_sensor_radius;
 }
 
 Sensor::Sensor(double angleFromScorpion, NeuronalScorpion *neuronalScorpion) :
-        owner(neuronalScorpion),
-        angleFromScorpion(angleFromScorpion),
-        actif(false),
-        score(0),
-        inhibitor(0),
-        sensorsToInhibit({nullptr, nullptr, nullptr}) {
+    owner(neuronalScorpion),
+    angleFromScorpion(angleFromScorpion),
+    actif(false),
+    score(0),
+    inhibitor(0),
+    sensorsToInhibit({nullptr, nullptr, nullptr})
+{
     if (neuronalScorpion == nullptr) {
         throw std::invalid_argument("neuronalScorpion of class Sensor is nullptr.");
     }
 }
 
-double Sensor::getAngle() const {
+double Sensor::getAngle() const
+{
     return angleFromScorpion;
 }
 
-void Sensor::setInhibitor(double inhibitor) {
+void Sensor::setInhibitor(double inhibitor)
+{
     this->inhibitor = fmax(0, fmin(getAppConfig().sensor_inhibition_max, inhibitor));
 }
 
-void Sensor::update(sf::Time A_Unused dt) {
+void Sensor::update(sf::Time A_Unused dt)
+{
     if (actif) {
         score += 2.0 * (1.0 - inhibitor);
         for (auto &s : sensorsToInhibit) {
@@ -44,7 +49,8 @@ void Sensor::update(sf::Time A_Unused dt) {
     }
 }
 
-double Sensor::getIntensity() {
+double Sensor::getIntensity()
+{
     double intensity(0);
     Vec2d positionOfSensor = getPositionOfSensor();
     std::list<Wave *> collidingWaves = getAppEnv().getWaveCollidingWithSensor(positionOfSensor);
@@ -55,33 +61,40 @@ double Sensor::getIntensity() {
     return intensity;
 }
 
-Vec2d Sensor::getPositionOfSensor() {
+Vec2d Sensor::getPositionOfSensor()
+{
     return owner->getPositionOfSensor(this);
 }
 
-void Sensor::resetSensor() {
+void Sensor::resetSensor()
+{
     inhibitor = 0;
     score = 0;
     actif = false;
 }
 
-void Sensor::setInhibitSensor(std::array<Sensor *, 3> sensorsToInhibit) {
+void Sensor::setInhibitSensor(std::array<Sensor *, 3> sensorsToInhibit)
+{
     this->sensorsToInhibit = sensorsToInhibit;
 }
 
-void Sensor::inhibit(double score) {
+void Sensor::inhibit(double score)
+{
     setInhibitor(inhibitor + score * getAppConfig().sensor_inhibition_factor);
 }
 
-bool Sensor::isActif() const {
+bool Sensor::isActif() const
+{
     return actif;
 }
 
-double Sensor::getScore() const {
+double Sensor::getScore() const
+{
     return score;
 }
 
-double Sensor::getInhibitor() const {
+double Sensor::getInhibitor() const
+{
     return inhibitor;
 }
 
