@@ -176,7 +176,7 @@ std::vector<std::string> FinalApplication::getHelperText() const
                     "(MP: mouse position)",
 					"R  : Reset the simulation",
 					"Esc : End of program",
-					"C   : Reload config file"
+					"C   : Reload config file",
                     "N  : Add a neuronal scorpion",
 					"         at MP",
                     "W  : Add a wave gerbil at MP",

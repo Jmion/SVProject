@@ -92,10 +92,13 @@ The animal is a seperate entity. Therefor we can imagine that classes that exten
 In the method draw of the Environment we need to call the draw of Animals.
 
 ## Q.2.9
-This is done to break encapsulation to be able to test the animal class by setting the rotation. We need this for the test
+This is done to break encapsulation to be able to test the animal class by setting the rotation. We need this for the test.
 
 ## Q.2.10
-A list of Vect2. This wo...
+A list of targets. We are using a list because it allows use to return as many elements as we want. At this point in time since we are only intrested in targets a list of Vec2d should be enough even though we can forsee that in the future we might need to change this to pointers towards targets.
+
+## Q.2.11
+We simply need to update the animals from the update methode of environment. This is how most games and simutations are build where the environment is in charge of updating when it wants all of the objects that are evolving within it.
 
 # Q.3
 
@@ -104,7 +107,7 @@ All of these methods are declared as abstract : *etStandardMaxSpeed, getMass, ge
 
 ## Q.3.2
 
-We need to chnage the line where energy is indicated. For example:
+We need to change the line where energy is indicated. For example:
 
 ```JSON
 "energy":{
@@ -142,13 +145,98 @@ When the OrganicEntities die of old age the environment needs to free the memory
  First of all we we need to define the condition when the Animal will be starving. This information will be used in getMaxSpeed. For the definition of when an animal is starving we decided that each animal can be starving at a different energy level. For proper use we therefor added an *scorpion_energy_starving* and *gerbil_energy_starving* to our app JSON config file. We used a virtual method to define the updateState leaving the choice of the value to return up to the non abstract animals. With this solution we are respecting the app design and choice of keeping all of these parameters modifiable at run time. We also added *animal_starving_speed_factor* to the JSON because it is the only logical place where such a setting should go. We do not want to affect the state that the animal is in since we would like the animal to behave is it normally does but in a weaker form (moving less fast).
 
 
-## QUESTIONS
-Why are we declaring the eatable method in all the subclasses? It is the same everywhere. And why not use a visitor.
-* See for access rights to eatable methods
-* Whay are we not using the state running away to make the animals run away from the scorpion. Need to check what is wrongs
-* Why is there no to string on a enum.
+## Q.3.9
+We could have decided that the circular collider provide the code to deal the all the collisions. The issue with this type of implementation is that all of the code is in one class that becomes quite large and dependant on other classes. 
+The architecture chosen allows for a more flexible implementation.
+
+## Q.3.10
+Exactly like for mate we use double dispatch to have the type of both this and mate. We define method *meet* and *meetManagement*. *Meet* calls *meetManagemetn* which takes care of dealing with the animals matting. The matting involves changes to the animals matting. Since all the fields are defined in animal we have defined a *procreate* method that will take car of making the appropriate changes to the animal.
+
+## Q.3.11
+
+We will put in place the gestation time by creating a sf::Time variable that will be used to track the amount of time that the animal has been in gestation.
+
+## Q.3.12
+
+The method give birth is defined in the *Animal* class and all of it's children. The definition in the *Animal* class only determines if the animal can give birth. It is another check to ensure that no male animals give birth. This check should be redundant since this method should only be called by females. But to avoid missus of this method in the future we felt like the proper way of defining this giveBirth method was to provide a check.
+
+## Q.3.13
+The number of babies is stored in the animal. This attribute has a getter provided for it ensuring that if a male animal calls the method it will return 0. It is logical that a male cannot have children.
+
+
+## Q.3.14
+It is better to avoid storing pointers to organic entity in the animal if possible. This would provide storage for pointers that could be used when the organic entity disappears from the environment. We instead decide to store a list of locations where we have last seen predators.
+There are some cons to this implementation since if a animal sees the predator twice in different locations it will register it as another location where there is prey without removing to location where it previously saw the preadator.
+We can argue that this implementation makes sense since a Gerbil would probably not be able to tell apart scorpions.
+
+# Q.4
+
+## Q.4.1
+A wave should inherit from a circular collider and it would be updatable, drawable. We do not implement the drawable interface since a circularCollider already does.
+
+## Q.4.2
+A wave does not need to keep track of time. Since it would be easier and logical to offer the possibility to a circularCollider to change it's radius this functionality was added in the circularCollider class. We therefor only need to update the radius when a call to update is made.
+
+## Q.4.3
+An environment will have a list of waves* that will be updated, drawn, and deleted. We also need to add a method to add a wave. And of course not forget to clear the remaining waves from the list at the destruction of the environment.
+
+## Q.4.4
+We need to create a method addObstacle. Modify the *Environment* delete, draw, methods to take the obstacles into account.
+
+## Q.4.5
+The neuronalScorpion will have an array of pointers to sensors. The sensors will store there relative angle to the scorpion. This is not the best idea when we are looking at the architecture of the NeuroanlScorpion and it's sensors. Making the assumption that a sensor needs to be attached to an other entity is OK and we will make this compromise. This means that a sensor knows is relative angle from the scorpion. 
+
+## Q.4.6
+```C
+Vec2d NeuronalScorpion::getPositionOfSensor(const Sensor* s) const;
+```
+A neuronal scorpion need only to know what sensor it is calculating the position for. Since the sensor stores it's own angle we do not need to look up, for example in a map where the sensor is positioned. Instead we can simply access the sensors angle by calling a *getAngle()* method from the scorpion.
+
+## Q.4.7
+We will add the environment the following method:
+
+```C
+    std::list<Wave *> getWaveCollidingWithSensor(const Vec2d& location ) const;
+```
+We will create a method that will only return the waves that are currently colliding with the sensor. A critic of our current implementation is that we are dealing a bit to much with the calculation of which waves are actually colliding. The advantage of this is that we are not sharing useless pointers.
+We are willing to delegate more of the work that should be up to the sensor to decide to the environment since it allows use to preserve good encapsulation of pointers.
+
+
+## Q.4.8
+Both classes are quite tightly coded. Meaning that sadly we might have issues making another animal use sensors. The best solution here would be to use an intermediate class that enforces that the neuronal animal has all of the methods that the sensor needs. Both classes are tightly integrated since sensors needs to know it's owners, and some of it's neighboring sensors. There is a lot of sharing of pointers which isn't optimal for code independence but will improve performance.
+
+## Q.4.9
+Since a sensor has a list of sensors that it needs to inhibit, we need to use a method to initialize all of the sensors and link them together. For this purpose we wrote the method : *void initializeSensors()*.
+
+## Q.4.10
+We will use an enum to model the different states. Again we made the choice to use our magic macro to do so because it takes care of the toString method as well.
+
+## Q.4.11
+We will have a stateTimer in the NeuronalScorpion that will be tasked with doing the time keeping.
+
+## Q.4.12
+Each time we change states we will reset the **stateTimer**. The **stateTimer** will be incremented every time update is called and that we are in *MOVING* or *IDLE*.
+
+ 
+# Q5
+
+## Q.5.1
+
+It is the purpose of a map to associate key to values. Since the application is using key to decide which graph to show it is natural to use a map to store the graphs that are tied to the keys.
+A map only allows one instance of a object with the same key. A vector is simply not appropriate for such a use. We could
+of course use a vector but this would involve coding a wrapper around it to make it behave like a map. Lets use what is already
+done for use and use the one that the standard library has :)
+
+## Q.5.2
+
+We have made the choice to add quite a bit of mechanics to all the classes that we want to monitor. We did this because it allows for almost no overhead when we are updating the graph. The environment has a mad that counts the number of 
+
+## Q.5.3
+In our design we do not need to do any special treatment to have it behave properly. Since the stats are tied to an environment switching environment will switch stats as well.
 
 
 ## CONCEPTION
 
-I added a macros utility file where I will put all the macros that will be utilities for this project. This includes for now the parameters to supress unused attributes for GCC. This is done here to allow flexibility in case we change compilers since the suppress warning flags are not part of the C norm but are specific to GCC.
+I added a macros utility file where I will put all the macros that will be utilities for this project. This includes for now the parameters to suppress unused attributes for GCC. This is done here to allow flexibility in case we change compilers since the suppress warning flags are not part of the C norm but are specific to GCC.
+
+I decided to structure the obstacles such Rocks into a abstract class that defines solideObstacles and let Rocks be an instance of a solideObstacle. This allows for easy definition of other types of solid obstacles. Some changes where made to the WaveTest.h . To be specific we changed the typedef of Obstacle to SolidObstacle instead of leaving as defined in the handout as a CircularCollider. This means that in our definition only solidObstactles will have the effect of breaking a wave.

@@ -19,7 +19,305 @@
 ### week 6
 * End of 3.3 and preparation for hand-in of files
 
+### week 7
+* End of part 3
+* Start of part 4
+
+### week 8
+* End of part 4
+* Part 5
+
+### week 9
+* Added Dragons
+
+### week 10
+*Prepare for hand-in
+
 Please find bellow the details of the work done (output from a git log):
+commit ddaa6ec8a04b1c5ccb53bb9460e4266604488056
+Author: Unknown <jeremy.mion@yahoo.ca>
+Date:   Sun May 26 23:03:12 2019 +0200
+
+    Finished readme, change json for dragon compatibility
+
+commit 9397846d3d8e271b98e0abcefadd02d1a1c81a56
+Author: Unknown <jeremy.mion@yahoo.ca>
+Date:   Sun May 26 02:03:41 2019 +0200
+
+    create of part 6
+    
+    Please note that dragons where already added before this copie.
+
+commit 511cd6ee5622c87607355777e4d42994784d8a0b
+Author: Unknown <jeremy.mion@yahoo.ca>
+Date:   Sun May 26 01:28:20 2019 +0200
+
+    Created TestToRun.txt
+
+commit 95141c7d391fd8c7aae616384c1ff277748233ed
+Author: Unknown <jeremy.mion@yahoo.ca>
+Date:   Sun May 26 01:26:18 2019 +0200
+
+    Fix unitilized dragonFireTriger and initial fire timer value
+
+commit 9d091711e04c894ad642570ee3a801d44757a6bb
+Author: Jeremy Mion <jeremy@mion.pro>
+Date:   Thu May 23 00:31:36 2019 +0200
+
+    Reactivate red target drawing in part 2 and 5
+    
+    The red target is part of chasingAutomaton and is not used in the final program.
+    The tests use the red target so we added it back in.
+
+commit 09a957f88f28c8cc2f42cb13a2539ffd31d7881a
+Author: Jeremy Mion <jeremy@mion.pro>
+Date:   Wed May 22 23:17:06 2019 +0200
+
+    Added documentation to ChasingAutomaton
+
+commit e20f43f0429b92306c0f91e270650fb1806d357a
+Merge: 465a0f4 b17301a
+Author: Jeremy Mion <jeremy@mion.pro>
+Date:   Wed May 22 23:14:38 2019 +0200
+
+    Added documentation to SeuronalScorpion and Sensor
+
+commit 465a0f4c65ec9798c0330dcf517f974c28133265
+Author: Jeremy Mion <jeremy@mion.pro>
+Date:   Wed May 22 23:00:36 2019 +0200
+
+    Fix segFault in eatTest due to how stats are implemented
+
+commit b17301ad62b942429b75364054dcb3b598ba3ad8
+Author: Mion Jeremy Olivier <mion@INTRANET.EPFL.CH@CO-20190228-7.intranet.epfl.ch>
+Date:   Wed May 22 18:25:40 2019 +0200
+
+    Remove initializer to nullptr in Sensor
+
+commit 3ff396552125db5149a8b0f6e92eecf7ca3ba71a
+Author: Jeremy Mion <jeremy@mion.pro>
+Date:   Mon May 20 12:50:08 2019 +0200
+
+    fiche resumer
+
+commit f2496a890b7d27d6aa8ea762b3b2933f732494d2
+Author: Jeremy Mion <jeremy@mion.pro>
+Date:   Sat May 18 20:52:18 2019 +0200
+
+    remove copy constructor on NeuronalScorpion
+
+commit 3295c78dfca66db6e5d3814273cff406e69b1395
+Author: Jeremy Mion <jeremy@mion.pro>
+Date:   Tue May 14 00:21:18 2019 +0200
+
+    sounds
+
+commit ba0c5d068fb1ee48fa23ed9fbdebb819cab49bcd
+Author: Jeremy Mion <jeremy@mion.pro>
+Date:   Mon May 13 21:18:10 2019 +0200
+
+    Dragons and sound working
+
+commit db082a3a3eca068a753f7f588f90a0567b657bed
+Author: Jeremy Mion <jeremy@mion.pro>
+Date:   Mon May 13 18:17:46 2019 +0200
+
+    dragons are working with fire beta
+
+commit e3c1be52fdf4460dfa9b831924d58b9ed188ea21
+Author: Jeremy Mion <jeremy@mion.pro>
+Date:   Mon May 13 17:58:35 2019 +0200
+
+    dragons are working
+
+commit 2acbe172f07a00e0e4d7578f6febff3af5296536
+Author: Jeremy Mion <jeremy@mion.pro>
+Date:   Mon May 13 17:33:22 2019 +0200
+
+    dragons are working
+
+commit 48571d57c06d096ab3455d84936c094394afb965
+Author: Jeremy Mion <jeremy@mion.pro>
+Date:   Mon May 13 15:52:17 2019 +0200
+
+    part 5 working
+
+commit b49c7c20260ed869ea05c6e12a97dd13cc5095db
+Author: Jeremy Mion <jeremy@mion.pro>
+Date:   Mon May 13 13:37:02 2019 +0200
+
+    working version step 5
+
+commit 65c245e09a1b7d8350f8fe6c2a235fbedfd9e959
+Author: Jeremy Mion <jeremy@mion.pro>
+Date:   Tue May 7 23:41:44 2019 +0200
+
+    test 28 reached but not working
+
+commit 60e60394c62b9cf7c949ddc21a4f3e12e880daf3
+Author: Jeremy Mion <jeremy@mion.pro>
+Date:   Tue May 7 23:35:18 2019 +0200
+
+    test 28 reached but not working
+
+commit fbb343fe71c6611848bc900674c94c3a8aea4e84
+Author: Jeremy Mion <jeremy@mion.pro>
+Date:   Tue May 7 21:26:44 2019 +0200
+
+    remove git log from journal
+
+commit e3845d7e75ffc1d21d121561ad161bbfdc0caa20
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Tue May 7 21:23:48 2019 +0200
+
+    Initialize part 5
+
+commit 87f2cab23d363c0ad26cebd89d601cf037bf2c21
+Author: Unknown <jeremy.mion@yahoo.ca>
+Date:   Tue May 7 11:35:22 2019 +0200
+
+    REPONSE file completed for part 4
+
+commit 94001ccbaf9df23faecadf4351bacd71cf43ecef
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Tue May 7 10:44:33 2019 +0200
+
+    end of 4.2
+
+commit 3791e90ce7780e51991d097c12f59e1c3ac5cefc
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Mon May 6 23:54:50 2019 +0200
+
+    fix state issue
+
+commit 1927f1c88631da759aa897c9cf692a2d54ce392d
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Mon May 6 12:27:59 2019 +0200
+
+    Neuronal Scorpion start
+
+commit 4ead99995c03150dc13db00366bc597a71261d35
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Sat May 4 18:15:17 2019 +0200
+
+    end of part 4.1
+
+commit f60e1607e37e4f3995366be740cbfd9fb9adbd7d
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Thu May 2 19:18:03 2019 +0200
+
+    Added obstacle texture rock to json
+
+commit 3827772b132fd56be11289c1db7163e23e4ec557
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Thu May 2 18:08:58 2019 +0200
+
+    waves work. passes test 22
+
+commit ad0a46860f75bd1f182cfe3e0e3eb7a14192b4bd
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Tue Apr 30 06:30:20 2019 +0200
+
+    start of part 4
+
+commit 0040bdcd8f82249c6600daa99060d5ddf530dc8e
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Tue Apr 30 06:22:30 2019 +0200
+
+    end of part 3
+
+commit e5ee0fb48ae584836898f12fc3b24c06bb58e68a
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Tue Apr 30 06:21:52 2019 +0200
+
+    update gitignore to not trask .o
+
+commit 34fad513da40cc9552c1d7600877d04b932d354c
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Mon Apr 29 23:22:35 2019 +0200
+
+    fix, missing virtual destructor
+
+commit c4fe2e9e431f072e046b45e7eb0a9b9769098258
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Mon Apr 29 18:39:20 2019 +0200
+
+    3.5 working
+
+commit e01a84b86506b74c79d27e67a6c6f75206e540c0
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Mon Apr 29 17:45:54 2019 +0200
+
+    fix orgy probleme
+
+commit 43275d670ca22a6e65493f5acfc0c5048a1012c5
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Mon Apr 29 16:18:17 2019 +0200
+
+    working part 3.3
+
+commit e4ae18d8db13d5ebe82e3f6330c9587ce2053ae7
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Fri Apr 26 19:12:56 2019 +0200
+
+    matting with no debug
+
+commit 988f1f75f2dc582e640075978af8c7b82af9b4f6
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Tue Apr 23 12:04:29 2019 +0200
+
+    Fix unsued warnings and addapted update state
+
+commit cb43d36b827ccc25b76033d79a387d2f6306189e
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Tue Apr 23 11:49:19 2019 +0200
+
+    done upto q3.11
+
+commit b53f46b8c26a127818a2e3376d041963692ba33c
+Merge: a943f09 6cf9d74
+Author: Unknown <jeremy.mion@yahoo.ca>
+Date:   Mon Apr 22 22:27:41 2019 +0200
+
+    Merge remote-tracking branch 'origin/master'
+
+commit a943f097737723adb15e1a7c2de296748cce8ce0
+Author: Unknown <jeremy.mion@yahoo.ca>
+Date:   Mon Apr 22 11:31:05 2019 +0200
+
+    Fix issue with tests
+
+commit 6cf9d7466967edc4a49b1b8e392f11207858104a
+Author: Unknown <jeremy.mion@yahoo.ca>
+Date:   Sun Apr 21 00:32:58 2019 +0200
+
+    Extracted analyseEnvironment
+    
+    Extracted analyse envirnment
+
+commit 62ef431acc47df5d5b857e026f2d117c0207b2c6
+Author: Unknown <jeremy.mion@yahoo.ca>
+Date:   Sat Apr 20 20:36:52 2019 +0200
+
+    Auto stash before rebase of "origin/master"
+
+commit 7551d0f7ea234a8951f35e9d94324905654db9df
+Author: Jeremy Mion <jeremy.mion@yahoo.ca>
+Date:   Sat Apr 20 18:21:58 2019 +0200
+
+    test 19 not working
+
+commit 296c283aaf0842d04586e67be0c2ded61f06da4a
+Author: Unknown <jeremy.mion@yahoo.ca>
+Date:   Tue Apr 16 12:12:01 2019 +0200
+
+    Astyle format for hand in
+
+commit 92edd1fee0aa80ca0847e48fbd6f7044b13fab93
+Author: Unknown <jeremy.mion@yahoo.ca>
+Date:   Tue Apr 16 12:03:58 2019 +0200
+
+    Added journal and drawing to cirlcular collider of food
 
 commit 0ce5b4af695b2073d90d429425329c4be94b1d8e
 Author: Unknown <jeremy.mion@yahoo.ca>
