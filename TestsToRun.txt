@@ -1,3 +1,7 @@
+# Important patches
+
+Some issues and segmentation faults where discovered during the implementation of the bonuses. These where due to the specifics of how we do not have a environment when running some early on tests. We have fixed these bugs in the latest realease that contains bonuses. The issue was with eatable test and caused by a specific design choice on how statistics where implemented.
+
 * Test1: scons ColliderTest / works in part 5
 * Test2: scons EnvTest-run / works in part 2
 * Test3: scons ChasingTest-run
