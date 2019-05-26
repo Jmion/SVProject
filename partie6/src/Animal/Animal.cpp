@@ -402,7 +402,7 @@ const Vec2d &Animal::getTargetPosition() const {
     return targetPosition;
 }
 
-std::string Animal::getStateString() const{
+std::string Animal::getStateString() const {
     return ToString(state);
 }
 
@@ -415,14 +415,14 @@ Vec2d Animal::getDirection() const {
 }
 
 void Animal::registerAnimalWithEnvironment(const std::string &animal) const {
-    Environment* e = &getAppEnv();
+    Environment *e = &getAppEnv();
     if (e != nullptr) {
         e->incrementCounter(animal);
     }
 }
 
 void Animal::removeAnimalWithEnvironment(const std::string &animal) const {
-    Environment* e = &getAppEnv();
+    Environment *e = &getAppEnv();
     if (e != nullptr) {
         e->decrementCounter(animal);
     }

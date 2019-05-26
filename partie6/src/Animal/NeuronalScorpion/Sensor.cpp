@@ -9,17 +9,17 @@
 #include <Environment/Wave.hpp>
 #include <Utility/Macros.hpp>
 
-double Sensor::radiusFromScorpion() const{
+double Sensor::radiusFromScorpion() const {
     return getAppConfig().scorpion_sensor_radius;
 }
 
-Sensor::Sensor(double angleFromScorpion, NeuronalScorpion* neuronalScorpion) :
-owner(neuronalScorpion),
-angleFromScorpion(angleFromScorpion),
-actif(false),
-score(0),
-inhibitor(0),
-sensorsToInhibit({nullptr, nullptr, nullptr}){
+Sensor::Sensor(double angleFromScorpion, NeuronalScorpion *neuronalScorpion) :
+        owner(neuronalScorpion),
+        angleFromScorpion(angleFromScorpion),
+        actif(false),
+        score(0),
+        inhibitor(0),
+        sensorsToInhibit({nullptr, nullptr, nullptr}) {
     if (neuronalScorpion == nullptr) {
         throw std::invalid_argument("neuronalScorpion of class Sensor is nullptr.");
     }
@@ -39,7 +39,7 @@ void Sensor::update(sf::Time A_Unused dt) {
         for (auto &s : sensorsToInhibit) {
             s->inhibit(score);
         }
-    }else if(getIntensity() >= getAppConfig().sensor_intensity_threshold){
+    } else if (getIntensity() >= getAppConfig().sensor_intensity_threshold) {
         actif = true;
     }
 }
@@ -47,9 +47,9 @@ void Sensor::update(sf::Time A_Unused dt) {
 double Sensor::getIntensity() {
     double intensity(0);
     Vec2d positionOfSensor = getPositionOfSensor();
-    std::list<Wave*> collidingWaves = getAppEnv().getWaveCollidingWithSensor(positionOfSensor);
+    std::list<Wave *> collidingWaves = getAppEnv().getWaveCollidingWithSensor(positionOfSensor);
     for (auto &w: collidingWaves) {
-        if(w->isPointWithinArcs(positionOfSensor))
+        if (w->isPointWithinArcs(positionOfSensor))
             intensity += w->getIntensity();
     }
     return intensity;
@@ -59,7 +59,7 @@ Vec2d Sensor::getPositionOfSensor() {
     return owner->getPositionOfSensor(this);
 }
 
-void Sensor:: resetSensor() {
+void Sensor::resetSensor() {
     inhibitor = 0;
     score = 0;
     actif = false;

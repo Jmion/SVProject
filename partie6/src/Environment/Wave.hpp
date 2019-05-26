@@ -20,13 +20,13 @@ private:
     /*!
      * Arcs than compose the wave. Values in radians
      */
-    std::list<std::pair<double,double>> arcs;
+    std::list<std::pair<double, double>> arcs;
 
 
     /*!
      * Initial amount of energy that the wve has
      */
-    double  initialEnergy;
+    double initialEnergy;
 
     /*!
      * ratio de perte d'energie par rapport au temps
@@ -41,7 +41,7 @@ private:
     /*!
      * Gives memory to wave for obstacles wich it has already collided with
      */
-    std::set<SolideObstacle*> collidedWith;
+    std::set<SolideObstacle *> collidedWith;
 
 public:
 
@@ -53,7 +53,7 @@ public:
      * @param mu carateristic contant that effects speed that energy decreases in funtion of distance.
      * @param speed of propagation
      */
-    Wave(const Vec2d &position, double initialEnergy, double radius, double mu,double speed);
+    Wave(const Vec2d &position, double initialEnergy, double radius, double mu, double speed);
 
     /*!
      * Free memory of object

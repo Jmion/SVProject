@@ -8,14 +8,17 @@
 #include <Obstacle/CircularCollider.hpp>
 #include <Interface/Drawable.hpp>
 #include <Interface/Updatable.hpp>
+
 class Scorpion;
+
 class Gerbil;
+
 class Food;
+
 class Dragon;
 
 
-class OrganicEntity : public CircularCollider, public Updatable
-{
+class OrganicEntity : public CircularCollider, public Updatable {
 public:
 
     void update(sf::Time dt) override;
@@ -26,7 +29,7 @@ public:
      * @param size of the organic entity (diameter of the organic entity) The collider ascociated to this shape is 1/2 of size
      * @param energyLevel of the organic entity.
      */
-    OrganicEntity(const Vec2d& position, double size, double energyLevel);
+    OrganicEntity(const Vec2d &position, double size, double energyLevel);
 
     ~OrganicEntity() override = default;
 
@@ -49,25 +52,27 @@ public:
      * @param entity that we want to know if this can eat
      * @return true if it is eatable
      */
-    virtual bool eatable(OrganicEntity const* entity) const = 0;
+    virtual bool eatable(OrganicEntity const *entity) const = 0;
 
     /*!
     * Determins if this can be eaten by a scorpion.
     */
-    virtual bool eatableBy(Scorpion  const* scorpion) const = 0;
+    virtual bool eatableBy(Scorpion const *scorpion) const = 0;
+
     /*!
      * Determins if this can be eaten by a gerbil.
      */
-    virtual bool eatableBy(Gerbil const* gerbil) const = 0;
+    virtual bool eatableBy(Gerbil const *gerbil) const = 0;
+
     /*!
      * Determins if this can be eaten by a food.
      */
-    virtual bool eatableBy(Food const* food) const = 0;
+    virtual bool eatableBy(Food const *food) const = 0;
 
     /*!
      * Determins if this can be eaten by a dragon.
      */
-    virtual bool eatableBy(Dragon const* dragon) const = 0;
+    virtual bool eatableBy(Dragon const *dragon) const = 0;
 
     /*!
      * Getter to current energy level.
@@ -100,49 +105,55 @@ public:
     * @param entity that we want to know if this mate with
     * @return true if it is matable
     */
-    virtual bool matable(OrganicEntity const* other) const = 0;
+    virtual bool matable(OrganicEntity const *other) const = 0;
 
     /*!
      * @return true is this can mate with scorpion
      */
-    virtual bool canMate(Scorpion const* scorpion) const = 0;
+    virtual bool canMate(Scorpion const *scorpion) const = 0;
+
     /*!
      * @return true is this can mate with gerbil
      */
-    virtual bool canMate(Gerbil const* gerbil) const = 0;
+    virtual bool canMate(Gerbil const *gerbil) const = 0;
+
     /*!
      * @return true is this can mate with food
      */
-    virtual bool canMate(Food const* food) const = 0;
+    virtual bool canMate(Food const *food) const = 0;
+
     /*!
      * @return true is this can mate with dragon
      */
-    virtual bool canMate(Dragon const* dragon) const = 0;
+    virtual bool canMate(Dragon const *dragon) const = 0;
 
     /*!
      * Takes care of animals fornicating.
      * @param mate other animal that is being met.
      * @return true if they had kids (met sucesfully), otherwise false
      */
-    virtual bool meet(OrganicEntity* mate) = 0;
+    virtual bool meet(OrganicEntity *mate) = 0;
+
     /*!
      * Determins how these 2 animals can fornicate (have kids).
      * @param mate other partner
      * @return false if no kids can be had
      */
-    virtual bool meetManagement(Scorpion * mate) = 0;
+    virtual bool meetManagement(Scorpion *mate) = 0;
+
     /*!
      * Determins how these 2 animals can fornicate (have kids).
      * @param mate other partner
      * @return false if no kids can be had
      */
-    virtual bool meetManagement(Gerbil * mate) = 0;
+    virtual bool meetManagement(Gerbil *mate) = 0;
+
     /*!
      * Determins how these 2 animals can fornicate (have kids).
      * @param mate other partner
      * @return false if no kids can be had
      */
-    virtual bool meetManagement(Food * mate) = 0;
+    virtual bool meetManagement(Food *mate) = 0;
 
     /*!
      * Determins how these 2 animals can fornicate (have kids).
@@ -164,7 +175,7 @@ protected:
      * to increase.
      * @param eaten organic entity. The organic entity that is for supper.
      */
-    void eat(OrganicEntity* & eaten);
+    void eat(OrganicEntity *&eaten);
 
     /*!
      * Updates the time that the entity has spend waiting after feeding.
@@ -173,10 +184,6 @@ protected:
      * @return true if entity has spend at least entity_wait_time waiting after having eaten.
      */
     bool updateAndHasWaitedLongEnoughFeeding(sf::Time dt);
-
-
-
-
 
 
 private:
@@ -204,7 +211,7 @@ private:
     /*!
      * Energy level of the animal
      */
-    double  energyLevel;
+    double energyLevel;
 
     /*!
      * How long the animal has been born. Affected by update

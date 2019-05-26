@@ -7,13 +7,13 @@
 
 #include <Animal/Scorpion.hpp>
 #include <Utility/Macros.hpp>
+
 class Sensor;
 
-class NeuronalScorpion  : public Scorpion{
+class NeuronalScorpion : public Scorpion {
 public:
 
-    DEFINE_ENUM_WITH_STRING_CONVERSIONS(State,(IDLE)(WANDERING)(TARGET_IN_SIGHT)(MOVING))
-
+    DEFINE_ENUM_WITH_STRING_CONVERSIONS(State, (IDLE)(WANDERING)(TARGET_IN_SIGHT)(MOVING))
 
 
     static constexpr int MAX_WAIT_IN_IDLE = 5;
@@ -30,12 +30,12 @@ public:
     /*!
      * Destrucor in charge of freeing up scorpion and sensors
      */
-    ~NeuronalScorpion() override ;
+    ~NeuronalScorpion() override;
 
     /*!
      * Avoid deep copy of neuronalScorpion and sensor. Costly and has no purpose.
      */
-    NeuronalScorpion(NeuronalScorpion const& other) = delete;
+    NeuronalScorpion(NeuronalScorpion const &other) = delete;
 
     void draw(sf::RenderTarget &targetWindow) const override;
 
@@ -50,7 +50,7 @@ public:
      * @param s the sensor that we want to know the position of.
      * @return position of the sensor
      */
-    Vec2d getPositionOfSensor(const Sensor* s) const;
+    Vec2d getPositionOfSensor(const Sensor *s) const;
 
     const Vec2d &getTargetPosition() const override;
 
@@ -75,7 +75,7 @@ private:
      * Array of sensors that the scorpion has. A scorpion is in charge of freeing memory
      * when scorpion is destroyed.
      */
-    std::array<Sensor*,nbSensor> sensor;
+    std::array<Sensor *, nbSensor> sensor;
 
     /*!
      * To be called during constructor. Will initialize the list of sensors.

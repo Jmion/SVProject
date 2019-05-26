@@ -155,11 +155,12 @@ double Dragon::getEnergyLossFactor() const {
     return getAppConfig().dragon_energy_loss_factor;
 }
 
-Dragon::Dragon(const Vec2d &position, double energyLevel, bool isFemale): Animal(position,getSize(),energyLevel,isFemale) {
+Dragon::Dragon(const Vec2d &position, double energyLevel, bool isFemale) : Animal(position, getSize(), energyLevel,
+                                                                                  isFemale) {
     registerAnimalWithEnvironment();
 }
 
-Dragon::Dragon(const Vec2d &position): Dragon(position,getInitialEnergy(), uniform(0,1) == 0) {}
+Dragon::Dragon(const Vec2d &position) : Dragon(position, getInitialEnergy(), uniform(0, 1) == 0) {}
 
 Dragon::~Dragon() {
     removeAnimalWithEnvironment();
@@ -186,18 +187,19 @@ void Dragon::update(sf::Time dt) {
     if (animationTimer.asMilliseconds() > 1000) {
         animationTimer = sf::Time::Zero;
     }
-    if(getState() != GIVING_BIRTH && getState() != MATING)
+    if (getState() != GIVING_BIRTH && getState() != MATING)
         animationTimer += dt;
-    if(getAppEnv().isDragonFireTrigger()) {
+    if (getAppEnv().isDragonFireTrigger()) {
         spriteFireTimer = sf::Time::Zero;
-    }if(spriteFireTimer.asMilliseconds()>1100&& spriteFireTimer.asMilliseconds()<2600){
+    }
+    if (spriteFireTimer.asMilliseconds() > 1100 && spriteFireTimer.asMilliseconds() < 2600) {
         spitFire();
     }
 }
 
 bool Dragon::giveBirth() {
-    if(Animal::giveBirth()){
-        for(int i(0); i < getNumberOfChildren(); i++){
+    if (Animal::giveBirth()) {
+        for (int i(0); i < getNumberOfChildren(); i++) {
             getAppEnv().addEntity(new Dragon(getPosition()));
         }
         return true;
@@ -209,19 +211,19 @@ void Dragon::draw(sf::RenderTarget &targetWindow) const {
     Animal::draw(targetWindow);
 
 
-    if(spriteFireTimer.asMilliseconds() > 1100 && spriteFireTimer.asMilliseconds() < 2600) {
+    if (spriteFireTimer.asMilliseconds() > 1100 && spriteFireTimer.asMilliseconds() < 2600) {
         sf::Texture &texture = getAppTexture(getAppConfig().dragon_fire_d1);
         int nbMillisecond = spriteFireTimer.asMilliseconds();
-        if(nbMillisecond < 1475 )
+        if (nbMillisecond < 1475)
             texture = getAppTexture(getAppConfig().dragon_fire_d1);
-        else if(nbMillisecond < 1950)
+        else if (nbMillisecond < 1950)
             texture = getAppTexture(getAppConfig().dragon_fire_d2);
-        else if(nbMillisecond < 2370)
+        else if (nbMillisecond < 2370)
             texture = getAppTexture(getAppConfig().dragon_fire_d3);
         else
             texture = getAppTexture(getAppConfig().dragon_fire_d4);
 
-        auto image_to_draw(buildSprite(convertToGlobalCoord(Vec2d(100,0)), 100, texture, getRotation() / DEG_TO_RAD));
+        auto image_to_draw(buildSprite(convertToGlobalCoord(Vec2d(100, 0)), 100, texture, getRotation() / DEG_TO_RAD));
         targetWindow.draw(image_to_draw);
     }
 }
@@ -241,9 +243,9 @@ bool Dragon::isTargetInBurnRange(const Vec2d &target) const {
 }
 
 void Dragon::spitFire() const {
-    std::list<OrganicEntity*> burnList = getAppEnv().getEntitiesInBurnRangeOfDragon(this);
+    std::list<OrganicEntity *> burnList = getAppEnv().getEntitiesInBurnRangeOfDragon(this);
     for (auto &i : burnList) {
-        if(i->isBurnable())
+        if (i->isBurnable())
             i->spendEnergy(10000);
     }
 }

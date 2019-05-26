@@ -11,8 +11,7 @@
 /*!
  * A Food generator creates food and adds it to the environment periodically.
  */
-class FoodGenerator : public Updatable
-{
+class FoodGenerator : public Updatable {
 public:
     void update(sf::Time dt) override;
 

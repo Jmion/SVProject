@@ -29,20 +29,20 @@ void Stats::update(sf::Time dt) {
 }
 
 void Stats::reset() {
-    for (auto it = graphs.begin(); it != graphs.end(); it++) {
-        it->second->reset();
+    for (auto& it :graphs) {
+        it.second->reset();
     }
 }
 
 void Stats::draw(sf::RenderTarget & target) const {
     auto it = graphs.find(actif);
-    if (it != graphs.end()) {
+    if (graphs.end() != it) {
         graphs.at(actif)->draw(target);
     }
 }
 
 void Stats::addGraph(int currentGraphId, std::string const &title, std::vector<std::string> const &series, double min,
-                     double max, Vec2d statSize) {
+                     double max, const Vec2d &statSize) {
     labels.insert(std::pair<std::string, int>(title, currentGraphId));
     auto it = graphs.find(currentGraphId);
     if (it == graphs.end()) {
@@ -53,7 +53,7 @@ void Stats::addGraph(int currentGraphId, std::string const &title, std::vector<s
     actif = currentGraphId;
 }
 
-void Stats::focusOn(std::string title) {
+void Stats::focusOn(const std::string &title) {
     actif = labels.at(title);
     reset();
 }

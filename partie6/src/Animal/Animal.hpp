@@ -390,10 +390,9 @@ protected:
     /*!
      * Reurns current direction of the animal
      */
-     Vec2d getDirection() const;
+    Vec2d getDirection() const;
 
 private:
-
 
 
     /*!
@@ -477,8 +476,6 @@ private:
      * @return the rate of deceleration
      */
     double getDecelerationRate() const;
-
-
 
 
     /*!

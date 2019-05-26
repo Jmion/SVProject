@@ -10,30 +10,31 @@
 NeuronalScorpion::NeuronalScorpion(const Vec2d &position, double energyLevel, bool isFemale) : Scorpion(position,
                                                                                                         energyLevel,
                                                                                                         isFemale),
-                                                                                                        sensor({nullptr,nullptr,nullptr}),
-                                                                                                        stateTimer(sf::Time::Zero),
-                                                                                                        state(NeuronalScorpion::State::WANDERING),
-                                                                                                        sensorActifTimer(sf::Time::Zero)
-                                                                                                        {
+                                                                                               sensor({nullptr, nullptr,
+                                                                                                       nullptr}),
+                                                                                               stateTimer(
+                                                                                                       sf::Time::Zero),
+                                                                                               state(NeuronalScorpion::State::WANDERING),
+                                                                                               sensorActifTimer(
+                                                                                                       sf::Time::Zero) {
     initializeSensors();
 }
 
 NeuronalScorpion::NeuronalScorpion(const Vec2d &position) : Scorpion(position),
-                                                            sensor({nullptr,nullptr,nullptr}),
+                                                            sensor({nullptr, nullptr, nullptr}),
                                                             stateTimer(sf::Time::Zero),
                                                             state(NeuronalScorpion::State::WANDERING),
                                                             sensorActifTimer(sf::Time::Zero) {
     initializeSensors();
 }
 
-Vec2d NeuronalScorpion::getPositionOfSensor(const Sensor* s) const {
-    if(s!= nullptr){
+Vec2d NeuronalScorpion::getPositionOfSensor(const Sensor *s) const {
+    if (s != nullptr) {
         double distanceSensorFromScorpion = s->radiusFromScorpion();
         double radAngle = s->getAngle();
-        Vec2d localPositionOfSensor = Vec2d(cos(radAngle), sin(radAngle))*distanceSensorFromScorpion;
+        Vec2d localPositionOfSensor = Vec2d(cos(radAngle), sin(radAngle)) * distanceSensorFromScorpion;
         return convertToGlobalCoord(localPositionOfSensor);
-    }
-    else{
+    } else {
         throw std::invalid_argument("Null pointer in NeuronalScorpion:getPositionOfSensor");
     }
 }
@@ -41,12 +42,12 @@ Vec2d NeuronalScorpion::getPositionOfSensor(const Sensor* s) const {
 void NeuronalScorpion::initializeSensors() {
     int sensorAngles[nbSensor] = {18, 54, 90, 140, -140, -90, -54, -18};
     for (int i = 0; i < nbSensor; ++i) {
-        sensor[i] = new Sensor(sensorAngles[i]*DEG_TO_RAD,this);
+        sensor[i] = new Sensor(sensorAngles[i] * DEG_TO_RAD, this);
     }
     for (unsigned long j = 0; j < nbSensor; ++j) {
-        std::array<Sensor*, 3> inhibitSensors = {nullptr, nullptr, nullptr};
+        std::array<Sensor *, 3> inhibitSensors = {nullptr, nullptr, nullptr};
         for (unsigned long i = 3; i <= 5; i++) {
-            inhibitSensors.at(i-3) = sensor.at((j+i) % nbSensor);
+            inhibitSensors.at(i - 3) = sensor.at((j + i) % nbSensor);
         }
         sensor.at(j)->setInhibitSensor(inhibitSensors);
     }
@@ -70,7 +71,7 @@ void NeuronalScorpion::update(sf::Time dt) {
     bool sensorActive = false;
     for (auto &s : sensor) {
         s->update(dt);
-        if(s->isActif()) {
+        if (s->isActif()) {
             sensorActive = true;
         }
     }
@@ -86,10 +87,9 @@ void NeuronalScorpion::update(sf::Time dt) {
     }
 
 
-
     bool hasTarget = false;
     Vec2d attraction_force = Vec2d(0, 0);
-    switch (state){
+    switch (state) {
         case WANDERING:
             hasTarget = false;
             attraction_force = randomWalk();
@@ -100,11 +100,11 @@ void NeuronalScorpion::update(sf::Time dt) {
             break;
         case MOVING:
             stateTimer += dt;
-            if(fabs(estimateDirection.angle()-getRotation()) > getAppConfig().scorpion_rotation_angle_precision) {
+            if (fabs(estimateDirection.angle() - getRotation()) > getAppConfig().scorpion_rotation_angle_precision) {
                 setRotation(estimateDirection.angle());
                 attraction_force = stoppingAttractionForce();
-            }else{
-                setTargetPosition(convertToGlobalCoord(Vec2d(getAppConfig().simulation_world_size/26.0,0)));
+            } else {
+                setTargetPosition(convertToGlobalCoord(Vec2d(getAppConfig().simulation_world_size / 26.0, 0)));
             }
             break;
         case IDLE:
@@ -129,13 +129,13 @@ void NeuronalScorpion::resetSensors() const {
 void NeuronalScorpion::updateState(bool sensorActif) {
     std::array<OrganicEntity *, 3> closestEnities = analyseEnvironment();
 
-    if(closestEnities.at(0) != nullptr){
+    if (closestEnities.at(0) != nullptr) {
         NeuronalScorpion::state = TARGET_IN_SIGHT;
         targetPosition = closestEnities.at(0)->getPosition();
         if (isColliding(*closestEnities.at(0))) {
             eat(closestEnities.at(0));
         }
-    }else{
+    } else {
         switch (state) {
             case TARGET_IN_SIGHT:
                 stateTimer = sf::Time::Zero;
@@ -149,7 +149,7 @@ void NeuronalScorpion::updateState(bool sensorActif) {
                 }
                 break;
             case WANDERING:
-                if(sensorActif) {
+                if (sensorActif) {
                     stateTimer = sf::Time::Zero;
                     state = IDLE;
                 }
@@ -194,13 +194,13 @@ void NeuronalScorpion::draw(sf::RenderTarget &targetWindow) const {
             if (s->isActif()) {
                 if (s->getInhibitor() > 0.2) {
                     c = sf::Color::Magenta;
-                }else{
+                } else {
                     c = sf::Color::Red;
                 }
-            }else{
+            } else {
                 if (s->getInhibitor() > 0.2) {
                     c = sf::Color::Blue;
-                }else{
+                } else {
                     c = sf::Color::Green;
                 }
             }
@@ -208,18 +208,18 @@ void NeuronalScorpion::draw(sf::RenderTarget &targetWindow) const {
             //draw the NeuronalScorpion's direction
             sf::RectangleShape scorpion_dir(sf::Vector2f(100, 2));
             scorpion_dir.setFillColor(sf::Color::Red);
-            scorpion_dir.rotate(getRotation()/DEG_TO_RAD);
+            scorpion_dir.rotate(getRotation() / DEG_TO_RAD);
             scorpion_dir.setPosition(getPosition());
             targetWindow.draw(scorpion_dir);
 
             //draw the estimated target of the NeuronalScorpion
             sf::RectangleShape line(sf::Vector2f(100, 2));
             line.setFillColor(sf::Color::Blue);
-            line.rotate(estimateDirection.angle()/DEG_TO_RAD);
+            line.rotate(estimateDirection.angle() / DEG_TO_RAD);
             line.setPosition(getPosition());
             targetWindow.draw(line);
 
-            targetWindow.draw(buildCircle(getPositionOfSensor(s),getRadius()/5, c));
+            targetWindow.draw(buildCircle(getPositionOfSensor(s), getRadius() / 5, c));
         }
     }
 

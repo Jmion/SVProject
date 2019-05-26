@@ -10,7 +10,7 @@
 void WaveGerbil::update(sf::Time dt) {
     Animal::update(dt);
     timeSinceLastWave += dt;
-    if (timeSinceLastWave.asSeconds() > 1/getAppConfig().wave_gerbil_frequency) {
+    if (timeSinceLastWave.asSeconds() > 1 / getAppConfig().wave_gerbil_frequency) {
         getAppEnv().addWave(new Wave(
                 getPosition(),
                 getAppConfig().wave_default_energy,

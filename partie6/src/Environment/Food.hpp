@@ -7,8 +7,7 @@
 
 #include <Environment/OrganicEntity.hpp>
 
-class Food : public OrganicEntity
-{
+class Food : public OrganicEntity {
 
 public:
 
@@ -18,7 +17,7 @@ public:
      */
     explicit Food(const Vec2d &position);
 
-    ~Food() override ;
+    ~Food() override;
 
     void draw(sf::RenderTarget &target) const override;
 

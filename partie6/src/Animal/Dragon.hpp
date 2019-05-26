@@ -9,13 +9,13 @@
 #include "Animal.hpp"
 #include <SFML/Audio.hpp>
 
-class Dragon : public Animal{
+class Dragon : public Animal {
 
 public:
 
-    Dragon(const Vec2d& position, double energyLevel, bool isFemale);
+    Dragon(const Vec2d &position, double energyLevel, bool isFemale);
 
-    explicit Dragon(const Vec2d& position);
+    explicit Dragon(const Vec2d &position);
 
     ~Dragon();
 

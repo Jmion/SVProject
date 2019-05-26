@@ -44,9 +44,10 @@ public:
 
     void draw(sf::RenderTarget & target) const;
 
-    void addGraph(int currentGraphId, std::string const& title, std::vector<std::string> const& series, double min, double max, Vec2d statSize);
+    void addGraph(int currentGraphId, std::string const &title, std::vector<std::string> const &series, double min,
+                  double max, const Vec2d &statSize);
 
-    void focusOn(std::string title);
+    void focusOn(const std::string &title);
 
 };
 

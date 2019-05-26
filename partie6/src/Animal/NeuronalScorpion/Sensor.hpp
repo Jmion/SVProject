@@ -7,7 +7,7 @@
 
 class NeuronalScorpion;
 
-class Sensor : public Updatable{
+class Sensor : public Updatable {
 public:
 
     /*!
@@ -15,7 +15,7 @@ public:
      */
     bool isActif() const;
 
-    Sensor(double angleFromScorpion, NeuronalScorpion* neuronalScorpion);
+    Sensor(double angleFromScorpion, NeuronalScorpion *neuronalScorpion);
 
     /*!
      * Gets from config file distance from sensor to scorpion.
@@ -33,7 +33,7 @@ public:
      * Allows the configuration of which sensors are to be inhibited by this
      * @param sensorsToInhibit list of sensors to inhibit.
      */
-    void setInhibitSensor(std::array<Sensor *,3> sensorsToInhibit);
+    void setInhibitSensor(std::array<Sensor *, 3> sensorsToInhibit);
 
     /*!
      * @return score of the sensor
@@ -51,12 +51,13 @@ public:
     void resetSensor();
 
     void update(sf::Time dt) override;
+
 private:
 
     /*!
      * Scorpion that owns this sensor
      */
-    NeuronalScorpion* owner;
+    NeuronalScorpion *owner;
 
     /*!
      * Angle from scorpion in radians

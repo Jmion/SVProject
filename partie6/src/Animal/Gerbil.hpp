@@ -7,8 +7,7 @@
 
 #include <Animal/Animal.hpp>
 
-class Gerbil : public Animal
-{
+class Gerbil : public Animal {
 public:
 
     /*!
@@ -18,8 +17,7 @@ public:
      * @param energyLevel at the spawn moment
      * @param isFemale if true the gerbil will be a female, else it will be a male
      */
-    Gerbil(const Vec2d& position, double energyLevel, bool isFemale);
-
+    Gerbil(const Vec2d &position, double energyLevel, bool isFemale);
 
 
     /*!
@@ -27,7 +25,7 @@ public:
      * The gerbil created has a 50% chance of being a male and 50% female.
      * @param position where the Gerbil will appear.
      */
-    explicit Gerbil(const Vec2d& position);
+    explicit Gerbil(const Vec2d &position);
 
     double getStandardMaxSpeed() const override;
 

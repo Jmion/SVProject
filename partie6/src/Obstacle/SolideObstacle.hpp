@@ -8,7 +8,7 @@
 
 #include "CircularCollider.hpp"
 
-class SolideObstacle : public CircularCollider{
+class SolideObstacle : public CircularCollider {
 private:
     /*!
      * Orientation of the rock in 3D space.
@@ -32,7 +32,7 @@ public:
 
 protected:
 
-    virtual std::string getTexturePath() const  = 0;
+    virtual std::string getTexturePath() const = 0;
 
 public:
     void draw(sf::RenderTarget &target) const override;

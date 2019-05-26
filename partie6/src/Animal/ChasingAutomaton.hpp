@@ -8,8 +8,7 @@
 #include <Utility/Utility.hpp>
 #include <Obstacle/CircularCollider.hpp>
 
-class ChasingAutomaton: public CircularCollider
-{
+class ChasingAutomaton : public CircularCollider {
 public:
 
     /*!
@@ -19,7 +18,9 @@ public:
      * If adding new states to this enum do not forget to configure the values that are wanted
      * in the getDecelerationRate method present in this class.
      */
-    enum Deceleration {WEAK,MEDIUM,STRONG};
+    enum Deceleration {
+        WEAK, MEDIUM, STRONG
+    };
 
     /*!
      * Will return values predefined in the config file applying to this.
@@ -38,14 +39,14 @@ public:
      * @param target position of chasing automaton
      * @return Reference to this to allow chaining calls
      */
-    ChasingAutomaton& setTargetPosition(const Vec2d& target);
+    ChasingAutomaton &setTargetPosition(const Vec2d &target);
 
 
     /*!
      * Calculates the speed vector of the automaton
      * @return
      */
-    Vec2d getSpeedVector() const ;
+    Vec2d getSpeedVector() const;
 
 
     /*!
@@ -59,7 +60,7 @@ public:
      * draws the automaton and it's target in the targetWindow
      * @param targetWindow where to draw the automaton
      */
-    void draw(sf::RenderTarget& targetWindow);
+    void draw(sf::RenderTarget &targetWindow);
 
     /*!
      * Creates a new ChasingAutomaton. The deceleration parameter allows for the control of how fast the automaton slows down
@@ -67,7 +68,7 @@ public:
      * @param _position starting position of the automaton
      * @param _deceleration constant that defines how quickly the automatons will slow down when approaching there target.
      */
-    ChasingAutomaton(const Vec2d& _position, Deceleration _deceleration=STRONG);
+    ChasingAutomaton(const Vec2d &_position, Deceleration _deceleration = STRONG);
 
     /*!
      * Allows modification of the deceleration rate
@@ -83,14 +84,14 @@ protected:
      * Calculates the attraction force that the automaton is experiencing
      * @return force that are being applied to the robot.
      */
-    Vec2d attractionForce() const ;
+    Vec2d attractionForce() const;
 
     /*!
      * Makes the automaton moved based of of the force that it is experiencing.
      * @param force that the robot is experiencing
      * @param dt time that has passed since previous update
      */
-    void updateMovementVariables(const Vec2d& force, const sf::Time dt );
+    void updateMovementVariables(const Vec2d &force, const sf::Time dt);
 
 
 private:

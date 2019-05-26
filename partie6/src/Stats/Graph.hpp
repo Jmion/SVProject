@@ -44,7 +44,7 @@ public:
     void reset();
 
     // Implement Drawable
-    virtual void draw(sf::RenderTarget& target) const override final;
+    void draw(sf::RenderTarget& target) const override final;
 
     virtual std::string getSeriesInString() const;
 
