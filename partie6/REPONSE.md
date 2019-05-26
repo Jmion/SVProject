@@ -146,7 +146,8 @@ When the OrganicEntities die of old age the environment needs to free the memory
 
 
 ## Q.3.9
-#What is wanted???
+We could have decided that the circular collider provide the code to deal the all the collisions. The issue with this type of implementation is that all of the code is in one class that becomes quite large and dependant on other classes. 
+The architecture chosen allows for a more flexible implementation.
 
 ## Q.3.10
 Exactly like for mate we use double dispatch to have the type of both this and mate. We define method *meet* and *meetManagement*. *Meet* calls *meetManagemetn* which takes care of dealing with the animals matting. The matting involves changes to the animals matting. Since all the fields are defined in animal we have defined a *procreate* method that will take car of making the appropriate changes to the animal.
@@ -165,6 +166,8 @@ The number of babies is stored in the animal. This attribute has a getter provid
 
 ## Q.3.14
 It is better to avoid storing pointers to organic entity in the animal if possible. This would provide storage for pointers that could be used when the organic entity disappears from the environment. We instead decide to store a list of locations where we have last seen predators.
+There are some cons to this implementation since if a animal sees the predator twice in different locations it will register it as another location where there is prey without removing to location where it previously saw the preadator.
+We can argue that this implementation makes sense since a Gerbil would probably not be able to tell apart scorpions.
 
 
 ## Q.4.1
@@ -177,7 +180,7 @@ A wave does not need to keep track of time. Since it would be easier and logical
 An environment will have a list of waves* that will be updated, drawn, and deleted. We also need to add a method to add a wave. And of course not forget to clear the remaining waves from the list at the destruction of the environment.
 
 ## Q.4.4
-We need to create a method addObstacle. Modify the *Environment* delete, draw, methods.
+We need to create a method addObstacle. Modify the *Environment* delete, draw, methods to take the obstacles into account.
 
 ## Q.4.5
 The neuronalScorpion will have an array of pointers to sensors. The sensors will store there relative angle to the scorpion. This is not the best idea when we are looking at the architecture of the NeuroanlScorpion and it's sensors. Making the assumption that a sensor needs to be attached to an other entity is OK and we will make this compromise. This means that a sensor knows is relative angle from the scorpion. 
@@ -195,6 +198,7 @@ We will add the environment the following method:
     std::list<Wave *> getWaveCollidingWithSensor(const Vec2d& location ) const;
 ```
 We will create a method that will only return the waves that are currently colliding with the sensor. A critic of our current implementation is that we are dealing a bit to much with the calculation of which waves are actually colliding. The advantage of this is that we are not sharing useless pointers.
+We are willing to delegate more of the work that should be up to the sensor to decide to the environment since it allows use to preserve good encapsulation of pointers.
 
 
 ## Q.4.8
@@ -217,10 +221,17 @@ Each time we change states we will reset the **stateTimer**. The **stateTimer** 
 
 ## Q.5.1
 
+It is the purpose of a map to associate key to values. Since the application is using key to decide which graph to show it is natural to use a map to store the graphs that are tied to the keys.
+A map only allows one instance of a object with the same key. A vector is simply not appropriate for such a use. We could
+of course use a vector but this would involve coding a wrapper around it to make it behave like a map. Lets use what is already
+done for use and use the one that the standard library has :)
+
 ## Q.5.2
 
 We have made the choice to add quite a bit of mechanics to all the classes that we want to monitor. We did this because it allows for almost no overhead when we are updating the graph. The environment has a mad that counts the number of 
 
+# Q.5.3
+In our design we do not need to do any special treatment to have it behave properly. Since the stats are tied to an environment switching environment will switch stats as well.
 
 ## QUESTIONS
 Why are we declaring the eatable method in all the subclasses? It is the same everywhere. And why not use a visitor.

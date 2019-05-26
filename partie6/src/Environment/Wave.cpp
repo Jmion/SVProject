@@ -48,7 +48,6 @@ void Wave::update(sf::Time dt) {
             std::pair<double, double> arcToAdd;
             bool arcCollidedWithObstacle = false;
             for (auto &a: arcs) {
-                std::cerr<<a.first<<" " <<a.second<<std::endl;
                 if (a.first < beta - halfAlpha && a.second > beta + halfAlpha) {
                     arcToAdd.second = a.second;
                     a.second = beta - halfAlpha;
