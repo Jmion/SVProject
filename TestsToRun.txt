@@ -1,0 +1,35 @@
+# Important patches
+
+Some issues and segmentation faults where discovered during the implementation of the bonuses. These where due to the specifics of how we do not have a environment when running some early on tests. We have fixed these bugs in the latest realease that contains bonuses. The issue was with eatable test and caused by a specific design choice on how statistics where implemented.
+
+* Test1: scons ColliderTest / works in part 5
+* Test2: scons EnvTest-run / works in part 2
+* Test3: scons ChasingTest-run
+* Test4: scons ChasingTest-run
+* Test5: scons AnimalTest-run / works in part 2
+* Test6: scons TargetInSightTest-run / works in part 2 (no longer working in part 3 due to changes)
+* Test7: scons AminalTest-run / works in part 2
+* Test8: scons AminalTest-run / works in part 2
+* Test9: scons AminalTest-run / works in part 2
+* Test10: scons PPSTest-run / works in part 5
+* Test11: scons PPSTeset-run / works in part 5
+* Test12: scons PPSTeset-run / works in part 5
+* Test13: scons EatableTest-run / works in part 5
+* Test14: scons PPSTest-run / works in part 5
+* Test15: scons PPSTest-run / works in part 5 (More debug info than requested)
+* Test16: scons PPSTest-run / works in part 5
+* Test17: : scons PPSTest-run / works in part  5
+* Test18: : scons PPSTest-run / works in part  5
+* Test19:  scons MatableTest-run / works in part 5
+* Test20:  scons MatableTest-run / works in part 5
+* Test21: scons PPSTest-run / works in part 5
+* Test22: scons PPSTest-run / works in part 5
+* Test23: scons PPSTest-run / works in part 5
+* Test24: scons application-run / works in part 5
+* Test25: scons NeuronalTest-run / works in part 5
+* Test26: scons NeuronalTest-run / works in part 5
+* Test27: scons application-run / works in part 5
+* Test28: scons application-run / works in part 5
+* Test29: scons application-run / works in part 5
+* Test30: scons application-run / works in part 5
+
