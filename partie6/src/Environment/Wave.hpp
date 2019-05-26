@@ -58,7 +58,7 @@ public:
     /*!
      * Free memory of object
      */
-    ~Wave() = default;
+    ~Wave() override = default;
 
 
     /*!

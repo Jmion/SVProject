@@ -28,7 +28,7 @@ public:
      */
     OrganicEntity(const Vec2d& position, double size, double energyLevel);
 
-    virtual ~OrganicEntity() = default;
+    ~OrganicEntity() override = default;
 
 
     /*!

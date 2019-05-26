@@ -414,14 +414,14 @@ Vec2d Animal::getDirection() const {
     return direction;
 }
 
-void Animal::registerAnimalWithEnvironment(std::string animal) const {
+void Animal::registerAnimalWithEnvironment(const std::string &animal) const {
     Environment* e = &getAppEnv();
     if (e != nullptr) {
         e->incrementCounter(animal);
     }
 }
 
-void Animal::removeAnimalWithEnvironment(std::string animal) const {
+void Animal::removeAnimalWithEnvironment(const std::string &animal) const {
     Environment* e = &getAppEnv();
     if (e != nullptr) {
         e->decrementCounter(animal);

@@ -48,7 +48,7 @@ Vec2d& CircularCollider::clamp(Vec2d& cord)
 
 Vec2d CircularCollider::directionTo(const Vec2d & to) const
 {
-    double minDist(DBL_MAX);
+    auto minDist(DBL_MAX);
     Vec2d smalestMove;
     auto worldSize = getAppConfig().simulation_world_size;
 

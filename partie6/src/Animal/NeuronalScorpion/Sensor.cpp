@@ -18,7 +18,8 @@ owner(neuronalScorpion),
 angleFromScorpion(angleFromScorpion),
 actif(false),
 score(0),
-inhibitor(0){
+inhibitor(0),
+sensorsToInhibit({nullptr, nullptr, nullptr}){
     if (neuronalScorpion == nullptr) {
         throw std::invalid_argument("neuronalScorpion of class Sensor is nullptr.");
     }

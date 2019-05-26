@@ -42,7 +42,7 @@ public:
      */
     CircularCollider(Vec2d position, double radius);
 
-    virtual ~CircularCollider()  = default;
+    ~CircularCollider() override = default;
 
     /*!
      * Gets the current position of the collider

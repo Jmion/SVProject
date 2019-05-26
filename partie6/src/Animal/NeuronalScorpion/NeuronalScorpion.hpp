@@ -30,7 +30,7 @@ public:
     /*!
      * Destrucor in charge of freeing up scorpion and sensors
      */
-    virtual ~NeuronalScorpion() override ;
+    ~NeuronalScorpion() override ;
 
     /*!
      * Avoid deep copy of neuronalScorpion and sensor. Costly and has no purpose.

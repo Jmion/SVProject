@@ -71,7 +71,7 @@ public:
     /*!
      * Will free all the animals attached to it.
      */
-    virtual ~Environment();
+    ~Environment() override ;
 
     /*!
      * Determins which targets are in sight of the animal.
@@ -88,7 +88,7 @@ public:
     std::list<OrganicEntity*> getEntitiesInBurnRangeOfDragon(const Dragon * dragon) const;
 
     /*!
-     * Allows acces to solideObstacles that are currently colliding with wave
+     * Allows access to solideObstacles that are currently colliding with wave
      * @param wave that is being used to know what it is hitting
      * @return list of obstacles that the wave is colliding with.
      */

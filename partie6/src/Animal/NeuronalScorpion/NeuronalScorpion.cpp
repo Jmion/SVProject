@@ -10,6 +10,7 @@
 NeuronalScorpion::NeuronalScorpion(const Vec2d &position, double energyLevel, bool isFemale) : Scorpion(position,
                                                                                                         energyLevel,
                                                                                                         isFemale),
+                                                                                                        sensor({nullptr,nullptr,nullptr}),
                                                                                                         stateTimer(sf::Time::Zero),
                                                                                                         state(NeuronalScorpion::State::WANDERING),
                                                                                                         sensorActifTimer(sf::Time::Zero)
@@ -18,6 +19,7 @@ NeuronalScorpion::NeuronalScorpion(const Vec2d &position, double energyLevel, bo
 }
 
 NeuronalScorpion::NeuronalScorpion(const Vec2d &position) : Scorpion(position),
+                                                            sensor({nullptr,nullptr,nullptr}),
                                                             stateTimer(sf::Time::Zero),
                                                             state(NeuronalScorpion::State::WANDERING),
                                                             sensorActifTimer(sf::Time::Zero) {
@@ -102,7 +104,7 @@ void NeuronalScorpion::update(sf::Time dt) {
                 setRotation(estimateDirection.angle());
                 attraction_force = stoppingAttractionForce();
             }else{
-                setTargetPosition(convertToGlobalCoord(Vec2d(getAppConfig().simulation_world_size/26,0)));
+                setTargetPosition(convertToGlobalCoord(Vec2d(getAppConfig().simulation_world_size/26.0,0)));
             }
             break;
         case IDLE:

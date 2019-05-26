@@ -7,8 +7,8 @@
 #include <Utility/Utility.hpp>
 #include <Application.hpp>
 
-SolideObstacle::SolideObstacle(const Vec2d &postion, const double radius, const double rotation):
-CircularCollider(postion,radius), rotation(rotation) {
+SolideObstacle::SolideObstacle(const Vec2d &postion, double radius, double angle):
+CircularCollider(postion,radius), rotation(angle) {
 
 }
 

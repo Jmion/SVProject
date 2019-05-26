@@ -26,9 +26,9 @@ public:
      * @param radius of the obstacle
      * @param angle orientation of the obstacle
      */
-    SolideObstacle(const Vec2d &postion, const double radius, const double angle);
+    SolideObstacle(const Vec2d &postion, double radius, double angle);
 
-    virtual ~SolideObstacle() = default;
+    ~SolideObstacle() override = default;
 
 protected:
 

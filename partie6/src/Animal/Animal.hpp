@@ -123,12 +123,12 @@ protected:
     /*!
     * registers animal with environment
     */
-    virtual void registerAnimalWithEnvironment(std::string) const;
+    virtual void registerAnimalWithEnvironment(const std::string &animal) const;
 
     /*!
      * Removes animal from environment
      */
-    virtual void removeAnimalWithEnvironment(std::string) const;
+    virtual void removeAnimalWithEnvironment(const std::string &animal) const;
 
     /*!
      * @return string representation of the state

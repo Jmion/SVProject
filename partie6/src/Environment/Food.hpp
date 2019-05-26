@@ -18,7 +18,7 @@ public:
      */
     explicit Food(const Vec2d &position);
 
-    ~Food();
+    ~Food() override ;
 
     void draw(sf::RenderTarget &target) const override;
 
